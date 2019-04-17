@@ -1,0 +1,41 @@
+#avatarInProfile{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#conteinerProfile{
+    background-color: #f2f6f9;
+}
+
+#account-line{
+    margin: 0;
+    padding: 0;
+}
+
+#profileForm{
+    margin-top: 10px;
+}
+
+#cardUploadAvatar{
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    background: rgb(206, 231, 255);
+    padding: 5px;
+    border-radius: 25px;
+    border: 1px solid rgb(224, 221, 221);
+    margin-top: 15px;
+}
+
+#upload{
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+#twoButtons{
+    margin-bottom: 40px;
+}

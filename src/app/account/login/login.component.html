@@ -1,0 +1,57 @@
+<hr id="account-line">
+<div class="conteiner" id="conteiner-login">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+
+      <div class="form-group" id="loginForm">
+        <h4>Log In</h4><br>
+        <form [formGroup]="service.formModelLogin" autocomplete="off" (submit)="onSubmit()">
+
+          <div class="form-group required">
+            <label>Email*</label>
+            <input class="form-control" formControlName="Email">
+            <small id="emailHelp" class="form-text text-muted">We won’t share your private email address with other
+              users.</small>
+            <label class="text-danger"
+              *ngIf="service.formModelLogin.get('Email').touched && service.formModelLogin.get('Email').errors?.required">This
+              field is mandatory.</label>
+            <label class="text-danger"
+              *ngIf="service.formModelLogin.get('Email').touched && service.formModelLogin.get('Email').errors?.email">Invalid
+              email address.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Password*</label>
+            <input type="password" class="form-control" formControlName="Password">
+            <small id="passwordHelp" class="form-text text-muted">Minimum 6 characters. Maximum 16 characters.</small>
+            <label class="text-danger"
+              *ngIf="service.formModelLogin.get('Password').touched && service.formModelLogin.get('Password').errors?.required">This
+              field is mandatory.</label>
+            <label class="text-danger"
+              *ngIf="service.formModelLogin.get('Password').touched && service.formModelLogin.get('Password').errors?.minlength">Minimum
+              6 characters required.</label>
+            <label class="text-danger"
+              *ngIf="service.formModelLogin.get('Password').touched && service.formModelLogin.get('Password').errors?.pattern">Password
+              can contain at least 1 lowercase, 1 uppercase alphabetical character, and at least 1 numeric
+              character</label>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="!service.formModelLogin.valid">LOG IN</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="forgotPasswordLink"><a href="#">Forgot your password?</a></div>
+      <div id="registerLinkFromLogin">If you don’t already have an account click the Register button below to create an
+        account</div>
+      <div id="registerBtnFromLogin" class="form-group">
+        <button routerLink="/account/registration" routerLinkActive="active" type="submit"
+          class="btn btn-primary">REGISTER</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr id="account-line">

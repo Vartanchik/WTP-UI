@@ -1,0 +1,16 @@
+<div *ngIf="isValid == true">
+    <button routerLink='/account/login' routerLinkActive='active' type="button" class="btn btn-outline-dark"
+    id="btn-login">LOG IN</button>
+    <button routerLink='/account/registration' routerLinkActive='active' type="button"
+    class="btn btn-primary" id="btn-register">REGISTER</button>
+</div>
+
+<div class="dropdown" *ngIf="isValid == false">
+        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="{{userDetails.photo}}" id="avatar"><span id="avatarUserName">{{userDetails.userName}}</span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a routerLink='/account/userprofile' routerLinkActive='active' class="dropdown-item">Edit Profile</a>
+          <a class="dropdown-item" href="#">Create Player</a>
+          <a class="dropdown-item" href="#">Create Team</a>
+          <a class="dropdown-item" id="logout" href="#" (click)="onLogout()">Log Out</a>
+        </div>
+</div>
