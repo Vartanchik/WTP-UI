@@ -1,3 +1,29 @@
-<p>
-  section-users works!
-</p>
+<div class="section-container">
+  <h2>List of users</h2>
+  <table class="table table-inverse table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>username</th>
+        <th>email</th>
+        <th>photoUrl</th>
+        <th>gender</th>
+        <th>birthday</th>
+        <th>country</th>
+        <th>steamId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.photoUrl}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.birthday | date:'short'}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.steamId}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

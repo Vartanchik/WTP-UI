@@ -12,6 +12,7 @@ import { SectionNewProfileComponent } from './sections/section-new-profile/secti
 import { SectionHistoryComponent } from './sections/section-history/section-history.component';
 import { SectionGamesComponent } from './sections/section-games/section-games.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
