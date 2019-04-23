@@ -1,3 +1,4 @@
+import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountComponent } from './account/account.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'registration', component: RegistrationComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'userprofile', component: UserprofileComponent }
     ]
   },

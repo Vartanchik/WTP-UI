@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:44396/api';
+  readonly BaseURI = 'http://localhost:61836/api';
 
   formModel = this.fb.group({
     confirmCheckbox:  ['', Validators.required],

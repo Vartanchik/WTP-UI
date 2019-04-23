@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 import { AuthdetailsComponent } from './authdetails/authdetails.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserprofileComponent } from './account/userprofile/userprofile.component';
+import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserprofileComponent } from './account/userprofile/userprofile.componen
     AccountComponent,
     HomeComponent,
     AuthdetailsComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
