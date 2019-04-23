@@ -1,3 +1,53 @@
-<p>
-  section-games works!
-</p>
+<div class="section-container">
+    <h2>Games</h2>
+  <div class="reglist">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Count of Players</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of Games; let i = index">
+          <th scope="row">{{ game.id }}</th>
+          <td>{{ game.name }}</td>
+          <td>{{ game.playersCount }}</td>
+          <td>{{ game.description}}</td>
+          <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
+    </div>
+  </div>
+  <br>
+  <div class="regentry" *ngIf="showNew">
+    <form (ngSubmit)="onSave()">
+      <div class="form-group row">
+        <label for="name-input" class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="regModel.name" name="name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="description-input" class="col-2 col-form-label">Description</label>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="regModel.description" name="description">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">{{submitType}}</button>
+      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+</div>

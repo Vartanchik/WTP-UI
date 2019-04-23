@@ -11,7 +11,8 @@ import { SectionUsersComponent } from './sections/section-users/section-users.co
 import { SectionNewProfileComponent } from './sections/section-new-profile/section-new-profile.component';
 import { SectionHistoryComponent } from './sections/section-history/section-history.component';
 import { SectionGamesComponent } from './sections/section-games/section-games.component';
-
+import {NgbModule, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { SectionGamesComponent } from './sections/section-games/section-games.co
     SectionGamesComponent
   ],
   imports: [
+    NgbModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes)

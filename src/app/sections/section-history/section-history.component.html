@@ -1,3 +1,29 @@
-<p>
-  section-history works!
-</p>
+<div class="section-container">
+  <h2>History</h2>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>AdminId</th>
+        <th>Admin's name</th>
+        <th>Admin's email</th>
+        <th>Action</th>
+        <th>DateOfChange</th>
+        <th>Category</th>
+        <th>UserId/GameId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let history of histories">
+        <td>{{history.id}}</td>
+        <td>{{history.admin.id}}</td>
+        <td>{{history.admin.name}}</td>
+        <td>{{history.admin.email}}</td>
+        <td>{{history.action}}</td>
+        <td>{{history.dateOfChange | date:'short'}}</td>
+        <td>{{history.category}}</td>
+        <td>{{history.user.id}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
