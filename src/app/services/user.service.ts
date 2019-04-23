@@ -35,6 +35,10 @@ export class UserService {
     Steam: []
   });
 
+  formModelForgotPassword = this.fb.group({
+    Email: ['', [Validators.required, Validators.email]]
+  });
+
   comparePasswords(fb: FormGroup) {
     let confirmPswrdCtrl = fb.get('ConfirmPassword');
     //passwordMismatch
@@ -79,6 +83,13 @@ export class UserService {
       Steam: this.formModelUser.value.Steam
     };
     return this.http.put(this.BaseURI + '/UserProfile', body);
+  }
+
+  forgotPassword() {
+    var body = {
+      Email: this.formModelForgotPassword.value.Email
+    };
+    return this.http.post(this.BaseURI + '/Account/ForgotPassword', body);
   }
 
 }
