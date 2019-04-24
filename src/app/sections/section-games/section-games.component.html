@@ -33,20 +33,36 @@
   </div>
   <br>
   <div class="regentry" *ngIf="showNew">
-    <form (ngSubmit)="onSave()">
+    <form (ngSubmit)="onSave()" #gameForm="ngForm">
       <div class="form-group row">
         <label for="name-input" class="col-2 col-form-label">Name</label>
         <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="regModel.name" name="name">
+          <input required pattern="^[a-zA-Z 0-9]+$" class="form-control" type="text" [(ngModel)]="regModel.name" name="name" #name="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="name.errors?.required && name.touched">
+          Name is required!
+      </div>
+      <div class="alert alert-danger"
+          *ngIf="name.errors?.pattern && name.touched">
+          Name is invalid!
+      </div>
         </div>
       </div>
       <div class="form-group row">
         <label for="description-input" class="col-2 col-form-label">Description</label>
         <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="regModel.description" name="description">
+          <input required pattern="^[a-zA-Z 0-9.,!():?;]+$" class="form-control" type="text" [(ngModel)]="regModel.description" name="description" #description="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="description.errors?.required && description.touched">
+          Description is required!
+      </div>
+      <div class="alert alert-danger"
+          *ngIf="description.errors?.pattern && description.touched">
+          Description is invalid!
+      </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-success">{{submitType}}</button>
+      <button type="submit" [disabled]="gameForm.form.invalid" class="btn btn-success">{{submitType}}</button>
       <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
     </form>
   </div>
