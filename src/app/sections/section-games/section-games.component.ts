@@ -28,7 +28,7 @@ export class SectionGamesComponent implements OnInit {
   // It maintains list of Games
   Games: Game[] = [];
   // It maintains Game Model
-  regModel: Game;
+  gameModel: Game;
   // It maintains Game form display status. By default it will be false.
   showNew: Boolean = false;
   // It will be either 'Save' or 'Update' based on operation.
@@ -47,7 +47,7 @@ export class SectionGamesComponent implements OnInit {
   // This method associate to New Button.
   onNew() {
     // Initiate new Game.
-    this.regModel = new Game(this.Games.length+1);
+    this.gameModel = new Game(this.Games.length+1);
     // Change submitType to 'Save'.
     this.submitType = 'Save';
     // display Game entry section.
@@ -58,13 +58,13 @@ export class SectionGamesComponent implements OnInit {
   onSave() {
     if (this.submitType === 'Save') {
       // Push Game model object into Game list.
-      this.Games.push(this.regModel);
+      this.Games.push(this.gameModel);
     } else {
       // Update the existing properties values based on model.
-      this.Games[this.selectedRow].id = this.regModel.id;
-      this.Games[this.selectedRow].name = this.regModel.name;
-      this.Games[this.selectedRow].playersCount = this.regModel.playersCount;
-      this.Games[this.selectedRow].description = this.regModel.description;
+      this.Games[this.selectedRow].id = this.gameModel.id;
+      this.Games[this.selectedRow].name = this.gameModel.name;
+      this.Games[this.selectedRow].playersCount = this.gameModel.playersCount;
+      this.Games[this.selectedRow].description = this.gameModel.description;
     }
     // Hide Game entry section.
     this.showNew = false;
@@ -75,9 +75,9 @@ export class SectionGamesComponent implements OnInit {
     // Assign selected table row index.
     this.selectedRow = index;
     // Initiate new Game.
-    this.regModel = new Game();
+    this.gameModel = new Game();
     // Retrieve selected Game from list and assign to model.
-    this.regModel = Object.assign({}, this.Games[this.selectedRow]);
+    this.gameModel = Object.assign({}, this.Games[this.selectedRow]);
     // Change submitType to Update.
     this.submitType = 'Update';
     // Display Game entry section.
