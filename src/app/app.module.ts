@@ -19,6 +19,7 @@ import { AuthdetailsComponent } from './authdetails/authdetails.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserprofileComponent } from './account/userprofile/userprofile.component';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ForgotPasswordComponent } from './account/forgot-password/forgot-passwo
     HomeComponent,
     AuthdetailsComponent,
     UserprofileComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

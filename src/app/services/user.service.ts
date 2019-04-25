@@ -39,6 +39,14 @@ export class UserService {
     Email: ['', [Validators.required, Validators.email]]
   });
 
+  formModelResetPassword = this.fb.group({
+    Email: ['', [Validators.required, Validators.email]],
+    Passwords: this.fb.group({
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
+      ConfirmPassword: ['', Validators.required]
+    }, { validator: this.comparePasswords })
+  });
+
   comparePasswords(fb: FormGroup) {
     let confirmPswrdCtrl = fb.get('ConfirmPassword');
     //passwordMismatch
@@ -90,6 +98,15 @@ export class UserService {
       Email: this.formModelForgotPassword.value.Email
     };
     return this.http.post(this.BaseURI + '/Account/ForgotPassword', body);
+  }
+
+  resetPassword(userId: string, code: string) {
+    var body = {
+      Id: userId,
+      Password: this.formModel.value.Passwords.Password,
+      Code: code
+    };
+    return this.http.post(this.BaseURI + '/Account/ResetPassword', body);
   }
 
 }
