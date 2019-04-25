@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ValidationErrors } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
@@ -40,11 +40,10 @@ export class UserService {
   });
 
   formModelResetPassword = this.fb.group({
-    Email: ['', [Validators.required, Validators.email]],
     Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
+      NewPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
       ConfirmPassword: ['', Validators.required]
-    }, { validator: this.comparePasswords })
+    }, { validator: this.passwordsValidator })
   });
 
   comparePasswords(fb: FormGroup) {
@@ -58,6 +57,13 @@ export class UserService {
         confirmPswrdCtrl.setErrors(null);
     }
   }
+
+  passwordsValidator(group: FormGroup): ValidationErrors | null {
+      let newPassword = group.get('NewPassword').value;
+      let confirmPassword = group.get('ConfirmPassword').value;
+      return newPassword === confirmPassword ? null : {"notSame" : true};
+    }
+
 
   register() {
     var body = {
@@ -103,9 +109,12 @@ export class UserService {
   resetPassword(userId: string, code: string) {
     var body = {
       Id: userId,
-      Password: this.formModel.value.Passwords.Password,
+      Password: this.formModelResetPassword.value.Passwords.NewPassword,
       Code: code
     };
+    console.log(body.Id);
+    console.log(body.Password);
+    console.log(body.Code);
     return this.http.post(this.BaseURI + '/Account/ResetPassword', body);
   }
 

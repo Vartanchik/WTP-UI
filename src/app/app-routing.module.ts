@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthdetailsComponent } from './authdetails/authdetails.component';
 import { UserprofileComponent } from './account/userprofile/userprofile.component';
+import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch:'full'},
@@ -18,7 +19,7 @@ const routes: Routes = [
       { path: 'registration', component: RegistrationComponent },
       { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'reset-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'userprofile', component: UserprofileComponent }
     ]
   },

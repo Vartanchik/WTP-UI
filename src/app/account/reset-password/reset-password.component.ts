@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -12,22 +12,30 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(public service: UserService, private router: Router,private http: HttpClient, private toastr: ToastrService) { }
+  constructor(
+    public service: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private toastr: ToastrService) { }
   
   userId: string;
 
   code: string;
 
   ngOnInit() {
-    this.http.get('http://localhost:61836/api/Account/ResetPassword').subscribe(
-      (res: any) => {
-        this.userId = res.id,
-        this.code = res.token;
-      }
-    )
+    console.log(this.route);
+    this.route.queryParamMap.subscribe(queryParams  => {
+      this.userId = queryParams.get("id"),
+      console.log('set userId=' + this.userId);
+      this.code = queryParams.get("token")
+      console.log('set code=' + this.code);
+    });
   }
 
   onSubmit() {
+    console.log(this.userId);
+    console.log(this.code);
     this.service.resetPassword(this.userId, this.code).subscribe(
       (res: any) => {
         if (res.succeeded) {
@@ -36,11 +44,12 @@ export class ResetPasswordComponent implements OnInit {
           this.toastr.success('Password has been reset!', 'Reseting is successful.');
         }
       },
-      err => {
-        (err.error.value).forEach(element => {
-            this.toastr.error(element);
-      });
-    });
+    //   err => {
+    //     (err.error.value).forEach(element => {
+    //         this.toastr.error(element);
+    //   });
+    // }
+    );
   }
 
 }
