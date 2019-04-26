@@ -41,7 +41,7 @@ export class UserService {
 
   formModelResetPassword = this.fb.group({
     Passwords: this.fb.group({
-      NewPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
+      NewPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z$@!%*?&-]{1,16})$')]],
       ConfirmPassword: ['', Validators.required]
     }, { validator: this.passwordsValidator })
   });
