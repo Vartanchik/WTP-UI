@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'http://localhost:61836/api';
+  readonly BaseURI = 'http://localhost:61835/api';
 
   formModel = this.fb.group({
     confirmCheckbox:  ['', Validators.required],
@@ -41,9 +41,9 @@ export class UserService {
 
   formModelResetPassword = this.fb.group({
     Passwords: this.fb.group({
-      NewPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z$@!%*?&-]{1,16})$')]],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
       ConfirmPassword: ['', Validators.required]
-    }, { validator: this.passwordsValidator })
+    }, { validator: this.comparePasswords })
   });
 
   comparePasswords(fb: FormGroup) {
@@ -51,19 +51,14 @@ export class UserService {
     //passwordMismatch
     //confirmPswrdCtrl.errors={passwordMismatch:true}
     if (confirmPswrdCtrl.errors == null || 'passwordMismatch' in confirmPswrdCtrl.errors) {
-      if (fb.get('Password').value != confirmPswrdCtrl.value)
+      if (fb.get('Password').value !== confirmPswrdCtrl.value){
         confirmPswrdCtrl.setErrors({ passwordMismatch: true });
-      else
+      } 
+      else {
         confirmPswrdCtrl.setErrors(null);
+      }
     }
   }
-
-  passwordsValidator(group: FormGroup): ValidationErrors | null {
-      let newPassword = group.get('NewPassword').value;
-      let confirmPassword = group.get('ConfirmPassword').value;
-      return newPassword === confirmPassword ? null : {"notSame" : true};
-    }
-
 
   register() {
     var body = {
@@ -100,21 +95,18 @@ export class UserService {
   }
 
   forgotPassword() {
-    var body = {
+    const body = {
       Email: this.formModelForgotPassword.value.Email
     };
     return this.http.post(this.BaseURI + '/Account/ForgotPassword', body);
   }
 
   resetPassword(userId: string, code: string) {
-    var body = {
+    const body = {
       Id: userId,
-      Password: this.formModelResetPassword.value.Passwords.NewPassword,
+      Password: this.formModelResetPassword.value.Passwords.Password,
       Code: code
     };
-    console.log(body.Id);
-    console.log(body.Password);
-    console.log(body.Code);
     return this.http.post(this.BaseURI + '/Account/ResetPassword', body);
   }
 
