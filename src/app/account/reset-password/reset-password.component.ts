@@ -34,11 +34,11 @@ export class ResetPasswordComponent implements OnInit {
       () => {
         this.service.formModel.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success('Password has been reset succeed!');
+        this.toastr.success('Password has been reset!', 'Success!', {disableTimeOut: true, closeButton: true});
       },
       err => {
         err.error.value.forEach(element => {
-          this.toastr.error(element);
+          this.toastr.error(element, 'Error!', {disableTimeOut: true, closeButton: true});
         });
       }
     );
