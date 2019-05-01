@@ -1,0 +1,89 @@
+<hr id="account-line">
+<div class="conteiner" id="conteiner-register">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div class="form-group" id="registerForm">
+
+        <h4>User registration</h4><br>
+        <form [formGroup]="formModelRegister" autocomplete="off" (submit)="onSubmit()">
+
+          <div class="form-group required">
+            <label>Username*</label>
+            <input class="form-control" formControlName="UserName">
+            <small id="userNameHelp" class="form-text text-muted">Username must be 4-30 characters long.</small>
+            <label class="text-danger"
+              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.required">This
+              field is mandatory.</label>
+            <label class="text-danger"
+              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.minlength">Minimum
+              4 characters required.</label>
+            <label class="text-danger"
+              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.maxlength">Maximum
+              30 characters required.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Email*</label>
+            <input class="form-control" formControlName="Email">
+            <small id="emailHelp" class="form-text text-muted">We won’t share your private email address with other
+              users.</small>
+            <label class="text-danger"
+              *ngIf="formModelRegister.get('Email').touched && formModelRegister.get('Email').errors?.required">This
+              field is mandatory.</label>
+            <label class="text-danger"
+              *ngIf="formModelRegister.get('Email').touched && formModelRegister.get('Email').errors?.email">Invalid
+              email address.</label>
+          </div>
+
+          <div formGroupName="Passwords">
+            <div class="form-group required">
+              <label>Password*</label>
+              <input type="password" class="form-control" formControlName="Password">
+              <small id="passwordHelp" class="form-text text-muted">Minimum 6 characters. Maximum 16 characters.</small>
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.required">This
+                field is mandatory.</label>
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.minlength">Minimum
+                6 characters required.</label>
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.pattern">Password
+                can contain at least 1 lowercase, 1 uppercase alphabetical character, and at least 1 numeric
+                character</label>
+            </div>
+
+            <div class="form-group required">
+              <label>Confirm Password*</label>
+              <input type="password" class="form-control" formControlName="ConfirmPassword">
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('Passwords.ConfirmPassword').touched && formModelRegister.get('Passwords.ConfirmPassword').errors?.required">This
+                field is mandatory.</label>
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('Passwords.ConfirmPassword').touched && formModelRegister.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Confirm
+                Password does not match.</label>
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="confirmCheckbox" id="invalidCheck2"
+                required>
+              <label class="form-check-label" for="invalidCheck2">
+                <p id="site-rules-title">I Agree to the <a href="#">Personal Data Consent,</a> <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
+              </label>
+              <label class="text-danger"
+                *ngIf="formModelRegister.get('confirmCheckbox').touched && formModelRegister.get('confirmCheckbox').errors?.required">Please
+                read and agree with the Personal Data Consent, Terms of Use, and Privacy Policy before
+                registering.</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="!formModelRegister.valid">REGISTER</button>
+          </div>
+        </form>
+        <p id="linkTologin">If you already have an account, click <a routerLink="/account/login" routerLinkActive="active">Log In</a></p>
+      </div>
+    </div>
+  </div>

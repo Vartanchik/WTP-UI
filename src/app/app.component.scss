@@ -1,0 +1,39 @@
+#header-nav {
+  background-color: #fff;
+}
+
+#navbarSupportedContent {
+  margin-left: 20px;
+}
+
+#mainlogo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#mainlogo:hover {
+  color: rgb(77, 76, 75);
+  opacity: .8;
+}
+
+#gameButton {
+  margin-right: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgb(239, 250, 255);
+  color: rgb(22, 22, 66);
+  border-radius: 15px;
+  width: 100px;
+  text-align: center;
+}
+
+#gameButton:hover {
+    background: rgb(230, 245, 252);
+  }
+
+  #smallStar{
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+  }
