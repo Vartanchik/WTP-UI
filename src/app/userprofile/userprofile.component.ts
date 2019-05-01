@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
 import { IMyDpOptions } from 'mydatepicker';
@@ -127,5 +127,7 @@ export class UserprofileComponent implements OnInit {
     });
   }
 
-
+  goToPage(pagename: string){
+    this.router.navigate([pagename]);
+  }
 }

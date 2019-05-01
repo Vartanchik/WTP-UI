@@ -17,7 +17,7 @@ import { LoginComponent } from './account/login/login.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UserprofileService } from './services/userprofile.service';
-
+import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +26,8 @@ import { UserprofileService } from './services/userprofile.service';
     AccountComponent,
     LoginComponent,
     RegistrationComponent,
-    UserprofileComponent
-  ],
+    UserprofileComponent,
+    ChangePasswordComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

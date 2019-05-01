@@ -6,6 +6,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch:'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch:'full'},
       { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'changepassword', component: ChangePasswordComponent}
     ]
   },
   { path: 'userprofile', component: UserprofileComponent }
