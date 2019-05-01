@@ -1,21 +1,38 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header>
+
+  <div id="header-nav">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg col-md">
+          <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #ffff;">
+            <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><img
+                src="https://cdn2.iconfinder.com/data/icons/harry-potter-colour-collection/60/09_-_Harry_Potter_-_Colour_-_Sirius_Black_Wolf-64.png"
+                width="40" height="40" alt=""><span id="mainlogo">WTP</span>
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item navBtns" id="gameButton">
+                  <a class="nav-link" href="#"><img id="smallStar" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-32.png">GAME</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">PLAYERS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">TEAMS</a>
+                  </li>  
+              </ul>
+              
+              <!-- Login and register buttons or if user authorized - userName and avatar -->
+              <app-account></app-account>
+
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
 
 <router-outlet></router-outlet>
