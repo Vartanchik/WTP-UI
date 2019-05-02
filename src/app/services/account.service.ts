@@ -6,6 +6,7 @@ import { ChangePassword} from './changepassword';
 import { baseURIConfig, providedInConfig } from './dataconfig';
 import { ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: providedInConfig
@@ -56,13 +57,11 @@ export class AccountService {
   }
 
   //Send data from changePassword form to API
-  changePassword(body: ChangePassword) : Observable<any>{
+  changePassword(body: ChangePassword) {
     let formData = {
         CurrentPassword : body.Passwords.CurrentPassword,
         NewPassword : body.Passwords.NewPassword,
     };
-    console.log(formData.CurrentPassword);
-    console.log(formData.NewPassword);
     return this.http.post(this.BaseURI + '/Account/ChangePassword', formData);
   }
 }
