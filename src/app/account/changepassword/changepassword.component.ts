@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, ValidationErrors, FormGroup } from '@angular/forms';
+import { WtpResponse } from '../../interfaces/wtpresponse';
 
 @Component({
   selector: 'app-changepassword',
@@ -32,13 +33,13 @@ export class ChangePasswordComponent implements OnInit {
       res => {
         this.formModelChangePassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success('', 'Password update successful.');
+        this.toastr.success('', res.message);
       },
-      err => {
-        console.log("error onSumbit");
+      (err) => {
         console.log(err);
-        this.toastr.error("",'Password update failed.');
-    });
+        this.toastr.error('', err.error.message);
+      }
+    );
   }
 
   //Validate passwords in changePassword form

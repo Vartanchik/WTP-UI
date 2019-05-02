@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from "@angular/common/http";
-import { Login } from './login';
-import { Register } from './register';
-import { ChangePassword} from './changepassword';
+import { Login } from '../interfaces/login';
+import { Register } from '../interfaces/register';
+import { ChangePassword} from '../interfaces/changepassword';
 import { baseURIConfig, providedInConfig } from './dataconfig';
 import { ForgotPassword } from './forgot-password';
 import { ResetPassword } from './reset-password';
 import { ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { WtpResponse } from '../interfaces/wtpresponse';
 
 @Injectable({
   providedIn: providedInConfig
@@ -69,11 +70,11 @@ export class AccountService {
   }
 
   //Send data from changePassword form to API
-  changePassword(body: ChangePassword) {
+  changePassword(body: ChangePassword) : Observable<WtpResponse> {
     let formData = {
         CurrentPassword : body.Passwords.CurrentPassword,
         NewPassword : body.Passwords.NewPassword,
     };
-    return this.http.post(this.BaseURI + '/Account/ChangePassword', formData);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Account/ChangePassword', formData);
   }
 }
