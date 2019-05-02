@@ -4,6 +4,8 @@ import { Login } from './login';
 import { Register } from './register';
 import { ChangePassword} from './changepassword';
 import { baseURIConfig, providedInConfig } from './dataconfig';
+import { ForgotPassword } from './forgot-password';
+import { ResetPassword } from './reset-password';
 import { ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -54,6 +56,16 @@ export class AccountService {
   //Get user profile info from API
   getUserProfile() {
     return this.http.get(this.BaseURI + '/UserProfile');
+  }
+
+  // Send data from forgot password form to API
+  forgotPassword(body: ForgotPassword) {
+    return this.http.post(this.BaseURI + '/Account/ForgotPassword', body);
+  }
+
+  // Send data from reset password form to API
+  resetPassword(body: ResetPassword) {
+    return this.http.post(this.BaseURI + '/Account/ResetPassword', body);
   }
 
   //Send data from changePassword form to API

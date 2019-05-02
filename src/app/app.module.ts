@@ -17,6 +17,8 @@ import { LoginComponent } from './account/login/login.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UserprofileService } from './services/userprofile.service';
+import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
 
 @NgModule({
@@ -27,6 +29,8 @@ import { ChangePasswordComponent } from './account/changepassword/changepassword
     LoginComponent,
     RegistrationComponent,
     UserprofileComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     ChangePasswordComponent  ],
   imports: [
     BrowserModule,

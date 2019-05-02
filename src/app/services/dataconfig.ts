@@ -1,9 +1,8 @@
 
 //Base WebApi URI address
-export const baseURIConfig = 'https://localhost:44379/api';
+export const baseURIConfig = 'http://localhost:61836/api';
 
 export const providedInConfig = 'root';
-
 
 //Languages for user-update form
 export const dropdownListLanguagesConfig = [
