@@ -49,6 +49,8 @@ export class RegistrationComponent implements OnInit {
         if (res.succeeded) {
           this.formModelRegister.reset();
           this.router.navigateByUrl('/home');
+          this.toastr.info('To complete the registration, check the email and click on the link indicated in the letter.', 'Note!',
+          {disableTimeOut: true, closeButton: true});
           this.toastr.success('New user created!', 'Registration successful.');
         }
       },
