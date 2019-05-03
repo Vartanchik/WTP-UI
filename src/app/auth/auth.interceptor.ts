@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, pipe, throwError } from "rxjs";
 import { tap, catchError, switchMap, finalize, filter, take } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { AccountService } from 'src/app/services/account.service';
-import { Tokenresponse } from '../services/tokenresponse';
+import { Tokenresponse } from '../interfaces/tokenresponse';
 
 @Injectable({
     providedIn: 'root'

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
 import { IMyDpOptions } from 'mydatepicker';
 import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
-import { User } from '../services/user';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-userprofile',

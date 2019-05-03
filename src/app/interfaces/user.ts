@@ -15,5 +15,5 @@ export interface User
     steam: string,
     languages: []
     players: []
-    teams: []
+    teams: [],
 }
