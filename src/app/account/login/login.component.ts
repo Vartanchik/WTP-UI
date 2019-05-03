@@ -29,14 +29,15 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.service.login(this.formModelLogin.value).subscribe(
       (res: any) => {
-        this.service.setToken(res.token);
-        //this.router.navigate(['/home']);
-        location.reload();
-   },
-      err => {
-        if (err.status == 400 || err.status == 401 || err.status == 500)
+        if(res.accessToken != null){
+          this.service.setAuthInfo(res);
+          //this.router.navigate(['/home']);
+          location.reload();
+        }  
+        else{
           this.toastr.error('Incorrect username or password.', 'Authentication failed.');
-      }
+        }
+      } 
     );
   }
 

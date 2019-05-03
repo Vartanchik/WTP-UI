@@ -70,8 +70,11 @@
               <input class="form-check-input" type="checkbox" formControlName="confirmCheckbox" id="invalidCheck2"
                 required>
               <label class="form-check-label" for="invalidCheck2">
-                <p id="site-rules-title">I Agree to the <a href="#">Personal Data Consent,</a> <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
-              </label>
+                <p id="site-rules-title">I Agree to the 
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter1">Personal Data Consent, </button>
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter2">Terms of Use</button> and 
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter3">Privacy Policy</button>
+                </label>
               <label class="text-danger"
                 *ngIf="formModelRegister.get('confirmCheckbox').touched && formModelRegister.get('confirmCheckbox').errors?.required">Please
                 read and agree with the Personal Data Consent, Terms of Use, and Privacy Policy before
@@ -87,3 +90,65 @@
       </div>
     </div>
   </div>
+
+  
+  <!-- Modal 1-->
+  <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Personal Data Consent</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            I confirm that I am at least 16 years old and I herewith give my consent regarding all possible processing actions in connection with my personal data as outlined in the <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter3">Privacy Policy</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2-->
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Terms Of Use</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              These Terms of Use (hereinafter – “Terms”) are provided to visitors, customers and users (hereinafter – “Customers” or “You”) of online platform DreamTeam devoted to recruitment and management for gaming in esports (the “Services”) and located at: https://wtp.com (the “Website” or “Platform”), owned and administrated all over the world by WTP. These Terms describe the conditions of using Services and Platform by Customers and based on the general custom, Internet ethic, common practice and Company’s policies.
+              PLEASE READ THESE TERMS CAREFULLY BEFORE USING THE PLATFORM AND SERVICES ON IT. BY ACCESSING PLATFORM AND/OR CREATING AN ACCOUNT AND/OR USING SERVICES ON IT YOU WILL EXPRESS YOUR UNCONDITIONAL CONSENT WITH THESE TERMS AND AGREE TO ABIDE BY THESE TERMS IN THE LATEST VERSION.
+              Please note, that You may not access or use the Platform and/or the Services, if You don’t agree with (or cannot comply with) these Terms.
+              </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3-->
+  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Privacy policy</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              Once you accept the Privacy Policy, you hereby agree and acknowledge that, we may modify (update or amend) the Privacy Policy by posting the modified version on the Platform at any time and at our sole discretion. All modified versions shall take effect immediately after posting on the Platform. You agree and consent to any and all modified versions of the Privacy Policy hereunder, in case you continue using the Platform and / or the Services after the modified version is posted, and you are solely responsible for regularly reviewing the Privacy Policy. We encourage you to periodically review the Privacy Policy for the latest information on our privacy practices.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
