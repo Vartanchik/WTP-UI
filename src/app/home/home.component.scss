@@ -1,3 +1,18 @@
 #header-img{
-    width: 100%
+    width: 100%;
+    display: block;
+    position: absolute;
+}
+
+#mainImage{
+    position: absolute;
+    top: 50px;
+}
+
+.card-b{
+    background-color: rgb(239, 245, 243);
+}
+
+.textC{
+    text-align: center;
 }

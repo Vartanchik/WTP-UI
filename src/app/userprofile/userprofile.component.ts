@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
 import { IMyDpOptions } from 'mydatepicker';
 import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
-import { User } from '../interfaces/user';
+import { User } from '../services/user';
 
 @Component({
   selector: 'app-userprofile',
@@ -106,24 +106,26 @@ export class UserprofileComponent implements OnInit {
   onSubmit() {
     this.service.updateUserProfile(this.formModelUser.value).subscribe(
       (res: any) => {
-        if (res.value == "Updated") {
-          //this.router.navigateByUrl('/account/userprofile');
-          this.toastr.success('Your profile updated!', 'Successful');
+        if(res.userName != null){
+          //this.toastr.success('Your profile updated!', 'Successful');
+          this.service.updatePhotoAndUserNameInStorage(res.photo, res.userName);
           location.reload();
         }
-      },
-      err => {
-        (err.error.value).forEach(element => {
-          if(element == "DuplicateUserName"){
-            this.toastr.error('Username is already taken','Update failed.');
-          }
-          else if(element == "DuplicateEmail"){
-            this.toastr.error('Email is already taken','Update failed.');
-          }
-          else{
-            this.toastr.error("Invalid data",'Update failed');
-          }
-      });
-    });
+        else{
+          (res.message).forEach(element => {
+            if(element == "DuplicateUserName"){
+              this.toastr.error('Username is already taken','Registration failed.');
+            }
+            else if(element == "DuplicateEmail"){
+              this.toastr.error('Email is already taken','Registration failed.');
+            }
+            else{
+              this.toastr.error("",'Registration failed.');
+            }
+          });
+        }
+      }
+    );
   }
+
 }

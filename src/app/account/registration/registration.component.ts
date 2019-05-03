@@ -53,20 +53,21 @@ export class RegistrationComponent implements OnInit {
           {disableTimeOut: true, closeButton: true});
           this.toastr.success('New user created!', 'Registration successful.');
         }
-      },
-      err => {
-        (err.error.value).forEach(element => {
-          if(element == "DuplicateUserName"){
-            this.toastr.error('Username is already taken','Registration failed.');
-          }
-          else if(element == "DuplicateEmail"){
-            this.toastr.error('Email is already taken','Registration failed.');
-          }
-          else{
-            this.toastr.error("",'Registration failed.');
-          }
-      });
-    });
+        else{
+          (res.message).forEach(element => {
+            if(element == "DuplicateUserName"){
+              this.toastr.error('Username is already taken','Registration failed.');
+            }
+            else if(element == "DuplicateEmail"){
+              this.toastr.error('Email is already taken','Registration failed.');
+            }
+            else{
+              this.toastr.error("",'Registration failed.');
+            }
+          });
+        }
+      }
+    );
   }
 
 }

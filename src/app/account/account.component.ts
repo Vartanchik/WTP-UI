@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
-import { User } from '../interfaces/user';
+import { User } from '../services/user';
 
 @Component({
   selector: 'app-account',
@@ -20,22 +20,30 @@ export class AccountComponent implements OnInit {
     if(this.service.checkExistenceToken()){
       this.isValid = false; 
 
-      //Get user info for navBar - avatar and userName
-      this.service.getUserProfile().subscribe(
-        (res: User) => {
-          this.photo = res.photo;
-          this.userName = res.userName;
-        },
-        err => {
-          //console.log(err);
-        }
-      );      
+      this.photo = this.service.getItem('photo');
+      this.userName = this.service.getItem('userName');
+
+      if(this.photo == undefined || this.userName == undefined){
+        //Get user info for navBar - avatar and userName
+        this.service.getUserProfile().subscribe(
+          (res: User) => {
+            this.photo = res.photo;
+            this.userName = res.userName;
+            this.service.setItem('photo', res.photo);
+            this.service.setItem('userName', res.userName);
+          },
+          err => {
+            //console.log(err);
+          }
+        );   
+      }
     }
+
   }
 
   //Logout user and delete JWT from local storage
   onLogout() {
-    this.service.removeToken();
+    this.service.removeAuthInfo();
     this.router.navigate(['/home']);
     location.reload();
   }

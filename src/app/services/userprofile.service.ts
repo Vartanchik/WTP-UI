@@ -40,4 +40,13 @@ export class UserprofileService {
     return this.http.put(this.BaseURI + '/UserProfile', formData);
   }
 
+
+  //update photo and userName in localStorage
+  updatePhotoAndUserNameInStorage(photo: string, userName: string){
+    localStorage.removeItem('userName');
+    localStorage.removeItem('photo');
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('photo', photo);
+  }
+
 }
