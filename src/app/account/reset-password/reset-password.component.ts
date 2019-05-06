@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder
     ) { }
-    
+
   formModelResetPassword = this.fb.group({
     newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
     confirmPassword: ['', Validators.required]
@@ -30,14 +30,10 @@ export class ResetPasswordComponent implements OnInit {
   );
 
   ngOnInit() {
-    console.log("RESET PASSWORD");
     this.route.queryParamMap.subscribe(queryParams => {
       this.userId = queryParams.get('userId');
       this.code = queryParams.get('code');
     });
-
-    console.log(this.userId);
-    console.log(this.code);
   }
 
   onSubmit() {
@@ -49,24 +45,18 @@ export class ResetPasswordComponent implements OnInit {
       res => {
         this.formModelResetPassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success('', res.message);
+        this.toastr.success(res.message, 'Success!');
       },
       err => {
-        console.log(err);
-        this.toastr.error('', err.error.message);
+        this.toastr.error(err.error.message, 'Error!');
       }
     );
   }
 
   checkPasswords(fb: FormGroup): ValidationErrors | null {
-    let newPassword = fb.get('newPassword').value;
-    let confirmPassword = fb.get('confirmPassword').value;
-    
-    console.log(newPassword);
-    console.log(confirmPassword);
-
+    const newPassword = fb.get('newPassword').value;
+    const confirmPassword = fb.get('confirmPassword').value;
     return newPassword === confirmPassword
-        ? null : { "notSame": true };
+        ? null : { notSame: true };
   }
-
 }

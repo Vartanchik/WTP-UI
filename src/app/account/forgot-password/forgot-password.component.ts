@@ -26,7 +26,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParam  => {
-      if (queryParam.get('fell') === 'true') {
+      if (queryParam.get('resetIsFailed') === 'true') {
         this.toastr.error('Something went wrong! Please, try again.', 'Error!');
       }
     });
@@ -34,18 +34,14 @@ export class ForgotPasswordComponent implements OnInit {
 
   onSubmit() {
     this.service.forgotPassword(this.formModelForgotPassword.value).subscribe(
-      () => {
+      res => {
         this.formModelForgotPassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.info('If there is no user with such email, or email is not confirmed - the letter won\'t be delivered!',
-         'Note!',
-          {disableTimeOut: true, closeButton: true});
-        this.toastr.success('Instructions were sent. Please, check Your email.', 'Success!');
+        this.toastr.info(res.info, 'Note!', {disableTimeOut: true, closeButton: true});
+        this.toastr.success(res.message, 'Success!');
       },
       err => {
-        err.error.value.forEach(element => {
-          this.toastr.error(element, 'Error!');
-        });
+        this.toastr.error(err.error.message, 'Error!');
       }
     );
   }
