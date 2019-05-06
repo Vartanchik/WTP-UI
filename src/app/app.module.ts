@@ -15,7 +15,7 @@ import { AccountComponent } from './account/account.component';
 import { AccountService } from './services/account.service';
 import { LoginComponent } from './account/login/login.component';
 import { RegistrationComponent } from './account/registration/registration.component';
-import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UserProfileComponent } from './userprofile/userprofile.component';
 import { UserprofileService } from './services/userprofile.service';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
@@ -28,7 +28,7 @@ import { ChangePasswordComponent } from './account/changepassword/changepassword
     AccountComponent,
     LoginComponent,
     RegistrationComponent,
-    UserprofileComponent,
+    UserProfileComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ChangePasswordComponent  ],

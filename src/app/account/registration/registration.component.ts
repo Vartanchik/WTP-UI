@@ -24,18 +24,18 @@ export class RegistrationComponent implements OnInit {
   //Validation rules
   formModelRegister = this.fb.group({
     confirmCheckbox:  ['', Validators.required],
-    UserName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-    Email: ['', [Validators.required, Validators.email]],
-    Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
-      ConfirmPassword: ['', Validators.required ]}, { validator: this.comparePasswords })
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email]],
+    passwords: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
+      confirmPassword: ['', Validators.required ]}, { validator: this.comparePasswords })
   });
 
   //Compare password on forms
   comparePasswords(fb: FormGroup) {
-    let confirmPswrdCtrl = fb.get('ConfirmPassword');
+    let confirmPswrdCtrl = fb.get('confirmPassword');
     if (confirmPswrdCtrl.errors == null || 'passwordMismatch' in confirmPswrdCtrl.errors) {
-      if (fb.get('Password').value != confirmPswrdCtrl.value)
+      if (fb.get('password').value != confirmPswrdCtrl.value)
         confirmPswrdCtrl.setErrors({ passwordMismatch: true });
       else
         confirmPswrdCtrl.setErrors(null);
@@ -69,5 +69,4 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
-
 }

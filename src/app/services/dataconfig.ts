@@ -30,7 +30,6 @@ export const dropdownSettingsLanguagesConfig = {
     allowSearchFilter: true
 };
 
-
 //Genders for user-update form
 export const dropdownListGendersConfig = [
     { id: 1, name: 'Male' },
@@ -43,7 +42,6 @@ export const dropdownSettingsGendersConfig = {
     itemsShowLimit: 1,
     allowSearchFilter: false
 };
-
 
 //Countries for user-update form
 export const dropdownListCountriesConfig = [
@@ -60,7 +58,6 @@ export const dropdownSettingsCountriesConfig = {
     itemsShowLimit: 1,
     allowSearchFilter: false
 };
-
 
 //DataPicker - format date
 export const dateFormatConfig = 'yyyy-mm-dd';

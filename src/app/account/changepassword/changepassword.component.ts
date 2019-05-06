@@ -24,7 +24,7 @@ export class ChangePasswordComponent implements OnInit {
     newPassword : ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
     confirmPassword : ['', [Validators.required]]
     }, 
-    {validators : [this.checkPasswords]}
+    { validators : [this.checkPasswords] }
   );
 
   //Send data from changePassword form to API and process response
@@ -51,4 +51,5 @@ export class ChangePasswordComponent implements OnInit {
     return currentPassword !== newPassword && newPassword === confirmPassword
         ? null : { "notSame": true };
   }
+  
 }

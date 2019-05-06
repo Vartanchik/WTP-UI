@@ -1,5 +1,5 @@
 export interface Login {
-    Email: string;
-    Password: string;
-    GrantType: string;
+    email: string;
+    password: string;
+    grantType: string;
 }

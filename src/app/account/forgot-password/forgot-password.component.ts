@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit {
     ) { }
 
   formModelForgotPassword = this.fb.group({
-    Email: ['', [Validators.required, Validators.email]]
+    email: ['', [Validators.required, Validators.email]]
   });
 
   ngOnInit() {
@@ -49,5 +49,4 @@ export class ForgotPasswordComponent implements OnInit {
       }
     );
   }
-
 }

@@ -3,90 +3,105 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
+
       <div class="form-group" id="registerForm">
-
         <h4>User registration</h4><br>
+        
         <form [formGroup]="formModelRegister" autocomplete="off" (submit)="onSubmit()">
-
+          
           <div class="form-group required">
             <label>Username*</label>
-            <input class="form-control" formControlName="UserName">
-            <small id="userNameHelp" class="form-text text-muted">Username must be 4-30 characters long.</small>
+            <input class="form-control" formControlName="userName">
+            <small id="userNameHelp" class="form-text text-muted">
+              username must be 4-30 characters long.</small>
             <label class="text-danger"
-              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.required">This
-              field is mandatory.</label>
+              *ngIf="formModelRegister.get('userName').touched && formModelRegister.get('userName').errors?.required">
+              This field is mandatory.</label>
             <label class="text-danger"
-              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.minlength">Minimum
-              4 characters required.</label>
+              *ngIf="formModelRegister.get('userName').touched && formModelRegister.get('userName').errors?.minlength">
+              Minimum 4 characters required.</label>
             <label class="text-danger"
-              *ngIf="formModelRegister.get('UserName').touched && formModelRegister.get('UserName').errors?.maxlength">Maximum
-              30 characters required.</label>
+              *ngIf="formModelRegister.get('userName').touched && formModelRegister.get('userName').errors?.maxlength">
+              Maximum 30 characters required.</label>
           </div>
 
           <div class="form-group required">
             <label>Email*</label>
-            <input class="form-control" formControlName="Email">
-            <small id="emailHelp" class="form-text text-muted">We won’t share your private email address with other
-              users.</small>
+            <input class="form-control" formControlName="email">
+            <small id="emailHelp" class="form-text text-muted">
+              We won’t share your private email address with other users.</small>
             <label class="text-danger"
-              *ngIf="formModelRegister.get('Email').touched && formModelRegister.get('Email').errors?.required">This
-              field is mandatory.</label>
+              *ngIf="formModelRegister.get('email').touched && formModelRegister.get('email').errors?.required">
+              This field is mandatory.</label>
             <label class="text-danger"
-              *ngIf="formModelRegister.get('Email').touched && formModelRegister.get('Email').errors?.email">Invalid
-              email address.</label>
+              *ngIf="formModelRegister.get('email').touched && formModelRegister.get('email').errors?.email">
+              Invalid email address.</label>
           </div>
 
-          <div formGroupName="Passwords">
+          <div formGroupName="passwords">
+
             <div class="form-group required">
               <label>Password*</label>
-              <input type="password" class="form-control" formControlName="Password">
-              <small id="passwordHelp" class="form-text text-muted">Minimum 6 characters. Maximum 16 characters.</small>
+              <input type="password" class="form-control" formControlName="password">
+              <small id="passwordHelp" class="form-text text-muted">
+                Minimum 6 characters. Maximum 16 characters.</small>
               <label class="text-danger"
-                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.required">This
-                field is mandatory.</label>
+                *ngIf="formModelRegister.get('passwords.password').touched && formModelRegister.get('passwords.password').errors?.required">
+                This field is mandatory.</label>
               <label class="text-danger"
-                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.minlength">Minimum
-                6 characters required.</label>
+                *ngIf="formModelRegister.get('passwords.password').touched && formModelRegister.get('passwords.password').errors?.minlength">
+                Minimum 6 characters required.</label>
               <label class="text-danger"
-                *ngIf="formModelRegister.get('Passwords.Password').touched && formModelRegister.get('Passwords.Password').errors?.pattern">Password
-                can contain at least 1 lowercase, 1 uppercase alphabetical character, and at least 1 numeric
-                character</label>
+                *ngIf="formModelRegister.get('passwords.password').touched && formModelRegister.get('passwords.password').errors?.pattern">
+                password can contain at least 1 lowercase, 1 uppercase alphabetical character, and at least 1 numeric character</label>
             </div>
 
             <div class="form-group required">
-              <label>Confirm Password*</label>
-              <input type="password" class="form-control" formControlName="ConfirmPassword">
+              <label>Confirm password*</label>
+              <input type="password" class="form-control" formControlName="confirmPassword">
               <label class="text-danger"
-                *ngIf="formModelRegister.get('Passwords.ConfirmPassword').touched && formModelRegister.get('Passwords.ConfirmPassword').errors?.required">This
-                field is mandatory.</label>
+                *ngIf="formModelRegister.get('passwords.confirmPassword').touched && formModelRegister.get('passwords.confirmPassword').errors?.required">
+                This field is mandatory.</label>
               <label class="text-danger"
-                *ngIf="formModelRegister.get('Passwords.ConfirmPassword').touched && formModelRegister.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Confirm
-                Password does not match.</label>
+                *ngIf="formModelRegister.get('passwords.confirmPassword').touched && formModelRegister.get('passwords.confirmPassword').errors?.passwordMismatch">
+                Confirm password does not match.</label>
             </div>
+
           </div>
 
           <div class="form-group required">
+
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" formControlName="confirmCheckbox" id="invalidCheck2"
-                required>
+              <input class="form-check-input" type="checkbox" formControlName="confirmCheckbox" id="invalidCheck2" required>
               <label class="form-check-label" for="invalidCheck2">
                 <p id="site-rules-title">I Agree to the 
-                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter1">Personal Data Consent, </button>
-                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter2">Terms of Use</button> and 
-                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter3">Privacy Policy</button>
-                </label>
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter1">
+                    Personal Data Consent, </button>
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter2">
+                    Terms of Use</button> and 
+                  <button type="button" class="btn btn-link linkBtn" data-toggle="modal" data-target="#exampleModalCenter3">
+                    Privacy Policy</button>
+                </p>
+              </label>
               <label class="text-danger"
-                *ngIf="formModelRegister.get('confirmCheckbox').touched && formModelRegister.get('confirmCheckbox').errors?.required">Please
-                read and agree with the Personal Data Consent, Terms of Use, and Privacy Policy before
-                registering.</label>
+                *ngIf="formModelRegister.get('confirmCheckbox').touched && formModelRegister.get('confirmCheckbox').errors?.required">
+                Please read and agree with the Personal Data Consent, Terms of Use, and Privacy Policy before registering.</label>
             </div>
+
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" [disabled]="!formModelRegister.valid">REGISTER</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!formModelRegister.valid">
+              REGISTER</button>
           </div>
+
         </form>
-        <p id="linkTologin">If you already have an account, click <a routerLink="/account/login" routerLinkActive="active">Log In</a></p>
+
+        <p id="linkTologin">
+          If you already have an account, click <a routerLink="/account/login" routerLinkActive="active">
+            Log In</a>
+        </p>
+      
       </div>
     </div>
   </div>
@@ -114,27 +129,26 @@
 
   <!-- Modal 2-->
   <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Terms Of Use</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              These Terms of Use (hereinafter – “Terms”) are provided to visitors, customers and users (hereinafter – “Customers” or “You”) of online platform DreamTeam devoted to recruitment and management for gaming in esports (the “Services”) and located at: https://wtp.com (the “Website” or “Platform”), owned and administrated all over the world by WTP. These Terms describe the conditions of using Services and Platform by Customers and based on the general custom, Internet ethic, common practice and Company’s policies.
-              PLEASE READ THESE TERMS CAREFULLY BEFORE USING THE PLATFORM AND SERVICES ON IT. BY ACCESSING PLATFORM AND/OR CREATING AN ACCOUNT AND/OR USING SERVICES ON IT YOU WILL EXPRESS YOUR UNCONDITIONAL CONSENT WITH THESE TERMS AND AGREE TO ABIDE BY THESE TERMS IN THE LATEST VERSION.
-              Please note, that You may not access or use the Platform and/or the Services, if You don’t agree with (or cannot comply with) these Terms.
-              </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>          </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Terms Of Use</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          These Terms of Use (hereinafter – “Terms”) are provided to visitors, customers and users (hereinafter – “Customers” or “You”) of online platform DreamTeam devoted to recruitment and management for gaming in esports (the “Services”) and located at: https://wtp.com (the “Website” or “Platform”), owned and administrated all over the world by WTP. These Terms describe the conditions of using Services and Platform by Customers and based on the general custom, Internet ethic, common practice and Company’s policies.
+          PLEASE READ THESE TERMS CAREFULLY BEFORE USING THE PLATFORM AND SERVICES ON IT. BY ACCESSING PLATFORM AND/OR CREATING AN ACCOUNT AND/OR USING SERVICES ON IT YOU WILL EXPRESS YOUR UNCONDITIONAL CONSENT WITH THESE TERMS AND AGREE TO ABIDE BY THESE TERMS IN THE LATEST VERSION.
+          Please note, that You may not access or use the Platform and/or the Services, if You don’t agree with (or cannot comply with) these Terms.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>
       </div>
     </div>
-
+  </div>
     <!-- Modal 3-->
-  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -144,7 +158,7 @@
             </button>
           </div>
           <div class="modal-body">
-              Once you accept the Privacy Policy, you hereby agree and acknowledge that, we may modify (update or amend) the Privacy Policy by posting the modified version on the Platform at any time and at our sole discretion. All modified versions shall take effect immediately after posting on the Platform. You agree and consent to any and all modified versions of the Privacy Policy hereunder, in case you continue using the Platform and / or the Services after the modified version is posted, and you are solely responsible for regularly reviewing the Privacy Policy. We encourage you to periodically review the Privacy Policy for the latest information on our privacy practices.
+            Once you accept the Privacy Policy, you hereby agree and acknowledge that, we may modify (update or amend) the Privacy Policy by posting the modified version on the Platform at any time and at our sole discretion. All modified versions shall take effect immediately after posting on the Platform. You agree and consent to any and all modified versions of the Privacy Policy hereunder, in case you continue using the Platform and / or the Services after the modified version is posted, and you are solely responsible for regularly reviewing the Privacy Policy. We encourage you to periodically review the Privacy Policy for the latest information on our privacy practices.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -152,3 +166,5 @@
         </div>
       </div>
     </div>
+</div>
+<hr id="account-line">

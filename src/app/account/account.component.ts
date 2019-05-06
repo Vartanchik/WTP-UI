@@ -38,7 +38,6 @@ export class AccountComponent implements OnInit {
         );   
       }
     }
-
   }
 
   //Logout user and delete JWT from local storage

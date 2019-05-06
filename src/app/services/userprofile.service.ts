@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { baseURIConfig, providedInConfig } from './dataconfig';
+import { User } from '../interfaces/user';
+import { Observable } from 'rxjs';
+import { WtpResponse } from '../interfaces/wtpresponse';
 
 @Injectable({
   providedIn: providedInConfig
@@ -13,9 +16,9 @@ export class UserprofileService {
   //Data from dataconfig file
    readonly BaseURI = baseURIConfig;
 
-   //Check existence JWT in local storage
-   checkExistenceToken(){
-    if (localStorage.getItem('token') != null){
+  //Check existence JWT in local storage
+  checkExistenceToken() {
+    if (localStorage.getItem('token') != null) {
       return true;
     }
     return false;
@@ -27,22 +30,14 @@ export class UserprofileService {
   }
 
   //Send data from userUpdate form to API
-  updateUserProfile(body) {
-    let formData = {
-      Photo: body.Photo,
-      UserName: body.UserName,
-      Gender: body.Gender[0],
-      DateOfBirth: body.DateOfBirth.formatted || body.DateOfBirth, 
-      Languages: body.Languages,
-      Country: body.Country[0],
-      Steam: body.Steam
-    };
-    return this.http.put(this.BaseURI + '/UserProfile', formData);
+  updateUserProfile(body: User) : Observable<WtpResponse> {
+    body.dateOfBirth = body.dateOfBirth.formatted || body.dateOfBirth;
+    
+    return this.http.put<WtpResponse>(this.BaseURI + '/UserProfile', body);
   }
 
-
   //update photo and userName in localStorage
-  updatePhotoAndUserNameInStorage(photo: string, userName: string){
+  updatePhotoAndUserNameInStorage(photo: string, userName: string) {
     localStorage.removeItem('userName');
     localStorage.removeItem('photo');
     localStorage.setItem('userName', userName);

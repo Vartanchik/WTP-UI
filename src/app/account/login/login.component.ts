@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   //Validation rules - login form
   formModelLogin = this.fb.group({
-    Email: ['', [Validators.required, Validators.email]],
-    Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]]
   });
 
   //Send data from login-form to API and process response

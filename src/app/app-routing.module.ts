@@ -5,7 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegistrationComponent } from './account/registration/registration.component';
-import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UserProfileComponent } from './userprofile/userprofile.component';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'changepassword', component: ChangePasswordComponent}
     ]
   },
-  { path: 'userprofile', component: UserprofileComponent }
+  { path: 'userprofile', component: UserProfileComponent }
 ];
 
 @NgModule({

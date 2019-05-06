@@ -21,60 +21,60 @@ export class AccountService {
   readonly BaseURI = baseURIConfig;
 
   //Check existence JWT in local storage
-  checkExistenceToken(){
-    if (localStorage.getItem('token') != null){
+  checkExistenceToken() {
+    if (localStorage.getItem('token') != null) {
       return true;
     }
     return false;
   }
 
   //Get single item from localStorage
-  getItem(name: string){
+  getItem(name: string) {
     return localStorage.getItem(name);
   }
 
   //Set single item to localStorage
-  setItem(name: string, item: string){
+  setItem(name: string, item: string) {
     localStorage.setItem(name, item);
   }
 
-//Set JWT in local storage
-setAuthInfo(body: Tokenresponse){
-  localStorage.setItem('token', body.accessToken.token);
-  localStorage.setItem('expiration', body.accessToken.expiration);
-  localStorage.setItem('refresh_token', body.accessToken.refresh_token);
-  localStorage.setItem('userName', body.accessToken.userName);
-  localStorage.setItem('photo', body.accessToken.photo);
-}
-
-//Remove JWT from local storage
-removeAuthInfo(){
-  localStorage.removeItem('token');
-  localStorage.removeItem('expiration');
-  localStorage.removeItem('refresh_token');
-  localStorage.removeItem('userName');
-  localStorage.removeItem('photo');
-}
+  //Set JWT in local storage
+  setAuthInfo(body: Tokenresponse) {
+    localStorage.setItem('token', body.accessToken.token);
+    localStorage.setItem('expiration', body.accessToken.expiration);
+    localStorage.setItem('refresh_token', body.accessToken.refresh_token);
+    localStorage.setItem('userName', body.accessToken.userName);
+    localStorage.setItem('photo', body.accessToken.photo);
+  }
+  
+  //Remove JWT from local storage
+  removeAuthInfo() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('photo');
+  }
 
   //Send data from register form to API
-  register(body: Register) {
+  register(body: Register) : Observable<WtpResponse> {
     let formData = {
-      UserName: body.UserName,
-      Email: body.Email,
-      Password: body.Passwords.Password
+      userName: body.userName,
+      email: body.email,
+      password: body.passwords.password
     };
-    return this.http.post(this.BaseURI + '/Account/Register', formData);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Account/Register', formData);
   }
 
   //Send data from login form to API
-  login(body: Login) {
+  login(body: Login) : Observable<WtpResponse>{
     let formData = {
-      Email: body.Email,
-      Password: body.Password,
-      GrantType: "password"
+      email: body.email,
+      password: body.password,
+      grantType: "password"
     };
     // return this.http.post(this.BaseURI + '/Account/Login', body);
-    return this.http.post(this.BaseURI + '/Token/Auth', formData)
+    return this.http.post<WtpResponse>(this.BaseURI + '/Token/Auth', formData)
   }
 
   //Get user profile info from API
@@ -83,22 +83,18 @@ removeAuthInfo(){
   }
 
   // Send data from forgot password form to API
-  forgotPassword(body: ForgotPassword) {
-    return this.http.post(this.BaseURI + '/Account/ForgotPassword', body);
+  forgotPassword(body: ForgotPassword) : Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/Account/ForgotPassword', body);
   }
 
   // Send data from reset password form to API
-  resetPassword(body: ResetPassword) {
-    return this.http.post(this.BaseURI + '/Account/ResetPassword', body);
+  resetPassword(body: ResetPassword) : Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/Account/ResetPassword', body);
   }
 
   //Send data from changePassword form to API
   changePassword(body: ChangePassword) : Observable<WtpResponse> {
-    let formData = {
-      currentPassword : body.currentPassword,
-      newPassword : body.newPassword,
-    };
-    return this.http.post<WtpResponse>(this.BaseURI + '/Account/ChangePassword', formData);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Account/ChangePassword', body);
   }
 
   // Method to get new refresh token

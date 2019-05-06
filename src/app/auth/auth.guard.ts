@@ -7,16 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate  {
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) { }
 
   //access denied for non authorized users
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('token') != null)
+    if (localStorage.getItem('token') != null) {
       return true;
-    else {
+    } else {
       this.router.navigate(['/home']);
       return false;
     }

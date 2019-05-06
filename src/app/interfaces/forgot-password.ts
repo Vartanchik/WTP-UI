@@ -1,3 +1,3 @@
 export interface ForgotPassword {
-    Email: string;
+    email: string;
 }

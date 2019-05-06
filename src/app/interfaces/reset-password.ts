@@ -1,5 +1,5 @@
 export interface ResetPassword {
-    Id: string;
-    Password: string;
-    Code: string;
+    id: string;
+    newPassword: string;
+    code: string;
 }

@@ -1,19 +1,14 @@
-export interface User
-{
+import { IdItem } from './id-item';
+
+export interface User {
     userName: string;
     email: string;
     photo: string;
-    gender: {
-        id: number;
-        name: string;
-    },
-    dateOfBirth: string;
-    country: {
-        id: number;
-        name: string;
-    },
+    gender: IdItem,
+    dateOfBirth: any;
+    country: IdItem,
     steam: string,
-    languages: []
+    languages: IdItem[]
     players: []
     teams: [],
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,7 +13,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class ResetPasswordComponent implements OnInit {
 
   userId: string;
-
   code: string;
 
   constructor(
@@ -23,49 +22,51 @@ export class ResetPasswordComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder
     ) { }
-
-    formModelResetPassword = this.fb.group({
-      Passwords: this.fb.group({
-        Password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
-        ConfirmPassword: ['', Validators.required]
-      }, { validator: this.comparePasswords })
-    });
-
-  comparePasswords(fb: FormGroup) {
-      const confirmPswrdCtrl = fb.get('ConfirmPassword');
-      if (confirmPswrdCtrl.errors == null || 'passwordMismatch' in confirmPswrdCtrl.errors) {
-        if (fb.get('Password').value !== confirmPswrdCtrl.value) {
-          confirmPswrdCtrl.setErrors({ passwordMismatch: true });
-        } else {
-          confirmPswrdCtrl.setErrors(null);
-        }
-      }
-    }
+    
+  formModelResetPassword = this.fb.group({
+    newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
+    confirmPassword: ['', Validators.required]
+  }, { validators : [this.checkPasswords] }
+  );
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(queryParams  => {
+    console.log("RESET PASSWORD");
+    this.route.queryParamMap.subscribe(queryParams => {
       this.userId = queryParams.get('userId');
       this.code = queryParams.get('code');
     });
+
+    console.log(this.userId);
+    console.log(this.code);
   }
 
   onSubmit() {
     this.service.resetPassword({
-      Id: this.userId,
-      Password: this.formModelResetPassword.value.Passwords.Password,
-      Code: this.code
+      id: this.userId,
+      newPassword: this.formModelResetPassword.get('newPassword').value,
+      code: this.code
     }).subscribe(
-      () => {
+      res => {
         this.formModelResetPassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success('Password has been reset!', 'Success!');
+        this.toastr.success('', res.message);
       },
       err => {
-        err.error.value.forEach(element => {
-          this.toastr.error(element, 'Error!');
-        });
+        console.log(err);
+        this.toastr.error('', err.error.message);
       }
     );
+  }
+
+  checkPasswords(fb: FormGroup): ValidationErrors | null {
+    let newPassword = fb.get('newPassword').value;
+    let confirmPassword = fb.get('confirmPassword').value;
+    
+    console.log(newPassword);
+    console.log(confirmPassword);
+
+    return newPassword === confirmPassword
+        ? null : { "notSame": true };
   }
 
 }
