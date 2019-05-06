@@ -83,12 +83,12 @@ export class AccountService {
   }
 
   // Send data from forgot password form to API
-  forgotPassword(body: ForgotPassword) : Observable<WtpResponse> {
+  forgotPassword(body: ForgotPassword): Observable<WtpResponse> {
     return this.http.post<WtpResponse>(this.BaseURI + '/Account/ForgotPassword', body);
   }
 
   // Send data from reset password form to API
-  resetPassword(body: ResetPassword) : Observable<WtpResponse> {
+  resetPassword(body: ResetPassword): Observable<WtpResponse> {
     return this.http.post<WtpResponse>(this.BaseURI + '/Account/ResetPassword', body);
   }
 

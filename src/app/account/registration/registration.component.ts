@@ -15,8 +15,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.formModelRegister.reset();
-    
-    if(this.service.checkExistenceToken()){
+    if (this.service.checkExistenceToken()) {
       this.router.navigate(['/home']);
     }
   }
