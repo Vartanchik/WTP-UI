@@ -87,23 +87,24 @@ export class UserProfileComponent implements OnInit {
       this.formModelUser.get('userName').setValue(this.userName);
     }
 
+    console.log(this.formModelUser);
     this.service.updateUserProfile(this.formModelUser.value).subscribe(
       res => {
         console.log(res);
-        this.toastr.success('Your profile updated!', 'Successful');
+        this.toastr.success('', res.message);
 
-        this.service.getUserProfile().subscribe(
-          (res: User) => {
-            this.userProfile = res;
-            console.log(this.userProfile.gender);
-            console.log(this.userProfile.languages);
-            console.log(this.userProfile.country);
-            this.setCurrentUserInfo();
-          },
-          err => {
-            console.log(err);
-          },
-        );
+        // this.service.getUserProfile().subscribe(
+        //   (res: User) => {
+        //     this.userProfile = res;
+        //     console.log(this.userProfile.gender);
+        //     console.log(this.userProfile.languages);
+        //     console.log(this.userProfile.country);
+        //     this.setCurrentUserInfo();
+        //   },
+        //   err => {
+        //     console.log(err);
+        //   },
+        // );
 
         // if(res.userName != null) {
         //   this.toastr.success('Your profile updated!', 'Successful');

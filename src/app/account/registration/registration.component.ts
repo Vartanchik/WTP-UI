@@ -45,27 +45,14 @@ export class RegistrationComponent implements OnInit {
   //Send data from register-form to API and process response
   onSubmit() {
     this.service.register(this.formModelRegister.value).subscribe(
-      (res: any) => {
-        if (res.succeeded) {
-          this.formModelRegister.reset();
-          this.router.navigateByUrl('/home');
-          this.toastr.info('To complete the registration, check the email and click on the link indicated in the letter.', 'Note!',
-          {disableTimeOut: true, closeButton: true});
-          this.toastr.success('New user created!', 'Registration successful.');
-        }
-        else{
-          (res.message).forEach(element => {
-            if(element == "DuplicateUserName"){
-              this.toastr.error('Username is already taken','Registration failed.');
-            }
-            else if(element == "DuplicateEmail"){
-              this.toastr.error('Email is already taken','Registration failed.');
-            }
-            else{
-              this.toastr.error("",'Registration failed.');
-            }
-          });
-        }
+      res => {
+        this.formModelRegister.reset();
+        this.router.navigateByUrl('/home');
+        this.toastr.success(res.message, 'Completed');
+        this.toastr.info(res.info, 'Note!', {disableTimeOut: true, closeButton: true});
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

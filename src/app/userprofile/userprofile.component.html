@@ -55,7 +55,7 @@
                     <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
                       [data]="dropdownListGenders"
                       [settings]="dropdownSettingsGenders">
-                      <option>{{this.selectedItemGender.value}}</option>
+                      <option value="{{this.selectedItemGender}}"></option>
                       </ng-multiselect-dropdown>
                     <label class="text-danger"
                       *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
@@ -77,7 +77,7 @@
               <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages" [placeholder]="'Choose language'"
                 [data]="dropdownListLanguages"
                 [settings]="dropdownSettingsLanguages">
-                <option [value]="language.value" *ngFor="let language of selectedItemsLanguages">{{language.value}}</option>
+                <option [value]="language.value" *ngFor="let language of selectedItemsLanguages">{{language.name}}</option>
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
@@ -89,7 +89,7 @@
               <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
                 [data]="dropdownListCountries"
                 [settings]="dropdownSettingsCountries">
-                <option>{{this.selectedItemCountry.value}}</option>
+                <option value="{{this.selectedItemCountry.name}}"></option>
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">
