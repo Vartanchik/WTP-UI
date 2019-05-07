@@ -54,8 +54,8 @@
                     <label>Gender*</label>
                     <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
                       [data]="dropdownListGenders"
-                      [settings]="dropdownSettingsGenders">
-                      <option value="{{this.selectedItemGender}}"></option>
+                      [settings]="dropdownSettingsGenders"
+                      [(ngModel)]="selectedItemGender">
                       </ng-multiselect-dropdown>
                     <label class="text-danger"
                       *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
@@ -76,8 +76,8 @@
               <label>Languages*</label>
               <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages" [placeholder]="'Choose language'"
                 [data]="dropdownListLanguages"
-                [settings]="dropdownSettingsLanguages">
-                <option [value]="language.value" *ngFor="let language of selectedItemsLanguages">{{language.name}}</option>
+                [settings]="dropdownSettingsLanguages"
+                [(ngModel)]="selectedItemsLanguages">
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
@@ -88,8 +88,8 @@
               <label>Country*</label>
               <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
                 [data]="dropdownListCountries"
-                [settings]="dropdownSettingsCountries">
-                <option value="{{this.selectedItemCountry.name}}"></option>
+                [settings]="dropdownSettingsCountries"
+                [(ngModel)]="selectedItemCountry">
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">

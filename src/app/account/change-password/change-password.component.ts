@@ -3,12 +3,11 @@ import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, ValidationErrors, FormGroup } from '@angular/forms';
-import { WtpResponse } from '../../interfaces/wtpresponse';
 
 @Component({
   selector: 'app-changepassword',
-  templateUrl: './changepassword.component.html',
-  styleUrls: ['./changepassword.component.css']
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
 

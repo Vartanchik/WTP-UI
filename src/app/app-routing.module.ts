@@ -8,7 +8,7 @@ import { RegistrationComponent } from './account/registration/registration.compo
 import { UserProfileComponent } from './userprofile/userprofile.component';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
+import { ChangePasswordComponent } from './account/change-password/change-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},

@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { baseURIConfig, providedInConfig } from './dataconfig';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
-import { WtpResponse } from '../interfaces/wtpresponse';
+import { WtpResponse } from '../interfaces/wtp-response';
 
 @Injectable({
   providedIn: providedInConfig

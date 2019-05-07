@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Login } from '../interfaces/login';
 import { Register } from '../interfaces/register';
-import { ChangePassword} from '../interfaces/changepassword';
+import { ChangePassword} from '../interfaces/change-password';
 import { baseURIConfig, providedInConfig } from './dataconfig';
 import { ForgotPassword } from '../interfaces/forgot-password';
 import { ResetPassword } from '../interfaces/reset-password';
 import { Observable } from 'rxjs';
-import { WtpResponse } from '../interfaces/wtpresponse';
-import { Tokenresponse } from '../interfaces/tokenresponse';
+import { WtpResponse } from '../interfaces/wtp-response';
+import { TokenResponse, Token } from '../interfaces/token-response';
 
 @Injectable({
   providedIn: providedInConfig
@@ -39,12 +39,12 @@ export class AccountService {
   }
 
   //Set JWT in local storage
-  setAuthInfo(body: Tokenresponse) {
-    localStorage.setItem('token', body.accessToken.token);
-    localStorage.setItem('expiration', body.accessToken.expiration);
-    localStorage.setItem('refresh_token', body.accessToken.refresh_token);
-    localStorage.setItem('userName', body.accessToken.userName);
-    localStorage.setItem('photo', body.accessToken.photo);
+  setAuthInfo(body: Token) {
+    localStorage.setItem('token', body.token);
+    localStorage.setItem('expiration', body.expiration);
+    localStorage.setItem('refresh_token', body.refresh_token);
+    localStorage.setItem('userName', body.userName);
+    localStorage.setItem('photo', body.photo);
   }
   
   //Remove JWT from local storage
@@ -63,18 +63,19 @@ export class AccountService {
       email: body.email,
       password: body.passwords.password
     };
+    
     return this.http.post<WtpResponse>(this.BaseURI + '/Account/Register', formData);
   }
 
   //Send data from login form to API
-  login(body: Login) : Observable<WtpResponse>{
+  login(body: Login) : Observable<TokenResponse>{
     let formData = {
       email: body.email,
       password: body.password,
       grantType: "password"
     };
-    // return this.http.post(this.BaseURI + '/Account/Login', body);
-    return this.http.post<WtpResponse>(this.BaseURI + '/Token/Auth', formData)
+
+    return this.http.post<TokenResponse>(this.BaseURI + '/Token/Auth', formData)
   }
 
   //Get user profile info from API
@@ -105,4 +106,5 @@ export class AccountService {
 
     return this.http.post(this.BaseURI + '/Token/Auth', {username, refreshToken,  grantType});
   }
+  
 }

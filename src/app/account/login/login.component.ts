@@ -28,16 +28,14 @@ export class LoginComponent implements OnInit {
   //Send data from login-form to API and process response
   onSubmit() {
     this.service.login(this.formModelLogin.value).subscribe(
-      (res: any) => {
-        if(res.accessToken != null){
-          this.service.setAuthInfo(res);
-          //this.router.navigate(['/home']);
-          location.reload();
-        }  
-        else{
-          this.toastr.error('Incorrect username or password.', 'Authentication failed.');
-        }
-      } 
+      res => {
+        this.service.setAuthInfo(res.accessToken);
+        this.toastr.success(res.message);
+        location.reload();
+      },
+      err => {
+        this.toastr.error(err.error.message);
+      }
     );
   }
 

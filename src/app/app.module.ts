@@ -19,7 +19,7 @@ import { UserProfileComponent } from './userprofile/userprofile.component';
 import { UserprofileService } from './services/userprofile.service';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './account/changepassword/changepassword.component';
+import { ChangePasswordComponent } from './account/change-password/change-password.component';
 
 @NgModule({
   declarations: [

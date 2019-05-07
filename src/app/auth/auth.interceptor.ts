@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, pipe, throwError } from "rxjs";
 import { tap, catchError, switchMap, finalize, filter, take } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { AccountService } from 'src/app/services/account.service';
-import { Tokenresponse } from '../interfaces/tokenresponse';
+import { TokenResponse, Token } from '../interfaces/token-response';
 
 @Injectable({
   providedIn: 'root'
@@ -59,9 +59,9 @@ export class AuthInterceptor implements HttpInterceptor {
       // call the API to refresh the token
       return this.service.getNewRefreshToken()
       .pipe(
-        switchMap((res: Tokenresponse) => {
+        switchMap((res: Token) => {
           if(res) {
-            this.tokenSubject.next(res.accessToken.token);
+            this.tokenSubject.next(res.token);
             this.service.setAuthInfo(res);
             return next.handle(this.attachTokenToRequest(request));
           }

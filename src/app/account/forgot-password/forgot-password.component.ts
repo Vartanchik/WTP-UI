@@ -25,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(queryParam  => {
+    this.route.queryParamMap.subscribe(queryParam => {
       if (queryParam.get('resetIsFailed') === 'true') {
         this.toastr.error('Something went wrong! Please, try again.', 'Error!');
       }
