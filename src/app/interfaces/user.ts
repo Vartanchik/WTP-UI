@@ -4,11 +4,11 @@ export interface User {
     userName: string;
     email: string;
     photo: string;
-    gender: IdItem,
+    gender: IdItem;
     dateOfBirth: any;
-    country: IdItem,
-    steam: string,
-    languages: IdItem[]
-    players: []
-    teams: [],
+    country: IdItem;
+    steam: string;
+    languages: IdItem[];
+    players: [];
+    teams: [];
 }

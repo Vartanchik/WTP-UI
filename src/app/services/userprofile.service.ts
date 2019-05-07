@@ -32,6 +32,8 @@ export class UserprofileService {
   //Send data from userUpdate form to API
   updateUserProfile(body: User) : Observable<WtpResponse> {
     body.dateOfBirth = body.dateOfBirth.formatted || body.dateOfBirth;
+    body.gender = body.gender[0];
+    body.country = body.country[0];
     
     return this.http.put<WtpResponse>(this.BaseURI + '/UserProfile', body);
   }

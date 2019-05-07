@@ -20,29 +20,39 @@ export class UserProfileComponent implements OnInit {
 
   private isValid: boolean = true;
 
-  private userProfile: User;
-  private photo: string;
-  private userName: string;
+  private userProfile: User = {
+    userName: '',
+    email: '',
+    photo: '',
+    gender: {id: 0, name: ''},
+    dateOfBirth: '',
+    country: {id: 0, name: ''},
+    steam: '',
+    languages: [{id: 0, name: ''}],
+    players: [],
+    teams: []
+  };
+  public model: any;
 
   //Initialized to specific date.
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: dateFormatConfig
   };
-  public model: any;
+  public dateField: any;
 
   //Multiselect-dropdown - Country
   dropdownListLanguages = [];
-  selectedItemsLanguages: IdItem[];
+  selectedItemsLanguages: IdItem[] = [{id: 0, name: ''}];
   dropdownSettingsLanguages = {};
 
   //Multiselect-dropdown - Gender
   dropdownListGenders = [];
-  selectedItemGender: IdItem;
+  selectedItemGender: IdItem[] = [{id: 0, name: ''}];
   dropdownSettingsGenders = {};
 
   //Multiselect-dropdown - Language 
   dropdownListCountries = [];
-  selectedItemCountry: IdItem;
+  selectedItemCountry: IdItem[] = [{id: 0, name: ''}];
   dropdownSettingsCountries = {};
 
   ngOnInit() {
@@ -53,27 +63,22 @@ export class UserProfileComponent implements OnInit {
 
       this.service.getUserProfile().subscribe(
         (res: User) => {
-          console.log(res);
           this.userProfile = res;
           this.setCurrentUserInfo();
         },
         err => {
-          console.log(err);
+          this.toastr.error(err.error.message);
         },
       );
     }
 
     this.initializeDefaultConfig();
-
-    // console.log(this.userProfile.gender);
-    // console.log(this.userProfile.languages);
-    // console.log(this.userProfile.country);
   }
 
   //Validation rules - userProfile form
   formModelUser = this.fb.group({
     photo: [''],
-    userName: ['' , [Validators.minLength(4), Validators.maxLength(30)]],
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
     gender:  ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     languages: ['', Validators.required],
@@ -83,47 +88,13 @@ export class UserProfileComponent implements OnInit {
 
   //Send data from userProfile-form to API and process response
   onSubmit() { 
-    if(!this.formModelUser.get('userName').value) {
-      this.formModelUser.get('userName').setValue(this.userName);
-    }
-
-    console.log(this.formModelUser);
     this.service.updateUserProfile(this.formModelUser.value).subscribe(
       res => {
-        console.log(res);
-        this.toastr.success('', res.message);
-
-        // this.service.getUserProfile().subscribe(
-        //   (res: User) => {
-        //     this.userProfile = res;
-        //     console.log(this.userProfile.gender);
-        //     console.log(this.userProfile.languages);
-        //     console.log(this.userProfile.country);
-        //     this.setCurrentUserInfo();
-        //   },
-        //   err => {
-        //     console.log(err);
-        //   },
-        // );
-
-        // if(res.userName != null) {
-        //   this.toastr.success('Your profile updated!', 'Successful');
-        //   this.service.updatePhotoAndUserNameInStorage(res.photo, res.userName);
-        //   location.reload();
-        // } else {
-        //   (res.message).forEach(element => {
-        //     if(element == "DuplicateUserName") {
-        //       this.toastr.error('Username is already taken','Registration failed.');
-        //     } else if(element == "DuplicateEmail") {
-        //       this.toastr.error('Email is already taken','Registration failed.');
-        //     } else {
-        //       this.toastr.error("",'Registration failed.');
-        //     }
-        //   });
-        // }
+        this.toastr.success(res.message, 'Completed!');
+        location.reload();
       },
       err => {
-        console.log(err);
+        this.toastr.error(err.error.message, err.error.info);
       }
     );
   }
@@ -140,29 +111,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-    this.photo = this.userProfile.photo;
-    this.userName = this.userProfile.userName;
-    this.selectedItemGender = this.userProfile.gender;
-    this.selectedItemCountry = this.userProfile.country;
+    this.selectedItemGender = [(this.userProfile.gender)];
+    this.selectedItemCountry = [(this.userProfile.country)];
 
-    if(this.userProfile.dateOfBirth == null) {
-      this.model = "Choose date of birth";
-    } else {
-      this.model = this.userProfile.dateOfBirth.substr(0, 10);
-    };
+    this.model = this.userProfile.dateOfBirth == null
+      ? "Choose date of birth"
+      : this.userProfile.dateOfBirth.substr(0, 10);
 
+    this.selectedItemsLanguages = [];
     for(let item of this.userProfile.languages) {
       this.selectedItemsLanguages.push(item);
     }
-  }
-
-  private resetSelectedData() {
-    this.photo = null;
-    this.userName = null;
-    this.selectedItemGender = null;
-    this.selectedItemCountry = null;
-    this.selectedItemsLanguages = null;
-    this.userProfile.dateOfBirth = null;
   }
 
 }

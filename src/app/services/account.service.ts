@@ -22,12 +22,11 @@ export class AccountService {
 
   //Check existence JWT in local storage
   checkExistenceToken() {
-    if (localStorage.getItem('token') != null) {
-      return true;
-    }
-    return false;
+    return localStorage.getItem('token') == null
+      ? false
+      : true;
   }
-
+  
   //Get single item from localStorage
   getItem(name: string) {
     return localStorage.getItem(name);

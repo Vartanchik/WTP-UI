@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
     this.service.login(this.formModelLogin.value).subscribe(
       res => {
         this.service.setAuthInfo(res.accessToken);
-        this.toastr.success(res.message);
         location.reload();
+        this.toastr.success(res.message);
       },
       err => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
