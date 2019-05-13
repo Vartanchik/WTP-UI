@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, PatternValidator, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
@@ -7,7 +7,6 @@ import { IMyDpOptions } from 'mydatepicker';
 import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
 import { User } from '../interfaces/user';
 import { IdItem } from '../interfaces/id-item';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-userprofile',
@@ -21,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   private isValid: boolean = true;
 
   private userProfile: User = {
+    id: 0,
     userName: '',
     email: '',
     photo: '',
@@ -42,17 +42,17 @@ export class UserProfileComponent implements OnInit {
 
   //Multiselect-dropdown - Country
   dropdownListLanguages = [];
-  selectedItemsLanguages: IdItem[] = [{id: 0, name: ''}];
+  selectedItemsLanguages: IdItem[] = null;
   dropdownSettingsLanguages = {};
 
   //Multiselect-dropdown - Gender
   dropdownListGenders = [];
-  selectedItemGender: IdItem[] = [{id: 0, name: ''}];
+  selectedItemGender: IdItem[] = null;
   dropdownSettingsGenders = {};
 
   //Multiselect-dropdown - Language 
   dropdownListCountries = [];
-  selectedItemCountry: IdItem[] = [{id: 0, name: ''}];
+  selectedItemCountry: IdItem[] = null;
   dropdownSettingsCountries = {};
 
   ngOnInit() {
@@ -88,13 +88,14 @@ export class UserProfileComponent implements OnInit {
 
   //Send data from userProfile-form to API and process response
   onSubmit() { 
-    this.service.updateUserProfile(this.formModelUser.value).subscribe(
+    this.service.updateUserProfile(this.userProfile.id, this.formModelUser.value).subscribe(
       res => {
         this.toastr.success(res.message, 'Completed!');
         location.reload();
       },
       err => {
         this.toastr.error(err.error.message, err.error.info);
+        console.log(err);
       }
     );
   }
@@ -118,10 +119,7 @@ export class UserProfileComponent implements OnInit {
       ? "Choose date of birth"
       : this.userProfile.dateOfBirth.substr(0, 10);
 
-    this.selectedItemsLanguages = [];
-    for(let item of this.userProfile.languages) {
-      this.selectedItemsLanguages.push(item);
-    }
+    this.selectedItemsLanguages = this.userProfile.languages;
   }
 
 }

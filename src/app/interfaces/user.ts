@@ -1,6 +1,7 @@
 import { IdItem } from './id-item';
 
 export interface User {
+    id: number;
     userName: string;
     email: string;
     photo: string;

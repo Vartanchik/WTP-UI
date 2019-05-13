@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       res => {
         this.formModelRegister.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success(res.message, 'Completed');
+        this.toastr.success(res.message, 'Completed.');
         this.toastr.info(res.info, 'Note!', {disableTimeOut: true, closeButton: true});
       },
       err => {
