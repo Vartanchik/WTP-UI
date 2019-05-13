@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectionUsersComponent } from './section-users.component';
+import { LockUserComponent } from './lock-user.component';
 
-describe('SectionUsersComponent', () => {
-  let component: SectionUsersComponent;
-  let fixture: ComponentFixture<SectionUsersComponent>;
+describe('LockUserComponent', () => {
+  let component: LockUserComponent;
+  let fixture: ComponentFixture<LockUserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectionUsersComponent ]
+      declarations: [ LockUserComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectionUsersComponent);
+    fixture = TestBed.createComponent(LockUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

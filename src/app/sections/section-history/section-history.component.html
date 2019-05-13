@@ -1,4 +1,4 @@
-<div class="section-container">
+<!-- <div class="section-container">
   <h2>History</h2>
   <table class="table table-striped">
     <thead class="thead-dark">
@@ -26,4 +26,64 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
+
+<div>
+    <h2>Searching string(input valid name of user!)</h2>
+    <div class="text-right">
+    <p class="one"><input type="text" [(ngModel)]="searchByName" class="form-control"/></p>
+   
+    <div class="text-left">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+            <td>Choose sorts field</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr valign="text-right">
+              <td><select [(ngModel)]="selectedNumber">  
+                  <option *ngFor="let item of nameOfSort">{{item}} </option>  
+                </select> </td>
+            </tr>
+            </tbody>
+            </table>
+    </div>
+
+    <button  style="width:300px;height:35px" (click)="search()" class="btn btn-sm btn-info">Search</button>
+  </div>
+  <br>
+  </div>
+  <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+            <td>Id</td>
+            <td>dateOfOperation</td>
+            <td>description</td>
+            <td>previousUserEmail</td>
+            <td>previousUserName</td>
+            <td>newUserEmail</td>
+            <td>newUserName</td>
+            <td>appUserId</td>
+            <td>adminId</td>
+            <td>operationId</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let item of histories | paginate: { itemsPerPage: itemOnPage, currentPage: pageNumber, totalItems:Count };let i = index">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.dateOfOperation | date:'short'}}</td>
+                  <td>{{ item.description }}</td>
+                  <td>{{item.previousUserEmail}}</td>
+                <td>{{item.previousUserName}}</td>
+                <td>{{item.newUserEmail}}</td>
+                <td>{{item.newUserName}}</td>
+                <td>{{item.appUserId}}</td>
+                <td>{{item.adminId}}</td>
+                <td>{{item.operationId}}</td>
+        </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>

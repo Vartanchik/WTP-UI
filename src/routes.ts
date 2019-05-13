@@ -1,14 +1,21 @@
 import {Routes} from '@angular/router';
-import {SectionUsersComponent} from './app/sections/section-users/section-users.component';
-import {SectionNewProfileComponent} from './app/sections/section-new-profile/section-new-profile.component';
 import {SectionHistoryComponent} from './app/sections/section-history/section-history.component';
 import {SectionGamesComponent} from './app/sections/section-games/section-games.component';
+import {UserListComponent} from './app/users/user-list/user-list.component';
+import {NotFoundComponent} from './app/users/not-found/not-found.component';
+import { UserUpdateComponent } from './app/users/user-update/user-update.component';
+import { UserCreateComponent } from './app/users/user-create/user-create.component';
+import { LockUserComponent } from './app/users/lock-user/lock-user.component';
 
 export const appRoutes: Routes = [
-    {path: 'users', component: SectionUsersComponent},
-    {path: 'newProfile', component: SectionNewProfileComponent},
-    {path: 'history', component: SectionHistoryComponent},
+    {path: 'admin/users', component: UserListComponent},
+    {path: 'admin/history', component: SectionHistoryComponent},
     {path: 'games', component: SectionGamesComponent},
 
-    {path: '', redirectTo: '/users',pathMatch: 'full'}
+    { path: 'admin/users/edit/:id', component: UserUpdateComponent },
+    { path: 'admin/users/block/:id', component: LockUserComponent },
+    { path: 'admin/users/create', component: UserCreateComponent },
+    {path: '', redirectTo: '/admin/users',pathMatch: 'full'},//component: UserListComponent},
+    //{path: '', redirectTo: '/users',pathMatch: 'full'},
+    { path: '**', component: NotFoundComponent }
 ];
