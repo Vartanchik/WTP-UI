@@ -7,6 +7,9 @@ import { IMyDpOptions } from 'mydatepicker';
 import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
 import { User } from '../interfaces/user';
 import { IdItem } from '../interfaces/id-item';
+import { CommunicationService } from '../services/communication.service';
+import { flatMap } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -15,7 +18,14 @@ import { IdItem } from '../interfaces/id-item';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: UserprofileService, private router: Router, private toastr: ToastrService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private service: UserprofileService, 
+    private router: Router, 
+    private toastr: ToastrService,
+    private svc: CommunicationService,
+    private accsvc: AccountService)
+  { }
 
   private isValid: boolean = true;
 
@@ -32,13 +42,12 @@ export class UserProfileComponent implements OnInit {
     players: [],
     teams: []
   };
-  public model: any;
+  public model: any = "Choose date of birth";
 
   //Initialized to specific date.
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: dateFormatConfig
   };
-  public dateField: any;
 
   //Multiselect-dropdown - Country
   dropdownListLanguages = [];
@@ -78,7 +87,7 @@ export class UserProfileComponent implements OnInit {
   //Validation rules - userProfile form
   formModelUser = this.fb.group({
     photo: [''],
-    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     gender:  ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     languages: ['', Validators.required],
@@ -88,14 +97,23 @@ export class UserProfileComponent implements OnInit {
 
   //Send data from userProfile-form to API and process response
   onSubmit() { 
-    this.service.updateUserProfile(this.userProfile.id, this.formModelUser.value).subscribe(
+    this.service.updateUserProfile(this.userProfile.id, this.formModelUser.value)
+    .pipe(
+      flatMap( res => 
+        { 
+          this.toastr.success(res.info, res.message);
+          return this.service.getUserProfile();
+        })
+    )
+    .subscribe(
       res => {
-        this.toastr.success(res.message, 'Completed!');
-        location.reload();
+        if (res.hasOwnProperty('photo')) {
+        this.userProfile = res as User;
+          this.setCurrentUserInfo();
+        }
       },
       err => {
-        this.toastr.error(err.error.message, err.error.info);
-        console.log(err);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -112,12 +130,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
+    this.accsvc.setItem('userName', this.userProfile.userName);
+    this.accsvc.setItem('photo', this.userProfile.photo);
+
     this.selectedItemGender = [(this.userProfile.gender)];
     this.selectedItemCountry = [(this.userProfile.country)];
 
-    this.model = this.userProfile.dateOfBirth == null
-      ? "Choose date of birth"
-      : this.userProfile.dateOfBirth.substr(0, 10);
+    if(this.userProfile.dateOfBirth != null)
+      this.model = this.userProfile.dateOfBirth.substr(0, 10);
 
     this.selectedItemsLanguages = this.userProfile.languages;
   }

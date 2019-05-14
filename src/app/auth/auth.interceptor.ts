@@ -89,7 +89,6 @@ export class AuthInterceptor implements HttpInterceptor {
     onLogout() {
       this.service.removeAuthInfo();
       this.router.navigate(['/home']);
-      location.reload();
     }
 
 }

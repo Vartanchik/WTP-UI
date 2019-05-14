@@ -36,7 +36,7 @@
             <div class="form-group required">
               <label class="labelLeft">Username*</label>
               <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName" />
-              <small id="userNameHelp" class="form-text text-muted">Username must be 4-30 characters long.</small>
+              <small id="userNameHelp" class="form-text text-muted">Username must be 4-16 characters long.</small>
               <label class="text-danger"
                 *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required">
                 This field is mandatory.</label>
@@ -45,7 +45,7 @@
                 Minimum 4 characters required.</label>
               <label class="text-danger"
                 *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
-                Maximum 30 characters required.</label>
+                Maximum 16 characters required.</label>
             </div>
 
             <div class="container" id="twoFields">
@@ -66,7 +66,7 @@
                 <div class="col-md-6">
                   <div class="form-group required">
                     <label>Date of birth*</label>
-                    <my-date-picker type="date" id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
+                    <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
                       [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
                   </div>
                 </div>

@@ -35,8 +35,7 @@ export class ChangePasswordComponent implements OnInit {
         this.toastr.success('', res.message);
       },
       err => {
-        console.log(err);
-        this.toastr.error('', err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

@@ -25,8 +25,8 @@ export class UserprofileService {
   }
   
    //Get user profile info from API
-  getUserProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+  getUserProfile(): Observable<User|WtpResponse> {
+    return this.http.get<User|WtpResponse>(this.BaseURI + '/UserProfile');
   }
 
   //Send data from userUpdate form to API

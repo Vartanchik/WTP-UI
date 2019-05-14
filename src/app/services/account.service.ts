@@ -6,16 +6,18 @@ import { ChangePassword} from '../interfaces/change-password';
 import { baseURIConfig, providedInConfig } from './dataconfig';
 import { ForgotPassword } from '../interfaces/forgot-password';
 import { ResetPassword } from '../interfaces/reset-password';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { WtpResponse } from '../interfaces/wtp-response';
 import { TokenResponse, Token } from '../interfaces/token-response';
+import { User } from '../interfaces/user';
+import { CommunicationService } from './communication.service';
 
 @Injectable({
   providedIn: providedInConfig
 })
 export class AccountService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private svc: CommunicationService) { }
 
   //Data from dataconfig file
   readonly BaseURI = baseURIConfig;
@@ -25,6 +27,10 @@ export class AccountService {
     return localStorage.getItem('token') == null
       ? false
       : true;
+  }
+
+  checkExistenceTokenAsync() {
+    this.svc.setLoginValue(localStorage.getItem('token') !== null);
   }
   
   //Get single item from localStorage
@@ -78,8 +84,8 @@ export class AccountService {
   }
 
   //Get user profile info from API
-  getUserProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+  getUserProfile(): Observable<User|WtpResponse> {
+    return this.http.get<User|WtpResponse>(this.BaseURI + '/UserProfile');
   }
 
   // Send data from forgot password form to API
@@ -104,6 +110,31 @@ export class AccountService {
     const grantType = "refresh_token";
 
     return this.http.post(this.BaseURI + '/Token/Auth', {username, refreshToken,  grantType});
+  }
+
+  getPhotoAndName(): Observable<User|WtpResponse> {
+    const photo = this.getItem('photo');
+    const userName = this.getItem('userName');
+
+      if(photo == undefined || userName == undefined) {
+        //Get user info for navBar - avatar and userName
+        return this.getUserProfile();
+      } else {
+        const usr: User = {
+          id: 0,
+          userName: userName,
+          email: '',
+          photo: photo,
+          gender: {id: 0, name: ''},
+          dateOfBirth: '',
+          country: {id: 0, name: ''},
+          steam: '',
+          languages: [{id: 0, name: ''}],
+          players: [],
+          teams: []
+        };
+        return of(usr);
+      }
   }
   
 }

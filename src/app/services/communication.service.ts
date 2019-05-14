@@ -4,16 +4,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ActualContentService {
+export class CommunicationService {
 
   private subject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() { }
 
-  changeSubject(value: boolean) {
-    this.subject = new BehaviorSubject(value);
+  setLoginValue(value: boolean) {
+    this.subject.next(value);
   }
-  getObservableValue(): Observable<boolean> {
+  getLoginValue(): Observable<boolean> {
     return this.subject.asObservable();
   }
 }
