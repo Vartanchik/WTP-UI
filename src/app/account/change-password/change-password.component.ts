@@ -32,7 +32,7 @@ export class ChangePasswordComponent implements OnInit {
       res => {
         this.formModelChangePassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success('', res.message);
+        this.toastr.success(res.info, res.message);
       },
       err => {
         this.toastr.error(err.error.info, err.error.message);

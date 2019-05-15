@@ -45,10 +45,10 @@ export class ResetPasswordComponent implements OnInit {
       res => {
         this.formModelResetPassword.reset();
         this.router.navigateByUrl('/home');
-        this.toastr.success(res.message, 'Success!');
+        this.toastr.success(res.info, res.message);
       },
       err => {
-        this.toastr.error(err.error.message, 'Error!');
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
