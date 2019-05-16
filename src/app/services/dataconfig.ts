@@ -60,4 +60,4 @@ export const dropdownSettingsCountriesConfig = {
 };
 
 //DataPicker - format date
-export const dateFormatConfig = 'yyyy-mm-dd';
+export const dateFormatConfig = 'dd.mm.yyyy';
