@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, ValidationErrors } from '@angular/forms';
 
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -32,7 +33,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParams => {
       this.userId = queryParams.get('userId');
-      this.code = queryParams.get('code');
+      this.code = encodeURIComponent(queryParams.get('code'));
     });
   }
 

@@ -27,7 +27,7 @@
             
             <div class="form-group" id="upload">
               <div class="custom-file">
-                <input type="file" class="form-control custom-file-input" formControlName="photo" aria-describedby="inputGroupFileAddon01">
+                <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" />
                 <label class="custom-file-label">UPDATE AVATAR</label>
               </div>
             </div>

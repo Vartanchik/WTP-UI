@@ -38,6 +38,10 @@ export class UserprofileService {
     
     return this.http.put<WtpResponse>(this.BaseURI + '/UserProfile', body);
   }
+  // Send file form to API
+  sendFile(form: FormData): Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/UserProfile/UpdatePhoto', form);
+  }
 
   //update photo and userName in localStorage
   updatePhotoAndUserNameInStorage(photo: string, userName: string) {
