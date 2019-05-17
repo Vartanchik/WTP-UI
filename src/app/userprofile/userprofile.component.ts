@@ -118,6 +118,23 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  // Update user photo
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file: File = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      this.service.sendFile(formData).subscribe(
+        res => {
+          this.userProfile.photo = res.info;
+        },
+        err => {
+          this.toastr.error(err.error.message);
+        }
+      )
+    }
+  }
+
   private initializeDefaultConfig() {
     this.dropdownListLanguages = dropdownListLanguagesConfig;
     this.dropdownSettingsLanguages = dropdownSettingsLanguagesConfig;
