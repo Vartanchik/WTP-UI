@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { User } from '../interfaces/user';
+import { CommunicationService } from '../services/communication.service';
+import { Subscription, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account',
@@ -10,41 +14,47 @@ import { User } from '../interfaces/user';
 })
 export class AccountComponent implements OnInit {
 
+  disposable: Subscription = new Subscription();
+  private isLogin: boolean = false;
+
   private photo: string;
   private userName: string;
 
-  constructor(private router: Router, private service: AccountService) { }
-  private isValid: boolean = true;
-
+  constructor(
+    private toastr: ToastrService,
+    private service: AccountService, 
+    private svc: CommunicationService) 
+  { }
+  
   ngOnInit() {
-    if(this.service.checkExistenceToken()){
-      this.isValid = false; 
-
-      this.photo = this.service.getItem('photo');
-      this.userName = this.service.getItem('userName');
-
-      if(this.photo == undefined || this.userName == undefined){
-        //Get user info for navBar - avatar and userName
-        this.service.getUserProfile().subscribe(
-          (res: User) => {
-            this.photo = res.photo;
-            this.userName = res.userName;
-            this.service.setItem('photo', res.photo);
-            this.service.setItem('userName', res.userName);
-          },
-          err => {
-            //console.log(err);
+    this.disposable.add(
+      this.svc.getLoginValue()
+      .pipe(
+        flatMap(val => {
+          if (val) return this.service.getPhotoAndName();
+          else return of(false);
+        })
+      )
+      .subscribe(
+        obj => {
+          if (obj && obj.hasOwnProperty('photo')) {
+          this.isLogin = true;
+          this.photo = (obj as User).photo;
+          this.userName = (obj as User).userName;
+          } else {
+            this.isLogin = false;
           }
-        );   
-      }
-    }
+        }
+      )
+    );
+    this.service.checkExistenceTokenAsync();
   }
 
   //Logout user and delete JWT from local storage
   onLogout() {
+    this.isLogin = false;
     this.service.removeAuthInfo();
-    this.router.navigate(['/home']);
-    location.reload();
+    this.toastr.success('Logged out.', 'Completed.');
   }
 
 }

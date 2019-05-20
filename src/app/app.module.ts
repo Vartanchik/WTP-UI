@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './account/reset-password/reset-password.
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { CommunicationService } from './services/communication.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FooterComponent } from './footer/footer.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    CommunicationService
   ],
   bootstrap: [AppComponent]
 })

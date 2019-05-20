@@ -25,15 +25,22 @@ export class UserprofileService {
   }
   
    //Get user profile info from API
-  getUserProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+  getUserProfile(): Observable<User|WtpResponse> {
+    return this.http.get<User|WtpResponse>(this.BaseURI + '/UserProfile');
   }
 
   //Send data from userUpdate form to API
-  updateUserProfile(body: User) : Observable<WtpResponse> {
+  updateUserProfile(id: number, body: User) : Observable<WtpResponse> {
     body.dateOfBirth = body.dateOfBirth.formatted || body.dateOfBirth;
+    body.gender = body.gender[0];
+    body.country = body.country[0];
+    body.id = id;
     
     return this.http.put<WtpResponse>(this.BaseURI + '/UserProfile', body);
+  }
+  // Send file form to API
+  sendFile(form: FormData): Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/UserProfile/UpdatePhoto', form);
   }
 
   //update photo and userName in localStorage

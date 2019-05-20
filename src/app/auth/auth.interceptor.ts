@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, pipe, throwError } from "rxjs";
 import { tap, catchError, switchMap, finalize, filter, take } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { AccountService } from 'src/app/services/account.service';
-import { TokenResponse, Token } from '../interfaces/token-response';
+import { Token } from '../interfaces/token-response';
 
 @Injectable({
   providedIn: 'root'
@@ -89,7 +89,6 @@ export class AuthInterceptor implements HttpInterceptor {
     onLogout() {
       this.service.removeAuthInfo();
       this.router.navigate(['/home']);
-      location.reload();
     }
 
 }

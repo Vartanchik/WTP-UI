@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CommunicationService } from 'src/app/services/communication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: AccountService, private router: Router, private toastr: ToastrService, private fb: FormBuilder) { }
+  constructor(
+    private service: AccountService, 
+    private router: Router, 
+    private toastr: ToastrService, 
+    private fb: FormBuilder, 
+    private svc: CommunicationService) 
+  { }
 
   ngOnInit() {
-    if(this.service.checkExistenceToken()){
+    if(this.service.checkExistenceToken()) {
+      this.svc.setLoginValue(true);
       this.router.navigate(['/home']);
+    } else {
+      this.svc.setLoginValue(false);
     }
   }
 
@@ -30,11 +40,12 @@ export class LoginComponent implements OnInit {
     this.service.login(this.formModelLogin.value).subscribe(
       res => {
         this.service.setAuthInfo(res.accessToken);
+        this.svc.setLoginValue(true);
+        this.router.navigate(['/home']);
         this.toastr.success(res.message);
-        location.reload();
       },
       err => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

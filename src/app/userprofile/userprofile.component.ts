@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, PatternValidator, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
@@ -7,7 +7,9 @@ import { IMyDpOptions } from 'mydatepicker';
 import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
 import { User } from '../interfaces/user';
 import { IdItem } from '../interfaces/id-item';
-import { Observable } from 'rxjs';
+import { CommunicationService } from '../services/communication.service';
+import { flatMap } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -16,33 +18,50 @@ import { Observable } from 'rxjs';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: UserprofileService, private router: Router, private toastr: ToastrService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private service: UserprofileService, 
+    private router: Router, 
+    private toastr: ToastrService,
+    private svc: CommunicationService,
+    private accsvc: AccountService)
+  { }
 
   private isValid: boolean = true;
 
-  private userProfile: User;
-  private photo: string;
-  private userName: string;
+  private userProfile: User = {
+    id: 0,
+    userName: '',
+    email: '',
+    photo: '',
+    gender: {id: 0, name: ''},
+    dateOfBirth: '',
+    country: {id: 0, name: ''},
+    steam: '',
+    languages: [{id: 0, name: ''}],
+    players: [],
+    teams: []
+  };
+  public model: any = "Choose date of birth";
 
   //Initialized to specific date.
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: dateFormatConfig
   };
-  public model: any;
 
   //Multiselect-dropdown - Country
   dropdownListLanguages = [];
-  selectedItemsLanguages: IdItem[];
+  selectedItemsLanguages: IdItem[] = null;
   dropdownSettingsLanguages = {};
 
   //Multiselect-dropdown - Gender
   dropdownListGenders = [];
-  selectedItemGender: IdItem;
+  selectedItemGender: IdItem[] = null;
   dropdownSettingsGenders = {};
 
   //Multiselect-dropdown - Language 
   dropdownListCountries = [];
-  selectedItemCountry: IdItem;
+  selectedItemCountry: IdItem[] = null;
   dropdownSettingsCountries = {};
 
   ngOnInit() {
@@ -53,27 +72,22 @@ export class UserProfileComponent implements OnInit {
 
       this.service.getUserProfile().subscribe(
         (res: User) => {
-          console.log(res);
           this.userProfile = res;
           this.setCurrentUserInfo();
         },
         err => {
-          console.log(err);
+          this.toastr.error(err.error.message);
         },
       );
     }
 
     this.initializeDefaultConfig();
-
-    // console.log(this.userProfile.gender);
-    // console.log(this.userProfile.languages);
-    // console.log(this.userProfile.country);
   }
 
   //Validation rules - userProfile form
   formModelUser = this.fb.group({
     photo: [''],
-    userName: ['' , [Validators.minLength(4), Validators.maxLength(30)]],
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     gender:  ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     languages: ['', Validators.required],
@@ -83,49 +97,42 @@ export class UserProfileComponent implements OnInit {
 
   //Send data from userProfile-form to API and process response
   onSubmit() { 
-    if(!this.formModelUser.get('userName').value) {
-      this.formModelUser.get('userName').setValue(this.userName);
-    }
-
-    console.log(this.formModelUser);
-    this.service.updateUserProfile(this.formModelUser.value).subscribe(
+    this.service.updateUserProfile(this.userProfile.id, this.formModelUser.value)
+    .pipe(
+      flatMap( res => 
+        { 
+          this.toastr.success(res.info, res.message);
+          return this.service.getUserProfile();
+        })
+    )
+    .subscribe(
       res => {
-        console.log(res);
-        this.toastr.success('', res.message);
-
-        // this.service.getUserProfile().subscribe(
-        //   (res: User) => {
-        //     this.userProfile = res;
-        //     console.log(this.userProfile.gender);
-        //     console.log(this.userProfile.languages);
-        //     console.log(this.userProfile.country);
-        //     this.setCurrentUserInfo();
-        //   },
-        //   err => {
-        //     console.log(err);
-        //   },
-        // );
-
-        // if(res.userName != null) {
-        //   this.toastr.success('Your profile updated!', 'Successful');
-        //   this.service.updatePhotoAndUserNameInStorage(res.photo, res.userName);
-        //   location.reload();
-        // } else {
-        //   (res.message).forEach(element => {
-        //     if(element == "DuplicateUserName") {
-        //       this.toastr.error('Username is already taken','Registration failed.');
-        //     } else if(element == "DuplicateEmail") {
-        //       this.toastr.error('Email is already taken','Registration failed.');
-        //     } else {
-        //       this.toastr.error("",'Registration failed.');
-        //     }
-        //   });
-        // }
+        if (res.hasOwnProperty('photo')) {
+        this.userProfile = res as User;
+          this.setCurrentUserInfo();
+        }
       },
       err => {
-        console.log(err);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
+  }
+
+  // Update user photo
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file: File = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      this.service.sendFile(formData).subscribe(
+        res => {
+          this.userProfile.photo = res.info;
+        },
+        err => {
+          this.toastr.error(err.error.message);
+        }
+      )
+    }
   }
 
   private initializeDefaultConfig() {
@@ -140,29 +147,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-    this.photo = this.userProfile.photo;
-    this.userName = this.userProfile.userName;
-    this.selectedItemGender = this.userProfile.gender;
-    this.selectedItemCountry = this.userProfile.country;
+    this.accsvc.setItem('userName', this.userProfile.userName);
+    this.accsvc.setItem('photo', this.userProfile.photo);
 
-    if(this.userProfile.dateOfBirth == null) {
-      this.model = "Choose date of birth";
-    } else {
+    this.selectedItemGender = [(this.userProfile.gender)];
+    this.selectedItemCountry = [(this.userProfile.country)];
+
+    if(this.userProfile.dateOfBirth != null)
       this.model = this.userProfile.dateOfBirth.substr(0, 10);
-    };
 
-    for(let item of this.userProfile.languages) {
-      this.selectedItemsLanguages.push(item);
-    }
-  }
-
-  private resetSelectedData() {
-    this.photo = null;
-    this.userName = null;
-    this.selectedItemGender = null;
-    this.selectedItemCountry = null;
-    this.selectedItemsLanguages = null;
-    this.userProfile.dateOfBirth = null;
+    this.selectedItemsLanguages = this.userProfile.languages;
   }
 
 }

@@ -1,6 +1,6 @@
 
 //Base WebApi URI address
-export const baseURIConfig = 'https://localhost:44367/api';
+export const baseURIConfig = 'http://localhost:61835/api';
 
 export const providedInConfig = 'root';
 
@@ -60,4 +60,4 @@ export const dropdownSettingsCountriesConfig = {
 };
 
 //DataPicker - format date
-export const dateFormatConfig = 'yyyy-mm-dd';
+export const dateFormatConfig = 'dd.mm.yyyy';

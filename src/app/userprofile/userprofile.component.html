@@ -5,79 +5,79 @@
       <div class="container">
         <div class="row">
           <div class="col-2" id="first"></div>
-
           <div class="col-10" id="blueBlock">
             <img id="stars"
-            src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png" alt="">
+              src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png" alt="">
           </div>
-
         </div>
       </div>
     </div>
 
     <div class="col-6">
       <div class="card text-center" id="userCard">
-        <div class="card-header">General Info</div>
+        <div class="card-header">
+          General Info
+        </div>
         <div class="card-body">
+          <div id="cardUploadAvatar">
+            <img src="{{userProfile.photo}}" id="avatarInProfile" alt="Profile avatar">
+          </div>
 
           <form [formGroup]="formModelUser" autocomplete="off" (submit)="onSubmit()">
             
-            <div id="cardUploadAvatar">
-              <img src="{{this.photo}}">
-            </div>
-
             <div class="form-group" id="upload">
               <div class="custom-file">
-                <input type="file" class="form-control custom-file-input" formControlName="photo" aria-describedby="inputGroupFileAddon01">
+                <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" />
                 <label class="custom-file-label">UPDATE AVATAR</label>
               </div>
             </div>
             <hr>
-            
-            <div class="form-group">
-              <label class="labelLeft">Username</label>
-              <input class="form-control" formControlName="userName" value={{this.userName}}/>
-              <small id="userNameHelp" class="form-text text-muted">Username must be 4-30 characters long.</small>
+
+            <div class="form-group required">
+              <label class="labelLeft">Username*</label>
+              <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName" />
+              <small id="userNameHelp" class="form-text text-muted">Username must be 4-16 characters long.</small>
+              <label class="text-danger"
+                *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required">
+                This field is mandatory.</label>
               <label class="text-danger"
                 *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.minlength">
                 Minimum 4 characters required.</label>
               <label class="text-danger"
                 *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
-                Maximum
-                30 characters required.</label>
+                Maximum 16 characters required.</label>
             </div>
 
             <div class="container" id="twoFields">
               <div class="row">
+
                 <div class="col-md-6">
                   <div class="form-group required">
                     <label>Gender*</label>
                     <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
-                      [data]="dropdownListGenders"
-                      [settings]="dropdownSettingsGenders"
-                      [(ngModel)]="selectedItemGender">
-                      </ng-multiselect-dropdown>
+                      [data]="dropdownListGenders" [(ngModel)]="selectedItemGender" [settings]="dropdownSettingsGenders">
+                    </ng-multiselect-dropdown>
                     <label class="text-danger"
                       *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
                       This field is mandatory.</label>
                   </div>
                 </div>
+
                 <div class="col-md-6">
                   <div class="form-group required">
                     <label>Date of birth*</label>
-                    <my-date-picker id="piker" name="mydate" [placeholder]="model"
+                    <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
                       [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
                   </div>
                 </div>
+
               </div>
             </div>
 
             <div class="form-group required">
               <label>Languages*</label>
               <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages" [placeholder]="'Choose language'"
-                [data]="dropdownListLanguages"
-                [settings]="dropdownSettingsLanguages"
-                [(ngModel)]="selectedItemsLanguages">
+                [data]="dropdownListLanguages" [(ngModel)]="selectedItemsLanguages" [settings]="dropdownSettingsLanguages">
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
@@ -87,9 +87,7 @@
             <div class="form-group required">
               <label>Country*</label>
               <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
-                [data]="dropdownListCountries"
-                [settings]="dropdownSettingsCountries"
-                [(ngModel)]="selectedItemCountry">
+                [data]="dropdownListCountries" [(ngModel)]="selectedItemCountry" [settings]="dropdownSettingsCountries">
               </ng-multiselect-dropdown>
               <label class="text-danger"
                 *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">
@@ -98,14 +96,14 @@
 
             <div class="form-group">
               <label>Steam Account</label>
-              <input class="form-control" formControlName="steam">
+              <input class="form-control" formControlName="steam" [(ngModel)]="userProfile.steam">
             </div>
 
             <div class="form-group">
               <button type="submit" class="btn btn-primary" [disabled]="!formModelUser.valid">
                 SAVE CHANGES</button>
             </div>
-
+            
           </form>
           <hr>
 
@@ -124,6 +122,7 @@
 
             </div>
           </div>
+
         </div>
       </div>
     </div>
