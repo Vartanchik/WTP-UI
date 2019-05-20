@@ -20,6 +20,8 @@ import { UserprofileService } from './services/userprofile.service';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
+import { HeaderComponent } from './home/header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
     UserProfileComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent  ],
+    ChangePasswordComponent,
+    HeaderComponent,
+    FooterComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
