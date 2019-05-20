@@ -127,11 +127,12 @@ export class UserProfileComponent implements OnInit {
       this.service.sendFile(formData).subscribe(
         res => {
           this.userProfile.photo = res.info;
+          localStorage.setItem('photo', res.info);
         },
         err => {
           this.toastr.error(err.error.message);
         }
-      )
+      );
     }
   }
 
