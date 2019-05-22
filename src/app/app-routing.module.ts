@@ -9,6 +9,13 @@ import { UserProfileComponent } from './userprofile/userprofile.component';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { SectionHistoryComponent } from './sections/section-history/section-history.component';
+import { SectionGamesComponent } from './sections/section-games/section-games.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { LockUserComponent } from './users/lock-user/lock-user.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { NotFoundComponent } from './users/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -24,6 +31,22 @@ const routes: Routes = [
       { path: 'changepassword', component: ChangePasswordComponent}
     ]
   },
+
+  {
+    path:'admin',
+    children: [
+      {path: 'users', component: UserListComponent},
+      {path: 'history', component: SectionHistoryComponent},
+      {path: 'games', component: SectionGamesComponent},
+      { path: 'users/edit/:id', component: UserUpdateComponent },
+      { path: 'users/block/:id', component: LockUserComponent },
+      { path: 'users/create', component: UserCreateComponent },
+      {path: '', redirectTo: 'users',pathMatch: 'full'},//component: UserListComponent},
+      { path: '**', component: NotFoundComponent }
+    ]
+},
+    
+
   { path: 'userprofile', component: UserProfileComponent }
 ];
 

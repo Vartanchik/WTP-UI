@@ -41,7 +41,10 @@ export class LoginComponent implements OnInit {
       res => {
         this.service.setAuthInfo(res.accessToken);
         this.svc.setLoginValue(true);
-        this.router.navigate(['/home']);
+        if(res.accessToken.role!='Admin')
+          this.router.navigate(['/home']);
+        else
+          this.router.navigate(['/admin', 'users']);
         this.toastr.success(res.message);
       },
       err => {

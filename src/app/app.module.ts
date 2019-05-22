@@ -23,6 +23,23 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommunicationService } from './services/communication.service';
+import { AdminComponentComponent } from './admin-component/admin-component.component';
+import {RouterModule} from '@angular/router';
+import {appRoutes} from '../routes';
+import { SectionHistoryComponent } from './sections/section-history/section-history.component';
+import { SectionGamesComponent } from './sections/section-games/section-games.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
+
+import {UserService} from './services/user.service';
+import { NotFoundComponent } from './users/not-found/not-found.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+
+import {NgxPaginationModule} from 'ngx-pagination';
+import { LockUserComponent } from './users/lock-user/lock-user.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+
 
 @NgModule({
   declarations: [
@@ -36,13 +53,25 @@ import { CommunicationService } from './services/communication.service';
     ResetPasswordComponent,
     ChangePasswordComponent,
     HeaderComponent,
-    FooterComponent  ],
+    FooterComponent,
+    AdminComponentComponent,
+    SectionHistoryComponent,
+    SectionGamesComponent,
+    UserListComponent,
+    UserUpdateComponent,
+    NotFoundComponent,
+    UserCreateComponent,
+    LockUserComponent,
+    NavbarComponent,
+    SidebarComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true
@@ -59,7 +88,8 @@ import { CommunicationService } from './services/communication.service';
       useClass: AuthInterceptor,
       multi: true
     },
-    CommunicationService
+    CommunicationService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

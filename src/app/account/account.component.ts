@@ -31,8 +31,10 @@ export class AccountComponent implements OnInit {
       this.svc.getLoginValue()
       .pipe(
         flatMap(val => {
-          if (val) return this.service.getPhotoAndName();
-          else return of(false);
+          if (val){ 
+            return this.service.getPhotoAndName();}
+          else{ 
+            return of({});}
         })
       )
       .subscribe(

@@ -103,3 +103,37 @@ div.form-group.required>label:first-child:after{
 .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
     background-color: #fff!important;
 }
+
+a{
+    color: #44a4cd;
+}
+
+a:hover{
+    color: #44a8cf;
+}
+
+.shadow{
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2), 0 5px 6px rgba(0,0,0,0.2);
+}
+
+.section-container{
+    padding: 30px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+
+.adminbody
+{
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: white;//#1C2228;
+    color: black;//#f7fff7;
+    height: 100%;
+}
+
+
