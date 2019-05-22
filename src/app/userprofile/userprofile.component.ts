@@ -19,6 +19,8 @@ import {CommunicationService} from '../services/communication.service';
 import {flatMap} from 'rxjs/operators';
 import {AccountService} from '../services/account.service';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Player } from '../interfaces/player';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -31,6 +33,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: UserprofileService,
+    private playerService: PlayerService,
     private router: Router,
     private toastr: ToastrService,
     private svc: CommunicationService,
@@ -54,6 +57,18 @@ export class UserProfileComponent implements OnInit {
     players: [],
     teams: []
   };
+
+  players: Player[] = [{
+    id: 0,
+    name: '',
+    user: this.userProfile,
+    game: {id: 0, name: ''},
+    server: {id: 0, name: ''},
+    goal: {id: 0, name: ''},
+    about: '',
+    rank: {id: 0, name: ''}
+  }];
+
   public model: any = 'Choose date of birth';
 
   //Initialized to specific date.
@@ -94,6 +109,11 @@ export class UserProfileComponent implements OnInit {
     }
 
     this.initializeDefaultConfig();
+    this.playerService.getPlayersOfUser().subscribe(
+      res => {
+        this.players = res;
+      }
+    );
   }
 
   //Validation rules - userProfile form

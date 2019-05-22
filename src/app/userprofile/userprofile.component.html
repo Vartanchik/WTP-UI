@@ -144,6 +144,23 @@
     <ngb-tab title="Player Profile">
       <ng-template ngbTabContent>
 <!--        PUT SOMETHING HERE-->
+          <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player's Name</th>
+                <th scope="col">Game</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of players; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.name }}</td>
+                <td>{{ item.game.name }}</td>
+              </tr>
+              </tbody>
+            </table>
+<!--        PUT SOMETHING HERE-->
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
