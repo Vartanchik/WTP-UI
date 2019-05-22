@@ -23,6 +23,7 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommunicationService } from './services/communication.service';
+import { GameSwitchButtonComponent } from './home/game-switch-button/game-switch-button.component';
 import { AdminComponentComponent } from './admin-component/admin-component.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from '../routes';
@@ -40,7 +41,6 @@ import { LockUserComponent } from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +54,7 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     ChangePasswordComponent,
     HeaderComponent,
     FooterComponent,
+    GameSwitchButtonComponent,
     AdminComponentComponent,
     SectionHistoryComponent,
     SectionGamesComponent,
@@ -82,7 +83,7 @@ import {SidebarComponent} from './sidebar/sidebar.component';
   ],
   providers: [
     AccountService,
-    UserprofileService, 
+    UserprofileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

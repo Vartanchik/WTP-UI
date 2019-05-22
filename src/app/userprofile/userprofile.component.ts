@@ -98,7 +98,6 @@ export class UserProfileComponent implements OnInit {
 
   //Validation rules - userProfile form
   formModelUser = this.fb.group({
-    photo: [''],
     userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     gender: ['', Validators.required],
     dateOfBirth: ['', Validators.required],

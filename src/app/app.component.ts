@@ -5,7 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
+
+  constructor() {}
+
   title = 'wtp-ui';
   isUser = true;
 }
