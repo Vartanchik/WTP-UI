@@ -23,6 +23,7 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommunicationService } from './services/communication.service';
+import { GameSwitchButtonComponent } from './home/game-switch-button/game-switch-button.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { CommunicationService } from './services/communication.service';
     ResetPasswordComponent,
     ChangePasswordComponent,
     HeaderComponent,
-    FooterComponent  ],
+    FooterComponent,
+    GameSwitchButtonComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -13,23 +13,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item navBtns">
-                  <div class="dropdown">
-                      <button  class="btn btn-link dropdown-toggle" id="gameButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-32.png" >
-                        <span >{{games[0].name}}</span>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <span class="dropdown-item">{{games[1].name}}</span>
-                        <span class="dropdown-item">{{games[2].name}}</span>
-                      </div>
-                  </div>
+                  <app-game-switch-button> </app-game-switch-button>
                 </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">PLAYERS</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" href="#">TEAMS</a>
-                  </li> 
+                  </li>  -->
                  
               </ul>
               

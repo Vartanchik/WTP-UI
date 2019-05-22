@@ -9,7 +9,7 @@
       <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="{{ this.service.getItem('photo') }}" id="avatar"><span id="avatarUserName">
         {{this.service.getItem("userName")}}</span></button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a routerLink='/userprofile' routerLinkActive='active' class="dropdown-item">Edit Profile</a>
+        <a routerLink='/userprofile' routerLinkActive='active' class="dropdown-item">Manage Profile</a>
         <a class="dropdown-item" id="logout" routerLink="/home" (click)="onLogout()">Log Out</a>
       </div>
 </div>
