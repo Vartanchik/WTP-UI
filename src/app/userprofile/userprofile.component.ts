@@ -18,7 +18,8 @@ import {IdItem} from '../interfaces/id-item';
 import {CommunicationService} from '../services/communication.service';
 import {flatMap} from 'rxjs/operators';
 import {AccountService} from '../services/account.service';
-import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmDeleteComponent} from './confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-userprofile',
@@ -35,7 +36,8 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService,
     private svc: CommunicationService,
     private accsvc: AccountService,
-    config: NgbTabsetConfig) {
+    config: NgbTabsetConfig,
+    private _modalService: NgbModal) {
     config.justify = 'center';
   }
 
@@ -155,6 +157,10 @@ export class UserProfileComponent implements OnInit {
 
     this.dropdownListCountries = dropdownListCountriesConfig;
     this.dropdownSettingsCountries = dropdownSettingsCountriesConfig;
+  }
+
+  performDelete() {
+    this._modalService.open(ConfirmDeleteComponent);
   }
 
   private setCurrentUserInfo() {
