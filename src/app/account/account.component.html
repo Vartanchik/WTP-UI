@@ -5,11 +5,11 @@
   class="btn btn-primary" id="btn-register">REGISTER</button>
 </div>
 
-<div class="dropdown" *ngIf="isLogin == true">
-      <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="{{ this.service.getItem('photo') }}" id="avatar"><span id="avatarUserName">
+<div ngbDropdown class="dropdown" *ngIf="isLogin == true">
+      <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" ngbDropdownToggle aria-haspopup="true" aria-expanded="false"> <img src="{{ this.service.getItem('photo') }}" id="avatar"><span id="avatarUserName">
         {{this.service.getItem("userName")}}</span></button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a routerLink='/userprofile' routerLinkActive='active' class="dropdown-item">Edit Profile</a>
+      <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+        <a routerLink='/userprofile' routerLinkActive='active' class="dropdown-item">Manage Profile</a>
         <a class="dropdown-item" id="logout" routerLink="/home" (click)="onLogout()">Log Out</a>
       </div>
 </div>

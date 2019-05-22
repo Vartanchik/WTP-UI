@@ -66,9 +66,9 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     SidebarComponent,
     ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,

@@ -1,31 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, PatternValidator, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { UserprofileService } from '../services/userprofile.service';
-import { IMyDpOptions } from 'mydatepicker';
-import { dropdownListLanguagesConfig, dropdownSettingsLanguagesConfig, dropdownListGendersConfig, dropdownSettingsGendersConfig, dropdownListCountriesConfig, dropdownSettingsCountriesConfig, dateFormatConfig } from '../services/dataconfig';
-import { User } from '../interfaces/user';
-import { IdItem } from '../interfaces/id-item';
-import { CommunicationService } from '../services/communication.service';
-import { flatMap } from 'rxjs/operators';
-import { AccountService } from '../services/account.service';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormBuilder, Validators, FormGroup, PatternValidator, FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {UserprofileService} from '../services/userprofile.service';
+import {IMyDpOptions} from 'mydatepicker';
+import {
+  dropdownListLanguagesConfig,
+  dropdownSettingsLanguagesConfig,
+  dropdownListGendersConfig,
+  dropdownSettingsGendersConfig,
+  dropdownListCountriesConfig,
+  dropdownSettingsCountriesConfig,
+  dateFormatConfig
+} from '../services/dataconfig';
+import {User} from '../interfaces/user';
+import {IdItem} from '../interfaces/id-item';
+import {CommunicationService} from '../services/communication.service';
+import {flatMap} from 'rxjs/operators';
+import {AccountService} from '../services/account.service';
+import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
-  styleUrls: ['./userprofile.component.scss']
+  styleUrls: ['./userprofile.component.scss'],
+  providers: [NgbTabsetConfig],
 })
 export class UserProfileComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder, 
-    private service: UserprofileService, 
-    private router: Router, 
+    private fb: FormBuilder,
+    private service: UserprofileService,
+    private router: Router,
     private toastr: ToastrService,
     private svc: CommunicationService,
-    private accsvc: AccountService)
-  { }
+    private accsvc: AccountService,
+    config: NgbTabsetConfig) {
+    config.justify = 'center';
+  }
 
   private isValid: boolean = true;
 
@@ -42,7 +54,7 @@ export class UserProfileComponent implements OnInit {
     players: [],
     teams: []
   };
-  public model: any = "Choose date of birth";
+  public model: any = 'Choose date of birth';
 
   //Initialized to specific date.
   myDatePickerOptions: IMyDpOptions = {
@@ -68,7 +80,7 @@ export class UserProfileComponent implements OnInit {
     if (!this.service.checkExistenceToken()) {
       this.router.navigate(['/home']);
     } else {
-      this.isValid = false; 
+      this.isValid = false;
 
       this.service.getUserProfile().subscribe(
         (res: User) => {
@@ -88,7 +100,7 @@ export class UserProfileComponent implements OnInit {
   formModelUser = this.fb.group({
     photo: [''],
     userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-    gender:  ['', Validators.required],
+    gender: ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     languages: ['', Validators.required],
     country: ['', Validators.required],
@@ -96,26 +108,25 @@ export class UserProfileComponent implements OnInit {
   });
 
   //Send data from userProfile-form to API and process response
-  onSubmit() { 
+  onSubmit() {
     this.service.updateUserProfile(this.userProfile.id, this.formModelUser.value)
-    .pipe(
-      flatMap( res => 
-        { 
+      .pipe(
+        flatMap(res => {
           this.toastr.success(res.info, res.message);
           return this.service.getUserProfile();
         })
-    )
-    .subscribe(
-      res => {
-        if (res.hasOwnProperty('photo')) {
-        this.userProfile = res as User;
-          this.setCurrentUserInfo();
+      )
+      .subscribe(
+        res => {
+          if (res.hasOwnProperty('photo')) {
+            this.userProfile = res as User;
+            this.setCurrentUserInfo();
+          }
+        },
+        err => {
+          this.toastr.error(err.error.info, err.error.message);
         }
-      },
-      err => {
-        this.toastr.error(err.error.info, err.error.message);
-      }
-    );
+      );
   }
 
   // Update user photo
@@ -154,8 +165,9 @@ export class UserProfileComponent implements OnInit {
     this.selectedItemGender = [(this.userProfile.gender)];
     this.selectedItemCountry = [(this.userProfile.country)];
 
-    if(this.userProfile.dateOfBirth != null)
+    if (this.userProfile.dateOfBirth != null) {
       this.model = this.userProfile.dateOfBirth.substr(0, 10);
+    }
 
     this.selectedItemsLanguages = this.userProfile.languages;
   }

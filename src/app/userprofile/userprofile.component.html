@@ -1,131 +1,151 @@
 <hr id="account-line">
 <div class="container" id="containerProfile" *ngIf="isValid == false">
-  <div class="row">
-    <div class="col-3">
-      <div class="container">
+  <ngb-tabset>
+    <ngb-tab title="User Profile">
+      <ng-template ngbTabContent>
         <div class="row">
-          <div class="col-2" id="first"></div>
-          <div class="col-10" id="blueBlock">
-            <img id="stars"
-              src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-6">
-      <div class="card text-center" id="userCard">
-        <div class="card-header">
-          General Info
-        </div>
-        <div class="card-body">
-          <div id="cardUploadAvatar">
-            <img src="{{userProfile.photo}}" id="avatarInProfile" alt="Profile avatar">
-          </div>
-
-          <form [formGroup]="formModelUser" autocomplete="off" (submit)="onSubmit()">
-            
-            <div class="form-group" id="upload">
-              <div class="custom-file">
-                <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" />
-                <label class="custom-file-label">UPDATE AVATAR</label>
+          <div class="col-3">
+            <div class="container">
+              <div class="row">
+                <div class="col-2" id="first"></div>
+                <div class="col-10" id="blueBlock">
+                  <img id="stars"
+                       src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png"
+                       alt="">
+                </div>
               </div>
             </div>
-            <hr>
+          </div>
 
-            <div class="form-group required">
-              <label class="labelLeft">Username*</label>
-              <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName" />
-              <small id="userNameHelp" class="form-text text-muted">Username must be 4-16 characters long.</small>
-              <label class="text-danger"
-                *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required">
-                This field is mandatory.</label>
-              <label class="text-danger"
-                *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.minlength">
-                Minimum 4 characters required.</label>
-              <label class="text-danger"
-                *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
-                Maximum 16 characters required.</label>
-            </div>
+          <div class="col-6">
+            <div class="card text-center" id="userCard">
+              <div class="card-header">
+                General Info
+              </div>
+              <div class="card-body">
+                <div id="cardUploadAvatar">
+                  <img src="{{userProfile.photo}}" id="avatarInProfile" alt="Profile avatar">
+                </div>
 
-            <div class="container" id="twoFields">
-              <div class="row">
+                <form [formGroup]="formModelUser" autocomplete="off" (submit)="onSubmit()">
 
-                <div class="col-md-6">
+                  <div class="form-group" id="upload">
+                    <div class="custom-file">
+                      <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01"
+                             (change)="onFileChange($event)"/>
+                      <label class="custom-file-label">UPDATE AVATAR</label>
+                    </div>
+                  </div>
+                  <hr>
+
                   <div class="form-group required">
-                    <label>Gender*</label>
-                    <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
-                      [data]="dropdownListGenders" [(ngModel)]="selectedItemGender" [settings]="dropdownSettingsGenders">
+                    <label class="labelLeft">Username*</label>
+                    <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName"/>
+                    <small id="userNameHelp" class="form-text text-muted">Username must be 4-16 characters long.</small>
+                    <label class="text-danger"
+                           *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required">
+                      This field is mandatory.</label>
+                    <label class="text-danger"
+                           *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.minlength">
+                      Minimum 4 characters required.</label>
+                    <label class="text-danger"
+                           *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
+                      Maximum 16 characters required.</label>
+                  </div>
+
+                  <div class="container" id="twoFields">
+                    <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group required">
+                          <label>Gender*</label>
+                          <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
+                                                   [data]="dropdownListGenders" [(ngModel)]="selectedItemGender"
+                                                   [settings]="dropdownSettingsGenders">
+                          </ng-multiselect-dropdown>
+                          <label class="text-danger"
+                                 *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
+                            This field is mandatory.</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group required">
+                          <label>Date of birth*</label>
+                          <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
+                                          [options]="myDatePickerOptions"
+                                          formControlName="dateOfBirth"></my-date-picker>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group required">
+                    <label>Languages*</label>
+                    <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages"
+                                             [placeholder]="'Choose language'"
+                                             [data]="dropdownListLanguages" [(ngModel)]="selectedItemsLanguages"
+                                             [settings]="dropdownSettingsLanguages">
                     </ng-multiselect-dropdown>
                     <label class="text-danger"
-                      *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
+                           *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
                       This field is mandatory.</label>
                   </div>
-                </div>
 
-                <div class="col-md-6">
                   <div class="form-group required">
-                    <label>Date of birth*</label>
-                    <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
-                      [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
+                    <label>Country*</label>
+                    <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
+                                             [data]="dropdownListCountries" [(ngModel)]="selectedItemCountry"
+                                             [settings]="dropdownSettingsCountries">
+                    </ng-multiselect-dropdown>
+                    <label class="text-danger"
+                           *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">
+                      This field is mandatory.</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Steam Account</label>
+                    <input class="form-control" formControlName="steam" [(ngModel)]="userProfile.steam">
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary" [disabled]="!formModelUser.valid">
+                      SAVE CHANGES
+                    </button>
+                  </div>
+
+                </form>
+                <hr>
+
+                <div class="container">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <a type="btn" class="btn btn-dark" routerLink="../account/changepassword">
+                        CHANGE PASSWORD</a>
+                    </div>
+
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-danger">
+                        DELETE ACCOUNT
+                      </button>
+                    </div>
+
                   </div>
                 </div>
 
               </div>
             </div>
-
-            <div class="form-group required">
-              <label>Languages*</label>
-              <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages" [placeholder]="'Choose language'"
-                [data]="dropdownListLanguages" [(ngModel)]="selectedItemsLanguages" [settings]="dropdownSettingsLanguages">
-              </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
-                This field is mandatory.</label>
-            </div>
-
-            <div class="form-group required">
-              <label>Country*</label>
-              <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
-                [data]="dropdownListCountries" [(ngModel)]="selectedItemCountry" [settings]="dropdownSettingsCountries">
-              </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">
-                This field is mandatory.</label>
-            </div>
-
-            <div class="form-group">
-              <label>Steam Account</label>
-              <input class="form-control" formControlName="steam" [(ngModel)]="userProfile.steam">
-            </div>
-
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary" [disabled]="!formModelUser.valid">
-                SAVE CHANGES</button>
-            </div>
-            
-          </form>
-          <hr>
-
-          <div class="container">
-            <div class="row">
-
-              <div class="col-md-6">
-                  <a type="btn" class="btn btn-dark" routerLink="../account/changepassword">
-                    CHANGE PASSWORD</a>
-              </div>
-
-              <div class="col-md-6">
-                <button type="submit" class="btn btn-danger">
-                  DELETE ACCOUNT</button>
-              </div>
-
-            </div>
           </div>
-
         </div>
-      </div>
-    </div>
-  </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Player Profile">
+      <ng-template ngbTabContent>
+<!--        PUT SOMETHING HERE-->
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>
 <hr id="account-line">
