@@ -10,7 +10,7 @@ import { InfoService } from 'src/app/services/info.service';
 
 export class GameSwitchButtonComponent implements OnInit {
 
-  games: IdItem[] = [{name: 'Game', id: -1}];
+  games: IdItem[] = [{name: 'Games', id: -1}];
 
   constructor(private service: InfoService) { }
 

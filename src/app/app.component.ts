@@ -11,4 +11,5 @@ export class AppComponent {
   constructor() {}
 
   title = 'wtp-ui';
+  isUser = true;
 }
