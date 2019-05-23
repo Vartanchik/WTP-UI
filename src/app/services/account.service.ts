@@ -1,23 +1,24 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Login } from '../interfaces/login';
-import { Register } from '../interfaces/register';
-import { ChangePassword} from '../interfaces/change-password';
-import { baseURIConfig, providedInConfig } from './dataconfig';
-import { ForgotPassword } from '../interfaces/forgot-password';
-import { ResetPassword } from '../interfaces/reset-password';
-import { Observable, of } from 'rxjs';
-import { WtpResponse } from '../interfaces/wtp-response';
-import { TokenResponse, Token } from '../interfaces/token-response';
-import { User } from '../interfaces/user';
-import { CommunicationService } from './communication.service';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Login} from '../interfaces/login';
+import {Register} from '../interfaces/register';
+import {ChangePassword} from '../interfaces/change-password';
+import {baseURIConfig, providedInConfig} from './dataconfig';
+import {ForgotPassword} from '../interfaces/forgot-password';
+import {ResetPassword} from '../interfaces/reset-password';
+import {Observable, of} from 'rxjs';
+import {WtpResponse} from '../interfaces/wtp-response';
+import {TokenResponse, Token} from '../interfaces/token-response';
+import {User} from '../interfaces/user';
+import {CommunicationService} from './communication.service';
 
 @Injectable({
   providedIn: providedInConfig
 })
 export class AccountService {
 
-  constructor(private http: HttpClient, private svc: CommunicationService) { }
+  constructor(private http: HttpClient, private svc: CommunicationService) {
+  }
 
   //Data from dataconfig file
   readonly BaseURI = baseURIConfig;
@@ -32,7 +33,7 @@ export class AccountService {
   checkExistenceTokenAsync() {
     this.svc.setLoginValue(localStorage.getItem('token') !== null);
   }
-  
+
   //Get single item from localStorage
   getItem(name: string) {
     return localStorage.getItem(name);
@@ -51,7 +52,7 @@ export class AccountService {
     localStorage.setItem('userName', body.userName);
     localStorage.setItem('photo', body.photo);
   }
-  
+
   //Remove JWT from local storage
   removeAuthInfo() {
     localStorage.removeItem('token');
@@ -62,30 +63,30 @@ export class AccountService {
   }
 
   //Send data from register form to API
-  register(body: Register) : Observable<WtpResponse> {
+  register(body: Register): Observable<WtpResponse> {
     let formData = {
       userName: body.userName,
       email: body.email,
       password: body.passwords.password
     };
-    
+
     return this.http.post<WtpResponse>(this.BaseURI + '/Account/Register', formData);
   }
 
   //Send data from login form to API
-  login(body: Login) : Observable<TokenResponse>{
+  login(body: Login): Observable<TokenResponse> {
     let formData = {
       email: body.email,
       password: body.password,
-      grantType: "password"
+      grantType: 'password'
     };
 
-    return this.http.post<TokenResponse>(this.BaseURI + '/Token/Auth', formData)
+    return this.http.post<TokenResponse>(this.BaseURI + '/Token/Auth', formData);
   }
 
   //Get user profile info from API
-  getUserProfile(): Observable<User|WtpResponse> {
-    return this.http.get<User|WtpResponse>(this.BaseURI + '/UserProfile');
+  getUserProfile(): Observable<User | WtpResponse> {
+    return this.http.get<User | WtpResponse>(this.BaseURI + '/UserProfile');
   }
 
   // Send data from forgot password form to API
@@ -99,7 +100,7 @@ export class AccountService {
   }
 
   //Send data from changePassword form to API
-  changePassword(body: ChangePassword) : Observable<WtpResponse> {
+  changePassword(body: ChangePassword): Observable<WtpResponse> {
     return this.http.post<WtpResponse>(this.BaseURI + '/Account/ChangePassword', body);
   }
 
@@ -107,34 +108,38 @@ export class AccountService {
   getNewRefreshToken() {
     let username = localStorage.getItem('userName');
     let refreshToken = localStorage.getItem('refresh_token');
-    const grantType = "refresh_token";
+    const grantType = 'refresh_token';
 
-    return this.http.post(this.BaseURI + '/Token/Auth', {username, refreshToken,  grantType});
+    return this.http.post(this.BaseURI + '/Token/Auth', {username, refreshToken, grantType});
   }
 
-  getPhotoAndName(): Observable<User|WtpResponse> {
+  getPhotoAndName(): Observable<User | WtpResponse> {
     const photo = this.getItem('photo');
     const userName = this.getItem('userName');
 
-      if(photo == undefined || userName == undefined) {
-        //Get user info for navBar - avatar and userName
-        return this.getUserProfile();
-      } else {
-        const usr: User = {
-          id: 0,
-          userName: userName,
-          email: '',
-          photo: photo,
-          gender: {id: 0, name: ''},
-          dateOfBirth: '',
-          country: {id: 0, name: ''},
-          steam: '',
-          languages: [{id: 0, name: ''}],
-          players: [],
-          teams: []
-        };
-        return of(usr);
-      }
+    if (photo == undefined || userName == undefined) {
+      //Get user info for navBar - avatar and userName
+      return this.getUserProfile();
+    } else {
+      const usr: User = {
+        id: 0,
+        userName: userName,
+        email: '',
+        photo: photo,
+        gender: {id: 0, name: ''},
+        dateOfBirth: '',
+        country: {id: 0, name: ''},
+        steam: '',
+        languages: [{id: 0, name: ''}],
+        players: [],
+        teams: []
+      };
+      return of(usr);
+    }
   }
-  
+
+  deleteAccount(): Observable<WtpResponse> {
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Account/Delete');
+  }
+
 }

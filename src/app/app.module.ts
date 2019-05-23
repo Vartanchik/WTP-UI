@@ -40,6 +40,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { LockUserComponent } from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
+import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     LockUserComponent,
     NavbarComponent,
     SidebarComponent,
+    ConfirmDeleteComponent,
+    PlayerProfileComponent,
     ],
   imports: [
     NgbModule,
@@ -92,6 +96,9 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     CommunicationService,
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmDeleteComponent
+  ]
 })
 export class AppModule { }

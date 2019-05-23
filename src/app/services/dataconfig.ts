@@ -59,5 +59,65 @@ export const dropdownSettingsCountriesConfig = {
     allowSearchFilter: false
 };
 
+//Games for user-update form
+export const dropdownListGamesConfig = [
+    { id: 1, name: 'Dota 2' },
+    { id: 2, name: 'CS:GO'},
+    { id: 3, name: 'GTA V'},
+];
+export const dropdownSettingsGamesConfig = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'name',
+    itemsShowLimit: 1,
+    allowSearchFilter: false
+};
+
+//Servers for user-update form
+export const dropdownListServersConfig = [
+    { id: 1, name: 'East' },
+    { id: 2, name: 'West'},
+    { id: 3, name: 'North'},
+    { id: 4, name: 'South'},
+];
+export const dropdownSettingsServersConfig = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'name',
+    itemsShowLimit: 1,
+    allowSearchFilter: false
+};
+
+//Goals for user-update form
+export const dropdownListGoalsConfig = [
+    { id: 1, name: 'Fun' },
+    { id: 2, name: 'Profi'},
+];
+export const dropdownSettingsGoalsConfig = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'name',
+    itemsShowLimit: 1,
+    allowSearchFilter: false
+};
+
+//Ranks for user-update form
+export const dropdownListRanksConfig = [
+    { id: 1, name: 'Uncalibrated' },
+    { id: 2, name: 'Guardian'},
+    { id: 3, name: 'Crusader'},
+    { id: 4, name: 'Archon'},
+    { id: 5, name: 'Legend'},
+    { id: 6, name: 'Ancient'},
+    { id: 7, name: 'Divine'},
+    { id: 8, name: 'Immortal'},
+];
+export const dropdownSettingsRanksConfig = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'name',
+    itemsShowLimit: 1,
+    allowSearchFilter: false
+};
 //DataPicker - format date
 export const dateFormatConfig = 'dd.mm.yyyy';

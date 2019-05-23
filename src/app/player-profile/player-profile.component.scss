@@ -1,0 +1,60 @@
+
+#containerProfile{
+    background-color: #f2f6f9!important;
+}
+
+#account-line{
+    margin: 0;
+    padding: 0;
+}
+
+#profileForm{
+    margin-top: 10px;
+}
+
+#upload{
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+#twoFields{
+    margin: 0;
+    padding: 0;
+}
+
+#blueBlock{
+    height: 100%;
+    width: 55%;
+    background-color: #314559;
+    position: absolute;
+    left: 35%;
+    text-align: center;
+    margin-right: 0;
+}
+
+#stars{
+    width: 80px;
+    opacity: .7;
+}
+
+#userCard{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+div#userCard.card.text-center{
+    text-align: left!important;
+}
+
+.card-header{
+    text-align: center!important;
+    font-weight: bold;
+    size: 14px;
+    margin: 0;
+    padding: 10px;
+    background-image: url(https://d6d90m6b4vcx.cloudfront.net/prod/release-2-3-2a6c9b6e/react-packages/static/media/statistics.8bf73563.png);
+    opacity: .9;
+}
