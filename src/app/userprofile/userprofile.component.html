@@ -139,7 +139,7 @@
         </div>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Player Profile">
+    <ngb-tab title="Players Profile">
       <ng-template ngbTabContent>
         <!--        PUT SOMETHING HERE-->
         <div class="row">
@@ -162,9 +162,36 @@
                 Players Info
               </div>
               <div class="card-body">
-                <button type="submit" class="btn btn-primary">
-                  CREATE PLAYER
-                </button>
+                <div class="card-body">
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                        <ngb-panel>
+                          <ng-template ngbPanelTitle>
+                            <span>&#9733; <b>Dota 2</b> player &#9733;</span>         
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            ---------------------------------------
+                            ---------------------------------------
+                            ---------------------------------------    
+                            -------Detail player content/fields-------
+                            ---------------------------------------
+                            ---------------------------------------
+                            <button type="submit" class="btn btn-secondary">
+                                Save changes
+                            </button>
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Create CS  player" [disabled]="true">
+                          <ng-template ngbPanelContent>
+                            You can write smth here
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Create GTA player" [disabled]="true">
+                            <ng-template ngbPanelContent>
+                              You can write smth here
+                            </ng-template>
+                          </ngb-panel>
+                      </ngb-accordion>
+                </div>
               </div>
             </div>
           </div>
@@ -172,6 +199,11 @@
         <!-- END END END-->
       </ng-template>
     </ngb-tab>
+    <ngb-tab title="Team profile" [disabled]="true">
+        <ng-template ngbTabContent>
+          Team content!
+        </ng-template>
+      </ngb-tab>
   </ngb-tabset>
 </div>
 <hr id="account-line">
