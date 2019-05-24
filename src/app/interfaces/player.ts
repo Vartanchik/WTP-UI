@@ -1,13 +1,10 @@
-import { IdItem } from './id-item';
-import { User } from './user';
 
 export interface Player {
     id: number;
     name: string;
-    user: User;
-    game: IdItem;
-    server: IdItem;
-    goal: IdItem;
+    game: string;
+    server: string;
+    goal: string;
     about: string;
-    rank: IdItem;
+    rank: string;
 }

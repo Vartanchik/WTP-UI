@@ -18,7 +18,6 @@ import {IdItem} from '../interfaces/id-item';
 import {CommunicationService} from '../services/communication.service';
 import {flatMap} from 'rxjs/operators';
 import {AccountService} from '../services/account.service';
-import { Player } from '../interfaces/player';
 import { PlayerService } from '../services/player.service';
 import {NgbModal, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmDeleteComponent} from './confirm-delete/confirm-delete.component';
@@ -45,8 +44,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   private isValid: boolean = true;
-  private createOrUpdatePlayer: boolean = false;
-  private listOfPlayers: boolean = true;
+  public createOrUpdatePlayer = false;
+  public listOfPlayers = true;
 
   private userProfile: User = {
     id: 0,
@@ -61,17 +60,6 @@ export class UserProfileComponent implements OnInit {
     players: [],
     teams: []
   };
-
-   players: Player[] = [{
-    id: 0,
-    name: '',
-    user: this.userProfile,
-    game: {id: 0, name: ''},
-    server: {id: 0, name: ''},
-    goal: {id: 0, name: ''},
-    about: '',
-    rank: {id: 0, name: ''}
-  }];
 
   public model: any = 'Choose date of birth';
 
@@ -113,11 +101,6 @@ export class UserProfileComponent implements OnInit {
     }
 
     this.initializeDefaultConfig();
-    this.playerService.getPlayersOfUser().subscribe(
-      res => {
-        this.players = res;
-      }
-    );
   }
 
   //Validation rules - userProfile form
@@ -170,9 +153,15 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  createPlayer(){
-    this.createOrUpdatePlayer = true;
-    this.listOfPlayers = false;
+  onPlayerCreate(create: boolean){
+    if(create){
+      this.createOrUpdatePlayer = true;
+      this.listOfPlayers = false;
+    }
+    else{
+      this.createOrUpdatePlayer = false;
+      this.listOfPlayers = true;
+    }
   }
 
   private initializeDefaultConfig() {

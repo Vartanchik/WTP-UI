@@ -42,6 +42,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
+import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { PlayerProfileComponent } from './player-profile/player-profile.componen
     SidebarComponent,
     ConfirmDeleteComponent,
     PlayerProfileComponent,
+    PlayerProfileListComponent,
     ],
   imports: [
     NgbModule,

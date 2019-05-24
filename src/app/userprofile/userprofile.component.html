@@ -141,65 +141,8 @@
     </ngb-tab>
     <ngb-tab title="Player Profile">
       <ng-template ngbTabContent>
+        <app-player-profile-list *ngIf="listOfPlayers" [userId]="userProfile.Id" (createButtonPushed)="onPlayerCreate($event)"></app-player-profile-list>
         <app-player-profile *ngIf="createOrUpdatePlayer"></app-player-profile>
-        <!-- PUT SOMETHING HERE-->
-        <div class="row" *ngIf="listOfPlayers">
-          <div class="col-3">
-            <div class="container">
-              <div class="row">
-                <div class="col-2" id="first"></div>
-                <div class="col-10" id="blueBlock">
-                  <img id="stars"
-                    src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png"
-                    alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="card text-center" id="userCard" style="height:100vh">
-              <div class="card-header">
-                Players Info
-              </div>
-              <div class="card-body">
-                <button type="submit" class="btn btn-primary" (click)="createPlayer()">
-                  CREATE PLAYER
-                </button>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Player</th>
-                      <th scope="col">Game</th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let item of players; index as i">
-                      <th scope="row">{{ i + 1 }}</th>
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.game.name }}</td>
-                      <td>
-                        <a type="btn" class="btn btn-secondary" routerLink="">
-                          Edit
-                        </a>
-                      </td>
-                      <td>
-                          <a type="btn" class="btn btn-danger" routerLink="">
-                            Delete
-                          </a>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <!-- END END END-->
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

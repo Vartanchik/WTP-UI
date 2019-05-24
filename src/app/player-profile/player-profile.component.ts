@@ -32,29 +32,14 @@ export class PlayerProfileComponent implements OnInit {
   public createButton = true;
   private playerProfile = false;
 
-  private userProfile: User = {
-    id: 0,
-    userName: '',
-    email: '',
-    photo: '',
-    gender: {id: 0, name: ''},
-    dateOfBirth: '',
-    country: {id: 0, name: ''},
-    steam: '',
-    languages: [{id: 0, name: ''}],
-    players: [],
-    teams: []
-  };
-
   players: Player[] = [{
     id: 0,
     name: '',
-    user: this.userProfile,
-    game: {id: 0, name: ''},
-    server: {id: 0, name: ''},
-    goal: {id: 0, name: ''},
+    game: '',
+    server: '',
+    goal: '',
     about: '',
-    rank: {id: 0, name: ''}
+    rank: ''
   }];
 
   formModelPlayer = this.fb.group({
@@ -68,26 +53,26 @@ export class PlayerProfileComponent implements OnInit {
   
   //Multiselect-dropdown - Game
   dropdownListGame = [];
-  selectedItemsGame: IdItem[] = null;
+  selectedItemsGame = '';
   dropdownSettingsGame = {};
   
   //Multiselect-dropdown - Server
   dropdownListServer = [];
-  selectedItemsServer: IdItem[] = null;
+  selectedItemsServer = '';
   dropdownSettingsServer = {};
   
   //Multiselect-dropdown - Goal
   dropdownListGoal = [];
-  selectedItemsGoal: IdItem[] = null;
+  selectedItemsGoal = '';
   dropdownSettingsGoal = {};
   
   //Multiselect-dropdown - Rank
   dropdownListRank = [];
-  selectedItemsRank: IdItem[] = null;
+  selectedItemsRank =  '';
   dropdownSettingsRank = {};
   
   ngOnInit() {
-    this.service.getPlayersOfUser().subscribe(
+    this.service.getPlayersOfUser(1).subscribe(
       res => {
         if (res.length === 0) {
           this.createButton = true;
@@ -138,10 +123,10 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-    this.selectedItemsGame = [(this.players[0].game)];
-    this.selectedItemsServer = [(this.players[0].server)];
-    this.selectedItemsGoal = [(this.players[0].goal)];
-    this.selectedItemsRank = [(this.players[0].rank)];
+    this.selectedItemsGame = (this.players[0].game);
+    this.selectedItemsServer = (this.players[0].server);
+    this.selectedItemsGoal = (this.players[0].goal);
+    this.selectedItemsRank = (this.players[0].rank);
   }
 
 }
