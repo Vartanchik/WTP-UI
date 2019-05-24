@@ -11,7 +11,7 @@ export class PlayerProfileListComponent implements OnChanges {
 
   constructor(private playerService: PlayerService) { }
 
-  @Input() userId = -1;
+  @Input() userId: number;
   @Output() createButtonPushed = new EventEmitter<boolean>();
 
   players: Player[] = [{

@@ -47,7 +47,7 @@ export class UserProfileComponent implements OnInit {
   public createOrUpdatePlayer = false;
   public listOfPlayers = true;
 
-  private userProfile: User = {
+  public userProfile: User = {
     id: 0,
     userName: '',
     email: '',
