@@ -16,6 +16,7 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { LockUserComponent } from './users/lock-user/lock-user.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { NotFoundComponent } from './users/not-found/not-found.component';
+import {RestoreComponent} from './account/restore/restore.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
-      { path: 'changepassword', component: ChangePasswordComponent}
+      { path: 'changepassword', component: ChangePasswordComponent},
+      { path: 'restore', component: RestoreComponent},
     ]
   },
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Login} from '../interfaces/login';
 import {Register} from '../interfaces/register';
 import {ChangePassword} from '../interfaces/change-password';
@@ -140,6 +140,13 @@ export class AccountService {
 
   deleteAccount(): Observable<WtpResponse> {
     return this.http.delete<WtpResponse>(this.BaseURI + '/Account/Delete');
+  }
+
+  // @Nazariy - why did you make a  controller action with POST method that required empty body but 1 query parameter?!
+  restoreAccount(email: string) {
+    return this.http.post(this.BaseURI + '/Account/Restore', {}, {
+      params: new HttpParams().set('email', email)
+    });
   }
 
 }

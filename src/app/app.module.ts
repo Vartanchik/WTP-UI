@@ -41,6 +41,7 @@ import { LockUserComponent } from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
+import { RestoreComponent } from './account/restore/restore.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-del
     NavbarComponent,
     SidebarComponent,
     ConfirmDeleteComponent,
+    RestoreComponent,
     ],
   imports: [
     NgbModule,
