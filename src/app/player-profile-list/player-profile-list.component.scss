@@ -57,3 +57,16 @@ div#userCard.card.text-center{
     background-image: url(https://d6d90m6b4vcx.cloudfront.net/prod/release-2-3-2a6c9b6e/react-packages/static/media/statistics.8bf73563.png);
     opacity: .9;
 }
+
+.table-condensed {
+    width: 100%;
+    padding: 2px;
+}
+
+.table-condensed > thead > tr > th.options {
+    text-align: center;
+}
+
+.table-condensed > tbody > tr > td.option-button {
+    text-align: center;
+}

@@ -1,3 +1,4 @@
+import { Player } from './interfaces/player';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -43,6 +44,8 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
+import { PlayerCommunicationServer } from './services/player.communication.service';
+import { PlayerService } from './services/player.service';
 
 @NgModule({
   declarations: [
@@ -96,7 +99,9 @@ import { PlayerProfileListComponent } from './player-profile-list/player-profile
       multi: true
     },
     CommunicationService,
-    UserService
+    UserService,
+    PlayerService,
+    PlayerCommunicationServer
   ],
   bootstrap: [AppComponent],
   entryComponents: [

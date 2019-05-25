@@ -1,9 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {FormBuilder, Validators, FormGroup, PatternValidator, FormControl} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {UserprofileService} from '../services/userprofile.service';
-import {IMyDpOptions} from 'mydatepicker';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, PatternValidator, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserprofileService } from '../services/userprofile.service';
+import { IMyDpOptions } from 'mydatepicker';
 import {
   dropdownListLanguagesConfig,
   dropdownSettingsLanguagesConfig,
@@ -13,14 +13,15 @@ import {
   dropdownSettingsCountriesConfig,
   dateFormatConfig
 } from '../services/dataconfig';
-import {User} from '../interfaces/user';
-import {IdItem} from '../interfaces/id-item';
-import {CommunicationService} from '../services/communication.service';
-import {flatMap} from 'rxjs/operators';
-import {AccountService} from '../services/account.service';
+import { User } from '../interfaces/user';
+import { IdItem } from '../interfaces/id-item';
+import { CommunicationService } from '../services/communication.service';
+import { flatMap } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
 import { PlayerService } from '../services/player.service';
-import {NgbModal, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
-import {ConfirmDeleteComponent} from './confirm-delete/confirm-delete.component';
+import { NgbModal, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { PlayerCommunicationServer } from '../services/player.communication.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -38,25 +39,26 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService,
     private svc: CommunicationService,
     private accsvc: AccountService,
+    private data: PlayerCommunicationServer,
     config: NgbTabsetConfig,
     private _modalService: NgbModal) {
     config.justify = 'center';
   }
 
   private isValid: boolean = true;
-  public createOrUpdatePlayer = false;
+  public createPlayer = false;
   public listOfPlayers = true;
 
-  public userProfile: User = {
+  private userProfile: User = {
     id: 0,
     userName: '',
     email: '',
     photo: '',
-    gender: {id: 0, name: ''},
+    gender: { id: 0, name: '' },
     dateOfBirth: '',
-    country: {id: 0, name: ''},
+    country: { id: 0, name: '' },
     steam: '',
-    languages: [{id: 0, name: ''}],
+    languages: [{ id: 0, name: '' }],
     players: [],
     teams: []
   };
@@ -93,13 +95,15 @@ export class UserProfileComponent implements OnInit {
         (res: User) => {
           this.userProfile = res;
           this.setCurrentUserInfo();
+          this.data.changeUserId(this.userProfile.id);
         },
         err => {
           this.toastr.error(err.error.message);
         },
       );
     }
-
+    this.data.currentListOfPlayers.subscribe(status => this.listOfPlayers = status);
+    this.data.currentCreatePlayer.subscribe(status => this.createPlayer = status);
     this.initializeDefaultConfig();
   }
 
@@ -150,17 +154,6 @@ export class UserProfileComponent implements OnInit {
           this.toastr.error(err.error.message);
         }
       );
-    }
-  }
-
-  onPlayerCreate(create: boolean){
-    if(create){
-      this.createOrUpdatePlayer = true;
-      this.listOfPlayers = false;
-    }
-    else{
-      this.createOrUpdatePlayer = false;
-      this.listOfPlayers = true;
     }
   }
 

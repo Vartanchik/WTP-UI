@@ -141,8 +141,8 @@
     </ngb-tab>
     <ngb-tab title="Player Profile">
       <ng-template ngbTabContent>
-        <app-player-profile-list *ngIf="listOfPlayers" [userId]="userProfile.Id" (createButtonPushed)="onPlayerCreate($event)"></app-player-profile-list>
-        <app-player-profile *ngIf="createOrUpdatePlayer"></app-player-profile>
+        <app-player-profile-list *ngIf="listOfPlayers" ></app-player-profile-list>
+        <app-player-profile *ngIf="createPlayer"></app-player-profile>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
