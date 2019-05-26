@@ -16,10 +16,14 @@ export class GameSwitchButtonComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllGames().subscribe(
-      res => {
+      (res: IdItem[]) => {
         this.games = res;
+        this.service.setSelectedGame(res[0]);
       }
     );
   }
 
+  setCurrentGame(game: IdItem): void {
+    this.service.setSelectedGame(game);
+  }
 }

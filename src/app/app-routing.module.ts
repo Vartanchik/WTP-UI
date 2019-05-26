@@ -16,6 +16,9 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { LockUserComponent } from './users/lock-user/lock-user.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { NotFoundComponent } from './users/not-found/not-found.component';
+import { DotaComponent } from './global-players/dota/dota.component';
+import { GtaComponent } from './global-players/gta/gta.component';
+import { CsGoComponent } from './global-players/cs-go/cs-go.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -35,7 +38,7 @@ const routes: Routes = [
   {
     path:'admin',
     children: [
-      {path: 'users', component: UserListComponent},
+      { path: 'users', component: UserListComponent },
       {path: 'history', component: SectionHistoryComponent},
       {path: 'games', component: SectionGamesComponent},
       { path: 'users/edit/:id', component: UserUpdateComponent },
@@ -47,7 +50,25 @@ const routes: Routes = [
 },
     
 
-  { path: 'userprofile', component: UserProfileComponent }
+  { path: 'userprofile', component: UserProfileComponent },
+
+  {
+    path:'players',
+    children: [
+      { 
+        path: 'dota',
+        component: DotaComponent
+      },
+      { 
+        path: 'gta',
+        component: GtaComponent
+      },
+      { 
+        path: 'cs-go',
+        component: CsGoComponent
+      },
+    ]
+  }
 ];
 
 @NgModule({

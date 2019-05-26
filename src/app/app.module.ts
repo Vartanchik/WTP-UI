@@ -41,6 +41,7 @@ import { LockUserComponent } from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
+import { GlobalPlayersModule } from './global-players/global-players.module';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-del
     LockUserComponent,
     NavbarComponent,
     SidebarComponent,
-    ConfirmDeleteComponent,
+    ConfirmDeleteComponent
     ],
   imports: [
     NgbModule,
@@ -81,6 +82,7 @@ import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-del
     }),
     FormsModule,
     MyDatePickerModule,
+    GlobalPlayersModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
