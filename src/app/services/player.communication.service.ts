@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Player } from '../interfaces/player';
 
 @Injectable()
 export class PlayerCommunicationServer {

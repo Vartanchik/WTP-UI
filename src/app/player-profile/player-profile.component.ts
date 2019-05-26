@@ -48,19 +48,19 @@ export class PlayerProfileComponent implements OnInit {
     rank: ['', Validators.required]
   });
 
-  //Multiselect-dropdown - Game
+  // Multiselect-dropdown - Game
   dropdownListGame = [];
   dropdownSettingsGame = {};
 
-  //Multiselect-dropdown - Server
+  // Multiselect-dropdown - Server
   dropdownListServer = [];
   dropdownSettingsServer = {};
 
-  //Multiselect-dropdown - Goal
+  // Multiselect-dropdown - Goal
   dropdownListGoal = [];
   dropdownSettingsGoal = {};
 
-  //Multiselect-dropdown - Rank
+  // Multiselect-dropdown - Rank
   dropdownListRank = [];
   dropdownSettingsRank = {};
 
@@ -71,6 +71,7 @@ export class PlayerProfileComponent implements OnInit {
   onSubmit() {
     this.service.createOrUpdatePlayer(this.formModelPlayer.value).subscribe(
       res => {
+        this.cancel();
         this.toastr.success(res.info, res.message);
       },
       err => {

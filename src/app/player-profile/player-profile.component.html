@@ -19,7 +19,7 @@
       </div>
       <div class="card-body">
 
-        <form [formGroup]="formModelPlayer" autocomplete="off" (submit)="onSubmit()">
+        <form [formGroup]="formModelPlayer" autocomplete="off">
 
           <div class="form-group required">
             <label class="labelLeft">Playername*</label>
@@ -83,7 +83,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" [disabled]="!formModelPlayer.valid">
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!formModelPlayer.valid">
               CREATE PLAYER
             </button>
           </div>
