@@ -1,3 +1,4 @@
+import { Player } from './interfaces/player';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -42,6 +43,11 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
 import { RestoreComponent } from './account/restore/restore.component';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
+import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
+import { PlayerCommunicationServer } from './services/player.communication.service';
+import { PlayerService } from './services/player.service';
+import { PlayerProfileEditComponent } from './player-profile-edit/player-profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +75,9 @@ import { RestoreComponent } from './account/restore/restore.component';
     SidebarComponent,
     ConfirmDeleteComponent,
     RestoreComponent,
+    PlayerProfileComponent,
+    PlayerProfileListComponent,
+    PlayerProfileEditComponent,
     ],
   imports: [
     NgbModule,
@@ -94,7 +103,9 @@ import { RestoreComponent } from './account/restore/restore.component';
       multi: true
     },
     CommunicationService,
-    UserService
+    UserService,
+    PlayerService,
+    PlayerCommunicationServer
   ],
   bootstrap: [AppComponent],
   entryComponents: [

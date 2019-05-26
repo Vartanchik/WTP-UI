@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-2" id="first"></div>
+        <div class="col-10" id="blueBlock">
+          <img id="stars"
+            src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png"
+            alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card text-center" id="userCard" style="height:100vh">
+      <div class="card-header">
+        Players Info
+      </div>
+      <div class="card-body">
+        <button type="submit" class="btn btn-primary" (click)="createPlayer()" [disabled]="players.length >= 1">
+          CREATE PLAYER
+        </button>
+        <table class="table-condensed">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Player</th>
+              <th scope="col">Game</th>
+              <th scope="col" colspan="2" class="options">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of players; index as i">
+              <ng-container *ngIf="item.id !== 0">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.name }}</td>
+                <td>{{ item.game }}</td>
+                <td class="option-button">
+                  <button type="btn" class="btn btn-secondary" (click)="editPlayer(item)">
+                    Edit
+                  </button>
+                </td>
+                <td class="option-button">
+                  <button type="btn" class="btn btn-danger" (click)="deletePlayer(item.game)">
+                    Delete
+                  </button>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

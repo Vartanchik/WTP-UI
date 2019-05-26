@@ -41,7 +41,7 @@ export class ResetPasswordComponent implements OnInit {
     this.service.resetPassword({
       id: this.userId,
       newPassword: this.formModelResetPassword.get('newPassword').value,
-      code: this.code
+      token: this.code
     }).subscribe(
       res => {
         this.formModelResetPassword.reset();

@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-2" id="first"></div>
+        <div class="col-10" id="blueBlock">
+          <img id="stars"
+            src="https://cdn3.iconfinder.com/data/icons/game-play/512/gaming-game-play-multimedia-console-10-128.png"
+            alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card text-center" id="userCard">
+      <div class="card-header">
+        Players Info
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="formModelPlayer" autocomplete="off" (submit)="onSubmit()">
+
+          <div class="form-group required">
+            <label class="labelLeft">Playername*</label>
+            <input class="form-control" formControlName="name" [(ngModel)]="player.name" />
+            <small id="playerNameHelp" class="form-text text-muted">Playername must be 4-16 characters long.</small>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('name').touched && formModelPlayer.get('name').errors?.required">
+              This field is mandatory.</label>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('name').touched && formModelPlayer.get('name').errors?.minlength">
+              Minimum 4 characters required.</label>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('name').touched && formModelPlayer.get('name').errors?.maxlength">
+              Maximum 16 characters required.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Game*</label>
+            <ng-multiselect-dropdown formControlName="game" [placeholder]="'Choose game'" [data]="dropdownListGame"
+              [(ngModel)]="selectedGame" [settings]="dropdownSettingsGame">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('game').touched && formModelPlayer.get('game').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Server*</label>
+            <ng-multiselect-dropdown formControlName="server" [placeholder]="'Choose server'"
+              [data]="dropdownListServer" [(ngModel)]="selectedServer" [settings]="dropdownSettingsServer">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('server').touched && formModelPlayer.get('server').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Goal*</label>
+            <ng-multiselect-dropdown formControlName="goal" [placeholder]="'Choose goal'" [data]="dropdownListGoal"
+              [(ngModel)]="selectedGoal" [settings]="dropdownSettingsGoal">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('goal').touched && formModelPlayer.get('goal').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Rank*</label>
+            <ng-multiselect-dropdown formControlName="rank" [placeholder]="'Choose rank'" [data]="dropdownListRank"
+              [(ngModel)]="selectedRank" [settings]="dropdownSettingsRank">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('rank').touched && formModelPlayer.get('rank').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Decency*</label>
+            <input type="number" class="form-control" formControlName="decency" [(ngModel)]="player.decency" />
+            <small id="playerDecencyHelp" class="form-text text-muted">Decency must be in range: 1-10000</small>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('decency').touched && formModelPlayer.get('decency').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
+          <div class="form-group shadow-textarea">
+            <label>About</label>
+            <textarea class="form-control z-depth-1" formControlName="about" id="exampleFormControlTextarea3" rows="5"
+              [(ngModel)]="player.about">
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="!formModelPlayer.valid">
+              SAVE CHANGES
+            </button>
+          </div>
+        </form>
+
+        <hr>
+
+        <button class="btn btn-info" (click)="cancel()">
+          CANCEL
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
