@@ -7,4 +7,5 @@ export interface Player {
     goal: string;
     about: string;
     rank: string;
+    decency: number;
 }

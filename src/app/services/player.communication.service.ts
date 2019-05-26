@@ -14,7 +14,8 @@ export class PlayerCommunicationServer {
         server: '',
         goal: '',
         about: '',
-        rank: ''
+        rank: '',
+        decency: 0
       };
 
     private userId = new BehaviorSubject<number>(0);

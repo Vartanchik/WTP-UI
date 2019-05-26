@@ -76,6 +76,15 @@
               This field is mandatory.</label>
           </div>
 
+          <div class="form-group required">
+            <label>Decency*</label>
+            <input type="number" class="form-control" formControlName="decency" [(ngModel)]="player.decency" />
+            <small id="playerDecencyHelp" class="form-text text-muted">Decency must be in range: 1-10000</small>
+            <label class="text-danger"
+              *ngIf="formModelPlayer.get('decency').touched && formModelPlayer.get('decency').errors?.required">
+              This field is mandatory.</label>
+          </div>
+
           <div class="form-group shadow-textarea">
             <label>About</label>
             <textarea class="form-control z-depth-1" id="exampleFormControlTextarea3" rows="5"

@@ -35,7 +35,8 @@ export class PlayerProfileEditComponent implements OnInit {
       server: '',
       goal: '',
       about: '',
-      rank: ''
+      rank: '',
+      decency: 0
     };
 
     formModelPlayer = this.fb.group({
@@ -44,7 +45,8 @@ export class PlayerProfileEditComponent implements OnInit {
       server: ['', Validators.required],
       goal: ['', Validators.required],
       about: [''],
-      rank: ['', Validators.required]
+      rank: ['', Validators.required],
+      decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
     });
 
     // Multiselect-dropdown - Game

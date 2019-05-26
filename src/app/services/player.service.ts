@@ -26,7 +26,7 @@ export class PlayerService {
       goalId: Object.keys(body.goal[0]).map(key => body.goal[0][key])[0],
       about: body.about,
       rankId: Object.keys(body.rank[0]).map(key => body.rank[0][key])[0],
-      decency: 100,
+      decency: body.decency,
     };
     return this.http.post<WtpResponse>(this.BaseURI + '/Player', player);
   }

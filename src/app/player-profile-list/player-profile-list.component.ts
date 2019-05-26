@@ -26,7 +26,8 @@ export class PlayerProfileListComponent implements OnInit {
     server: '',
     goal: '',
     about: '',
-    rank: ''
+    rank: '',
+    decency: 0
   }];
 
   ngOnInit() {
