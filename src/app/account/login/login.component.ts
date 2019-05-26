@@ -48,7 +48,11 @@ export class LoginComponent implements OnInit {
         this.toastr.success(res.message);
       },
       err => {
-        this.toastr.error(err.error.info, err.error.message);
+        if (err.error.statusCode === 302) {
+          this.router.navigateByUrl(`/account/restore?email=${err.error.message}`);
+        } else {
+          this.toastr.error(err.error.info, err.error.message);
+        }
       }
     );
   }

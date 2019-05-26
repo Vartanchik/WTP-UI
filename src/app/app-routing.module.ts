@@ -19,6 +19,7 @@ import { NotFoundComponent } from './users/not-found/not-found.component';
 import { DotaComponent } from './global-players/dota/dota.component';
 import { GtaComponent } from './global-players/gta/gta.component';
 import { CsGoComponent } from './global-players/cs-go/cs-go.component';
+import {RestoreComponent} from './account/restore/restore.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
-      { path: 'changepassword', component: ChangePasswordComponent}
+      { path: 'changepassword', component: ChangePasswordComponent},
+      { path: 'restore', component: RestoreComponent},
     ]
   },
 
