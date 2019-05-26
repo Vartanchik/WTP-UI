@@ -14,12 +14,15 @@ import {
   dropdownListRanksConfig,
   dropdownSettingsRanksConfig
 } from '../services/dataconfig';
+import { IdItem } from '../interfaces/id-item';
+import { Item } from './item';
 
 @Component({
   selector: 'app-player-profile-edit',
   templateUrl: './player-profile-edit.component.html',
   styleUrls: ['./player-profile-edit.component.scss']
 })
+
 export class PlayerProfileEditComponent implements OnInit {
 
   constructor(
@@ -28,46 +31,46 @@ export class PlayerProfileEditComponent implements OnInit {
     private toastr: ToastrService,
     private data: PlayerCommunicationServer) { }
 
-    player: Player = {
-      id: 0,
-      name: '',
-      game: '',
-      server: '',
-      goal: '',
-      about: '',
-      rank: '',
-      decency: 0
-    };
+  player: Player = {
+    id: 0,
+    name: '',
+    game: '',
+    server: '',
+    goal: '',
+    about: '',
+    rank: '',
+    decency: 0
+  };
 
-    formModelPlayer = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      game: ['', Validators.required],
-      server: ['', Validators.required],
-      goal: ['', Validators.required],
-      about: [''],
-      rank: ['', Validators.required],
-      decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
-    });
+  formModelPlayer = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+    game: ['', Validators.required],
+    server: ['', Validators.required],
+    goal: ['', Validators.required],
+    about: [''],
+    rank: ['', Validators.required],
+    decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
+  });
 
-    // Multiselect-dropdown - Game
-    dropdownListGame = [];
-    selectedGame: string = null;
-    dropdownSettingsGame = {};
+  // Multiselect-dropdown - Game
+  dropdownListGame = [];
+  selectedGame: IdItem[] = null;
+  dropdownSettingsGame = {};
 
-    // Multiselect-dropdown - Server
-    dropdownListServer = [];
-    selectedServer: string = null;
-    dropdownSettingsServer = {};
+  // Multiselect-dropdown - Server
+  dropdownListServer = [];
+  selectedServer: IdItem[] = null;
+  dropdownSettingsServer = {};
 
-    // Multiselect-dropdown - Goal
-    dropdownListGoal = [];
-    selectedGoal: string = null;
-    dropdownSettingsGoal = {};
+  // Multiselect-dropdown - Goal
+  dropdownListGoal = [];
+  selectedGoal: IdItem[] = null;
+  dropdownSettingsGoal = {};
 
-    // Multiselect-dropdown - Rank
-    dropdownListRank = [];
-    selectedRank: string = null;
-    dropdownSettingsRank = {};
+  // Multiselect-dropdown - Rank
+  dropdownListRank = [];
+  selectedRank: IdItem[] = null;
+  dropdownSettingsRank = {};
 
   ngOnInit() {
     this.data.currentPlayerToEdit.subscribe(p => this.player = p);
@@ -110,10 +113,21 @@ export class PlayerProfileEditComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-    this.selectedGame = (this.player.game);
-    this.selectedServer = (this.player.server);
-    this.selectedGoal = (this.player.goal);
-    this.selectedRank = (this.player.rank);
+    this.selectedGame = [new Item(
+      dropdownListGamesConfig.find(g => g.name === this.player.game).id,
+      this.player.game)];
+
+    this.selectedServer = [new Item(
+      dropdownListServersConfig.find(s => s.name === this.player.server).id,
+      this.player.server)];
+
+    this.selectedGoal = [new Item(
+      dropdownListGoalsConfig.find(g => g.name === this.player.goal).id,
+      this.player.goal)];
+
+    this.selectedRank = [new Item(
+      dropdownListRanksConfig.find(r => r.name === this.player.rank).id,
+      this.player.rank)];
   }
 
 }

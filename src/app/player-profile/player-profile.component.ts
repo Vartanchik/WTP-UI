@@ -71,6 +71,7 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.formModelPlayer.value.about);
     this.service.createOrUpdatePlayer(this.formModelPlayer.value).subscribe(
       res => {
         this.cancel();
