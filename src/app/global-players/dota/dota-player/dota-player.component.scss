@@ -56,11 +56,13 @@
 .player-about{
     margin: 10px;
     height: 90px;
+    width: 445px;
 }
 .player-about-text{
     border-radius: 5px;
     background-color: #f2f6f9;
     height: 100%;
+    overflow-y: auto;
 }
 .player-about__text{
     margin: 10px;

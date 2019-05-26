@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player } from '../../player.model';
+import { Player } from '../../models/player.model';
 
 @Component({
   selector: 'app-dota-player',
@@ -10,15 +10,6 @@ export class DotaPlayerComponent implements OnInit {
 
   @Input() player: Player[];
 
-  // player = { 
-  //   "id": 1, 
-  //   "name": "PlayerName", 
-  //   "game": "Dota 2", 
-  //   "rank": "Uncalibrated", 
-  //   "server": "East", 
-  //   "goal": "Fun", 
-  //   "about": "xdd" 
-  // };
   constructor() { }
 
   ngOnInit() {

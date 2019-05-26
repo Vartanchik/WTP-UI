@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Player } from './player.model';
 import { HttpClient } from '@angular/common/http';
 import { baseURIConfig } from '../services/dataconfig';
+import { PlayersPagination } from './models/players-pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +10,18 @@ import { baseURIConfig } from '../services/dataconfig';
 export class GlobalPlayersService {
 
   private readonly BaseURI = baseURIConfig;
-  private readonly playersUrl = '/Player/players';
+  private readonly playersUrl = '/Player/players/pagination';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getPlayers(id: number): Observable<Player[]> {
-    return this.http.get<Player[]>(
+  getPlayers(gameId: number, pageId: number): Observable<PlayersPagination> {
+    return this.http.get<PlayersPagination>(
       `${this.BaseURI}${this.playersUrl}`, {
         params: {
-          idGame: id.toString()
+          idGame: gameId.toString(),
+          page: pageId.toString()
         }
       });
   }
