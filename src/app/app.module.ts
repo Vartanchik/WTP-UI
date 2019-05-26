@@ -46,6 +46,7 @@ import { PlayerProfileComponent } from './player-profile/player-profile.componen
 import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
 import { PlayerCommunicationServer } from './services/player.communication.service';
 import { PlayerService } from './services/player.service';
+import { PlayerProfileEditComponent } from './player-profile-edit/player-profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { PlayerService } from './services/player.service';
     ConfirmDeleteComponent,
     PlayerProfileComponent,
     PlayerProfileListComponent,
+    PlayerProfileEditComponent,
     ],
   imports: [
     NgbModule,

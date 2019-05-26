@@ -143,6 +143,7 @@
       <ng-template ngbTabContent>
         <app-player-profile-list *ngIf="listOfPlayers" ></app-player-profile-list>
         <app-player-profile *ngIf="createPlayer"></app-player-profile>
+        <app-player-profile-edit *ngIf="editPlayer"></app-player-profile-edit>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

@@ -48,6 +48,7 @@ export class UserProfileComponent implements OnInit {
   private isValid: boolean = true;
   public createPlayer = false;
   public listOfPlayers = true;
+  public editPlayer = false;
 
   private userProfile: User = {
     id: 0,
@@ -104,6 +105,7 @@ export class UserProfileComponent implements OnInit {
     }
     this.data.currentListOfPlayers.subscribe(status => this.listOfPlayers = status);
     this.data.currentCreatePlayer.subscribe(status => this.createPlayer = status);
+    this.data.currentEditPlayer.subscribe(status => this.editPlayer = status);
     this.initializeDefaultConfig();
   }
 

@@ -43,6 +43,12 @@ export class PlayerProfileListComponent implements OnInit {
     this.data.changeCreatePlayer(true);
   }
 
+  editPlayer(player: Player) {
+    this.data.changeListOfPlayers(false);
+    this.data.changeEditPlayer(true);
+    this.data.changePlayerToEdit(player);
+  }
+
   deletePlayer(game: string) {
     const gameId: number = dropdownListGamesConfig.find(g => g.name === game).id;
     if (confirm('Are you sure to delete ' + game + ' player?')) {

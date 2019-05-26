@@ -37,9 +37,9 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.game }}</td>
                 <td class="option-button">
-                  <a type="btn" class="btn btn-secondary" routerLink="">
+                  <button type="btn" class="btn btn-secondary" (click)="editPlayer(item)">
                     Edit
-                  </a>
+                  </button>
                 </td>
                 <td class="option-button">
                   <button type="btn" class="btn btn-danger" (click)="deletePlayer(item.game)">
