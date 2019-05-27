@@ -42,6 +42,7 @@ import { LockUserComponent } from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
+import { GlobalPlayersModule } from './global-players/global-players.module';
 import { RestoreComponent } from './account/restore/restore.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
@@ -92,6 +93,7 @@ import { PlayerProfileEditComponent } from './player-profile-edit/player-profile
     }),
     FormsModule,
     MyDatePickerModule,
+    GlobalPlayersModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
