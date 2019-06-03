@@ -9,7 +9,7 @@
         <div class="center-elements">
           <p class="text-primary">You can create only one player by one game!</p>
           <button id="create-button" type="submit" class="btn btn-primary" (click)="createPlayer()"
-            [disabled]="players.length >= 3">
+            [disabled]="players.length >= numberOfGames">
             CREATE PLAYER
           </button>
         </div>

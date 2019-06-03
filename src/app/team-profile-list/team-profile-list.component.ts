@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Team } from '../interfaces/team';
 import { TeamCommunicationService } from '../services/team.communication.service';
 import { TeamService } from '../services/team.service';
+import { dropdownListGamesConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-team-profile-list',
@@ -18,6 +19,8 @@ export class TeamProfileListComponent implements OnInit {
 
   public userId: number;
 
+  public numberOfGames: number;
+
   private teams: Team[] = [{
     id: 0,
     name: '',
@@ -32,6 +35,7 @@ export class TeamProfileListComponent implements OnInit {
   }];
 
   ngOnInit() {
+    this.numberOfGames = dropdownListGamesConfig.length;
     this.data.currentUserId.subscribe(id => this.userId = id);
     this.teamService.getTeams(this.userId).subscribe(
       res => {

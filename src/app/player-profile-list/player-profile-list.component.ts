@@ -19,6 +19,8 @@ export class PlayerProfileListComponent implements OnInit {
 
   public userId: number;
 
+  public numberOfGames: number;
+
   private players: Player[] = [{
     id: 0,
     name: 'Default',
@@ -31,6 +33,7 @@ export class PlayerProfileListComponent implements OnInit {
   }];
 
   ngOnInit() {
+    this.numberOfGames = dropdownListGamesConfig.length;
     this.data.currentUserId.subscribe(id => this.userId = id);
     this.playerService.getPlayersByUserId(this.userId).subscribe(
       res => {
