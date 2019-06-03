@@ -62,8 +62,8 @@ export const dropdownSettingsCountriesConfig = {
 //Games for user-update form
 export const dropdownListGamesConfig = [
     { id: 1, name: 'Dota 2' },
-    // { id: 2, name: 'CS:GO'},
-    // { id: 3, name: 'GTA V'},
+    { id: 2, name: 'CS:GO'},
+    { id: 3, name: 'GTA V'},
 ];
 export const dropdownSettingsGamesConfig = {
     singleSelection: true,

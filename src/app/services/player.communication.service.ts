@@ -23,12 +23,14 @@ export class PlayerCommunicationServer {
     private createPlayer = new BehaviorSubject<boolean>(false);
     private editPlayer = new BehaviorSubject<boolean>(false);
     private playerToEdit = new BehaviorSubject<Player>(this.player);
+    private existingGames = new BehaviorSubject<string[]>([]);
 
     currentUserId = this.userId.asObservable();
     currentListOfPlayers = this.listOfPlayers.asObservable();
     currentCreatePlayer = this.createPlayer.asObservable();
     currentEditPlayer = this.editPlayer.asObservable();
     currentPlayerToEdit = this.playerToEdit.asObservable();
+    getExistingGames = this.existingGames.asObservable();
 
     changeUserId(id: number) {
         this.userId.next(id);
@@ -48,5 +50,9 @@ export class PlayerCommunicationServer {
 
     changePlayerToEdit(player: Player) {
         this.playerToEdit.next(player);
+    }
+
+    setExistingGames(games: string[]) {
+        this.existingGames.next(games);
     }
 }

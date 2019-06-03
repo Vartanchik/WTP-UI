@@ -32,7 +32,7 @@ export class PlayerProfileListComponent implements OnInit {
 
   ngOnInit() {
     this.data.currentUserId.subscribe(id => this.userId = id);
-    this.playerService.getPlayersOfUser(this.userId).subscribe(
+    this.playerService.getPlayersByUserId(this.userId).subscribe(
       res => {
         this.players = res;
       }
@@ -40,6 +40,12 @@ export class PlayerProfileListComponent implements OnInit {
   }
 
   createPlayer() {
+    // Set dropdownListGame to show only uncreated game team
+    const existingGames: string[] = [];
+    for (let i = 0; i < this.players.length; i++) {
+      existingGames.push(this.players[i].game);
+    }
+    this.data.setExistingGames(existingGames);
     this.data.changeListOfPlayers(false);
     this.data.changeCreatePlayer(true);
   }

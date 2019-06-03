@@ -35,6 +35,7 @@ export class UserprofileService {
     body.gender = body.gender[0];
     body.country = body.country[0];
     body.id = id;
+    body.photo = localStorage.getItem('photo');
     
     return this.http.put<WtpResponse>(this.BaseURI + '/UserProfile', body);
   }

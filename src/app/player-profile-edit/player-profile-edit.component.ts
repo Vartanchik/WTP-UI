@@ -99,16 +99,18 @@ export class PlayerProfileEditComponent implements OnInit {
   }
 
   private initializeDefaultConfig() {
-    this.dropdownListGame = dropdownListGamesConfig;
+    this.dropdownListGame = [new Item(
+      dropdownListGamesConfig.find(g => g.name === this.player.game).id,
+      this.player.game)];
     this.dropdownSettingsGame = dropdownSettingsGamesConfig;
 
-    this.dropdownListServer = dropdownListServersConfig;
+    this.dropdownListServer = [...dropdownListServersConfig];
     this.dropdownSettingsServer = dropdownSettingsServersConfig;
 
-    this.dropdownListGoal = dropdownListGoalsConfig;
+    this.dropdownListGoal = [...dropdownListGoalsConfig];
     this.dropdownSettingsGoal = dropdownSettingsGoalsConfig;
 
-    this.dropdownListRank = dropdownListRanksConfig;
+    this.dropdownListRank = [...dropdownListRanksConfig];
     this.dropdownSettingsRank = dropdownSettingsRanksConfig;
   }
 

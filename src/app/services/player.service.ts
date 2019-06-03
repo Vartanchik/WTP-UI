@@ -14,8 +14,12 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
-  getPlayersOfUser(userId: number): Observable<Player[]> {
-    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersOfUser/' + userId);
+  getPlayersByUserId(userId: number): Observable<Player[]> {
+    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByUser?userId=' + userId);
+  }
+
+  getPlayersByTeamId(teamId: number): Observable<Player[]> {
+    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByTeam?teamId=' + teamId);
   }
 
   createOrUpdatePlayer(body: Player): Observable<WtpResponse> {
