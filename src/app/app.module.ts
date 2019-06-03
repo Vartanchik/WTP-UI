@@ -49,6 +49,11 @@ import { PlayerProfileListComponent } from './player-profile-list/player-profile
 import { PlayerCommunicationServer } from './services/player.communication.service';
 import { PlayerService } from './services/player.service';
 import { PlayerProfileEditComponent } from './player-profile-edit/player-profile-edit.component';
+import { TeamProfileListComponent } from './team-profile-list/team-profile-list.component';
+import { TeamService } from './services/team.service';
+import { TeamCommunicationService } from './services/team.communication.service';
+import { TeamProfileCreateComponent } from './team-profile-create/team-profile-create.component';
+import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +84,9 @@ import { PlayerProfileEditComponent } from './player-profile-edit/player-profile
     PlayerProfileComponent,
     PlayerProfileListComponent,
     PlayerProfileEditComponent,
+    TeamProfileListComponent,
+    TeamProfileCreateComponent,
+    TeamProfileEditComponent
     ],
   imports: [
     NgbModule,
@@ -107,7 +115,9 @@ import { PlayerProfileEditComponent } from './player-profile-edit/player-profile
     CommunicationService,
     UserService,
     PlayerService,
-    PlayerCommunicationServer
+    PlayerCommunicationServer,
+    TeamService,
+    TeamCommunicationService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

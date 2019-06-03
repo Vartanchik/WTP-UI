@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, PatternValidator, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserprofileService } from '../services/userprofile.service';
@@ -22,6 +22,7 @@ import { PlayerService } from '../services/player.service';
 import { NgbModal, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { PlayerCommunicationServer } from '../services/player.communication.service';
+import { TeamCommunicationService } from '../services/team.communication.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -39,7 +40,8 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService,
     private svc: CommunicationService,
     private accsvc: AccountService,
-    private data: PlayerCommunicationServer,
+    private playerData: PlayerCommunicationServer,
+    private teamData: TeamCommunicationService,
     config: NgbTabsetConfig,
     private _modalService: NgbModal) {
     config.justify = 'center';
@@ -49,6 +51,9 @@ export class UserProfileComponent implements OnInit {
   public createPlayer = false;
   public listOfPlayers = true;
   public editPlayer = false;
+  public createTeam = false;
+  public listOfTeams = true;
+  public editTeam = false;
 
   private userProfile: User = {
     id: 0,
@@ -96,16 +101,20 @@ export class UserProfileComponent implements OnInit {
         (res: User) => {
           this.userProfile = res;
           this.setCurrentUserInfo();
-          this.data.changeUserId(this.userProfile.id);
+          this.playerData.changeUserId(this.userProfile.id);
+          this.teamData.changeUserId(this.userProfile.id);
         },
         err => {
           this.toastr.error(err.error.message);
         },
       );
     }
-    this.data.currentListOfPlayers.subscribe(status => this.listOfPlayers = status);
-    this.data.currentCreatePlayer.subscribe(status => this.createPlayer = status);
-    this.data.currentEditPlayer.subscribe(status => this.editPlayer = status);
+    this.playerData.currentListOfPlayers.subscribe(status => this.listOfPlayers = status);
+    this.playerData.currentCreatePlayer.subscribe(status => this.createPlayer = status);
+    this.playerData.currentEditPlayer.subscribe(status => this.editPlayer = status);
+    this.teamData.currentListOfTeams.subscribe(status => this.listOfTeams = status);
+    this.teamData.currentCreateTeam.subscribe(status => this.createTeam = status);
+    this.teamData.currentEditTeam.subscribe(status => this.editTeam = status);
     this.initializeDefaultConfig();
   }
 

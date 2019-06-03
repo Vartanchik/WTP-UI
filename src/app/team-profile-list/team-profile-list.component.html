@@ -1,42 +1,41 @@
 <div class="row first-conteiner">
-
   <div class="col-12">
     <div class="card text-center" id="userCard" style="height:100vh">
       <div class="card-header">
-        Players Info
+        Teams Info
       </div>
       <div class="card-body">
         <div class="center-elements">
-          <p class="text-primary">You can create only one player by one game!</p>
-          <button id="create-button" type="submit" class="btn btn-primary" (click)="createPlayer()"
-            [disabled]="players.length >= 3">
-            CREATE PLAYER
+          <p class="text-primary">You can create only one team by one game!</p>
+          <button id="create-button" type="submit" class="btn btn-primary" (click)="createTeam()"
+            [disabled]="teams.length >= 3">
+            CREATE TEAM
           </button>
         </div>
         <table>
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Player</th>
+              <th scope="col">Team</th>
               <th scope="col">Game</th>
-              <th scope="col">Rank</th>
+              <th scope="col">Win Rate</th>
               <th scope="col" colspan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of players; index as i">
+            <tr *ngFor="let item of teams; index as i">
               <ng-container *ngIf="item.id !== 0">
                 <td scope="row">{{ i + 1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.game }}</td>
-                <td>{{ item.rank }}</td>
+                <td>{{ item.winRate }}</td>
                 <td>
-                  <button class="action-button" (click)="editPlayer(item)">
+                  <button class="action-button" (click)="editTeam(item)">
                     Edit
                   </button>
                 </td>
                 <td>
-                  <button class="action-button" (click)="deletePlayer(item.game)">
+                  <button class="action-button" (click)="deleteTeam(item.id)">
                     Delete
                   </button>
                 </td>

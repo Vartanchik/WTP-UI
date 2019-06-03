@@ -1,0 +1,126 @@
+<div class="row first-conteiner">
+  <div class="col-12">
+    <div class="card text-center" id="userCard">
+      <div class="card-header">
+        Teams Info
+      </div>
+      <div class="card-body">
+        <div id="cardUploadAvatar">
+          <img src="{{team.photo}}" id="avatarInProfile" alt="Profile avatar">
+        </div>
+
+        <form [formGroup]="formModelTeam" autocomplete="off">
+
+          <div class="form-group" id="upload">
+            <div class="custom-file">
+              <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01"
+                (change)="onFileChange($event)" />
+              <label class="custom-file-label">UPDATE LOGO</label>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row justify-content-between">
+            <div class="col-md-6 form-group required">
+              <label class="labelLeft">Teamname*</label>
+              <input class="form-control" formControlName="name" [(ngModel)]="team.name" />
+              <small id="teamNameHelp" class="form-text text-muted">Teamrname must be 4-16 characters long.</small>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.required">
+                This field is mandatory.</label>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.minlength">
+                Minimum 4 characters required.</label>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.maxlength">
+                Maximum 16 characters required.</label>
+            </div>
+
+            <div class="col-md-6 form-group required">
+              <label>Game*</label>
+              <ng-multiselect-dropdown formControlName="game" [placeholder]="'Choose game'" [data]="dropdownListGame"
+                [(ngModel)]="selectedGame" [settings]="dropdownSettingsGame">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('game').touched && formModelTeam.get('game').errors?.required">
+                This field is mandatory.</label>
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col-md-6 form-group required">
+              <label>Server*</label>
+              <ng-multiselect-dropdown formControlName="server" [placeholder]="'Choose server'"
+                [data]="dropdownListServer" [(ngModel)]="selectedServer" [settings]="dropdownSettingsServer">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('server').touched && formModelTeam.get('server').errors?.required">
+                This field is mandatory.</label>
+            </div>
+
+            <div class="col-md-6 form-group required">
+              <label>Goal*</label>
+              <ng-multiselect-dropdown formControlName="goal" [placeholder]="'Choose goal'" [data]="dropdownListGoal"
+                [(ngModel)]="selectedGoal" [settings]="dropdownSettingsGoal">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('goal').touched && formModelTeam.get('goal').errors?.required">
+                This field is mandatory.</label>
+            </div>
+          </div>
+
+          <!-- <div class="form-group required">
+            <label>Language*</label>
+            <ng-multiselect-dropdown formControlName="language" [placeholder]="'Choose language'"
+              [data]="dropdownListLanguage" [(ngModel)]="selectedLanguage" [settings]="dropdownSettingsLanguage">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelTeam.get('language').touched && formModelTeam.get('language').errors?.required">
+              This field is mandatory.</label>
+          </div> -->
+          <div class="row justify-content-center">
+            <div class="col-md-6 form-group center-elements">
+              <label>Players:</label>
+              <div>
+                <p *ngIf="team.players === undefined || team.players.length === 0" id="create-team-notification"
+                  class="text-primary">
+                  There is no players yet!
+                </p>
+              </div>
+              <ng-container *ngIf="team.players !== undefined && team.players.length > 0">
+                <table class="table-condensed">
+                  <tbody>
+                    <tr *ngFor="let item of team.players; index as i">
+                      <td>{{ i + 1 }}</td>
+                      <td><img src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/30.User-256.png" id="avatar"></td>
+                      <td>{{ item.name }}</td>
+                      <td>
+                        <button class="action-button" (click)="removePlayer(item.id)">
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="form-group center-elements">
+            <button id="create-button" type="submit" class="btn btn-primary" (click)="onSubmit()"
+              [disabled]="!formModelTeam.valid">
+              UPDATE TEAM
+            </button>
+          </div>
+        </form>
+
+        <hr>
+        <div class="center-elements">
+          <button id="create-button" class="btn btn-info" (click)="cancel()">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
