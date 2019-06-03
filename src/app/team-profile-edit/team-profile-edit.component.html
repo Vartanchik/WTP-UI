@@ -22,7 +22,7 @@
 
           <div class="row justify-content-between">
             <div class="col-md-6 form-group required">
-              <label class="labelLeft">Teamname*</label>
+              <label class="labelLeft">Name*</label>
               <input class="form-control" formControlName="name" [(ngModel)]="team.name" />
               <small id="teamNameHelp" class="form-text text-muted">Teamrname must be 4-16 characters long.</small>
               <label class="text-danger"
@@ -84,7 +84,7 @@
               <div>
                 <p *ngIf="team.players === undefined || team.players.length === 0" id="create-team-notification"
                   class="text-primary">
-                  There is no players yet!
+                  There are no players yet!
                 </p>
               </div>
               <ng-container *ngIf="team.players !== undefined && team.players.length > 0">

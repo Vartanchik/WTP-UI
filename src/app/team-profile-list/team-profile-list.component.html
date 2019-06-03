@@ -8,7 +8,7 @@
         <div class="center-elements">
           <p class="text-primary">You can create only one team by one game!</p>
           <button id="create-button" type="submit" class="btn btn-primary" (click)="createTeam()"
-            [disabled]="teams.length >= 3">
+            [disabled]="teams.length >= numberOfGames">
             CREATE TEAM
           </button>
         </div>

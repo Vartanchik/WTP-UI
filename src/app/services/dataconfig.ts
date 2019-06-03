@@ -33,7 +33,7 @@ export const dropdownSettingsLanguagesConfig = {
 //Genders for user-update form
 export const dropdownListGendersConfig = [
     { id: 1, name: 'Male' },
-    { id: 2, name: 'Female'},
+    { id: 2, name: 'Female'}
 ];
 export const dropdownSettingsGendersConfig = {
     singleSelection: true,
@@ -46,10 +46,12 @@ export const dropdownSettingsGendersConfig = {
 //Countries for user-update form
 export const dropdownListCountriesConfig = [
     { id: 1, name: 'Ukraine' },
-    { id: 2, name: 'Spanish' },
+    { id: 2, name: 'Spain' },
     { id: 3, name: 'USA' },
     { id: 4, name: 'Brazil' },
-    { id: 5, name: 'German' }
+    { id: 5, name: 'German' },
+    { id: 6, name: 'China' },
+    { id: 7, name: 'Poland' }
 ];
 export const dropdownSettingsCountriesConfig = {
     singleSelection: true,
@@ -63,7 +65,7 @@ export const dropdownSettingsCountriesConfig = {
 export const dropdownListGamesConfig = [
     { id: 1, name: 'Dota 2' },
     { id: 2, name: 'CS:GO'},
-    { id: 3, name: 'GTA V'},
+    { id: 3, name: 'GTA V'}
 ];
 export const dropdownSettingsGamesConfig = {
     singleSelection: true,
@@ -75,10 +77,12 @@ export const dropdownSettingsGamesConfig = {
 
 //Servers for user-update form
 export const dropdownListServersConfig = [
-    { id: 1, name: 'East' },
-    { id: 2, name: 'West'},
-    { id: 3, name: 'North'},
-    { id: 4, name: 'South'},
+    { id: 1, name: 'EU East' },
+    { id: 2, name: 'EU West'},
+    { id: 3, name: 'South America'},
+    { id: 4, name: 'Norht America'},
+    { id: 5, name: 'Middle East'},
+    { id: 6, name: 'Asia'}
 ];
 export const dropdownSettingsServersConfig = {
     singleSelection: true,
@@ -90,8 +94,9 @@ export const dropdownSettingsServersConfig = {
 
 //Goals for user-update form
 export const dropdownListGoalsConfig = [
-    { id: 1, name: 'Fun' },
-    { id: 2, name: 'Profi'},
+    { id: 1, name: 'To have fun' },
+    { id: 2, name: 'To become a pro'},
+    { id: 3, name: 'To play competitlvely'}
 ];
 export const dropdownSettingsGoalsConfig = {
     singleSelection: true,
@@ -110,7 +115,7 @@ export const dropdownListRanksConfig = [
     { id: 5, name: 'Legend'},
     { id: 6, name: 'Ancient'},
     { id: 7, name: 'Divine'},
-    { id: 8, name: 'Immortal'},
+    { id: 8, name: 'Immortal'}
 ];
 export const dropdownSettingsRanksConfig = {
     singleSelection: true,
