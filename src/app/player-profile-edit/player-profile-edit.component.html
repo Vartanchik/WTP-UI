@@ -9,7 +9,7 @@
 
         <form [formGroup]="formModelPlayer" autocomplete="off" (submit)="onSubmit()">
 
-          <div class="row justify-content-between">
+          <div class="row justify-content-center">
             <div class="col-md-6 form-group required">
               <label class="labelLeft">Name*</label>
               <input class="form-control" formControlName="name" [(ngModel)]="player.name" />
@@ -23,16 +23,6 @@
               <label class="text-danger"
                 *ngIf="formModelPlayer.get('name').touched && formModelPlayer.get('name').errors?.maxlength">
                 Maximum 16 characters required.</label>
-            </div>
-
-            <div class="col-md-6 form-group required">
-              <label>Game*</label>
-              <ng-multiselect-dropdown formControlName="game" [placeholder]="'Choose game'" [data]="dropdownListGame"
-                [(ngModel)]="selectedGame" [settings]="dropdownSettingsGame">
-              </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelPlayer.get('game').touched && formModelPlayer.get('game').errors?.required">
-                This field is mandatory.</label>
             </div>
           </div>
 

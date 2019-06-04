@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
         this.toastr.success('Your e-mail was confirmed!', 'Success!');
       }
       else if (queryParam.get('confirmed') === 'false'){
-        this.toastr.success('Something went wrong!', 'Error!');
+        this.toastr.error('Something went wrong!', 'Error!');
       }
     });
   }

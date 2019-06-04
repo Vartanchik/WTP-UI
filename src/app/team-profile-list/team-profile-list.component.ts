@@ -4,6 +4,7 @@ import { Team } from '../interfaces/team';
 import { TeamCommunicationService } from '../services/team.communication.service';
 import { TeamService } from '../services/team.service';
 import { dropdownListGamesConfig } from '../services/dataconfig';
+import { Invitation } from '../interfaces/invitation';
 
 @Component({
   selector: 'app-team-profile-list',
@@ -20,6 +21,13 @@ export class TeamProfileListComponent implements OnInit {
   public userId: number;
 
   public numberOfGames: number;
+
+  public invitations: Invitation[] = [{
+    id: 0,
+    playerName: '',
+    teamName: '',
+    author: ''
+  }];
 
   private teams: Team[] = [{
     id: 0,
@@ -40,6 +48,14 @@ export class TeamProfileListComponent implements OnInit {
     this.teamService.getTeams(this.userId).subscribe(
       res => {
         this.teams = res;
+      }
+    );
+
+    this.teamService.getInvitationsByUserId(this.userId).subscribe(
+      res => {
+        if (res !== null) {
+          this.invitations = res;
+        }
       }
     );
   }
@@ -78,6 +94,32 @@ export class TeamProfileListComponent implements OnInit {
         }
       );
     }
+  }
+
+  accept(invitationId: number) {
+    this.teamService.acceptInvitation(invitationId).subscribe(
+      res => {
+        let index: number = this.invitations.indexOf(
+          this.invitations.find(i => i.id === invitationId)
+        );
+        if (index !== -1) {
+          this.invitations.splice(index, 1);
+        }
+      }
+    );
+  }
+
+  decline(invitationId: number) {
+    this.teamService.declineInvitation(invitationId).subscribe(
+      res => {
+        let index: number = this.invitations.indexOf(
+          this.invitations.find(i => i.id === invitationId)
+        );
+        if (index !== -1) {
+          this.invitations.splice(index, 1);
+        }
+      }
+    );
   }
 
 }
