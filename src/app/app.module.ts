@@ -44,16 +44,17 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
 import { GlobalPlayersModule } from './global-players/global-players.module';
 import { RestoreComponent } from './account/restore/restore.component';
-import { PlayerProfileComponent } from './player-profile/player-profile.component';
-import { PlayerProfileListComponent } from './player-profile-list/player-profile-list.component';
+import { PlayerProfileCreateComponent } from './player/player-profile-create/player-profile.component';
+import { PlayerProfileListComponent } from './player/player-profile-list/player-profile-list.component';
 import { PlayerCommunicationServer } from './services/player.communication.service';
 import { PlayerService } from './services/player.service';
-import { PlayerProfileEditComponent } from './player-profile-edit/player-profile-edit.component';
-import { TeamProfileListComponent } from './team-profile-list/team-profile-list.component';
+import { PlayerProfileEditComponent } from './player/player-profile-edit/player-profile-edit.component';
+import { TeamProfileListComponent } from './team/team-profile-list/team-profile-list.component';
 import { TeamService } from './services/team.service';
 import { TeamCommunicationService } from './services/team.communication.service';
-import { TeamProfileCreateComponent } from './team-profile-create/team-profile-create.component';
-import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.component';
+import { TeamProfileCreateComponent } from './team/team-profile-create/team-profile-create.component';
+import { TeamProfileEditComponent } from './team/team-profile-edit/team-profile-edit.component';
+import { PlayerPageComponent } from './player/player-page/player-page.component';
 
 @NgModule({
   declarations: [
@@ -81,12 +82,13 @@ import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.
     SidebarComponent,
     ConfirmDeleteComponent,
     RestoreComponent,
-    PlayerProfileComponent,
+    PlayerProfileCreateComponent,
     PlayerProfileListComponent,
     PlayerProfileEditComponent,
     TeamProfileListComponent,
     TeamProfileCreateComponent,
-    TeamProfileEditComponent
+    TeamProfileEditComponent,
+    PlayerPageComponent
     ],
   imports: [
     NgbModule,

@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Player } from '../interfaces/player';
-import { PlayerService } from '../services/player.service';
-import { PlayerCommunicationServer } from '../services/player.communication.service';
-import { dropdownListGamesConfig } from '../services/dataconfig';
+import { Player } from '../../interfaces/player';
+import { PlayerService } from '../../services/player.service';
+import { PlayerCommunicationServer } from '../../services/player.communication.service';
+import { dropdownListGamesConfig } from '../../services/dataconfig';
 import { ToastrService } from 'ngx-toastr';
-import { Invitation } from '../interfaces/invitation';
-import { TeamService } from '../services/team.service';
+import { Invitation } from '../../interfaces/invitation';
+import { TeamService } from '../../services/team.service';
 
 @Component({
   selector: 'app-player-profile-list',

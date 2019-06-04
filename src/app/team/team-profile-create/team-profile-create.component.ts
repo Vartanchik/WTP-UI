@@ -1,55 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { Player } from '../interfaces/player';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
-  dropdownListRanksConfig,
-  dropdownSettingsRanksConfig,
   dropdownListGoalsConfig,
   dropdownSettingsGoalsConfig,
   dropdownListServersConfig,
   dropdownSettingsServersConfig,
   dropdownSettingsGamesConfig,
-  dropdownListGamesConfig
-} from '../services/dataconfig';
+  dropdownListGamesConfig,
+  dropdownListLanguagesConfig,
+  dropdownSettingsLanguagesConfig
+} from '../../services/dataconfig';
 import { ToastrService } from 'ngx-toastr';
-import { PlayerCommunicationServer } from '../services/player.communication.service';
+import { TeamService } from '../../services/team.service';
+import { TeamCommunicationService } from '../../services/team.communication.service';
 
 @Component({
-  selector: 'app-player-profile',
-  templateUrl: './player-profile.component.html',
-  styleUrls: ['./player-profile.component.scss']
+  selector: 'app-team-profile-create',
+  templateUrl: './team-profile-create.component.html',
+  styleUrls: ['./team-profile-create.component.scss']
 })
-
-export class PlayerProfileComponent implements OnInit {
+export class TeamProfileCreateComponent implements OnInit {
 
   constructor(
-    private service: PlayerService,
+    private service: TeamService,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private data: PlayerCommunicationServer) { }
+    private data: TeamCommunicationService) { }
 
   private existingGames: string[];
 
-  player: Player = {
-    id: 0,
-    name: '',
-    game: '',
-    server: '',
-    goal: '',
-    about: '',
-    rank: '',
-    decency: 1
-  };
-
-  formModelPlayer = this.fb.group({
+  formModelTeam = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     game: ['', Validators.required],
     server: ['', Validators.required],
-    goal: ['', Validators.required],
-    about: [''],
-    rank: ['', Validators.required],
-    decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
+    goal: ['', Validators.required]
+    // language: ['', Validators.required]
   });
 
   // Multiselect-dropdown - Game
@@ -64,14 +49,14 @@ export class PlayerProfileComponent implements OnInit {
   dropdownListGoal = [];
   dropdownSettingsGoal = {};
 
-  // Multiselect-dropdown - Rank
-  dropdownListRank = [];
-  dropdownSettingsRank = {};
+  // Multiselect-dropdown - Languege
+  // dropdownListLanguage = [];
+  // dropdownSettingsLanguage = {};
 
   ngOnInit() {
     this.initializeDefaultConfig();
     // Set dropdownListGame to show only uncreated game team
-    this.data.getExistingGames.subscribe(p => this.existingGames = p);
+    this.data.getExistingGames.subscribe(t => this.existingGames = t);
     for (let i = 0; i < this.existingGames.length; i++) {
       let index: number = this.dropdownListGame.indexOf(
         this.dropdownListGame.find(g => g.name === this.existingGames[i])
@@ -83,7 +68,7 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.createPlayer(this.formModelPlayer.value).subscribe(
+    this.service.createTeam(this.formModelTeam.value).subscribe(
       res => {
         this.cancel();
         this.toastr.success(res.info, res.message);
@@ -95,8 +80,8 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   cancel() {
-    this.data.changeCreatePlayer(false);
-    this.data.changeListOfPlayers(true);
+    this.data.changeCreateTeam(false);
+    this.data.changeListOfTeams(true);
   }
 
   private initializeDefaultConfig() {
@@ -109,7 +94,8 @@ export class PlayerProfileComponent implements OnInit {
     this.dropdownListGoal = [...dropdownListGoalsConfig];
     this.dropdownSettingsGoal = dropdownSettingsGoalsConfig;
 
-    this.dropdownListRank = [...dropdownListRanksConfig];
-    this.dropdownSettingsRank = dropdownSettingsRanksConfig;
+    // this.dropdownListLanguage = [...dropdownListLanguagesConfig];
+    // this.dropdownSettingsLanguage = dropdownSettingsLanguagesConfig;
   }
+
 }

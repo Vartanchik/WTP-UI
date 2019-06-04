@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Team } from '../interfaces/team';
-import { TeamCommunicationService } from '../services/team.communication.service';
-import { TeamService } from '../services/team.service';
-import { dropdownListGamesConfig } from '../services/dataconfig';
-import { Invitation } from '../interfaces/invitation';
+import { Team } from '../../interfaces/team';
+import { TeamCommunicationService } from '../../services/team.communication.service';
+import { TeamService } from '../../services/team.service';
+import { dropdownListGamesConfig } from '../../services/dataconfig';
+import { Invitation } from '../../interfaces/invitation';
 
 @Component({
   selector: 'app-team-profile-list',

@@ -1,33 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { PlayerCommunicationServer } from '../services/player.communication.service';
-import { ToastrService } from 'ngx-toastr';
+import { PlayerService } from '../../services/player.service';
+import { Player } from '../../interfaces/player';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Player } from '../interfaces/player';
 import {
-  dropdownListServersConfig,
-  dropdownSettingsServersConfig,
+  dropdownListRanksConfig,
+  dropdownSettingsRanksConfig,
   dropdownListGoalsConfig,
   dropdownSettingsGoalsConfig,
-  dropdownListRanksConfig,
-  dropdownSettingsRanksConfig
-} from '../services/dataconfig';
-import { IdItem } from '../interfaces/id-item';
-import { Item } from './item';
+  dropdownListServersConfig,
+  dropdownSettingsServersConfig,
+  dropdownSettingsGamesConfig,
+  dropdownListGamesConfig
+} from '../../services/dataconfig';
+import { ToastrService } from 'ngx-toastr';
+import { PlayerCommunicationServer } from '../../services/player.communication.service';
 
 @Component({
-  selector: 'app-player-profile-edit',
-  templateUrl: './player-profile-edit.component.html',
-  styleUrls: ['./player-profile-edit.component.scss']
+  selector: 'app-player-profile-create',
+  templateUrl: './player-profile-create.component.html',
+  styleUrls: ['./player-profile-create.component.scss']
 })
 
-export class PlayerProfileEditComponent implements OnInit {
+export class PlayerProfileCreateComponent implements OnInit {
 
   constructor(
     private service: PlayerService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private data: PlayerCommunicationServer) { }
+
+  private existingGames: string[];
 
   player: Player = {
     id: 0,
@@ -37,12 +39,12 @@ export class PlayerProfileEditComponent implements OnInit {
     goal: '',
     about: '',
     rank: '',
-    decency: 0
+    decency: 1
   };
 
   formModelPlayer = this.fb.group({
-    id: 0,
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+    game: ['', Validators.required],
     server: ['', Validators.required],
     goal: ['', Validators.required],
     about: [''],
@@ -50,32 +52,38 @@ export class PlayerProfileEditComponent implements OnInit {
     decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
   });
 
+  // Multiselect-dropdown - Game
+  dropdownListGame = [];
+  dropdownSettingsGame = {};
+
   // Multiselect-dropdown - Server
   dropdownListServer = [];
-  selectedServer: IdItem[] = null;
   dropdownSettingsServer = {};
 
   // Multiselect-dropdown - Goal
   dropdownListGoal = [];
-  selectedGoal: IdItem[] = null;
   dropdownSettingsGoal = {};
 
   // Multiselect-dropdown - Rank
   dropdownListRank = [];
-  selectedRank: IdItem[] = null;
   dropdownSettingsRank = {};
 
   ngOnInit() {
-    this.data.currentPlayerToEdit.subscribe(p => this.player = p);
-    if (this.player !== null) {
-      this.setCurrentUserInfo();
-      this.formModelPlayer.get('id').setValue(this.player.id);
-    }
     this.initializeDefaultConfig();
+    // Set dropdownListGame to show only uncreated game team
+    this.data.getExistingGames.subscribe(p => this.existingGames = p);
+    for (let i = 0; i < this.existingGames.length; i++) {
+      let index: number = this.dropdownListGame.indexOf(
+        this.dropdownListGame.find(g => g.name === this.existingGames[i])
+      );
+      if (index !== -1) {
+        this.dropdownListGame.splice(index, 1);
+      }
+    }
   }
 
   onSubmit() {
-    this.service.updatePlayer(this.formModelPlayer.value).subscribe(
+    this.service.createPlayer(this.formModelPlayer.value).subscribe(
       res => {
         this.cancel();
         this.toastr.success(res.info, res.message);
@@ -84,15 +92,17 @@ export class PlayerProfileEditComponent implements OnInit {
         this.toastr.error(err.error.message);
       }
     );
-
   }
 
   cancel() {
-    this.data.changeEditPlayer(false);
+    this.data.changeCreatePlayer(false);
     this.data.changeListOfPlayers(true);
   }
 
   private initializeDefaultConfig() {
+    this.dropdownListGame = [...dropdownListGamesConfig];
+    this.dropdownSettingsGame = dropdownSettingsGamesConfig;
+
     this.dropdownListServer = [...dropdownListServersConfig];
     this.dropdownSettingsServer = dropdownSettingsServersConfig;
 
@@ -102,19 +112,4 @@ export class PlayerProfileEditComponent implements OnInit {
     this.dropdownListRank = [...dropdownListRanksConfig];
     this.dropdownSettingsRank = dropdownSettingsRanksConfig;
   }
-
-  private setCurrentUserInfo() {
-    this.selectedServer = [new Item(
-      dropdownListServersConfig.find(s => s.name === this.player.server).id,
-      this.player.server)];
-
-    this.selectedGoal = [new Item(
-      dropdownListGoalsConfig.find(g => g.name === this.player.goal).id,
-      this.player.goal)];
-
-    this.selectedRank = [new Item(
-      dropdownListRanksConfig.find(r => r.name === this.player.rank).id,
-      this.player.rank)];
-  }
-
 }

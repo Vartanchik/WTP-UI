@@ -1,4 +1,4 @@
-import { PlayerService } from './../services/player.service';
+import { PlayerService } from '../../services/player.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -8,13 +8,13 @@ import {
   dropdownSettingsServersConfig,
   dropdownListLanguagesConfig,
   dropdownSettingsLanguagesConfig
-} from '../services/dataconfig';
+} from '../../services/dataconfig';
 import { ToastrService } from 'ngx-toastr';
-import { TeamService } from '../services/team.service';
-import { TeamCommunicationService } from '../services/team.communication.service';
-import { Team } from '../interfaces/team';
-import { IdItem } from '../interfaces/id-item';
-import { Item } from '../player-profile-edit/item';
+import { TeamService } from '../../services/team.service';
+import { TeamCommunicationService } from '../../services/team.communication.service';
+import { Team } from '../../interfaces/team';
+import { IdItem } from '../../interfaces/id-item';
+import { Item } from '../../player/player-profile-edit/item';
 
 @Component({
   selector: 'app-team-profile-edit',
