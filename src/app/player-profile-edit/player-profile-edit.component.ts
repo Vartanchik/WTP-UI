@@ -5,8 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Player } from '../interfaces/player';
 import {
-  dropdownListGamesConfig,
-  dropdownSettingsGamesConfig,
   dropdownListServersConfig,
   dropdownSettingsServersConfig,
   dropdownListGoalsConfig,
@@ -43,19 +41,14 @@ export class PlayerProfileEditComponent implements OnInit {
   };
 
   formModelPlayer = this.fb.group({
+    id: 0,
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-    game: ['', Validators.required],
     server: ['', Validators.required],
     goal: ['', Validators.required],
     about: [''],
     rank: ['', Validators.required],
     decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
   });
-
-  // Multiselect-dropdown - Game
-  dropdownListGame = [];
-  selectedGame: IdItem[] = null;
-  dropdownSettingsGame = {};
 
   // Multiselect-dropdown - Server
   dropdownListServer = [];
@@ -76,12 +69,13 @@ export class PlayerProfileEditComponent implements OnInit {
     this.data.currentPlayerToEdit.subscribe(p => this.player = p);
     if (this.player !== null) {
       this.setCurrentUserInfo();
+      this.formModelPlayer.get('id').setValue(this.player.id);
     }
     this.initializeDefaultConfig();
   }
 
   onSubmit() {
-    this.service.createOrUpdatePlayer(this.formModelPlayer.value).subscribe(
+    this.service.updatePlayer(this.formModelPlayer.value).subscribe(
       res => {
         this.cancel();
         this.toastr.success(res.info, res.message);
@@ -99,11 +93,6 @@ export class PlayerProfileEditComponent implements OnInit {
   }
 
   private initializeDefaultConfig() {
-    this.dropdownListGame = [new Item(
-      dropdownListGamesConfig.find(g => g.name === this.player.game).id,
-      this.player.game)];
-    this.dropdownSettingsGame = dropdownSettingsGamesConfig;
-
     this.dropdownListServer = [...dropdownListServersConfig];
     this.dropdownSettingsServer = dropdownSettingsServersConfig;
 
@@ -115,10 +104,6 @@ export class PlayerProfileEditComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-    this.selectedGame = [new Item(
-      dropdownListGamesConfig.find(g => g.name === this.player.game).id,
-      this.player.game)];
-
     this.selectedServer = [new Item(
       dropdownListServersConfig.find(s => s.name === this.player.server).id,
       this.player.server)];

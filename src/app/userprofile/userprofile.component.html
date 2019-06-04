@@ -26,7 +26,7 @@
                   </div>
                   <hr>
 
-                  <div class="row justify-content-between">
+                  <div class="row justify-content-center">
                     <div class="col-md-6 form-group required">
                       <label class="labelLeft">Name*</label>
                       <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName" />
@@ -43,12 +43,6 @@
                         *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
                         Maximum 16 characters required.</label>
                     </div>
-
-                    <div class="col-md-6 form-group required">
-                      <label>Date of birth*</label>
-                      <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
-                        [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
-                    </div>
                   </div>
 
                   <div class="row justify-content-between">
@@ -64,14 +58,9 @@
                     </div>
 
                     <div class="col-md-6 form-group required">
-                      <label>Languages*</label>
-                      <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages"
-                        [placeholder]="'Choose language'" [data]="dropdownListLanguages"
-                        [(ngModel)]="selectedItemsLanguages" [settings]="dropdownSettingsLanguages">
-                      </ng-multiselect-dropdown>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
-                        This field is mandatory.</label>
+                      <label>Date of birth*</label>
+                      <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
+                        [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
                     </div>
                   </div>
 
@@ -88,12 +77,18 @@
                         This field is mandatory.</label>
                     </div>
 
-                    <div class="col-md-6 form-group">
-                      <label>Steam Account</label>
-                      <input class="form-control" formControlName="steam" [(ngModel)]="userProfile.steam">
+                    <div class="col-md-6 form-group required">
+                      <label>Languages*</label>
+                      <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages"
+                        [placeholder]="'Choose language'" [data]="dropdownListLanguages"
+                        [(ngModel)]="selectedItemsLanguages" [settings]="dropdownSettingsLanguages">
+                      </ng-multiselect-dropdown>
+                      <label class="text-danger"
+                        *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
+                        This field is mandatory.</label>
                     </div>
                   </div>
-
+                  <br>
                   <div class="form-group center-elements">
                     <button id="create-button" type="submit" class="btn btn-primary" [disabled]="!formModelUser.valid">
                       SAVE CHANGES

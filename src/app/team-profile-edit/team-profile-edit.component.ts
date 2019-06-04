@@ -6,8 +6,6 @@ import {
   dropdownSettingsGoalsConfig,
   dropdownListServersConfig,
   dropdownSettingsServersConfig,
-  dropdownSettingsGamesConfig,
-  dropdownListGamesConfig,
   dropdownListLanguagesConfig,
   dropdownSettingsLanguagesConfig
 } from '../services/dataconfig';
@@ -46,18 +44,13 @@ export class TeamProfileEditComponent implements OnInit {
   };
 
   formModelTeam = this.fb.group({
+    id: 0,
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-    game: ['', Validators.required],
     server: ['', Validators.required],
     goal: ['', Validators.required],
     // language: ['', Validators.required],
     players: []
   });
-
-  // Multiselect-dropdown - Game
-  dropdownListGame = [];
-  selectedGame: IdItem[] = null;
-  dropdownSettingsGame = {};
 
   // Multiselect-dropdown - Server
   dropdownListServer = [];
@@ -78,6 +71,7 @@ export class TeamProfileEditComponent implements OnInit {
     this.data.currentTeamToEdit.subscribe(p => this.team = p);
     if (this.team !== null) {
       this.setCurrentUserInfo();
+      this.formModelTeam.get('id').setValue(this.team.id);
     }
     this.initializeDefaultConfig();
     this.playerService.getPlayersByTeamId(this.team.id).subscribe(
@@ -136,11 +130,6 @@ export class TeamProfileEditComponent implements OnInit {
   }
 
   private initializeDefaultConfig() {
-    this.dropdownListGame = [new Item(
-      dropdownListGamesConfig.find(g => g.name === this.team.game).id,
-      this.team.game)];
-    this.dropdownSettingsGame = dropdownSettingsGamesConfig;
-
     this.dropdownListServer = [...dropdownListServersConfig];
     this.dropdownSettingsServer = dropdownSettingsServersConfig;
 
@@ -152,15 +141,6 @@ export class TeamProfileEditComponent implements OnInit {
   }
 
   private setCurrentUserInfo() {
-
-    this.dropdownListGame = [new Item(
-      dropdownListGamesConfig.find(g => g.name === this.team.game).id,
-      this.team.game)];
-
-    this.selectedGame = [new Item(
-      dropdownListGamesConfig.find(g => g.name === this.team.game).id,
-      this.team.game)];
-
     this.selectedServer = [new Item(
       dropdownListServersConfig.find(s => s.name === this.team.server).id,
       this.team.server)];

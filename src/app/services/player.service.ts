@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { baseURIConfig } from './dataconfig';
 import { Player } from '../interfaces/player';
 import { WtpResponse } from '../interfaces/wtp-response';
+import { Invitation } from '../interfaces/invitation';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PlayerService {
     return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByTeam?teamId=' + teamId);
   }
 
-  createOrUpdatePlayer(body: Player): Observable<WtpResponse> {
+  createPlayer(body: Player): Observable<WtpResponse> {
     const player = {
       name: body.name,
       gameId: Object.keys(body.game[0]).map(key => body.game[0][key])[0],
@@ -35,7 +36,25 @@ export class PlayerService {
     return this.http.post<WtpResponse>(this.BaseURI + '/Player', player);
   }
 
+  updatePlayer(body: Player): Observable<WtpResponse> {
+    const player = {
+      id: body.id,
+      name: body.name,
+      serverId: Object.keys(body.server[0]).map(key => body.server[0][key])[0],
+      goalId: Object.keys(body.goal[0]).map(key => body.goal[0][key])[0],
+      about: body.about,
+      rankId: Object.keys(body.rank[0]).map(key => body.rank[0][key])[0],
+      decency: body.decency,
+    };
+    return this.http.put<WtpResponse>(this.BaseURI + '/Player', player);
+  }
+
   deletePlayer(gameId: number): Observable<WtpResponse> {
     return this.http.delete<WtpResponse>(this.BaseURI + '/Player?playerGameId=' + gameId);
   }
+
+  getInvitationsByUserId(userId: number): Observable<Invitation[]> {
+    return this.http.get<Invitation[]>(this.BaseURI + '/Player/InvitationPlayerListByUserId?userId=' + userId);
+  }
+
 }

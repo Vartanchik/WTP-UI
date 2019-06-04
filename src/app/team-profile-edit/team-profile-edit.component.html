@@ -20,7 +20,7 @@
           </div>
           <hr>
 
-          <div class="row justify-content-between">
+          <div class="row justify-content-center">
             <div class="col-md-6 form-group required">
               <label class="labelLeft">Name*</label>
               <input class="form-control" formControlName="name" [(ngModel)]="team.name" />
@@ -34,16 +34,6 @@
               <label class="text-danger"
                 *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.maxlength">
                 Maximum 16 characters required.</label>
-            </div>
-
-            <div class="col-md-6 form-group required">
-              <label>Game*</label>
-              <ng-multiselect-dropdown formControlName="game" [placeholder]="'Choose game'" [data]="dropdownListGame"
-                [(ngModel)]="selectedGame" [settings]="dropdownSettingsGame">
-              </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('game').touched && formModelTeam.get('game').errors?.required">
-                This field is mandatory.</label>
             </div>
           </div>
 
@@ -81,18 +71,16 @@
           <div class="row justify-content-center">
             <div class="col-md-6 form-group center-elements">
               <label>Players:</label>
-              <div>
-                <p *ngIf="team.players === undefined || team.players.length === 0" id="create-team-notification"
-                  class="text-primary">
-                  There are no players yet!
-                </p>
-              </div>
+              <p *ngIf="team.players === undefined || team.players.length === 0" class="text-primary">
+                There are no players yet!
+              </p>
               <ng-container *ngIf="team.players !== undefined && team.players.length > 0">
                 <table class="table-condensed">
                   <tbody>
                     <tr *ngFor="let item of team.players; index as i">
                       <td>{{ i + 1 }}</td>
-                      <td><img src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/30.User-256.png" id="avatar"></td>
+                      <td><img src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/30.User-256.png" id="avatar">
+                      </td>
                       <td>{{ item.name }}</td>
                       <td>
                         <button class="action-button" (click)="removePlayer(item.id)">
