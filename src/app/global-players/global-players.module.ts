@@ -8,6 +8,11 @@ import { DotaPlayerComponent } from './dota/dota-player/dota-player.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayersFilteringComponent } from './players-filtering/players-filtering.component';
 
+import { Ng5SliderModule } from 'ng5-slider';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,10 @@ import { PlayersFilteringComponent } from './players-filtering/players-filtering
     PlayersFilteringComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    Ng5SliderModule,
+    NgbModule,
+    FormsModule
   ]
 })
 export class GlobalPlayersModule { }

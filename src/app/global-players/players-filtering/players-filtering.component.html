@@ -1,7 +1,40 @@
 <div>
     <h4 style="margin-left: 10px;">Filters: </h4>
-    <div class="nickname-block">
-    <input class="form-control" type="text" placeholder="Nickname">
+    <div class="nickname-filter">
+        <h6 style="margin-left: 10px;">Search by name: </h6>
+        <div class="nickname-block">
+                <input class="form-control" type="text" placeholder="Nickname" [(ngModel)]="filterFields.name">
+        </div>        
+    </div>
+    <div class="decency-filter">
+        <h6 style="margin-left: 10px;">Decency level: </h6>
+        <div class="decency-slider">
+            <ng5-slider [(value)]="filterFields.decencyLeft" [(highValue)]="filterFields.decencyRight" [options]="optionsDecency"></ng5-slider>
+        </div>
+    </div>
+    <div class="rank-filter">
+            <h6 style="margin-left: 10px;">Player`s rank: </h6>
+            <div class="rank-slider">
+                <ng5-slider [(value)]="filterFields.rankLeft" [(highValue)]="filterFields.rankRight" [options]="optionsRank"></ng5-slider>
+            </div>
+    </div>
+    <div class="sort-block">
+        <h6 style="margin-left: 10px;">Sort by: </h6>
+        <select (change)="SortChanged()" class="browser-default custom-select" [(ngModel)]="filterFields.sortingField">
+            <option value="0" selected>Without sorting</option>
+            <option value="rank">Rank</option>
+            <option value="decency">Decency</option>
+        </select>
+        <h6 style="margin-left: 10px;">Sort type: </h6>
+        <select [disabled] ="sortEnabled" class="browser-default custom-select" [(ngModel)]="filterFields.sortingType">
+            <option value="asc">Ascending </option>
+            <option value="desc">Descending </option>
+        </select>    
+    </div>
+    <div class="sort-block">
+        <button type="submit" class="btn btn-primary" (click)="FindPlayers()">
+          Find players
+        </button>
     </div>
 </div>
 
