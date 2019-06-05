@@ -1,16 +1,23 @@
 <div class="row">
-    <div class="col">
-      <div ngbDropdown class="d-inline-block game-dropdown">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-32.png" >{{games[0].name}}</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem (click)="setCurrentGame(games[0])">{{games[0].name}}</button>
-          <button *ngIf="games[1]"
-          (click)="setCurrentGame(games[1])"
-          ngbDropdownItem [disabled]="true">{{games[1].name}}</button>
-          <button *ngIf="games[2]"
-          (click)="setCurrentGame(games[2])"
-          ngbDropdownItem [disabled]="true">{{games[2].name}}</button>
-        </div>
+  <div class="col">
+    <div ngbDropdown class="d-inline-block game-dropdown">
+
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img
+          src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-32.png">
+        {{games[0].name}}
+      </button>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="setCurrentGame(games[0])">
+          {{games[0].name}}
+        </button>
+        <button *ngIf="games[1]" (click)="setCurrentGame(games[1])" ngbDropdownItem [disabled]="true">
+          {{games[1].name}}
+        </button>
+        <button *ngIf="games[2]" (click)="setCurrentGame(games[2])" ngbDropdownItem [disabled]="true">
+          {{games[2].name}}
+        </button>
       </div>
     </div>
   </div>
+</div>

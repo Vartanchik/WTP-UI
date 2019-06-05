@@ -20,6 +20,7 @@ import { DotaComponent } from './global-players/dota/dota.component';
 import { GtaComponent } from './global-players/gta/gta.component';
 import { CsGoComponent } from './global-players/cs-go/cs-go.component';
 import {RestoreComponent} from './account/restore/restore.component';
+import { PlayerPageComponent } from './player/player-page/player-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -50,9 +51,10 @@ const routes: Routes = [
       { path: '**', component: NotFoundComponent }
     ]
 },
-    
+
 
   { path: 'userprofile', component: UserProfileComponent },
+  { path: 'player', component: PlayerPageComponent },
 
   {
     path:'players',

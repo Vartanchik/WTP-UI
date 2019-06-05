@@ -1,3 +1,134 @@
-<p>
-  player-page works!
-</p>
+<div class="container" id="containerProfile">
+  <div class="row first-conteiner">
+
+    <div class="col-12">
+      <div class="card text-center" id="userCard" style="height:52vh">
+        <div class="card-body">
+
+          <div class="row justify-content-between">
+
+            <div class="col-md-3">
+              <div class="row justify-content-center">
+                <div class="image-cropper">
+                  <img src="{{playerPhoto}}" class="profile-pic" />
+                </div>
+              </div>
+              <br>
+              <div class="row justify-content-center">
+                <div>
+                  <p class="field-name">Age:</p>
+                  <p class="field-value">{{age}} y/o</p>
+                </div>
+              </div>
+              <br>
+
+              <ng-container *ngIf="false">
+                <div class="row justify-content-center">
+                  <div>
+                    <p class="field-name">Team:</p>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="image-cropper-team">
+                    <a routerLink=''><img src="{{playerPhoto}}" class="profile-pic" /></a>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div>
+                    <p class="field-value">{{teamName}}</p>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="true">
+                <div class="row justify-content-center">
+                  <div>
+                    <p class="field-name">Team:</p>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="image-cropper-team center-elements">
+                    none
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div>
+                    <p class="field-value">Player is available</p>
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+
+            <div class="col-md-9">
+
+              <div class="row justify-content-between">
+
+                <div class="col-md-6 player-name">
+                  {{player.name}}
+                </div>
+
+                <div class="col-md-3">
+                  <button id="create-button" class="btn btn-primary" (click)="invite()">
+                    Invite
+                  </button>
+                </div>
+
+              </div>
+
+              <hr>
+              <br>
+              <div class="row justify-content-around">
+
+                <div class="col-md-3">
+                  <p class="field-name">Rank:</p>
+                  <p class="field-value">{{player.rank}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Goal:</p>
+                  <p class="field-value">{{player.goal}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Decency:</p>
+                  <p class="field-value">{{player.decency}}</p>
+                </div>
+
+              </div>
+              <br>
+              <div class="row justify-content-around">
+
+                <div class="col-md-3">
+                  <p class="field-name">Server:</p>
+                  <p class="field-value">{{player.server}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Country:</p>
+                  <p class="field-value">{{country}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Languages:</p>
+                  <p class="field-value" *ngFor="let item of languages; index as i">{{item}}</p>
+                </div>
+
+              </div>
+              <br>
+              <div class="row justify-content-center">
+
+                <div class="col-md-9">
+                  <p class="field-name">About:</p>
+                  <p class="player-about-text">{{player.about}}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
