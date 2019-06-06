@@ -54,7 +54,7 @@ const routes: Routes = [
 
 
   { path: 'userprofile', component: UserProfileComponent },
-  { path: 'player', component: PlayerPageComponent },
+  { path: 'player/:id', component: PlayerPageComponent },
 
   {
     path:'players',

@@ -1,5 +1,4 @@
 export interface PlayerForPlayerPage {
-    id: number;
     photo: string;
     age: number;
     name: string;

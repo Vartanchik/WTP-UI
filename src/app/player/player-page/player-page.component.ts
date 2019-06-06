@@ -8,6 +8,8 @@ import { flatMap } from 'rxjs/operators';
 import { InfoService } from 'src/app/services/info.service';
 import { TeamService } from 'src/app/services/team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player-page',
@@ -23,7 +25,9 @@ export class PlayerPageComponent implements OnInit {
     private svc: CommunicationService,
     private serviceInfo: InfoService,
     private service: TeamService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   closeResult: string;
@@ -41,8 +45,9 @@ export class PlayerPageComponent implements OnInit {
 
   playerQty = -1;
 
+  playerId = 0;
+
   player: PlayerForPlayerPage = {
-    id: 0,
     photo: 'https://pbs.twimg.com/profile_images/900338165113815045/aA0Wx0uR_400x400.jpg',
     age: 18,
     name: 'name',
@@ -58,8 +63,13 @@ export class PlayerPageComponent implements OnInit {
     teamLogo: 'http://localhost:5000/api/Team/Logo/12e4ead2-d52f-4d7f-b796-4b524026fc64'
   };
 
-
   ngOnInit() {
+
+    this.route.paramMap.subscribe(
+      params =>
+        this.playerId = +params.get('id')
+    );
+
     // check if user logined
     this.disposable.add(
       this.svc.getLoginValue()
@@ -85,7 +95,6 @@ export class PlayerPageComponent implements OnInit {
 
     // get game id
     this.gameId = this.serviceInfo.getSelectedGame().id;
-
     // get team players quantity
     this.service.getTeamPlayersQuantity(this.gameId).subscribe(
       res => {
@@ -98,7 +107,7 @@ export class PlayerPageComponent implements OnInit {
     if (!this.isLogin || this.isAvailable || this.playerQty === -1 || this.playerQty > 4) {
       this.openVerticallyCentered(content);
     } else {
-      this.service.invitePlayer(this.player.id, this.teamId).subscribe(
+      this.service.invitePlayer(this.playerId, this.teamId).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },
