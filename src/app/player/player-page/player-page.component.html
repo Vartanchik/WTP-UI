@@ -2,7 +2,7 @@
   <div class="row first-conteiner">
 
     <div class="col-12">
-      <div class="card text-center" id="userCard" style="height:52vh">
+      <div class="card text-center" id="userCard">
         <div class="card-body">
 
           <div class="row justify-content-between">
@@ -10,37 +10,19 @@
             <div class="col-md-3">
               <div class="row justify-content-center">
                 <div class="image-cropper">
-                  <img src="{{playerPhoto}}" class="profile-pic" />
+                  <img src="{{player.photo}}" class="profile-pic" />
                 </div>
               </div>
               <br>
               <div class="row justify-content-center">
                 <div>
                   <p class="field-name">Age:</p>
-                  <p class="field-value">{{age}} y/o</p>
+                  <p class="field-value">{{player.age}} y/o</p>
                 </div>
               </div>
               <br>
 
-              <ng-container *ngIf="false">
-                <div class="row justify-content-center">
-                  <div>
-                    <p class="field-name">Team:</p>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="image-cropper-team">
-                    <a routerLink=''><img src="{{playerPhoto}}" class="profile-pic" /></a>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div>
-                    <p class="field-value">{{teamName}}</p>
-                  </div>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="true">
+              <ng-container *ngIf="isAvailable; else elseBlock">
                 <div class="row justify-content-center">
                   <div>
                     <p class="field-name">Team:</p>
@@ -48,7 +30,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <div class="image-cropper-team center-elements">
-                    none
+                    
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -57,6 +39,24 @@
                   </div>
                 </div>
               </ng-container>
+
+              <ng-template #elseBlock>
+                <div class="row justify-content-center">
+                  <div>
+                    <p class="field-name">Team:</p>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="image-cropper-team">
+                    <a routerLink=''><img src="{{player.teamLogo}}" class="profile-pic" /></a>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div>
+                    <a routerLink=''><p class="field-value">{{player.teamName}}</p></a>
+                  </div>
+                </div>
+              </ng-template>
 
             </div>
 
@@ -106,12 +106,12 @@
 
                 <div class="col-md-3">
                   <p class="field-name">Country:</p>
-                  <p class="field-value">{{country}}</p>
+                  <p class="field-value">{{player.country}}</p>
                 </div>
 
                 <div class="col-md-3">
                   <p class="field-name">Languages:</p>
-                  <p class="field-value" *ngFor="let item of languages; index as i">{{item}}</p>
+                  <p class="field-value" *ngFor="let item of player.languages">{{item}}</p>
                 </div>
 
               </div>

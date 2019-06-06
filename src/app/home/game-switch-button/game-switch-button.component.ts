@@ -10,9 +10,9 @@ import { InfoService } from 'src/app/services/info.service';
 
 export class GameSwitchButtonComponent implements OnInit {
 
-  games: IdItem[] = [{ name: 'default', id: -1 }];
+  games: IdItem[] = [{ name: 'Game', id: -1 }];
 
-  selectedGame: IdItem = { name: 'default', id: -1 };
+  selectedGame: IdItem = { name: 'Games', id: -1 };
 
   gameByDefault = 'Dota 2';
 

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/interfaces/player';
+import { PlayerForPlayerPage } from 'src/app/interfaces/player-for-player-page';
+import { Subscription, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/services/account.service';
+import { CommunicationService } from 'src/app/services/communication.service';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player-page',
@@ -8,45 +14,63 @@ import { Player } from 'src/app/interfaces/player';
 })
 export class PlayerPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private toastr: ToastrService,
+    private service: AccountService,
+    private svc: CommunicationService
+  ) { }
 
-  isAvailable: true;
+  disposable: Subscription = new Subscription();
 
-  player: Player = {
+  isAvailable = true;
+
+  isLogin = false;
+
+  player: PlayerForPlayerPage = {
     id: 0,
-    name: 'playerName',
-    game: '',
-    server: 'playerServer',
-    goal: 'playerGoal',
-    about: 'PlayerAbout',
-    rank: 'playerRank',
-    decency: 1
+    photo: 'https://pbs.twimg.com/profile_images/900338165113815045/aA0Wx0uR_400x400.jpg',
+    age: 18,
+    name: 'name',
+    rank: 'rank',
+    goal: 'goal',
+    decency: 1,
+    server: 'server',
+    country: 'country',
+    languages: ['lan1', 'lan2'],
+    about: 'about',
+    teamId: 0,
+    teamName: 'team name',
+    teamLogo: 'http://localhost:5000/api/Team/Logo/12e4ead2-d52f-4d7f-b796-4b524026fc64'
   };
-
-  // id
-  // name
-  // server
-  // goal
-  // rank
-  // decency
-  // about
-  playerPhoto: 'https://pbs.twimg.com/profile_images/900338165113815045/aA0Wx0uR_400x400.jpg';
-  age: 18;
-  languages: ['playerlanguage1', 'playerlanguage2'];
-  country: 'playerCountry';
-  teamId: 1;
-  teamName: 'teamName';
-  teamPhoto: 'http://localhost:5000/api/Team/Logo/12e4ead2-d52f-4d7f-b796-4b524026fc64';
 
 
   ngOnInit() {
-    this.playerPhoto = 'https://pbs.twimg.com/profile_images/900338165113815045/aA0Wx0uR_400x400.jpg';
-    this.age = 18;
-    this.languages = ['playerlanguage1', 'playerlanguage2'];
-    this.country = 'playerCountry';
-    this.teamId = 1;
-    this.teamName = 'teamName';
-    this.teamPhoto = 'http://localhost:5000/api/Team/Logo/12e4ead2-d52f-4d7f-b796-4b524026fc64';
+    this.disposable.add(
+      this.svc.getLoginValue()
+        .pipe(
+          flatMap(val => {
+            if (val) {
+              return this.service.getPhotoAndName();
+            }
+            else {
+              return of({});
+            }
+          })
+        )
+        .subscribe(
+          obj => {
+            if (obj && obj.hasOwnProperty('photo')) {
+              this.isLogin = true;
+            } else {
+              this.isLogin = false;
+            }
+          }
+        )
+    );
+
+  }
+
+  invite() {
 
   }
 
