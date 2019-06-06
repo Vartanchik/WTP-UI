@@ -6,6 +6,7 @@ import { CommunicationService } from '../services/communication.service';
 import { Subscription, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { IconInfo } from '../interfaces/icon-info';
 
 @Component({
   selector: 'app-account',
@@ -41,8 +42,8 @@ export class AccountComponent implements OnInit {
         obj => {
           if (obj && obj.hasOwnProperty('photo')) {
           this.isLogin = true;
-          this.photo = (obj as User).photo;
-          this.userName = (obj as User).userName;
+          this.photo = (obj as IconInfo).photo;
+          this.userName = (obj as IconInfo).userName;
           } else {
             this.isLogin = false;
           }
