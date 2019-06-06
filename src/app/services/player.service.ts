@@ -53,8 +53,8 @@ export class PlayerService {
     return this.http.delete<WtpResponse>(this.BaseURI + '/Player?playerGameId=' + gameId);
   }
 
-  getInvitationsByUserId(userId: number): Observable<Invitation[]> {
-    return this.http.get<Invitation[]>(this.BaseURI + '/Player/InvitationPlayerListByUserId?userId=' + userId);
+  getInvitationsByUserId(): Observable<Invitation[]> {
+    return this.http.get<Invitation[]>(this.BaseURI + '/Player/InvitationPlayerListByUserId');
   }
 
 }

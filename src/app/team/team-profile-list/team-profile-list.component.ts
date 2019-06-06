@@ -51,7 +51,7 @@ export class TeamProfileListComponent implements OnInit {
       }
     );
 
-    this.teamService.getInvitationsByUserId(this.userId).subscribe(
+    this.teamService.getInvitationsByUserId().subscribe(
       res => {
         if (res !== null) {
           this.invitations = res;

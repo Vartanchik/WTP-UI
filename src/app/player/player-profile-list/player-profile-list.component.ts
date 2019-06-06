@@ -46,7 +46,7 @@ export class PlayerProfileListComponent implements OnInit {
       }
     );
 
-    this.playerService.getInvitationsByUserId(this.userId).subscribe(
+    this.playerService.getInvitationsByUserId().subscribe(
       res => {
         if (res !== null) {
           this.invitations = res;

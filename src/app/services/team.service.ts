@@ -18,6 +18,13 @@ export class TeamService {
   getTeams(userId: number): Observable<Team[]> {
     return this.http.get<Team[]>(this.BaseURI + '/Team/ListByUserId?userId=' + userId);
   }
+  getTeamId(gameId: number): Observable<number> {
+    return this.http.get<number>(this.BaseURI + '/Team/GetTeamIdByGameId?gameId=' + gameId);
+  }
+
+  getTeamPlayersQuantity(gameId: number): Observable<number> {
+    return this.http.get<number>(this.BaseURI + '/Team/GetTeamPlayersQuantityByGame?gameId=' + gameId);
+  }
 
   createTeam(body: Team): Observable<WtpResponse> {
     const team = {
@@ -53,8 +60,8 @@ export class TeamService {
     return this.http.put<WtpResponse>(this.BaseURI + '/Team/RemovePlayerFromTeam?playerId=' + playerId + '&teamId=' + teamId, null);
   }
 
-  getInvitationsByUserId(userId: number): Observable<Invitation[]> {
-    return this.http.get<Invitation[]>(this.BaseURI + '/Team/InvitationTeamListByUserId?userId=' + userId);
+  getInvitationsByUserId(): Observable<Invitation[]> {
+    return this.http.get<Invitation[]>(this.BaseURI + '/Team/InvitationTeamListByUserId');
   }
 
   acceptInvitation(invitationId: number): Observable<WtpResponse> {
@@ -63,5 +70,13 @@ export class TeamService {
 
   declineInvitation(invitationId: number): Observable<WtpResponse> {
     return this.http.post<WtpResponse>(this.BaseURI + '/Team/DeclineInvitation?invitationId=' + invitationId, null);
+  }
+
+  invitePlayer(playerId: number, teamId: number): Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/Team/InvitePlayer?playerId=' + playerId + '&teamId=' + teamId, null);
+  }
+
+  inviteTeam(playerId: number, teamId: number): Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/Team/InviteTeam?playerId=' + playerId + '&teamId=' + teamId, null);
   }
 }

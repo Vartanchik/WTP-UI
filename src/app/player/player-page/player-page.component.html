@@ -30,7 +30,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <div class="image-cropper-team center-elements">
-                    
+
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -53,7 +53,9 @@
                 </div>
                 <div class="row justify-content-center">
                   <div>
-                    <a routerLink=''><p class="field-value">{{player.teamName}}</p></a>
+                    <a routerLink=''>
+                      <p class="field-value">{{player.teamName}}</p>
+                    </a>
                   </div>
                 </div>
               </ng-template>
@@ -69,7 +71,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <button id="create-button" class="btn btn-primary" (click)="invite()">
+                  <button id="create-button" class="btn btn-primary" (click)="invite(content)">
                     Invite
                   </button>
                 </div>
@@ -132,3 +134,27 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Invite the player needs:</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div *ngIf="!isAvailable" class="modal-body">
+    <p>- Player must be available;</p>
+  </div>
+  <div *ngIf="!isLogin" class="modal-body">
+    <p>- You must be logged in;</p>
+  </div>
+  <div *ngIf="this.playerQty === -1" class="modal-body">
+    <p>- You must create team whith relevant game;</p>
+  </div>
+  <div *ngIf="this.playerQty > 4" class="modal-body">
+    <p>- You must have free slots in Your team;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
