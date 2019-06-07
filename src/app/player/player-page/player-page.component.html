@@ -48,7 +48,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <div class="image-cropper-team">
-                    <a routerLink=''><img src="{{player.teamLogo}}" class="profile-pic" /></a>
+                    <a routerLink=''><img src="{{player.teamPhoto}}" class="profile-pic" /></a>
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -142,11 +142,11 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div *ngIf="!isAvailable" class="modal-body">
-    <p>- Player must be available;</p>
-  </div>
   <div *ngIf="!isLogin" class="modal-body">
     <p>- You must be logged in;</p>
+  </div>
+  <div *ngIf="!isAvailable" class="modal-body">
+    <p>- Player must be without team;</p>
   </div>
   <div *ngIf="this.playerQty === -1" class="modal-body">
     <p>- You must create team whith relevant game;</p>

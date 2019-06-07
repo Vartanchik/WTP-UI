@@ -8,8 +8,8 @@ import { flatMap } from 'rxjs/operators';
 import { InfoService } from 'src/app/services/info.service';
 import { TeamService } from 'src/app/services/team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-player-page',
@@ -24,9 +24,9 @@ export class PlayerPageComponent implements OnInit {
     private serviceAccount: AccountService,
     private svc: CommunicationService,
     private serviceInfo: InfoService,
-    private service: TeamService,
+    private serviceTeam: TeamService,
+    private service: PlayerService,
     private modalService: NgbModal,
-    private router: Router,
     private route: ActivatedRoute,
   ) { }
 
@@ -43,24 +43,25 @@ export class PlayerPageComponent implements OnInit {
   // team which whant to invite this player
   teamId = 0;
 
-  playerQty = -1;
+  playerQty = 0;
 
   playerId = 0;
 
   player: PlayerForPlayerPage = {
-    photo: 'https://pbs.twimg.com/profile_images/900338165113815045/aA0Wx0uR_400x400.jpg',
-    age: 18,
-    name: 'name',
-    rank: 'rank',
-    goal: 'goal',
+    id: 0,
+    photo: '',
+    age: 0,
+    name: '',
+    rank: '',
+    goal: '',
     decency: 1,
-    server: 'server',
-    country: 'country',
-    languages: ['lan1', 'lan2'],
-    about: 'about',
+    server: '',
+    country: '',
+    languages: [],
+    about: '',
     teamId: 0,
-    teamName: 'team name',
-    teamLogo: 'http://localhost:5000/api/Team/Logo/12e4ead2-d52f-4d7f-b796-4b524026fc64'
+    teamName: '',
+    teamPhoto: ''
   };
 
   ngOnInit() {
@@ -95,19 +96,40 @@ export class PlayerPageComponent implements OnInit {
 
     // get game id
     this.gameId = this.serviceInfo.getSelectedGame().id;
-    // get team players quantity
-    this.service.getTeamPlayersQuantity(this.gameId).subscribe(
+
+    // get player
+    this.service.getPlayersById(this.playerId).subscribe(
       res => {
-        this.playerQty = res;
+        this.player = res;
+        if (this.player.teamId === 0) {
+          this.isAvailable = true;
+        } else { this.isAvailable = false; }
       }
     );
+
+    if (this.isLogin) {
+      // get team players quantity
+      this.serviceTeam.getTeamPlayersQuantity(this.gameId).subscribe(
+        res => {
+          this.playerQty = res;
+        }
+      );
+
+      // get team id which whant to invite this player
+      this.serviceTeam.getTeamId(this.gameId).subscribe(
+        res => {
+          this.teamId = res;
+        }
+      );
+    }
+
   }
 
   invite(content) {
-    if (!this.isLogin || this.isAvailable || this.playerQty === -1 || this.playerQty > 4) {
+    if (!this.isLogin || !this.isAvailable || this.playerQty === -1 || this.playerQty > 4) {
       this.openVerticallyCentered(content);
     } else {
-      this.service.invitePlayer(this.playerId, this.teamId).subscribe(
+      this.serviceTeam.invitePlayer(this.playerId, this.teamId).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },

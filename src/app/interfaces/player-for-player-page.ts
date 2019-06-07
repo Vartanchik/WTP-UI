@@ -1,4 +1,5 @@
 export interface PlayerForPlayerPage {
+    id: number;
     photo: string;
     age: number;
     name: string;
@@ -11,5 +12,5 @@ export interface PlayerForPlayerPage {
     about: string;
     teamId: number;
     teamName: string;
-    teamLogo: string;
+    teamPhoto: string;
 }

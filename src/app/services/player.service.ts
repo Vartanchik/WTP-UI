@@ -5,6 +5,7 @@ import { baseURIConfig } from './dataconfig';
 import { Player } from '../interfaces/player';
 import { WtpResponse } from '../interfaces/wtp-response';
 import { Invitation } from '../interfaces/invitation';
+import { PlayerForPlayerPage } from '../interfaces/player-for-player-page';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class PlayerService {
   readonly BaseURI = baseURIConfig;
 
   constructor(private http: HttpClient) { }
+
+  getPlayersById(playerId: number): Observable<PlayerForPlayerPage> {
+    return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player?playerId=' + playerId);
+  }
 
   getPlayersByUserId(userId: number): Observable<Player[]> {
     return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByUser?userId=' + userId);
