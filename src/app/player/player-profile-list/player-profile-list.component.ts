@@ -94,7 +94,7 @@ export class PlayerProfileListComponent implements OnInit {
   }
 
   accept(invitationId: number) {
-    this.teamService.acceptInvitation(invitationId).subscribe(
+    this.teamService.acceptInvitation(invitationId, true).subscribe(
       res => {
         let index: number = this.invitations.indexOf(
           this.invitations.find(i => i.id === invitationId)
@@ -107,7 +107,7 @@ export class PlayerProfileListComponent implements OnInit {
   }
 
   decline(invitationId: number) {
-    this.teamService.declineInvitation(invitationId).subscribe(
+    this.teamService.acceptInvitation(invitationId, false).subscribe(
       res => {
         let index: number = this.invitations.indexOf(
           this.invitations.find(i => i.id === invitationId)

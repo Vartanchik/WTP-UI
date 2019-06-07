@@ -98,7 +98,7 @@ export class PlayerPageComponent implements OnInit {
     this.gameId = this.serviceInfo.getSelectedGame().id;
 
     // get player
-    this.service.getPlayersById(this.playerId).subscribe(
+    this.service.getPlayerById(this.playerId).subscribe(
       res => {
         this.player = res;
         if (this.player.teamId === 0) {
@@ -126,15 +126,15 @@ export class PlayerPageComponent implements OnInit {
   }
 
   invite(content) {
-    if (!this.isLogin || !this.isAvailable || this.playerQty === -1 || this.playerQty > 4) {
+    if (!this.isLogin || this.playerQty === -1 || this.playerQty > 4) {
       this.openVerticallyCentered(content);
     } else {
-      this.serviceTeam.invitePlayer(this.playerId, this.teamId).subscribe(
+      this.serviceTeam.invite(this.playerId, this.teamId).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error('Invite already exist.', 'Failed!');
         }
       );
     }

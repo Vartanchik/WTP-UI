@@ -64,19 +64,15 @@ export class TeamService {
     return this.http.get<Invitation[]>(this.BaseURI + '/Team/InvitationTeamListByUserId');
   }
 
-  acceptInvitation(invitationId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/AcceptInvitation?invitationId=' + invitationId, null);
+  acceptInvitation(invitation: number, isAccepted: boolean): Observable<WtpResponse> {
+    const response = {
+      invitationId: invitation,
+      accept: isAccepted
+    }
+    return this.http.put<WtpResponse>(this.BaseURI + '/Team/AcceptInvitation', response);
   }
 
-  declineInvitation(invitationId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/DeclineInvitation?invitationId=' + invitationId, null);
-  }
-
-  invitePlayer(playerId: number, teamId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/InvitePlayer?playerId=' + playerId + '&teamId=' + teamId, null);
-  }
-
-  inviteTeam(playerId: number, teamId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/InviteTeam?playerId=' + playerId + '&teamId=' + teamId, null);
+  invite(playerId: number, teamId: number): Observable<WtpResponse> {
+    return this.http.post<WtpResponse>(this.BaseURI + '/Team/Invite?playerId=' + playerId + '&teamId=' + teamId, null);
   }
 }

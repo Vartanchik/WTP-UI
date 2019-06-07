@@ -16,7 +16,7 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
-  getPlayersById(playerId: number): Observable<PlayerForPlayerPage> {
+  getPlayerById(playerId: number): Observable<PlayerForPlayerPage> {
     return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player?playerId=' + playerId);
   }
 
