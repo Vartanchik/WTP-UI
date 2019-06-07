@@ -28,6 +28,7 @@ export class PlayerProfileListComponent implements OnInit {
 
   private players: Player[] = [{
     id: 0,
+    photo: '',
     name: 'Default',
     game: 'Default',
     server: '',

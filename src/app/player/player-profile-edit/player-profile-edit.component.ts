@@ -31,6 +31,7 @@ export class PlayerProfileEditComponent implements OnInit {
 
   player: Player = {
     id: 0,
+    photo: '',
     name: '',
     game: '',
     server: '',

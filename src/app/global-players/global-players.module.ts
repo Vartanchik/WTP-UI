@@ -7,6 +7,7 @@ import { GtaComponent } from './gta/gta.component';
 import { DotaPlayerComponent } from './dota/dota-player/dota-player.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayersFilteringComponent } from './players-filtering/players-filtering.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PlayersFilteringComponent } from './players-filtering/players-filtering
     PlayersFilteringComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule,
   ]
 })
 export class GlobalPlayersModule { }

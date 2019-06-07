@@ -6,7 +6,7 @@
           <h4>{{ player.name }}</h4>
         </div>
         <div class="card-buttons">
-          <button class="btn btn-primary">Invite to game</button>
+          <button [routerLink]="['/player', player.id]" class="btn btn-primary">Invite to game</button>
           <button class="btn btn-primary">Start chat</button>
         </div>
     </div>
