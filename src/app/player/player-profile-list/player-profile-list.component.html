@@ -65,7 +65,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of invitations; index as i">
+              <tr *ngFor="let item of inviteList; index as i">
                 <ng-container *ngIf="item.id !== 0">
                   <td class="first-column" scope="row">{{ i + 1 }}</td>
                   <td>{{ item.playerName }}</td>
@@ -100,8 +100,8 @@
               </tr>
             </tbody>
           </table>
-          <p *ngIf="invitations === undefined || invitations.length === 0" class="text-primary center-elements">
-            You don't have any invitations yet!
+          <p *ngIf="inviteList === undefined || inviteList.length === 0" class="text-primary center-elements">
+            You don't have any inviteList yet!
           </p>
         </ng-container>
       </div>

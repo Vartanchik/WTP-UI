@@ -24,7 +24,7 @@ export class PlayerProfileListComponent implements OnInit {
 
   public numberOfGames: number;
 
-  public invitations: Invitation[];
+  public inviteList: Invitation[] = [];
 
   private players: Player[] = [{
     id: 0,
@@ -35,7 +35,8 @@ export class PlayerProfileListComponent implements OnInit {
     goal: '',
     about: '',
     rank: '',
-    decency: 0
+    decency: 0,
+    invitations: []
   }];
 
   ngOnInit() {
@@ -44,14 +45,12 @@ export class PlayerProfileListComponent implements OnInit {
     this.playerService.getPlayersByUserId(this.userId).subscribe(
       res => {
         this.players = res;
-      }
-    );
 
-    this.playerService.getInvitationsByUserId().subscribe(
-      res => {
-        if (res !== null) {
-          this.invitations = res;
-        }
+        this.players.forEach(player => {
+          player.invitations.forEach(invitation => {
+            this.inviteList.push(invitation);
+          });
+        });
       }
     );
   }
@@ -96,11 +95,11 @@ export class PlayerProfileListComponent implements OnInit {
   accept(invitationId: number) {
     this.teamService.acceptInvitation(invitationId, true).subscribe(
       res => {
-        let index: number = this.invitations.indexOf(
-          this.invitations.find(i => i.id === invitationId)
+        let index: number = this.inviteList.indexOf(
+          this.inviteList.find(i => i.id === invitationId)
         );
         if (index !== -1) {
-          this.invitations.splice(index, 1);
+          this.inviteList.splice(index, 1);
         }
       }
     );
@@ -109,11 +108,11 @@ export class PlayerProfileListComponent implements OnInit {
   decline(invitationId: number) {
     this.teamService.acceptInvitation(invitationId, false).subscribe(
       res => {
-        let index: number = this.invitations.indexOf(
-          this.invitations.find(i => i.id === invitationId)
+        let index: number = this.inviteList.indexOf(
+          this.inviteList.find(i => i.id === invitationId)
         );
         if (index !== -1) {
-          this.invitations.splice(index, 1);
+          this.inviteList.splice(index, 1);
         }
       }
     );

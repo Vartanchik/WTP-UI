@@ -40,7 +40,8 @@ export class PlayerProfileCreateComponent implements OnInit {
     goal: '',
     about: '',
     rank: '',
-    decency: 1
+    decency: 1,
+    invitations: []
   };
 
   formModelPlayer = this.fb.group({

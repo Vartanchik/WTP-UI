@@ -10,6 +10,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/services/player.service';
+import { TeamSize } from 'src/app/interfaces/team-size';
 
 @Component({
   selector: 'app-player-page',
@@ -30,7 +31,7 @@ export class PlayerPageComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  closeResult: string;
+  // closeResult: string;
 
   disposable: Subscription = new Subscription();
 
@@ -41,11 +42,10 @@ export class PlayerPageComponent implements OnInit {
   gameId = 0;
 
   // team which whant to invite this player
-  teamId = 0;
-
-  playerQty = 0;
-
-  playerId = 0;
+  teamSize: TeamSize = {
+    teamId: 0,
+    playerQuantity: 0
+  };
 
   player: PlayerForPlayerPage = {
     id: 0,
@@ -68,7 +68,7 @@ export class PlayerPageComponent implements OnInit {
 
     this.route.paramMap.subscribe(
       params =>
-        this.playerId = +params.get('id')
+        this.player.id = +params.get('id')
     );
 
     // check if user logined
@@ -98,7 +98,7 @@ export class PlayerPageComponent implements OnInit {
     this.gameId = this.serviceInfo.getSelectedGame().id;
 
     // get player
-    this.service.getPlayerById(this.playerId).subscribe(
+    this.service.getPlayerById(this.player.id).subscribe(
       res => {
         this.player = res;
         if (this.player.teamId === 0) {
@@ -108,17 +108,10 @@ export class PlayerPageComponent implements OnInit {
     );
 
     if (this.isLogin) {
-      // get team players quantity
-      this.serviceTeam.getTeamPlayersQuantity(this.gameId).subscribe(
+      // get potential team size
+      this.serviceTeam.getTeamSize(this.gameId).subscribe(
         res => {
-          this.playerQty = res;
-        }
-      );
-
-      // get team id which whant to invite this player
-      this.serviceTeam.getTeamId(this.gameId).subscribe(
-        res => {
-          this.teamId = res;
+          this.teamSize = res;
         }
       );
     }
@@ -126,15 +119,15 @@ export class PlayerPageComponent implements OnInit {
   }
 
   invite(content) {
-    if (!this.isLogin || this.playerQty === -1 || this.playerQty > 4) {
+    if (!this.isLogin || this.teamSize.teamId === 0 || this.teamSize.playerQuantity > 4) {
       this.openVerticallyCentered(content);
     } else {
-      this.serviceTeam.invite(this.playerId, this.teamId).subscribe(
+      this.serviceTeam.invite(this.player.id, this.teamSize.teamId).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error('Invite already exist.', 'Failed!');
+          this.toastr.error('You already send invitation.', 'Failed!');
         }
       );
     }
