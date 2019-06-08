@@ -11,13 +11,14 @@ export class TeamCommunicationService {
         id: 0,
         name: '',
         photo: '',
-        coach: 0,
+        appUser: 0,
         game: '',
         server: '',
         goal: '',
         language: '',
         players: [],
-        winRate: 0
+        winRate: 0,
+        invitations: []
     };
 
     private userId = new BehaviorSubject<number>(0);

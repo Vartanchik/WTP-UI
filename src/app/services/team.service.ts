@@ -58,10 +58,6 @@ export class TeamService {
     return this.http.delete<WtpResponse>(this.BaseURI + '/Team/RemovePlayerFromTeam?playerId=' + playerId + '&teamId=' + teamId);
   }
 
-  getInvitationsByUserId(): Observable<Invitation[]> {
-    return this.http.get<Invitation[]>(this.BaseURI + '/Team/InvitationTeamListByUserId');
-  }
-
   acceptInvitation(invitation: number, isAccepted: boolean): Observable<WtpResponse> {
     const response = {
       invitationId: invitation,
