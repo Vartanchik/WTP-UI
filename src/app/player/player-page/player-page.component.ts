@@ -104,6 +104,9 @@ export class PlayerPageComponent implements OnInit {
         if (this.player.teamId === 0) {
           this.isAvailable = true;
         } else { this.isAvailable = false; }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
 
@@ -112,6 +115,9 @@ export class PlayerPageComponent implements OnInit {
       this.serviceTeam.getTeamSize(this.gameId).subscribe(
         res => {
           this.teamSize = res;
+        },
+        err => {
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }
@@ -127,7 +133,7 @@ export class PlayerPageComponent implements OnInit {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error('You already send invitation.', 'Failed!');
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }

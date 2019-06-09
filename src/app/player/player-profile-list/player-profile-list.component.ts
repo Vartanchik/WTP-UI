@@ -26,18 +26,7 @@ export class PlayerProfileListComponent implements OnInit {
 
   public inviteList: Invitation[] = [];
 
-  private players: Player[] = [{
-    id: 0,
-    photo: '',
-    name: 'Default',
-    game: 'Default',
-    server: '',
-    goal: '',
-    about: '',
-    rank: '',
-    decency: 0,
-    invitations: []
-  }];
+  private players: Player[] = [];
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;
@@ -51,6 +40,9 @@ export class PlayerProfileListComponent implements OnInit {
             this.inviteList.push(invitation);
           });
         });
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -86,7 +78,7 @@ export class PlayerProfileListComponent implements OnInit {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }
@@ -101,6 +93,9 @@ export class PlayerProfileListComponent implements OnInit {
         if (index !== -1) {
           this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -114,6 +109,9 @@ export class PlayerProfileListComponent implements OnInit {
         if (index !== -1) {
           this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

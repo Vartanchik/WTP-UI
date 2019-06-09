@@ -74,7 +74,7 @@ export class TeamProfileCreateComponent implements OnInit {
         this.toastr.success(res.info, res.message);
       },
       err => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

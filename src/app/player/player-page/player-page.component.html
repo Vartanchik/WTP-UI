@@ -17,7 +17,7 @@
               <div class="row justify-content-center">
                 <div>
                   <p class="field-name">Age:</p>
-                  <p class="field-value">{{player.age}} y/o</p>
+                  <p *ngIf="player.age > 0" class="field-value">{{player.age}} y/o</p>
                 </div>
               </div>
               <br>
@@ -78,7 +78,6 @@
 
               </div>
 
-              <hr>
               <br>
               <div class="row justify-content-around">
 
@@ -98,6 +97,7 @@
                 </div>
 
               </div>
+
               <br>
               <div class="row justify-content-around">
 
@@ -117,7 +117,8 @@
                 </div>
 
               </div>
-              <br>
+
+              <hr>
               <div class="row justify-content-center">
 
                 <div class="col-md-9">
@@ -143,13 +144,13 @@
     </button>
   </div>
   <div *ngIf="!isLogin" class="modal-body">
-    <p>- You must be logged in;</p>
+    <p>- be logged in;</p>
   </div>
-  <div *ngIf="teamSize.teamId === 0" class="modal-body">
-    <p>- You must create team whith relevant game;</p>
+  <div *ngIf="teamSize.teamId === 0 && isLogin" class="modal-body">
+    <p>- create team whith relevant game;</p>
   </div>
   <div *ngIf="teamSize.playerQuantity > 4" class="modal-body">
-    <p>- You must have free slots in Your team;</p>
+    <p>- free slots in Your team;</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

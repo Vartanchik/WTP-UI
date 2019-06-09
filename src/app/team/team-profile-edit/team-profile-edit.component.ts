@@ -78,6 +78,9 @@ export class TeamProfileEditComponent implements OnInit {
     this.playerService.getPlayersByTeamId(this.team.id).subscribe(
       res => {
         this.team.players = res;
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -89,7 +92,7 @@ export class TeamProfileEditComponent implements OnInit {
         this.toastr.success('Player updated.', res.message);
       },
       err => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -102,7 +105,7 @@ export class TeamProfileEditComponent implements OnInit {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }
@@ -119,7 +122,7 @@ export class TeamProfileEditComponent implements OnInit {
           localStorage.setItem('teamLogo', res.info);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }

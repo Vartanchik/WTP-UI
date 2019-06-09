@@ -24,19 +24,7 @@ export class TeamProfileListComponent implements OnInit {
 
   public inviteList: Invitation[] = [];
 
-  private teams: Team[] = [{
-    id: 0,
-    name: '',
-    photo: '',
-    appUser: 0,
-    game: '',
-    server: '',
-    goal: '',
-    language: '',
-    players: [],
-    winRate: 0,
-    invitations: []
-  }];
+  private teams: Team[] = [];
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;
@@ -50,6 +38,9 @@ export class TeamProfileListComponent implements OnInit {
             this.inviteList.push(invitation);
           });
         });
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -84,7 +75,7 @@ export class TeamProfileListComponent implements OnInit {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }
@@ -99,6 +90,9 @@ export class TeamProfileListComponent implements OnInit {
         if (index !== -1) {
           this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -112,6 +106,9 @@ export class TeamProfileListComponent implements OnInit {
         if (index !== -1) {
           this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
