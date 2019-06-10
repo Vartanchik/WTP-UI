@@ -13,7 +13,7 @@ import { UpdateModel } from '../interfaces/updateModel';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  public baseUrl ="https://localhost:44390/";
+  public baseUrl ="http://localhost:5000/";
   private getAllUsersUrl: string =this.baseUrl+"api/Admin/users";
   private createUserUrl: string =this.baseUrl+"api/Admin/users/profiles";
   private createAdminUrl: string =this.baseUrl+"api/Admin/profiles";

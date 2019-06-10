@@ -191,7 +191,7 @@ export class UserProfileComponent implements OnInit {
     this.selectedItemCountry = [(this.userProfile.country)];
 
     if (this.userProfile.dateOfBirth != null) {
-      this.model = this.userProfile.dateOfBirth.substr(0, 10);
+      this.model = this.userProfile.dateOfBirth.substr(0, 8);
     }
 
     this.selectedItemsLanguages = this.userProfile.languages;
