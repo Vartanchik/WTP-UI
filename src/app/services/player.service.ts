@@ -17,15 +17,15 @@ export class PlayerService {
   constructor(private http: HttpClient) { }
 
   getPlayerById(playerId: number): Observable<PlayerForPlayerPage> {
-    return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player?playerId=' + playerId);
+    return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player/' + playerId);
   }
 
   getPlayersByUserId(userId: number): Observable<Player[]> {
-    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByUser?userId=' + userId);
+    return this.http.get<Player[]>(this.BaseURI + '/Player/UserPlayers/' + userId);
   }
 
   getPlayersByTeamId(teamId: number): Observable<Player[]> {
-    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByTeam?teamId=' + teamId);
+    return this.http.get<Player[]>(this.BaseURI + '/Player/TeamPlayers/' + teamId);
   }
 
   createPlayer(body: Player): Observable<WtpResponse> {

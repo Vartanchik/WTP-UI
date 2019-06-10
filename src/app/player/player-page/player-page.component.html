@@ -77,7 +77,7 @@
                 </div>
 
               </div>
-
+              <hr>
               <br>
               <div class="row justify-content-around">
 
@@ -145,12 +145,6 @@
   </div>
   <div *ngIf="!isLogin" class="modal-body">
     <p>- be logged in;</p>
-  </div>
-  <div *ngIf="teamSize.teamId === 0 && isLogin" class="modal-body">
-    <p>- create team whith relevant game;</p>
-  </div>
-  <div *ngIf="teamSize.playerQuantity > 4" class="modal-body">
-    <p>- free slots in Your team;</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

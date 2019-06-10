@@ -74,8 +74,6 @@ div#userCard.card.text-center {
   height: 150px;
   padding: 10px 20px;
   overflow-y: auto;
-  //text-indent: 50px;
-
 }
 
 #containerProfile {
@@ -143,4 +141,8 @@ div#userCard.card.text-center {
 .modal-body{
     margin: 0;
     padding: 0 0 0 10px;
+}
+
+hr {
+  margin-top: 5px;
 }

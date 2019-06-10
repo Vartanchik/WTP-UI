@@ -5,7 +5,6 @@ import { baseURIConfig, dropdownListGamesConfig } from './dataconfig';
 import { WtpResponse } from '../interfaces/wtp-response';
 import { Team } from '../interfaces/team';
 import { Invitation } from '../interfaces/invitation';
-import { TeamSize } from '../interfaces/team-size';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +16,7 @@ export class TeamService {
   constructor(private http: HttpClient) { }
 
   getTeams(userId: number): Observable<Team[]> {
-    return this.http.get<Team[]>(this.BaseURI + '/Team/ListByUserId?userId=' + userId);
-  }
-
-  getTeamSize(gameId: number): Observable<TeamSize> {
-    return this.http.get<TeamSize>(this.BaseURI + '/Team/GetTeamSizeByGame?gameId=' + gameId);
+    return this.http.get<Team[]>(this.BaseURI + '/Team/UserTeams/' + userId);
   }
 
   createTeam(body: Team): Observable<WtpResponse> {

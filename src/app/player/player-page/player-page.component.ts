@@ -10,7 +10,6 @@ import { TeamService } from 'src/app/services/team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/services/player.service';
-import { TeamSize } from 'src/app/interfaces/team-size';
 
 @Component({
   selector: 'app-player-page',
@@ -39,13 +38,11 @@ export class PlayerPageComponent implements OnInit {
 
   isLogin = false;
 
-  gameId = 0;
+  game = '';
 
-  // team which whant to invite this player
-  teamSize: TeamSize = {
-    teamId: 0,
-    playerQuantity: 0
-  };
+  // fields of user who want to send invite
+  teamId = 0;
+  userId = 0;
 
   player: PlayerForPlayerPage = {
     id: 0,
@@ -87,15 +84,21 @@ export class PlayerPageComponent implements OnInit {
           obj => {
             if (obj && obj.hasOwnProperty('photo')) {
               this.isLogin = true;
+              // get game id
+              this.game = this.serviceInfo.getSelectedGame().name;
+              // get team id
+              this.svc.currentUserId.subscribe(id => this.userId = id);
+              this.serviceTeam.getTeams(this.userId).subscribe(
+                res => {
+                  this.teamId = res.find(t => t.game === this.game).id;
+                }
+              );
             } else {
               this.isLogin = false;
             }
           }
         )
     );
-
-    // get game id
-    this.gameId = this.serviceInfo.getSelectedGame().id;
 
     // get player
     this.service.getPlayerById(this.player.id).subscribe(
@@ -110,25 +113,13 @@ export class PlayerPageComponent implements OnInit {
       }
     );
 
-    if (this.isLogin) {
-      // get potential team size
-      this.serviceTeam.getTeamSize(this.gameId).subscribe(
-        res => {
-          this.teamSize = res;
-        },
-        err => {
-          this.toastr.error(err.error.info, err.error.message);
-        }
-      );
-    }
-
   }
 
   invite(content) {
-    if (!this.isLogin || this.teamSize.teamId === 0 || this.teamSize.playerQuantity > 4) {
+    if (!this.isLogin) {
       this.openVerticallyCentered(content);
     } else {
-      this.serviceTeam.invite(this.player.id, this.teamSize.teamId).subscribe(
+      this.serviceTeam.invite(this.player.id, 1).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },
