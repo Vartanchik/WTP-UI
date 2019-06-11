@@ -55,7 +55,7 @@ export class PlayerService {
   }
 
   deletePlayer(gameId: number): Observable<WtpResponse> {
-    return this.http.delete<WtpResponse>(this.BaseURI + '/Player?playerGameId=' + gameId);
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Player/' + gameId);
   }
 
 }

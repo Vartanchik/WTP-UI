@@ -42,26 +42,30 @@ export class TeamService {
   }
 
   deleteTeam(teamId: number): Observable<WtpResponse> {
-    return this.http.delete<WtpResponse>(this.BaseURI + '/Team?teamId=' + teamId);
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Team/' + teamId);
   }
 
   sendPhoto(form: FormData, teamId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/UpdateLogo?teamId=' + teamId, form);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Team/UpdateLogo/' + teamId, form);
   }
 
   removePlayerFromTeam(playerId: number, teamId: number): Observable<WtpResponse> {
     return this.http.delete<WtpResponse>(this.BaseURI + '/Team/RemovePlayerFromTeam?playerId=' + playerId + '&teamId=' + teamId);
   }
 
-  acceptInvitation(invitation: number, isAccepted: boolean): Observable<WtpResponse> {
-    const response = {
-      invitationId: invitation,
-      accept: isAccepted
+  acceptInvitation(invitationId: number, accept: boolean): Observable<WtpResponse> {
+    const body = {
+      invitationId,
+      accept
     }
-    return this.http.put<WtpResponse>(this.BaseURI + '/Team/AcceptInvitation', response);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Invitation/InvitationResponse', body);
   }
 
   invite(playerId: number, teamId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/Invite?playerId=' + playerId + '&teamId=' + teamId, null);
+    const body = {
+      playerId,
+      teamId
+    }
+    return this.http.post<WtpResponse>(this.BaseURI + '/Invitation', body);
   }
 }
