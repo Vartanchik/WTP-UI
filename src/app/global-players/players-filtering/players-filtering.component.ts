@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { dropdownListRanksConfig } from 'src/app/services/dataconfig';
 import { PlayerFiltersModel } from '../models/PlayerFilters';
+import { GlobalPlayersService } from '../global-players.service';
+import { DotaComponent } from '../dota/dota.component';
 
 @Component({
   selector: 'app-players-filtering',
@@ -14,7 +16,7 @@ export class PlayersFilteringComponent implements OnInit {
   filterFields: PlayerFiltersModel = {
     name: '',
     rankLeft: 0,
-    rankRight: 7,
+    rankRight: 100,
     decencyLeft: 0,
     decencyRight: 10000,
     sortingField: '',
@@ -31,25 +33,25 @@ export class PlayersFilteringComponent implements OnInit {
 
   optionsRank: Options = {
     floor: 0,
-    ceil: 7,
-    step: 1,
+    ceil: 70,
+    step: 10,
     translate: (value: number): string => {
       switch(value){
         case 0:
           return dropdownListRanksConfig[0].name
-        case 1:
+        case 10:
           return dropdownListRanksConfig[1].name
-        case 2:
+        case 20:
           return dropdownListRanksConfig[2].name
-        case 3:
+        case 30:
           return dropdownListRanksConfig[3].name
-        case 4:
+        case 40:
           return dropdownListRanksConfig[4].name
-        case 5:
+        case 50:
           return dropdownListRanksConfig[5].name
-        case 6:
+        case 60:
           return dropdownListRanksConfig[6].name
-        case 7:
+        case 70:
           return dropdownListRanksConfig[7].name
         default:
           return 'None'
@@ -58,14 +60,16 @@ export class PlayersFilteringComponent implements OnInit {
     }
   };
 
-  constructor() { }
-
-  FindPlayers(){
-  }
+  constructor(private svc: GlobalPlayersService, private dota: DotaComponent) { }
 
   SortChanged(){
     if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
     this.sortEnabled = false;
+  }
+
+  updateSortFields(){
+    this.svc.pushUpdatedValues(this.filterFields);
+    this.dota.loadList();
   }
 
   ngOnInit() {  }

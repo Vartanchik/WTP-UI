@@ -21,7 +21,7 @@ export class DotaComponent implements OnInit {
   paginationArray: undefined[] = [];
 
   constructor(
-    private globalPlayersService: GlobalPlayersService
+    private globalPlayersService: GlobalPlayersService,
   ) { }
 
   ngOnInit() {
@@ -50,6 +50,10 @@ export class DotaComponent implements OnInit {
         window.scroll(0,0);
       }
     )
+  }
+
+  loadList(): void {
+    this.loadPlayersList(this.pageView.pageNumber);
   }
 
 }
