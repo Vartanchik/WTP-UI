@@ -55,6 +55,7 @@ import { TeamCommunicationService } from './services/team.communication.service'
 import { TeamProfileCreateComponent } from './team/team-profile-create/team-profile-create.component';
 import { TeamProfileEditComponent } from './team/team-profile-edit/team-profile-edit.component';
 import { PlayerPageComponent } from './player/player-page/player-page.component';
+import { TeamPageComponent } from './team/team-page/team-page.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { PlayerPageComponent } from './player/player-page/player-page.component'
     TeamProfileListComponent,
     TeamProfileCreateComponent,
     TeamProfileEditComponent,
-    PlayerPageComponent
+    PlayerPageComponent,
+    TeamPageComponent
     ],
   imports: [
     NgbModule,

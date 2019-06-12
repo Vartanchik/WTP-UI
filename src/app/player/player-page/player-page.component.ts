@@ -87,7 +87,7 @@ export class PlayerPageComponent implements OnInit {
               // get game id
               this.game = this.serviceInfo.getSelectedGame().name;
               // get team id
-              this.svc.currentUserId.subscribe(id => this.userId = id);
+              this.userId = +localStorage.getItem('id');
               this.serviceTeam.getTeams(this.userId).subscribe(
                 res => {
                   this.teamId = res.find(t => t.game === this.game).id;
@@ -119,7 +119,7 @@ export class PlayerPageComponent implements OnInit {
     if (!this.isLogin) {
       this.openVerticallyCentered(content);
     } else {
-      this.serviceTeam.invite(this.player.id, 1).subscribe(
+      this.serviceTeam.invite(this.player.id, this.teamId).subscribe(
         res => {
           this.toastr.success(res.info, res.message);
         },

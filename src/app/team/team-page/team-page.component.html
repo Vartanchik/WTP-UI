@@ -1,3 +1,157 @@
-<p>
-  team-page works!
-</p>
+<div class="container" id="containerProfile">
+  <div class="row first-conteiner">
+
+    <div class="col-12">
+      <div class="card text-center" id="userCard">
+        <div class="card-body">
+          <div class="row justify-content-between">
+
+            <div class="col-md-3">
+              <div class="row justify-content-center">
+                <div class="image-cropper">
+                  <img src="{{team.photo}}" class="profile-pic" />
+                </div>
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-9">
+
+              <div class="row justify-content-between">
+
+                <div class="col-md-6 team-name">
+                  {{team.name}}
+                </div>
+
+                <div class="col-md-3">
+                  <button id="create-button" class="btn btn-primary" (click)="makeOffer(content)">
+                    Make offer
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <br>
+              <div class="row justify-content-around">
+
+                <div class="col-md-3">
+                  <p class="field-name">Server:</p>
+                  <p class="field-value">{{team.server}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Goal:</p>
+                  <p class="field-value">{{team.goal}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Win rate:</p>
+                  <p class="field-value">{{team.winRate}}</p>
+                </div>
+
+              </div>
+              <br>
+              <div class="row justify-content-around">
+
+                <div class="col-md-3">
+                  <p class="field-name">Players:</p>
+                  <p class="field-value">{{team.players.length}} of {{maxTeamSize}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Players age:</p>
+                  <p class="field-value">{{minAge}} - {{maxAge}}</p>
+                </div>
+
+                <div class="col-md-3">
+                  <p class="field-name">Players decency:</p>
+                  <p class="field-value">{{minDecency}} - {{maxDecency}}</p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card-header">
+          Team Players
+        </div>
+        <div class="card-body">
+          <div class="row justify-content-between">
+
+            <div class="col-md-12">
+              <div *ngFor="let item of team.players" class="row justify-content-around">
+
+                <div class="col-md-3">
+                  <div class="row justify-content-center">
+                    <div class="image-cropper-team">
+                      <a [routerLink]="['/player', item.id]"><img src="{{item.photo}}" class="profile-pic" /></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-9">
+
+                  <div class="row justify-content-center">
+                    <div class="col-md-9">
+                      <a [routerLink]="['/player', item.id]">
+                        <p class="player-name">{{item.name}}</p>
+                      </a>
+                    </div>
+                  </div>
+                  <hr>
+                  <br>
+
+                  <div class="row justify-content-around">
+                    <div class="col-md-3">
+                      <p class="field-name">Age:</p>
+                      <p class="field-value">{{item.age}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="field-name">Rank:</p>
+                      <p class="field-value">{{item.rank}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="field-name">Decency:</p>
+                      <p class="field-value">{{item.decency}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <hr class="player-separate">
+                  <br>
+                </div>
+              </div>
+
+              <div *ngIf="team.players.length == 0" class="row justify-content-center">
+                <p class="text-primary">
+                  There are no players yet!
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Make an offer needs:</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div *ngIf="!isLogin" class="modal-body">
+    <p>- be logged in;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

@@ -1,3 +1,4 @@
+import { TeamPageComponent } from './team/team-page/team-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
 
   { path: 'userprofile', component: UserProfileComponent },
   { path: 'player/:id', component: PlayerPageComponent },
+  { path: 'team/:id', component: TeamPageComponent },
 
   {
     path:'players',

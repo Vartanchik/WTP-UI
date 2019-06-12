@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       mergeMap( res => {
         this.service.setAuthInfo(res);
         const id = this.decode(res);
+        localStorage.setItem('id', id);
         this.svc.setUserId(id);
         return this.service.getIconInfo(id);
       })
