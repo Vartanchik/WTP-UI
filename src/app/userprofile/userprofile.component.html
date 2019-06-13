@@ -125,7 +125,7 @@
     <ngb-tab title="Player Profile">
       <ng-template ngbTabContent>
         <app-player-profile-list *ngIf="listOfPlayers"></app-player-profile-list>
-        <app-player-profile *ngIf="createPlayer"></app-player-profile>
+        <app-player-profile-create *ngIf="createPlayer"></app-player-profile-create>
         <app-player-profile-edit *ngIf="editPlayer"></app-player-profile-edit>
       </ng-template>
     </ngb-tab>

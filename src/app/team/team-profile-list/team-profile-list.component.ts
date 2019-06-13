@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Team } from '../interfaces/team';
-import { TeamCommunicationService } from '../services/team.communication.service';
-import { TeamService } from '../services/team.service';
-import { dropdownListGamesConfig } from '../services/dataconfig';
-import { Invitation } from '../interfaces/invitation';
+import { Team } from '../../interfaces/team';
+import { TeamCommunicationService } from '../../services/team.communication.service';
+import { TeamService } from '../../services/team.service';
+import { dropdownListGamesConfig } from '../../services/dataconfig';
+import { Invitation } from '../../interfaces/invitation';
 
 @Component({
   selector: 'app-team-profile-list',
@@ -22,25 +22,9 @@ export class TeamProfileListComponent implements OnInit {
 
   public numberOfGames: number;
 
-  public invitations: Invitation[] = [{
-    id: 0,
-    playerName: '',
-    teamName: '',
-    author: ''
-  }];
+  public inviteList: Invitation[] = [];
 
-  private teams: Team[] = [{
-    id: 0,
-    name: '',
-    photo: '',
-    coach: 0,
-    game: '',
-    server: '',
-    goal: '',
-    language: '',
-    players: [],
-    winRate: 0
-  }];
+  private teams: Team[] = [];
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;
@@ -48,14 +32,15 @@ export class TeamProfileListComponent implements OnInit {
     this.teamService.getTeams(this.userId).subscribe(
       res => {
         this.teams = res;
-      }
-    );
 
-    this.teamService.getInvitationsByUserId(this.userId).subscribe(
-      res => {
-        if (res !== null) {
-          this.invitations = res;
-        }
+        this.teams.forEach(team => {
+          team.invitations.forEach(invitation => {
+            this.inviteList.push(invitation);
+          });
+        });
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
@@ -90,34 +75,40 @@ export class TeamProfileListComponent implements OnInit {
           this.toastr.success(res.info, res.message);
         },
         err => {
-          this.toastr.error(err.error.message);
+          this.toastr.error(err.error.info, err.error.message);
         }
       );
     }
   }
 
   accept(invitationId: number) {
-    this.teamService.acceptInvitation(invitationId).subscribe(
+    this.teamService.acceptInvitation(invitationId, true).subscribe(
       res => {
-        let index: number = this.invitations.indexOf(
-          this.invitations.find(i => i.id === invitationId)
+        let index: number = this.inviteList.indexOf(
+          this.inviteList.find(i => i.id === invitationId)
         );
         if (index !== -1) {
-          this.invitations.splice(index, 1);
+          this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
 
   decline(invitationId: number) {
-    this.teamService.declineInvitation(invitationId).subscribe(
+    this.teamService.acceptInvitation(invitationId, false).subscribe(
       res => {
-        let index: number = this.invitations.indexOf(
-          this.invitations.find(i => i.id === invitationId)
+        let index: number = this.inviteList.indexOf(
+          this.inviteList.find(i => i.id === invitationId)
         );
         if (index !== -1) {
-          this.invitations.splice(index, 1);
+          this.inviteList.splice(index, 1);
         }
+      },
+      err => {
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

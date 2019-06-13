@@ -135,5 +135,5 @@ export class AccountService {
   getIconInfo(userId: string): Observable<IconInfo> {
     return this.http.get<IconInfo>(`${this.BaseURI}/Info/UserIcon/${userId}`);
   }
-  
+
 }

@@ -5,6 +5,7 @@ import { baseURIConfig, dropdownListGamesConfig } from './dataconfig';
 import { WtpResponse } from '../interfaces/wtp-response';
 import { Team } from '../interfaces/team';
 import { Invitation } from '../interfaces/invitation';
+import { TeamForTeamPage } from '../interfaces/team-for-team-page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,12 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
+  getTeamById(teamId: number): Observable<TeamForTeamPage> {
+    return this.http.get<TeamForTeamPage>(this.BaseURI + '/Team/' + teamId);
+  }
+
   getTeams(userId: number): Observable<Team[]> {
-    return this.http.get<Team[]>(this.BaseURI + '/Team/ListByUserId?userId=' + userId);
+    return this.http.get<Team[]>(this.BaseURI + '/Team/UserTeams/' + userId);
   }
 
   createTeam(body: Team): Observable<WtpResponse> {
@@ -42,26 +47,30 @@ export class TeamService {
   }
 
   deleteTeam(teamId: number): Observable<WtpResponse> {
-    return this.http.delete<WtpResponse>(this.BaseURI + '/Team?teamId=' + teamId);
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Team/' + teamId);
   }
 
   sendPhoto(form: FormData, teamId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/UpdateLogo?teamId=' + teamId, form);
+    return this.http.post<WtpResponse>(this.BaseURI + '/Team/UpdateLogo/' + teamId, form);
   }
 
   removePlayerFromTeam(playerId: number, teamId: number): Observable<WtpResponse> {
-    return this.http.put<WtpResponse>(this.BaseURI + '/Team/RemovePlayerFromTeam?playerId=' + playerId + '&teamId=' + teamId, null);
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Team/RemovePlayerFromTeam?playerId=' + playerId + '&teamId=' + teamId);
   }
 
-  getInvitationsByUserId(userId: number): Observable<Invitation[]> {
-    return this.http.get<Invitation[]>(this.BaseURI + '/Team/InvitationTeamListByUserId?userId=' + userId);
+  acceptInvitation(invitationId: number, accept: boolean): Observable<WtpResponse> {
+    const body = {
+      invitationId,
+      accept
+    }
+    return this.http.post<WtpResponse>(this.BaseURI + '/Invitation/InvitationResponse', body);
   }
 
-  acceptInvitation(invitationId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/AcceptInvitation?invitationId=' + invitationId, null);
-  }
-
-  declineInvitation(invitationId: number): Observable<WtpResponse> {
-    return this.http.post<WtpResponse>(this.BaseURI + '/Team/DeclineInvitation?invitationId=' + invitationId, null);
+  invite(playerId: number, teamId: number): Observable<WtpResponse> {
+    const body = {
+      playerId,
+      teamId
+    }
+    return this.http.post<WtpResponse>(this.BaseURI + '/Invitation', body);
   }
 }

@@ -1,4 +1,4 @@
-import { IdItem } from '../interfaces/id-item';
+import { IdItem } from '../../interfaces/id-item';
 
 
 export class Item implements IdItem {
