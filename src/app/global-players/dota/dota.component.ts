@@ -21,7 +21,7 @@ export class DotaComponent implements OnInit {
   paginationArray: undefined[] = [];
 
   constructor(
-    private globalPlayersService: GlobalPlayersService,
+    private globalPlayersService: GlobalPlayersService
   ) { }
 
   ngOnInit() {

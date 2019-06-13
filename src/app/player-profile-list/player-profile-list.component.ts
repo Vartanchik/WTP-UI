@@ -4,6 +4,8 @@ import { PlayerService } from '../services/player.service';
 import { PlayerCommunicationServer } from '../services/player.communication.service';
 import { dropdownListGamesConfig } from '../services/dataconfig';
 import { ToastrService } from 'ngx-toastr';
+import { Invitation } from '../interfaces/invitation';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-player-profile-list',
@@ -14,10 +16,15 @@ export class PlayerProfileListComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
+    private teamService: TeamService,
     private data: PlayerCommunicationServer,
     private toastr: ToastrService) { }
 
   public userId: number;
+
+  public numberOfGames: number;
+
+  public invitations: Invitation[];
 
   private players: Player[] = [{
     id: 0,
@@ -31,15 +38,30 @@ export class PlayerProfileListComponent implements OnInit {
   }];
 
   ngOnInit() {
+    this.numberOfGames = dropdownListGamesConfig.length;
     this.data.currentUserId.subscribe(id => this.userId = id);
-    this.playerService.getPlayersOfUser(this.userId).subscribe(
+    this.playerService.getPlayersByUserId(this.userId).subscribe(
       res => {
         this.players = res;
+      }
+    );
+
+    this.playerService.getInvitationsByUserId(this.userId).subscribe(
+      res => {
+        if (res !== null) {
+          this.invitations = res;
+        }
       }
     );
   }
 
   createPlayer() {
+    // Set dropdownListGame to show only uncreated game team
+    const existingGames: string[] = [];
+    for (let i = 0; i < this.players.length; i++) {
+      existingGames.push(this.players[i].game);
+    }
+    this.data.setExistingGames(existingGames);
     this.data.changeListOfPlayers(false);
     this.data.changeCreatePlayer(true);
   }
@@ -68,6 +90,32 @@ export class PlayerProfileListComponent implements OnInit {
         }
       );
     }
+  }
+
+  accept(invitationId: number) {
+    this.teamService.acceptInvitation(invitationId).subscribe(
+      res => {
+        let index: number = this.invitations.indexOf(
+          this.invitations.find(i => i.id === invitationId)
+        );
+        if (index !== -1) {
+          this.invitations.splice(index, 1);
+        }
+      }
+    );
+  }
+
+  decline(invitationId: number) {
+    this.teamService.declineInvitation(invitationId).subscribe(
+      res => {
+        let index: number = this.invitations.indexOf(
+          this.invitations.find(i => i.id === invitationId)
+        );
+        if (index !== -1) {
+          this.invitations.splice(index, 1);
+        }
+      }
+    );
   }
 
 }

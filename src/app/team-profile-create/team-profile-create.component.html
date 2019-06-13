@@ -1,0 +1,88 @@
+<div class="row first-conteiner">
+
+  <div class="col-12">
+    <div class="card text-center" id="userCard">
+      <div class="card-header">
+        Teams Info
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="formModelTeam" autocomplete="off" (submit)="onSubmit()">
+
+          <div class="row justify-content-between">
+            <div class="col-md-6 form-group required">
+              <label class="labelLeft">Name*</label>
+              <input class="form-control" formControlName="name" />
+              <small id="teamNameHelp" class="form-text text-muted">Teamrname must be 4-16 characters long.</small>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.required">
+                This field is mandatory.</label>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.minlength">
+                Minimum 4 characters required.</label>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.maxlength">
+                Maximum 16 characters required.</label>
+            </div>
+
+            <div class="col-md-6 form-group required">
+              <label>Game*</label>
+              <ng-multiselect-dropdown formControlName="game" [placeholder]="'Choose game'" [data]="dropdownListGame"
+                [settings]="dropdownSettingsGame">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('game').touched && formModelTeam.get('game').errors?.required">
+                This field is mandatory.</label>
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col-md-6 form-group required">
+              <label>Server*</label>
+              <ng-multiselect-dropdown formControlName="server" [placeholder]="'Choose server'"
+                [data]="dropdownListServer" [settings]="dropdownSettingsServer">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('server').touched && formModelTeam.get('server').errors?.required">
+                This field is mandatory.</label>
+            </div>
+
+            <div class="col-md-6 form-group required">
+              <label>Goal*</label>
+              <ng-multiselect-dropdown formControlName="goal" [placeholder]="'Choose goal'" [data]="dropdownListGoal"
+                [settings]="dropdownSettingsGoal">
+              </ng-multiselect-dropdown>
+              <label class="text-danger"
+                *ngIf="formModelTeam.get('goal').touched && formModelTeam.get('goal').errors?.required">
+                This field is mandatory.</label>
+            </div>
+          </div>
+
+          <!-- <div class="form-group required">
+            <label>Language*</label>
+            <ng-multiselect-dropdown formControlName="language" [placeholder]="'Choose language'"
+              [data]="dropdownListLanguage" [settings]="dropdownSettingsLanguage">
+            </ng-multiselect-dropdown>
+            <label class="text-danger"
+              *ngIf="formModelTeam.get('language').touched && formModelTeam.get('language').errors?.required">
+              This field is mandatory.</label>
+          </div> -->
+
+          <div class="form-group center-elements">
+            <button id="create-button" type="submit" class="btn btn-primary" [disabled]="!formModelTeam.valid">
+              CREATE TEAM
+            </button>
+          </div>
+        </form>
+
+        <hr>
+        <div class="center-elements">
+          <button id="create-button" class="btn btn-info" (click)="cancel()">
+            CANCEL
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

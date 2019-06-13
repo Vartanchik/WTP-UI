@@ -67,11 +67,10 @@ export class PlayersFilteringComponent implements OnInit {
     this.sortEnabled = false;
   }
 
-  updateSortFields(){
+  updateSortFieldsDota(){
     this.svc.pushUpdatedValues(this.filterFields);
     this.dota.loadList();
   }
-
   ngOnInit() {  }
 
 }

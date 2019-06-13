@@ -27,6 +27,7 @@
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
     "jquery": "^3.4.0",
+    "jwt-decode": "^2.2.0",
     "mydatepicker": "^2.6.6",
     "ng-multiselect-dropdown": "^0.2.3",
     "ng2-charts": "^2.2.2",
@@ -37,6 +38,7 @@
     "rxjs": "^6.3.3",
     "tar": "^4.4.8",
     "tslib": "^1.9.0",
+    "typescript-task-queue": "^1.0.4",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
