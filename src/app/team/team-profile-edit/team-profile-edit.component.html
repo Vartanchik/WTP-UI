@@ -79,7 +79,7 @@
                   <tbody>
                     <tr *ngFor="let item of team.players; index as i">
                       <td>{{ i + 1 }}</td>
-                      <td><img src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/30.User-256.png" id="avatar">
+                      <td><img src="{{item.photo}}" id="avatar">
                       </td>
                       <td>{{ item.name }}</td>
                       <td>

@@ -3,11 +3,10 @@
   <div class="player-info">
     <div class="card-header">
         <div class="name">
-            <h4> {{ player.name }}</h4>
+          <h4>{{ player.name }}</h4>
         </div>
         <div class="card-buttons">
-          <button class="btn btn-primary">Invite to game</button>
-          <button class="btn btn-primary">Start chat</button>
+          <button [routerLink]="['/player', player.id]" class="btn btn-primary">Make offer</button>
         </div>
     </div>
     <div class="player-details">
@@ -19,13 +18,9 @@
         <h5>Server:</h5>
          {{ player.server }}
       </div>
-    </div>
-    <div class="player-about">
-      <h5 class="player-about__title">About</h5>
-      <div class="player-about-text">
-          <p class="player-about__text">
-              {{ player.about }}
-            </p>
+      <div class="player-decency">
+        <h5>Decency:</h5>
+         {{ player.decency }}
       </div>
     </div>
   </div>

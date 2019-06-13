@@ -1,45 +1,43 @@
 <div class="row first-conteiner">
-
   <div class="col-12">
-    <div class="card text-center" id="userCard" style="height:100vh">
+    <div class="card text-center" id="userCard">
       <div class="card-header">
-        Players Info
+        Teams Info
       </div>
       <div class="card-body">
         <div class="center-elements">
-          <p *ngIf="players.length === numberOfGames" class="text-primary">You can create only one player by one game!
-          </p>
-          <button id="create-button" type="submit" class="btn btn-primary" (click)="createPlayer()"
-            [disabled]="players.length >= numberOfGames">
-            CREATE PLAYER
+          <p *ngIf="teams.length === numberOfGames" class="text-primary">You can create only one team by one game!</p>
+          <button id="create-button" type="submit" class="btn btn-primary" (click)="createTeam()"
+            [disabled]="teams.length >= numberOfGames">
+            CREATE TEAM
           </button>
         </div>
         <br>
-        <h3>Players</h3>
+        <h3>Teams</h3>
         <table>
           <thead>
             <tr>
               <th class="first-column" scope="col">#</th>
-              <th scope="col">Player</th>
+              <th scope="col">Team</th>
               <th scope="col">Game</th>
-              <th scope="col">Rank</th>
+              <th scope="col">Win Rate</th>
               <th class="double-column" scope="col" colspan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of players; index as i">
+            <tr *ngFor="let item of teams; index as i">
               <ng-container *ngIf="item.id !== 0">
                 <td class="first-column" scope="row">{{ i + 1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.game }}</td>
-                <td>{{ item.rank }}</td>
+                <td>{{ item.winRate }}</td>
                 <td>
-                  <button class="action-button" (click)="editPlayer(item)">
+                  <button class="action-button" (click)="editTeam(item)">
                     Edit
                   </button>
                 </td>
                 <td>
-                  <button class="action-button" (click)="deletePlayer(item.game)">
+                  <button class="action-button" (click)="deleteTeam(item.id)">
                     Delete
                   </button>
                 </td>
@@ -47,31 +45,31 @@
             </tr>
           </tbody>
         </table>
-        <p *ngIf="players === undefined || players.length === 0" class="text-primary center-elements">
-          You don't have any players yet!
+        <p *ngIf="teams === undefined || teams.length === 0" class="text-primary center-elements">
+          You don't have any teams yet!
         </p>
         <br>
         <br>
-        <ng-container *ngIf="players.length >= 1">
+        <ng-container *ngIf="teams.length >= 1">
           <h3>Invitations</h3>
           <table>
             <thead>
               <tr>
                 <th class="first-column" scope="col">#</th>
-                <th scope="col">Player</th>
                 <th scope="col">Team</th>
+                <th scope="col">Player</th>
                 <th scope="col">Sender</th>
                 <th class="double-column" scope="col" colspan="2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of invitations; index as i">
+              <tr *ngFor="let item of inviteList; index as i">
                 <ng-container *ngIf="item.id !== 0">
                   <td class="first-column" scope="row">{{ i + 1 }}</td>
-                  <td>{{ item.playerName }}</td>
                   <td>{{ item.teamName }}</td>
-                  <ng-container *ngIf="item.author === 'Coach'">
-                    <td>{{ item.teamName }}</td>
+                  <td>{{ item.playerName }}</td>
+                  <ng-container *ngIf="item.author === 'Player'">
+                    <td>{{ item.playerName }}</td>
                     <td>
                       <button class="action-button" (click)="accept(item.id)">
                         Accept
@@ -83,11 +81,11 @@
                       </button>
                     </td>
                   </ng-container>
-                  <ng-container *ngIf="item.author === 'Player'">
-                    <td>{{ item.playerName }}</td>
+                  <ng-container *ngIf="item.author === 'Coach'">
+                    <td>{{ item.teamName }}</td>
                     <td>
                       <button class="disabled-button" color='black' disabled>
-                        Sended
+                        Sent
                       </button>
                     </td>
                     <td>
@@ -100,10 +98,11 @@
               </tr>
             </tbody>
           </table>
-          <p *ngIf="invitations === undefined || invitations.length === 0" class="text-primary center-elements">
+          <p *ngIf="inviteList === undefined || inviteList.length === 0" class="text-primary center-elements">
             You don't have any invitations yet!
           </p>
         </ng-container>
+
       </div>
     </div>
   </div>

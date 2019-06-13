@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IdItem } from 'src/app/interfaces/id-item';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -10,7 +10,11 @@ import { InfoService } from 'src/app/services/info.service';
 
 export class GameSwitchButtonComponent implements OnInit {
 
-  games: IdItem[] = [{name: 'Games', id: -1}];
+  games: IdItem[] = [{ name: 'Game', id: -1 }];
+
+  selectedGame: IdItem = { name: 'Games', id: -1 };
+
+  gameByDefault = 'Dota 2';
 
   constructor(private service: InfoService) { }
 
@@ -18,12 +22,21 @@ export class GameSwitchButtonComponent implements OnInit {
     this.service.getAllGames().subscribe(
       (res: IdItem[]) => {
         this.games = res;
-        this.service.setSelectedGame(res[0]);
+
+        const index: number = this.games.indexOf(
+          this.games.find(g => g.name === this.gameByDefault)
+        );
+        if (index !== -1) {
+          this.selectedGame = this.games[index];
+        }
+
+        this.service.setSelectedGame(this.selectedGame);
       }
     );
   }
 
   setCurrentGame(game: IdItem): void {
+    this.selectedGame = game;
     this.service.setSelectedGame(game);
   }
 }

@@ -11,8 +11,8 @@
 .player-aside {
     background-image: url(../../../../assets/dota-card.png);
     width: 131px;
-    height: 325px;
-    background-size: 131px 325px;
+    height: 170px;
+    background-size: 131px 170px;
 }
 
 .card-header {
@@ -52,18 +52,4 @@
 
 .player-server {
     width: 50%;
-}
-.player-about{
-    margin: 10px;
-    height: 90px;
-    width: 445px;
-}
-.player-about-text{
-    border-radius: 5px;
-    background-color: #f2f6f9;
-    height: 100%;
-    overflow-y: auto;
-}
-.player-about__text{
-    margin: 10px;
 }
