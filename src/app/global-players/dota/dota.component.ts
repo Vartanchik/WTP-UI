@@ -52,4 +52,8 @@ export class DotaComponent implements OnInit {
     )
   }
 
+  loadList(): void {
+    this.loadPlayersList(this.pageView.pageNumber);
+  }
+
 }

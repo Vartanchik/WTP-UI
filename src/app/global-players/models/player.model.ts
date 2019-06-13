@@ -6,4 +6,5 @@ export interface Player {
     server: string;
     goal: string;
     about: string;
+    decency: number;
 }
