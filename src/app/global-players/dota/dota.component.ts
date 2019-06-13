@@ -9,6 +9,7 @@ import { PlayersPagination } from '../models/players-pagination.model';
   templateUrl: './dota.component.html',
   styleUrls: ['./dota.component.scss']
 })
+
 export class DotaComponent implements OnInit {
 
   players: Player[];

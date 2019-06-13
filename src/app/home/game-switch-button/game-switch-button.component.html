@@ -6,10 +6,10 @@
           <button ngbDropdownItem (click)="setCurrentGame(games[0])">{{games[0].name}}</button>
           <button *ngIf="games[1]"
           (click)="setCurrentGame(games[1])"
-          ngbDropdownItem [disabled]="true">{{games[1].name}}</button>
+          ngbDropdownItem>{{games[1].name}}</button>
           <button *ngIf="games[2]"
           (click)="setCurrentGame(games[2])"
-          ngbDropdownItem [disabled]="true">{{games[2].name}}</button>
+          ngbDropdownItem>{{games[2].name}}</button>
         </div>
       </div>
     </div>

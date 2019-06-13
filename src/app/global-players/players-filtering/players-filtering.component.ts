@@ -5,6 +5,8 @@ import { PlayerFiltersModel } from '../models/PlayerFilters';
 import { GlobalPlayersService } from '../global-players.service';
 import { DotaComponent } from '../dota/dota.component';
 
+
+
 @Component({
   selector: 'app-players-filtering',
   templateUrl: './players-filtering.component.html',
@@ -67,7 +69,7 @@ export class PlayersFilteringComponent implements OnInit {
     this.sortEnabled = false;
   }
 
-  updateSortFieldsDota(){
+  updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
     this.dota.loadList();
   }
