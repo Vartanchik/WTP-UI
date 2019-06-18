@@ -31,6 +31,14 @@
             <option value="desc">Descending </option>
         </select>    
     </div>
+    <h6 style="margin-left: 10px;">Players on page: </h6>
+    <div class="pageSize">
+        <div class="btn-group" role="group">
+          <button (click)="filterFields.playersOnPage = 5" type="button" class="btn btn-outline-primary">5</button>
+          <button (click)="filterFields.playersOnPage = 10" type="button" class="btn btn-outline-primary">10</button>
+          <button (click)="filterFields.playersOnPage = 15" type="button" class="btn btn-outline-primary">15</button>
+        </div>
+    </div>    
     <div class="sort-block">
         <button type="submit" class="btn btn-primary" (click)="updateSortFields()">
           Find players

@@ -26,6 +26,7 @@ export class GtaComponent implements OnInit {
 
   ngOnInit() {
     this.loadPlayersList(1);
+    this.globalPlayersService.pushCurrentGame(3);
   }
 
   switchPage(pageId: number): void {

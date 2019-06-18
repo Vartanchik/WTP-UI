@@ -26,6 +26,7 @@ export class CsGoComponent implements OnInit {
 
   ngOnInit() {
     this.loadPlayersList(1);
+    this.globalPlayersService.pushCurrentGame(2);
   }
 
   switchPage(pageId: number): void {

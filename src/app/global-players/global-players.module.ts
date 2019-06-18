@@ -28,6 +28,7 @@ import { GtaPlayerComponent } from './gta/gta-player/gta-player.component';
     Ng5SliderModule,
     NgbModule,
     FormsModule,
+    HttpClientModule
   ]
 })
 export class GlobalPlayersModule { }

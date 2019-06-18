@@ -27,6 +27,7 @@ export class DotaComponent implements OnInit {
 
   ngOnInit() {
     this.loadPlayersList(1);
+    this.globalPlayersService.pushCurrentGame(1);
   }
 
   switchPage(pageId: number): void {
