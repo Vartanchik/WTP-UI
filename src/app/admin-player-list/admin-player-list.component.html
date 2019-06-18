@@ -1,0 +1,15 @@
+<ejs-grid #grid [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar' [allowPaging]='true' (actionComplete)='actionComplete($event)'
+[pageSettings]='initialPage' (toolbarClick)='toolbarClick($event)'
+[allowSorting]='true' [allowFiltering]='true' [filterSettings]='filterOption'>
+    <e-columns>
+        <e-column field='id' headerText='Player ID' isPrimaryKey='true' [validationRules]='playerIdRules' width=120></e-column>
+        <e-column field='name' headerText='Player Name' width=150 [validationRules]='playerNameRules'></e-column>
+        <e-column field='appUserName' headerText='User Name' editType='dropdownedit' [edit]='userParams' width=150 [validationRules]='gameNameRules'></e-column>
+        <e-column field='gameName' headerText='Game' editType= 'dropdownedit' [edit]='gameParams' width=150 [validationRules]='gameNameRules'></e-column>
+        <e-column field='goalName' headerText='Goal' editType= 'dropdownedit' [edit]='goalParams' width=150 [validationRules]='goalNameRules'></e-column>
+        <e-column field='about' headerText='About' width=150 [validationRules]='rankNameRules'></e-column>
+        <e-column field='rankName' headerText='Rank' editType= 'dropdownedit' [edit]='rankParams' width=150 [validationRules]='rankNameRules'></e-column>
+        <e-column field='decency' headerText='Decency' width=150 [validationRules]='decencyRules'></e-column>
+        <e-column field='teamName' headerText='Team' editType= 'dropdownedit' [edit]='teamParams' width=150 isPrimaryKey='true'></e-column>
+    </e-columns>
+    </ejs-grid>

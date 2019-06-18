@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from '../interfaces/UserDataForAdmin';
+import {User} from '../interfaces/userDataForAdmin';
 import {Lock} from '../interfaces/lock';
 import { flatMap,first,shareReplay } from 'rxjs/operators';
 import { RegisterModel } from '../interfaces/registerModel';

@@ -55,6 +55,22 @@ import { TeamCommunicationService } from './services/team.communication.service'
 import { TeamProfileCreateComponent } from './team-profile-create/team-profile-create.component';
 import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.component';
 
+import { GridModule, PageService, ToolbarService, SortService, FilterService, GroupService, EditService } from '@syncfusion/ej2-angular-grids';
+import { AdminFilterListComponent } from './admin-filter-list/admin-filter-list.component';
+import { MatTableModule, MatTreeModule } from '@angular/material'
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
+import { AdminPlayerListComponent } from './admin-player-list/admin-player-list.component';
+import { AdminTestListComponent } from './admin-test-list/admin-test-list.component';
+import { AdminPagingListComponent } from './admin-paging-list/admin-paging-list.component';
+
+import { NumericTextBoxComponent } from '@syncfusion/ej2-angular-inputs';
+import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
+import { AdminRankListComponent } from './admin-rank-list/admin-rank-list.component';
+import { AdminGoalListComponent } from './admin-goal-list/admin-goal-list.component';
+import { AdminHistoryListComponent } from './admin-history-list/admin-history-list.component';
+import { AdminTeamListComponent } from './admin-team-list/admin-team-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,11 +102,27 @@ import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.
     PlayerProfileEditComponent,
     TeamProfileListComponent,
     TeamProfileCreateComponent,
-    TeamProfileEditComponent
+    TeamProfileEditComponent,
+    AdminFilterListComponent,
+    DropDownListComponent,
+    AdminPlayerListComponent,
+    AdminTestListComponent,
+    AdminPagingListComponent,
+    NumericTextBoxComponent,
+    AdminUserListComponent,
+    AdminGameListComponent,
+    AdminRankListComponent,
+    AdminGoalListComponent,
+    AdminHistoryListComponent,
+    AdminTeamListComponent,
     ],
   imports: [
     NgbModule,
     BrowserModule,
+    GridModule,
+    MatTableModule,
+    CdkTreeModule,
+    MatTreeModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -117,7 +149,12 @@ import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.
     PlayerService,
     PlayerCommunicationServer,
     TeamService,
-    TeamCommunicationService
+    TeamCommunicationService,
+    PageService, ToolbarService,
+    SortService,
+    FilterService,
+    GroupService,
+    EditService, ToolbarService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/UserDataForAdmin';
+import { User } from '../../interfaces/userDataForAdmin';
 import { HttpClient } from '@angular/common/http';
-import { SortState } from 'src/app/interfaces/UserSortViewModel';
-import { UserIndexViewModel } from 'src/app/interfaces/UserIndexViewModel';
+import { SortState } from 'src/app/interfaces/userSortViewModel';
+import { UserIndexViewModel } from 'src/app/interfaces/userIndexViewModel';
 
 @Component({
     templateUrl: './user-list.component.html',

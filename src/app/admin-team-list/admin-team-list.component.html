@@ -1,0 +1,8 @@
+<ejs-grid #grid [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar' [allowPaging]='true' (load)='load()' (actionComplete)='actionComplete($event)'
+[pageSettings]='initialPage' (toolbarClick)='toolbarClick($event)'
+[allowSorting]='true' [allowFiltering]='true' [filterSettings]='filterOption'>
+    <e-columns>
+        <e-column field='id' headerText='Rank ID' isPrimaryKey='true' [validationRules]='TeamIdRules' width=120></e-column>
+        <e-column field='name' headerText='Rank Name' width=150 [validationRules]='TeamNameRules'></e-column>
+    </e-columns>
+    </ejs-grid>

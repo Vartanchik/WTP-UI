@@ -1,6 +1,6 @@
 
 //Base WebApi URI address
-export const baseURIConfig = 'http://localhost:5000/api';
+export const baseURIConfig = 'http://localhost:44390/api';
 
 export const providedInConfig = 'root';
 

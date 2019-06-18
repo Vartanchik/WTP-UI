@@ -1,7 +1,7 @@
 import { User } from './UserDataForAdmin';
-import { UserPageViewModel } from './UserPageViewModel';
-import { UserFilterViewModel } from './UserFilterViewModel';
-import { UserSortViewModel } from './UserSortViewModel';
+import { UserPageViewModel } from './userPageViewModel';
+import { UserFilterViewModel } from './userFilterViewModel';
+import { UserSortViewModel } from './userSortViewModel';
 
 export class UserIndexViewModel {
     public users:User[];

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Lock } from 'src/app/interfaces/lock';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/interfaces/UserDataForAdmin';
+import { User } from 'src/app/interfaces/userDataForAdmin';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 

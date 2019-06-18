@@ -5,7 +5,7 @@ export class User {
     public email?: string,
     public photo?: string,
     public gender?: string,
-    public birthday?: Date,
+    public dateOfBirth?: string,
     public country?: string[],
     public steamId?: string,
     public lockoutEnabled?: boolean,

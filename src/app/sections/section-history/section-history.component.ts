@@ -3,7 +3,7 @@ import {History} from '../../interfaces/history';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { HistoryIndexViewModel } from 'src/app/interfaces/HistoryIndexViewModel';
-import { HistorySortState } from 'src/app/interfaces/HistorySortViewModel';
+import { HistorySortState } from 'src/app/interfaces/historySortViewModel';
 
 @Component({
   selector: 'app-section-history',

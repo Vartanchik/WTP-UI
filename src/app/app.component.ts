@@ -16,7 +16,7 @@ export class AppComponent {
   ) {}
 
   title = 'wtp-ui';
-  isUser = true;
+  isUser = false;
 
   navigateToPlayers(): void {
     const selectedGame = this.infoService.getSelectedGame();
