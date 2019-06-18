@@ -6,4 +6,5 @@ export interface PlayerFiltersModel {
     decencyRight: number;
     sortingField: string;
     sortingType: string;
+    playersOnPage: number;
 }

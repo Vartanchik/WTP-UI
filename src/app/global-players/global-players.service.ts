@@ -4,11 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { baseURIConfig } from '../services/dataconfig';
 import { PlayersPagination } from './models/players-pagination.model';
 import { PlayerFiltersModel } from './models/PlayerFilters';
+import { DotaComponent } from './dota/dota.component';
+import { CsGoComponent } from './cs-go/cs-go.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalPlayersService {
+
+  currentGame: number = 1;
 
   currentFields: PlayerFiltersModel = {
     name: '',
@@ -17,14 +21,15 @@ export class GlobalPlayersService {
     decencyLeft: 0,
     decencyRight: 10000,
     sortingField: '',
-    sortingType: ''
+    sortingType: '',
+    playersOnPage: 5
   }
   
   private readonly BaseURI = baseURIConfig;
   private readonly playersUrl = '/Player/players/pagination';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getPlayers(gameId: number, pageId: number): Observable<PlayersPagination> {
@@ -32,7 +37,7 @@ export class GlobalPlayersService {
       `${this.BaseURI}${this.playersUrl}`, {
         params: {
           idGame: gameId.toString(),
-          //pageSize: 5,
+          pageSize: this.currentFields.playersOnPage.toString(),
           page: pageId.toString(),
           sortField: this.currentFields.sortingField,
           sortType: this.currentFields.sortingType,
@@ -49,4 +54,7 @@ export class GlobalPlayersService {
     this.currentFields = value;
   }
 
+  pushCurrentGame(value: number){
+    this.currentGame = value;
+  }
 }

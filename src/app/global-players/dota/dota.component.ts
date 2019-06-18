@@ -9,6 +9,7 @@ import { PlayersPagination } from '../models/players-pagination.model';
   templateUrl: './dota.component.html',
   styleUrls: ['./dota.component.scss']
 })
+
 export class DotaComponent implements OnInit {
 
   players: Player[];
@@ -26,6 +27,7 @@ export class DotaComponent implements OnInit {
 
   ngOnInit() {
     this.loadPlayersList(1);
+    this.globalPlayersService.pushCurrentGame(1);
   }
 
   switchPage(pageId: number): void {
