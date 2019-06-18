@@ -43,6 +43,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
 import { GlobalPlayersModule } from './global-players/global-players.module';
+import { GlobalTeamsModule } from './global-teams/global-teams.module';
 import { RestoreComponent } from './account/restore/restore.component';
 import { PlayerProfileCreateComponent } from './player/player-profile-create/player-profile.component';
 import { PlayerProfileListComponent } from './player/player-profile-list/player-profile-list.component';
@@ -106,6 +107,7 @@ import { TeamPageComponent } from './team/team-page/team-page.component';
     FormsModule,
     MyDatePickerModule,
     GlobalPlayersModule,
+    GlobalTeamsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [

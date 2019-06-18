@@ -20,6 +20,11 @@ import { NotFoundComponent } from './users/not-found/not-found.component';
 import { DotaComponent } from './global-players/dota/dota.component';
 import { GtaComponent } from './global-players/gta/gta.component';
 import { CsGoComponent } from './global-players/cs-go/cs-go.component';
+
+import { DotaTeamsComponent } from './global-teams/dota/dota.component';
+import { GtaTeamsComponent } from './global-teams/gta/gta.component';
+import { CsGoTeamsComponent } from './global-teams/cs-go/cs-go.component';
+
 import {RestoreComponent} from './account/restore/restore.component';
 import { PlayerPageComponent } from './player/player-page/player-page.component';
 
@@ -72,6 +77,24 @@ const routes: Routes = [
       { 
         path: 'cs-go',
         component: CsGoComponent
+      },
+    ]
+  },
+
+  {
+    path:'teams',
+    children: [
+      { 
+        path: 'dota',
+        component: DotaTeamsComponent
+      },
+      { 
+        path: 'gta',
+        component: GtaTeamsComponent
+      },
+      { 
+        path: 'cs-go',
+        component: CsGoTeamsComponent
       },
     ]
   }

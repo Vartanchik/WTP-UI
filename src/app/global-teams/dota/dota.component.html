@@ -1,0 +1,45 @@
+<section class="dota-players">
+  <div class="card sticky-top">
+      <app-teams-filtering>
+      </app-teams-filtering>
+  </div>
+   
+    <div class="teams-list">
+      <app-dota-team
+        *ngFor="let team of teams"
+        [team]="team">
+      </app-dota-team>
+      <div class="pagination" *ngIf="pageView.totalPages !== 0">
+        <button class="page-item pagination-button"
+            (click)="loadPreviousPage()"
+            [disabled]="!pageView.hasPreviousPage"
+            [ngClass]="{
+              'disabled': !pageView.hasPreviousPage
+            }">
+          <span class="page-link">
+            Previous
+          </span>
+        </button>
+        <button class="page-item pagination-button"
+            *ngFor="let pag of paginationArray; let i = index"
+            [ngClass]="{
+              'active': pageView.pageNumber === i + 1
+            }"
+            (click)="switchPage(i+1)">
+          <span class="page-link">
+            {{ i+1 }}
+          </span>
+        </button>
+        <button class="page-item pagination-button"
+            (click)="loadNextPage()"
+            [disabled]="!pageView.hasNextPage"
+            [ngClass]="{
+              'disabled': !pageView.hasNextPage
+            }">
+          <span class="page-link">
+            Next
+          </span>
+        </button>
+      </div>
+    </div>
+</section>

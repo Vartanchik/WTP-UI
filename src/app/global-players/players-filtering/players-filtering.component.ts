@@ -4,6 +4,8 @@ import { dropdownListRanksConfig } from 'src/app/services/dataconfig';
 import { PlayerFiltersModel } from '../models/PlayerFilters';
 import { GlobalPlayersService } from '../global-players.service';
 import { DotaComponent } from '../dota/dota.component';
+import { GtaComponent } from '../gta/gta.component';
+import { CsGoComponent } from '../cs-go/cs-go.component';
 
 @Component({
   selector: 'app-players-filtering',
@@ -20,7 +22,8 @@ export class PlayersFilteringComponent implements OnInit {
     decencyLeft: 0,
     decencyRight: 10000,
     sortingField: '',
-    sortingType: ''
+    sortingType: '',
+    playersOnPage: 5
   }
 
   sortEnabled: boolean = true;
@@ -60,17 +63,22 @@ export class PlayersFilteringComponent implements OnInit {
     }
   };
 
-  constructor(private svc: GlobalPlayersService, private dota: DotaComponent) { }
+  constructor(
+    private svc: GlobalPlayersService, 
+    private dota: DotaComponent
+    ) { }
 
   SortChanged(){
     if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
     this.sortEnabled = false;
   }
+  ngOnInit() {  }
 
-  updateSortFieldsDota(){
+  updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
+
     this.dota.loadList();
   }
-  ngOnInit() {  }
+
 
 }
