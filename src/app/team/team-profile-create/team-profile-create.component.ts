@@ -9,10 +9,10 @@ import {
   dropdownListGamesConfig,
   dropdownListLanguagesConfig,
   dropdownSettingsLanguagesConfig
-} from '../services/dataconfig';
+} from '../../services/dataconfig';
 import { ToastrService } from 'ngx-toastr';
-import { TeamService } from '../services/team.service';
-import { TeamCommunicationService } from '../services/team.communication.service';
+import { TeamService } from '../../services/team.service';
+import { TeamCommunicationService } from '../../services/team.communication.service';
 
 @Component({
   selector: 'app-team-profile-create',
@@ -74,7 +74,7 @@ export class TeamProfileCreateComponent implements OnInit {
         this.toastr.success(res.info, res.message);
       },
       err => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }

@@ -17,12 +17,12 @@ import { TokenResponse } from 'src/app/interfaces/token-response';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private service: AccountService, 
-    private router: Router, 
-    private toastr: ToastrService, 
-    private fb: FormBuilder, 
-    private svc: CommunicationService) 
-  { }
+    private service: AccountService,
+    private router: Router,
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private svc: CommunicationService
+    ) {}
 
   taskQueue: TaskQueue = new TaskQueue();
 
@@ -49,7 +49,9 @@ export class LoginComponent implements OnInit {
       mergeMap( res => {
         this.service.setAuthInfo(res);
         const id = this.decode(res);
-        return this.service.getIconInfo(id)
+        localStorage.setItem('id', id);
+        this.svc.setUserId(id);
+        return this.service.getIconInfo(id);
       })
     )
     .subscribe(

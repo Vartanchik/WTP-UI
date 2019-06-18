@@ -5,6 +5,7 @@ import { baseURIConfig } from './dataconfig';
 import { Player } from '../interfaces/player';
 import { WtpResponse } from '../interfaces/wtp-response';
 import { Invitation } from '../interfaces/invitation';
+import { PlayerForPlayerPage } from '../interfaces/player-for-player-page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,16 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
+  getPlayerById(playerId: number): Observable<PlayerForPlayerPage> {
+    return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player/' + playerId);
+  }
+
   getPlayersByUserId(userId: number): Observable<Player[]> {
-    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByUser?userId=' + userId);
+    return this.http.get<Player[]>(this.BaseURI + '/Player/UserPlayers/' + userId);
   }
 
   getPlayersByTeamId(teamId: number): Observable<Player[]> {
-    return this.http.get<Player[]>(this.BaseURI + '/Player/GetPlayersByTeam?teamId=' + teamId);
+    return this.http.get<Player[]>(this.BaseURI + '/Player/TeamPlayers/' + teamId);
   }
 
   createPlayer(body: Player): Observable<WtpResponse> {
@@ -50,11 +55,7 @@ export class PlayerService {
   }
 
   deletePlayer(gameId: number): Observable<WtpResponse> {
-    return this.http.delete<WtpResponse>(this.BaseURI + '/Player?playerGameId=' + gameId);
-  }
-
-  getInvitationsByUserId(userId: number): Observable<Invitation[]> {
-    return this.http.get<Invitation[]>(this.BaseURI + '/Player/InvitationPlayerListByUserId?userId=' + userId);
+    return this.http.delete<WtpResponse>(this.BaseURI + '/Player/' + gameId);
   }
 
 }

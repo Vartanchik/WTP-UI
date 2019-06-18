@@ -1,3 +1,4 @@
+import { TeamPageComponent } from './team/team-page/team-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +26,7 @@ import { GtaTeamsComponent } from './global-teams/gta/gta.component';
 import { CsGoTeamsComponent } from './global-teams/cs-go/cs-go.component';
 
 import {RestoreComponent} from './account/restore/restore.component';
+import { PlayerPageComponent } from './player/player-page/player-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -55,9 +57,11 @@ const routes: Routes = [
       { path: '**', component: NotFoundComponent }
     ]
 },
-    
+
 
   { path: 'userprofile', component: UserProfileComponent },
+  { path: 'player/:id', component: PlayerPageComponent },
+  { path: 'team/:id', component: TeamPageComponent },
 
   {
     path:'players',

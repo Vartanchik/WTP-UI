@@ -72,6 +72,7 @@ export class PlayersFilteringComponent implements OnInit {
     if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
     this.sortEnabled = false;
   }
+  ngOnInit() {  }
 
   updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
@@ -79,6 +80,5 @@ export class PlayersFilteringComponent implements OnInit {
     this.dota.loadList();
   }
 
-  ngOnInit() {  }
 
 }
