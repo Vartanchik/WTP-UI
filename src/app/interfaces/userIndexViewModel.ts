@@ -1,4 +1,4 @@
-import { User } from './UserDataForAdmin';
+import { User } from './userDataForAdmin';
 import { UserPageViewModel } from './userPageViewModel';
 import { UserFilterViewModel } from './userFilterViewModel';
 import { UserSortViewModel } from './userSortViewModel';

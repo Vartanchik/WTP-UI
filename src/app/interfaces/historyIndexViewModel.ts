@@ -1,6 +1,6 @@
 import { History } from './history';
 import { UserPageViewModel } from './userPageViewModel';
-import { HistoryFilterViewModel } from './HistoryFilterViewModel';
+import { HistoryFilterViewModel } from './historyFilterViewModel';
 import { HistorySortViewModel } from './historySortViewModel';
 
 export class HistoryIndexViewModel

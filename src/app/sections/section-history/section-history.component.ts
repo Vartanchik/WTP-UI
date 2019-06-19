@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {History} from '../../interfaces/history';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { HistoryIndexViewModel } from 'src/app/interfaces/HistoryIndexViewModel';
+import { HistoryIndexViewModel } from 'src/app/interfaces/historyIndexViewModel';
 import { HistorySortState } from 'src/app/interfaces/historySortViewModel';
 
 @Component({

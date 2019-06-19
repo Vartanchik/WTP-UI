@@ -1,4 +1,4 @@
-import { User } from './UserDataForAdmin';
+import { User } from './userDataForAdmin';
 
 export class UserFilterViewModel
 {
