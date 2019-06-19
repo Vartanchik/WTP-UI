@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TeamFiltersModel } from '../models/team-filters';
 import { DotaTeamsComponent } from '../dota/dota.component';
 import { GlobalTeamsService } from '../global-teams.service';
@@ -37,7 +37,7 @@ export class TeamsFilteringComponent implements OnInit {
 
 
   constructor(
-    private svc: GlobalTeamsService, private dota: DotaTeamsComponent
+    private svc: GlobalTeamsService
   ) { }
 
   SortChanged(){
@@ -47,7 +47,7 @@ export class TeamsFilteringComponent implements OnInit {
 
   updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
-    this.dota.loadList();
+    this.svc.filter('Filter click');
   }
   
   dropdownListGoals = [];

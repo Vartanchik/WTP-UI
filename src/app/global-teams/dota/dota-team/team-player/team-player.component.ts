@@ -18,15 +18,6 @@ export class TeamPlayerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.playerService.getPlayersByTeamId(this.team.id).subscribe(
-    //   res => {
-    //   this.team.players = res;
-      
-    //   if(this.team.players[0] !== undefined)
-    //   this.name1 = this.team.players[0].name;
-
-    //   if(this.team.players[1] !== undefined)
-    //   this.name2 = this.team.players[1].name;
-    // })
+    
   }
 }
