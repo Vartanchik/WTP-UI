@@ -41,7 +41,7 @@ export class AdminRankListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Rank[]>('https://localhost:44390/api/Rank/list').subscribe(result => {
+      this.http.get<Rank[]>('http://localhost:5000/api/Rank/list').subscribe(result => {
         
     if(result==null)
       window.alert("No content!");
@@ -79,7 +79,7 @@ actionComplete(args) {
     {
       var Rank = records[0] as Rank;
       console.log(records);
-      this.http.post('https://localhost:44390/api/Rank/item',Rank).subscribe(
+      this.http.post('http://localhost:5000/api/Rank/item',Rank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -93,7 +93,7 @@ actionComplete(args) {
     {
       var updatedRank = records[0] as Rank;
       console.log(records);
-      this.http.put('https://localhost:44390/api/Rank/item/'+updatedRank.id,updatedRank).subscribe(
+      this.http.put('http://localhost:5000/api/Rank/item/'+updatedRank.id,updatedRank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -106,7 +106,7 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('https://localhost:44390/api/Rank/item/'+this.currentRank.id)
+      this.http.delete('http://localhost:5000/api/Rank/item/'+this.currentRank.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});

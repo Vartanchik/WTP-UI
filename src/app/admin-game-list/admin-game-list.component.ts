@@ -41,7 +41,7 @@ export class AdminGameListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Game[]>('https://localhost:44390/api/Game/list').subscribe(result => {
+      this.http.get<Game[]>('http://localhost:5000/api/Game/list').subscribe(result => {
         
     if(result==null)
       window.alert("No content!");
@@ -78,7 +78,7 @@ actionComplete(args) {
     {
       var game = records[0] as Game;
       console.log(records);
-      this.http.post('https://localhost:44390/api/Game/item',game).subscribe(
+      this.http.post('http://localhost:5000/api/Game/item',game).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -92,7 +92,7 @@ actionComplete(args) {
     {
       var updatedgame = records[0] as Game;
       console.log(updatedgame);
-      this.http.put('https://localhost:44390/api/Game/item/'+updatedgame.id,updatedgame).subscribe(
+      this.http.put('http://localhost:5000/api/Game/item/'+updatedgame.id,updatedgame).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -105,7 +105,7 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('https://localhost:44390/api/Game/item/'+this.currentGame.id)
+      this.http.delete('http://localhost:5000/api/Game/item/'+this.currentGame.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});

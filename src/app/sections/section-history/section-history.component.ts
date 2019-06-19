@@ -28,7 +28,7 @@ export class SectionHistoryComponent implements OnInit {
   //Array of users at current page
   histories: History[];
   private http: HttpClient;
-  private baseUrl: string=this.userService.baseUrl;//"https://localhost:44390/";
+  private baseUrl: string=this.userService.baseUrl;//"http://localhost:5000/";
 
   //Current page
   public pageNumber: number = 1;

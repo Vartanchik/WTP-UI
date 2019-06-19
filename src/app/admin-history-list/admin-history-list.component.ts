@@ -39,7 +39,7 @@ export class AdminHistoryListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<History[]>('https://localhost:44390/api/Admin/history/list').subscribe(result => {
+      this.http.get<History[]>('http://localhost:5000/api/Admin/history/list').subscribe(result => {
         
     if(result==null)
       window.alert("No content!");

@@ -42,7 +42,7 @@ export class AdminGoalListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Goal[]>('https://localhost:44390/api/Goal/list').subscribe(result => {
+      this.http.get<Goal[]>('http://localhost:5000/api/Goal/list').subscribe(result => {
         
     if(result==null)
       window.alert("No content!");
@@ -79,7 +79,7 @@ actionComplete(args) {
     {
       var Goal = records[0] as Goal;
       console.log(records);
-      this.http.post('https://localhost:44390/api/Goal',Goal).subscribe(
+      this.http.post('http://localhost:5000/api/Goal',Goal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -93,7 +93,7 @@ actionComplete(args) {
     {
       var updatedGoal = records[0] as Goal;
       console.log(records);
-      this.http.put('https://localhost:44390/api/Goal/item/'+updatedGoal.id,updatedGoal).subscribe(
+      this.http.put('http://localhost:5000/api/Goal/item/'+updatedGoal.id,updatedGoal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -106,7 +106,7 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('https://localhost:44390/api/Goal/item/'+this.currentGoal.id)
+      this.http.delete('http://localhost:5000/api/Goal/item/'+this.currentGoal.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});

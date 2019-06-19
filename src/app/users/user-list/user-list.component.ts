@@ -14,7 +14,7 @@ export class UserListComponent implements OnInit {
     //Array of users at current page
     users: User[];
     private http: HttpClient;
-    private baseUrl: string=this.userService.baseUrl;//"https://localhost:44390/";
+    private baseUrl: string=this.userService.baseUrl;//"http://localhost:5000/";
 
     //Current page
     public pageNumber: number = 1;

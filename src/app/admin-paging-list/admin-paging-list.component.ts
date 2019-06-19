@@ -49,7 +49,7 @@ public editSettings: EditSettingsModel;
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<User[]>('https://localhost:44390/api/Admin/users').subscribe(result => {
+      this.http.get<User[]>('http://localhost:5000/api/Admin/users').subscribe(result => {
         
     if(result==null)
       window.alert("No content!");
@@ -107,7 +107,7 @@ actionComplete(args) {
       var user = records[0] as RegisterModel;
       user.password = '123456';
       console.log(records);
-      this.http.post('https://localhost:44390/api/Admin/users/profiles',user).subscribe(
+      this.http.post('http://localhost:5000/api/Admin/users/profiles',user).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -122,7 +122,7 @@ actionComplete(args) {
       var updatedUser = records[0] as User;
       updatedUser.dateOfBirth = '';
       console.log(records);
-      this.http.put('https://localhost:44390/api/Admin/users/'+updatedUser.id,updatedUser).subscribe(
+      this.http.put('http://localhost:5000/api/Admin/users/'+updatedUser.id,updatedUser).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -138,7 +138,7 @@ actionComplete(args) {
     // var t = this.Grid.getSelectedRecords() as User[];
     // var deletedUser = t[0];
     // console.log(deletedUser);      
-      this.http.delete('https://localhost:44390/api/Admin/users/'+this.currentUser.id)
+      this.http.delete('http://localhost:5000/api/Admin/users/'+this.currentUser.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
@@ -208,7 +208,7 @@ dataBound() {
         
   //     console.log(result);
   //     }, error => console.error(error)));
-  // this.http.get<UserIndexViewModel>('https://localhost:44390/api/Admin/list?name='+'user'+'&page='+this.pageNumber).subscribe(result => {
+  // this.http.get<UserIndexViewModel>('http://localhost:5000/api/Admin/list?name='+'user'+'&page='+this.pageNumber).subscribe(result => {
         
   //   if(result==null)
   //     window.alert("No content!");

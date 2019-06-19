@@ -82,7 +82,7 @@ export class AdminPlayerListComponent implements OnInit {
 
 loadGame():void{
 
-  this.http.get<Game[]>('https://localhost:44390/api/Game/list').subscribe((result:Game[]) => {
+  this.http.get<Game[]>('http://localhost:5000/api/Game/list').subscribe((result:Game[]) => {
         console.log(result);
     if(result==null)
       window.alert("No content!");
@@ -148,7 +148,7 @@ loadGame():void{
 
 
 loadRank():void{
-  this.http.get<Rank[]>('https://localhost:44390/api/Rank/list').subscribe((result:Rank[]) => {
+  this.http.get<Rank[]>('http://localhost:5000/api/Rank/list').subscribe((result:Rank[]) => {
     console.log(result);
 if(result==null)
   window.alert("No content!");
@@ -184,7 +184,7 @@ this.rankObj.appendTo(this.rankElem);
 }
 
 loadGoal():void{
-  this.http.get<Goal[]>('https://localhost:44390/api/Goal/list').subscribe((result:Goal[]) => {
+  this.http.get<Goal[]>('http://localhost:5000/api/Goal/list').subscribe((result:Goal[]) => {
     console.log(result);
 if(result==null)
   window.alert("No content!");
@@ -220,7 +220,7 @@ this.goalObj.appendTo(this.goalElem);
 
 
 loadTeam():void{
-  this.http.get<Team[]>('https://localhost:44390/api/Team/team/list').subscribe((result:Team[]) => {
+  this.http.get<Team[]>('http://localhost:5000/api/Team/team/list').subscribe((result:Team[]) => {
     console.log(result);
 if(result==null)
   window.alert("No content!");
@@ -255,7 +255,7 @@ this.teamObj.appendTo(this.teamElem);
 }
 
 loadUser():void{
-  this.http.get<User[]>('https://localhost:44390/api/Admin/users').subscribe((result:User[]) => {
+  this.http.get<User[]>('http://localhost:5000/api/Admin/users').subscribe((result:User[]) => {
     console.log(result);
 if(result==null)
   window.alert("No content!");
@@ -297,7 +297,7 @@ this.userObj.appendTo(this.userElem);
   this.loadTeam();
   this.loadUser();
 
-      this.http.get<PlayerInfo[]>('https://localhost:44390/api/PlayerManage/list/info').subscribe(result => {
+      this.http.get<PlayerInfo[]>('http://localhost:5000/api/PlayerManage/list/info').subscribe(result => {
         console.log(result);
     if(result==null)
       window.alert("No content!");
@@ -349,7 +349,7 @@ actionComplete(args) {
       console.log(player.teamId);
       player.serverId=1;
       console.log(player);
-      this.http.post('https://localhost:44390/api/PlayerManage/item',player).subscribe(
+      this.http.post('http://localhost:5000/api/PlayerManage/item',player).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -368,7 +368,7 @@ actionComplete(args) {
       updatedPlayer.teamId=this.teamObj.value as number;
       //updatedPlayer.appUserId=this.userObj.value as number;
       console.log(updatedPlayer);
-      this.http.put('https://localhost:44390/api/PlayerManage/item',updatedPlayer).subscribe(
+      this.http.put('http://localhost:5000/api/PlayerManage/item',updatedPlayer).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -381,7 +381,7 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);   
-      this.http.delete('https://localhost:44390/api/PlayerManage/item')
+      this.http.delete('http://localhost:5000/api/PlayerManage/item')
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
