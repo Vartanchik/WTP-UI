@@ -25,6 +25,8 @@
       <select (change)="SortChanged()" class="browser-default custom-select" [(ngModel)]="filterFields.sortingField">
           <option value="0">Without sorting</option>
           <option value="rate">WinRate</option>
+          <option value="playersCount">Players quantity</option>
+
       </select>
       <h6 style="margin-left: 10px;">Sort type: </h6>
       <select [disabled] ="sortEnabled" class="browser-default custom-select" [(ngModel)]="filterFields.sortingType">

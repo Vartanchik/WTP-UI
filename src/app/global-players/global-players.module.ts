@@ -11,6 +11,7 @@ import { GtaComponent } from './gta/gta.component';
 import { CsGoComponent } from './cs-go/cs-go.component';
 import { CsPlayerComponent } from './cs-go/cs-player/cs-player.component';
 import { GtaPlayerComponent } from './gta/gta-player/gta-player.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { GtaPlayerComponent } from './gta/gta-player/gta-player.component';
     GtaPlayerComponent,
   ],
   imports: [
+    AppRoutingModule,
     CommonModule,
     Ng5SliderModule,
     NgbModule,

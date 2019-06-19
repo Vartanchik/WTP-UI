@@ -14,6 +14,8 @@ import { MatRadioModule } from '@angular/material';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CsTeamComponent } from './cs-go/cs-team/cs-team.component';
 import { GtaTeamComponent } from './gta/gta-team/gta-team.component';
+import { AppRoutingModule } from '../app-routing.module';
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { GtaTeamComponent } from './gta/gta-team/gta-team.component';
     FormsModule,
     AvatarModule,
     MatRadioModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    AppRoutingModule
   ]
 })
 export class GlobalTeamsModule { }

@@ -20,9 +20,17 @@ export class GtaComponent implements OnInit {
   };
   paginationArray: undefined[] = [];
 
-  constructor(
-    private globalPlayersService: GlobalPlayersService
-  ) { }
+  constructor(private globalPlayersService: GlobalPlayersService){
+    this.globalPlayersService.listen().subscribe((m:any) => {
+        console.log(m);
+        this.onFilterClick(m);
+    })
+  }
+
+  onFilterClick(event: any) {
+    console.log('Fire onFilterClick: ', event);
+    this.loadPlayersList(1);
+  }
 
   ngOnInit() {
     this.loadPlayersList(1);

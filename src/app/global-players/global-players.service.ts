@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { baseURIConfig } from '../services/dataconfig';
 import { PlayersPagination } from './models/players-pagination.model';
@@ -53,6 +53,17 @@ export class GlobalPlayersService {
   pushUpdatedValues(value: PlayerFiltersModel){
     this.currentFields = value;
   }
+
+  //communication between players components and filter component 
+  private _listners = new Subject<any>();
+
+    listen(): Observable<any> {
+       return this._listners.asObservable();
+    }
+
+    filter(filterBy: string) {
+       this._listners.next(filterBy);
+    }
 
   pushCurrentGame(value: number){
     this.currentGame = value;
