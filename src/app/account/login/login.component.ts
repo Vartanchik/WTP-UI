@@ -24,8 +24,6 @@ export class LoginComponent implements OnInit {
     private svc: CommunicationService
     ) {}
 
-  taskQueue: TaskQueue = new TaskQueue();
-
   ngOnInit() {
 
     if(this.service.checkExistenceToken()) {
@@ -68,11 +66,10 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Login successful.');
       },
       err => {
-        if (err.error.statusCode === 'User is deleted.') {
-          this.router.navigateByUrl(`/account/restore?email=${this.formModelLogin.get('email')}`);
-        } else {
-          this.toastr.error(err.error.info, err.error.message);
+        if (err.error.info === 'User is deleted.') {
+          this.router.navigateByUrl(`/account/restore?email=${this.formModelLogin.get('email').value}`);
         }
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
