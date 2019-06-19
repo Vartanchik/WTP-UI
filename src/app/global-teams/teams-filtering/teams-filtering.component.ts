@@ -40,13 +40,6 @@ export class TeamsFilteringComponent implements OnInit {
     private svc: GlobalTeamsService
   ) { }
 
-  //@Output() onFilter: EventEmitter = new EventEmitter();
-
-    //  clickFilter():void {
-    //      // this.onFilter.emit('Register click');
-    //      this.svc.filter('Filter click');
-    //  }
-
   SortChanged(){
     if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
     this.sortEnabled = false;
@@ -55,7 +48,6 @@ export class TeamsFilteringComponent implements OnInit {
   updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
     this.svc.filter('Filter click');
-    //this.dota.loadList();
   }
   
   dropdownListGoals = [];
