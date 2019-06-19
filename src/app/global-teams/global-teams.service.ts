@@ -3,7 +3,7 @@ import { TeamFiltersModel } from './models/team-filters';
 import { baseURIConfig } from '../services/dataconfig';
 import { HttpClient } from '@angular/common/http';
 import { TeamsPagination } from './models/team-pagination.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +52,17 @@ export class GlobalTeamsService {
   pushUpdatedValues(value: TeamFiltersModel){
     this.currentFields = value;
   }
+
+  //communication between game components and filter component 
+
+  private _listners = new Subject<any>();
+
+    listen(): Observable<any> {
+       return this._listners.asObservable();
+    }
+
+    filter(filterBy: string) {
+       this._listners.next(filterBy);
+    }
 
 }

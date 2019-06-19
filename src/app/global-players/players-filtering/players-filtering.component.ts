@@ -63,10 +63,7 @@ export class PlayersFilteringComponent implements OnInit {
     }
   };
 
-  constructor(
-    private svc: GlobalPlayersService, 
-    private dota: DotaComponent
-    ) { }
+  constructor(private svc: GlobalPlayersService) { }
 
   SortChanged(){
     if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
@@ -76,8 +73,8 @@ export class PlayersFilteringComponent implements OnInit {
 
   updateSortFields(){
     this.svc.pushUpdatedValues(this.filterFields);
-
-    this.dota.loadList();
+    this.svc.filter('Filter click');
+    //this.dota.loadList();
   }
 
 

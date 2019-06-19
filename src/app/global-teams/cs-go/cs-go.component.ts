@@ -22,9 +22,17 @@ export class CsGoTeamsComponent implements OnInit {
   paginationArray: undefined[] = [];
 
 
-  constructor(
-    private teamService: GlobalTeamsService 
-  ) { }
+  constructor(private teamService: GlobalTeamsService){
+    this.teamService.listen().subscribe((m:any) => {
+        console.log(m);
+        this.onFilterClick(m);
+    })
+  }
+
+  onFilterClick(event: any) {
+    console.log('Fire onFilterClick: ', event);
+    this.loadPlayersList(1);
+  }
 
   ngOnInit() {
     this.loadPlayersList(1);
