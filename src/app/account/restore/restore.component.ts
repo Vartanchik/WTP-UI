@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-restore',
@@ -14,7 +15,8 @@ export class RestoreComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private accSvc: AccountService
+    private accSvc: AccountService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class RestoreComponent implements OnInit {
   restore() {
     this.accSvc.restoreAccount(this.email).subscribe(
       res => {
+        this.toastr.info('An email has been sent to restore the account.');
         this.router.navigateByUrl('/home');
       }
     );
