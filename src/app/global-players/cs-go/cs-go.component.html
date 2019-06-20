@@ -5,10 +5,10 @@
   </div>
    
     <div class="players-list">
-      <app-dota-player
+      <app-cs-player
         *ngFor="let player of players"
         [player]="player">
-      </app-dota-player>
+      </app-cs-player>
       <div class="pagination" *ngIf="pageView.totalPages !== 0">
         <button class="page-item pagination-button"
             (click)="loadPreviousPage()"

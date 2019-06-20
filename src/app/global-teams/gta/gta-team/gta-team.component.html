@@ -45,7 +45,7 @@
             <div class="available-slot-text" *ngIf="!showButoon">
                 slot
             </div>
-            <button id="applyBtn" class="btn btn-primary" *ngIf="showButoon">Apply</button>
+            <button [routerLink]="['/team', team.id]" id="applyBtn" class="btn btn-primary" *ngIf="showButoon">Apply</button>
         </div>        
         </div>
       </div>
