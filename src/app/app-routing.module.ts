@@ -1,3 +1,4 @@
+import { TeamPageComponent } from './team/team-page/team-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -19,7 +20,13 @@ import { NotFoundComponent } from './users/not-found/not-found.component';
 import { DotaComponent } from './global-players/dota/dota.component';
 import { GtaComponent } from './global-players/gta/gta.component';
 import { CsGoComponent } from './global-players/cs-go/cs-go.component';
+
+import { DotaTeamsComponent } from './global-teams/dota/dota.component';
+import { GtaTeamsComponent } from './global-teams/gta/gta.component';
+import { CsGoTeamsComponent } from './global-teams/cs-go/cs-go.component';
+
 import {RestoreComponent} from './account/restore/restore.component';
+import { PlayerPageComponent } from './player/player-page/player-page.component';
 import { AdminPlayerListComponent } from './admin-player-list/admin-player-list.component';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
@@ -63,9 +70,11 @@ const routes: Routes = [
       { path: '**', component: NotFoundComponent }
     ]
 },
-    
+
 
   { path: 'userprofile', component: UserProfileComponent },
+  { path: 'player/:id', component: PlayerPageComponent },
+  { path: 'team/:id', component: TeamPageComponent },
 
   {
     path:'players',
@@ -81,6 +90,24 @@ const routes: Routes = [
       { 
         path: 'cs-go',
         component: CsGoComponent
+      },
+    ]
+  },
+
+  {
+    path:'teams',
+    children: [
+      {
+        path: 'dota',
+        component: DotaTeamsComponent
+      },
+      {
+        path: 'gta',
+        component: GtaTeamsComponent
+      },
+      {
+        path: 'cs-go',
+        component: CsGoTeamsComponent
       },
     ]
   }

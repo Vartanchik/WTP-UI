@@ -1,0 +1,53 @@
+<div class="team-card">
+  <div class="team-aside">
+    <!-- <img src="{{team.photo}}"> -->
+    <div  class = "team-avatar">
+        <ngx-avatar src="{{team.photo}}" size="80"></ngx-avatar>
+    </div>
+    <div class="players-count">
+      <p id="count-text">{{playersCount}} of 5 players</p>
+    </div>
+  </div>
+  <div class="team-info">
+    <div class="card-header">
+        <div class="name">
+            <h4> {{ team.name }}</h4>
+        </div>
+        <!-- <div class="card-buttons">
+          <button class="btn btn-primary">Practise</button>
+        </div> -->
+    </div>
+    <div class="team-details">
+      <div class="team-goal">
+        <h5>Goal:</h5>
+        {{ team.goal }}
+      </div>    
+      <div class="team-winRate">
+        <h5>WinRate:</h5> 
+        {{ team.winRate }}
+      </div>
+      <div class="team-server">
+        <h5>Server:</h5>
+         {{ team.server }}
+      </div>
+    </div>
+    <div class="team-players">
+      <h5 style="margin-left: 10px">Players:</h5>
+      <div class="players">
+        <app-team-player
+        *ngFor="let player of players"
+        [player]="player">
+      </app-team-player>
+      <div class="available-slot" *ngIf="slotAvailable" (mouseover)="showButoon=true" (mouseleave)="showButoon=false">
+          <div class="available-text" *ngIf="!showButoon">
+              Available 
+          </div>
+          <div class="available-slot-text" *ngIf="!showButoon">
+              slot
+          </div>
+          <button [routerLink]="['/team', team.id]" id="applyBtn" class="btn btn-primary" *ngIf="showButoon">Apply</button>
+      </div>        
+      </div>
+    </div>
+  </div>
+</div>

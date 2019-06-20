@@ -10,7 +10,7 @@ import { IdItem } from '../interfaces/id-item';
 export class InfoService {
   readonly BaseURI = baseURIConfig;
 
-  private selectedGame: IdItem;
+  private selectedGame = { id: 1, name: 'Dota 2' };
 
   constructor(private http: HttpClient) {}
 

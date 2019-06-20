@@ -37,6 +37,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+  navigateToTeams(): void {
+    const selectedGame = this.infoService.getSelectedGame();
+
+    switch (selectedGame.id) {
+      case 1:
+        this.router.navigate(['/teams/dota']);
+        break;
+      case 2:
+        this.router.navigate(['/teams/cs-go']);
+        break;
+      case 3:
+        this.router.navigate(['/teams/gta']);
+        break;
+    }
+  }
+
   ngOnInit(): void {
     this.isUserSvc.getValue().subscribe(
       val => {

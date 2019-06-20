@@ -1,0 +1,51 @@
+<div>
+  <h4 style="margin-left: 10px;">Filters: </h4>
+  
+  <div class="nickname-filter">
+      <h6 style="margin-left: 10px;">Search by name: </h6>
+      <div class="nickname-block">
+              <input class="form-control" type="text" placeholder="Nickname" [(ngModel)]="filterFields.name">
+      </div>        
+  </div>
+  <div class="members-filter">
+        <h6 style="margin-left: 10px;">Members quantity: </h6>
+        <div class="members-slider">
+            <ng5-slider [(value)]="filterFields.membersLeftValue" [(highValue)]="filterFields.membersRightValue" [options]="optionsMembersQuantity"></ng5-slider>
+        </div>
+    </div>
+    <!-- <div class="form-group required" id="goals-filter" [formGroup]="myGroup">
+            <label>Goals</label>
+            <ng-multiselect-dropdown id="lingvoSelect" formControlName="goals"
+              [placeholder]="'Choose goals'" [data]="dropdownListGoals"
+              [(ngModel)]="selectedItemGoals" [settings]="dropdownSettingsGoals">
+            </ng-multiselect-dropdown>
+    </div> -->
+  <div class="sort-block">
+      <h6 style="margin-left: 10px;">Sort by: </h6>
+      <select (change)="SortChanged()" class="browser-default custom-select" [(ngModel)]="filterFields.sortingField">
+          <option value="0">Without sorting</option>
+          <option value="rate">WinRate</option>
+          <option value="playersCount">Players quantity</option>
+
+      </select>
+      <h6 style="margin-left: 10px;">Sort type: </h6>
+      <select [disabled] ="sortEnabled" class="browser-default custom-select" [(ngModel)]="filterFields.sortingType">
+          <option value="asc">Ascending </option>
+          <option value="desc">Descending </option>
+      </select>    
+  </div>
+  <h6 style="margin-left: 10px;">Teams on page: </h6>
+  <div class="pageSize">
+      <div class="btn-group" role="group">
+        <button (click)="filterFields.teamsOnPage = 5" type="button" class="btn btn-outline-primary">5</button>
+        <button (click)="filterFields.teamsOnPage = 10" type="button" class="btn btn-outline-primary">10</button>
+        <button (click)="filterFields.teamsOnPage = 15" type="button" class="btn btn-outline-primary">15</button>
+      </div>
+  </div>  
+  <div class="sort-block">
+      <button type="submit" class="btn btn-primary" (click)="updateSortFields()">
+        Find teams
+      </button>
+  </div>
+</div>
+

@@ -57,7 +57,7 @@ export class UserListComponent implements OnInit {
 
   //Load data from first page which contains filtered and sorted user information by default params
   load() {
-    this.http.get<UserIndexViewModel>(this.baseUrl + 'api/Admin/users/pagination?name='+this.searchByName+'&page='+this.pageNumber+'&sortorder='+this.selectedNumber+'&enableDeleted='+this.enableDeleted+'&enableLocked='+this.enableLocked).subscribe(result => {
+    this.http.get<UserIndexViewModel>(this.baseUrl + 'api/Admin/list?name='+this.searchByName+'&page='+this.pageNumber+'&sortorder='+this.selectedNumber+'&enableDeleted='+this.enableDeleted+'&enableLocked='+this.enableLocked).subscribe(result => {
         
       if(result==null)
         window.alert("No content!");
@@ -73,7 +73,7 @@ export class UserListComponent implements OnInit {
 
   //Load data by changing page
   onPageChange = (pageNumber) => {
-  this.http.get<UserIndexViewModel>(this.baseUrl + 'api/Admin/users/pagination?name='+this.searchByName+'&page='+pageNumber+'&sortorder='+this.selectedNumber+'&enableDeleted='+this.enableDeleted+'&enableLocked='+this.enableLocked).subscribe(result => {
+  this.http.get<UserIndexViewModel>(this.baseUrl + 'api/Admin/list?name='+this.searchByName+'&page='+pageNumber+'&sortorder='+this.selectedNumber+'&enableDeleted='+this.enableDeleted+'&enableLocked='+this.enableLocked).subscribe(result => {
     
     if(result==null)
     window.alert("No content!");

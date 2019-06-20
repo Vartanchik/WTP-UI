@@ -1,0 +1,40 @@
+.player-card {
+    background-color: #ffffff;
+    border: 2px solid rgba(40, 91, 231, 0.404);
+    border-radius: 10px;
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-left: 10px;
+    height: 100px;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+.btn-primary {
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font: bold;
+    padding: 4px;
+    border-color:  #ffffff;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.player-name{
+    display: flex;
+    align-self: center;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.player-info{
+    display: flex;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.info{
+    margin-top: 7px;
+}

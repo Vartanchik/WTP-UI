@@ -1,0 +1,55 @@
+.player-card {
+    display: flex;
+    background-color: #ffffff;
+    border: 2px solid rgba(40, 91, 231, 0.404);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 600px;
+    margin-bottom: 30px;
+}
+
+.player-aside {
+    background-image: url(../../../../assets/cs-card.png);
+    width: 131px;
+    height: 170px;
+    background-size: 131px 170px;
+}
+
+.card-header {
+    width: 465px;
+    background-color: #f2f6f9;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-buttons {
+    display: flex;
+}
+
+.btn-primary {
+    margin-left: 10px;
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font: bold;
+    padding: 4px;
+    border-color:  #ffffff;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.player-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 10px;
+    height: 30%;
+}
+
+.player-rank {
+    width: 50%;
+}
+
+.player-server {
+    width: 50%;
+}

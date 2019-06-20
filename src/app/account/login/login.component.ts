@@ -4,6 +4,10 @@ import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommunicationService } from 'src/app/services/communication.service';
+import * as jwt_decode from 'jwt-decode';
+import {TaskQueue} from 'typescript-task-queue';
+import { mergeMap } from 'rxjs/operators';
+import { TokenResponse } from 'src/app/interfaces/token-response';
 import {IsUserService} from '../../services/is-user.service';
 
 @Component({
@@ -23,6 +27,7 @@ export class LoginComponent implements OnInit {
   { }
 
   ngOnInit() {
+
     if(this.service.checkExistenceToken()) {
       this.svc.setLoginValue(true);
       this.router.navigate(['/home']);
@@ -38,12 +43,23 @@ export class LoginComponent implements OnInit {
   });
 
   //Send data from login-form to API and process response
-  onSubmit() {
-    this.service.login(this.formModelLogin.value).subscribe(
+  async onSubmit() {
+    this.service.login(this.formModelLogin.value)
+    .pipe(
+      mergeMap( res => {
+        this.service.setAuthInfo(res);
+        const id = this.decode(res);
+        localStorage.setItem('id', id);
+        this.svc.setUserId(id);
+        return this.service.getIconInfo(id);
+      })
+    )
+    .subscribe(
       res => {
-        this.service.setAuthInfo(res.accessToken);
-        this.svc.setLoginValue(true);
-        if(res.accessToken.role!='Admin') {
+        localStorage.setItem('photo', res.photo);
+        localStorage.setItem('userName', res.userName);
+
+        if(jwt_decode(localStorage.getItem('token')).role != 'Admin') {
           this.isUserSvc.setValue(false);
           this.router.navigate(['/home']);
         }
@@ -51,16 +67,20 @@ export class LoginComponent implements OnInit {
           this.isUserSvc.setValue(true);
           this.router.navigate(['/admin', 'users']);
         }
-        this.toastr.success(res.message);
+
+        this.svc.setLoginValue(true);
+        this.toastr.success('Login successful.');
       },
       err => {
-        if (err.error.statusCode === 302) {
-          this.router.navigateByUrl(`/account/restore?email=${err.error.message}`);
-        } else {
-          this.toastr.error(err.error.info, err.error.message);
+        if (err.error.info === 'User is deleted.') {
+          this.router.navigateByUrl(`/account/restore?email=${this.formModelLogin.get('email').value}`);
         }
+        this.toastr.error(err.error.info, err.error.message);
       }
     );
   }
 
+  decode(token: TokenResponse) {
+    return jwt_decode(token.token).UserID;
+  }
 }

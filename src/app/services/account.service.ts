@@ -8,9 +8,11 @@ import {ForgotPassword} from '../interfaces/forgot-password';
 import {ResetPassword} from '../interfaces/reset-password';
 import {Observable, of} from 'rxjs';
 import {WtpResponse} from '../interfaces/wtp-response';
-import {TokenResponse, Token} from '../interfaces/token-response';
+import {TokenResponse} from '../interfaces/token-response';
 import {User} from '../interfaces/user';
 import {CommunicationService} from './communication.service';
+import { IconInfo } from '../interfaces/icon-info';
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: providedInConfig
@@ -25,7 +27,8 @@ export class AccountService {
 
   //Check existence JWT in local storage
   checkExistenceToken() {
-    return localStorage.getItem('token') == null
+    let is = localStorage.getItem('token');
+    return is === null || is === undefined
       ? false
       : true;
   }
@@ -40,24 +43,20 @@ export class AccountService {
   }
 
   //Set single item to localStorage
-  setItem(name: string, item: string) {
-    localStorage.setItem(name, item);
+  setItem(name: string, value: string) {
+    localStorage.setItem(name, value);
   }
 
   //Set JWT in local storage
-  setAuthInfo(body: Token) {
+  setAuthInfo(body: TokenResponse) {
     localStorage.setItem('token', body.token);
-    localStorage.setItem('expiration', body.expiration);
-    localStorage.setItem('refresh_token', body.refresh_token);
-    localStorage.setItem('userName', body.userName);
-    localStorage.setItem('photo', body.photo);
+    localStorage.setItem('refreshToken', body.refreshToken);
   }
 
   //Remove JWT from local storage
   removeAuthInfo() {
     localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('userName');
     localStorage.removeItem('photo');
   }
@@ -75,13 +74,7 @@ export class AccountService {
 
   //Send data from login form to API
   login(body: Login): Observable<TokenResponse> {
-    let formData = {
-      email: body.email,
-      password: body.password,
-      grantType: 'password'
-    };
-
-    return this.http.post<TokenResponse>(this.BaseURI + '/Token/Auth', formData);
+    return this.http.post<TokenResponse>(this.BaseURI + '/Token/GetAccess', body);
   }
 
   //Get user profile info from API
@@ -105,36 +98,26 @@ export class AccountService {
   }
 
   // Method to get new refresh token
-  getNewRefreshToken() {
-    let username = localStorage.getItem('userName');
-    let refreshToken = localStorage.getItem('refresh_token');
-    const grantType = 'refresh_token';
+  getNewRefreshToken(): Observable<TokenResponse> {
+    let refreshToken = localStorage.getItem('refreshToken');
 
-    return this.http.post(this.BaseURI + '/Token/Auth', {username, refreshToken, grantType});
+    return this.http.post<TokenResponse>(this.BaseURI + '/Token/RefreshAccess', refreshToken);
   }
 
-  getPhotoAndName(): Observable<User | WtpResponse> {
+  getPhotoAndName(): Observable<IconInfo> {
     const photo = this.getItem('photo');
     const userName = this.getItem('userName');
+    const token = localStorage.getItem('token');
 
-    if (photo == undefined || userName == undefined) {
+    if ((photo == undefined || userName == undefined) && token !== undefined) {
       //Get user info for navBar - avatar and userName
-      return this.getUserProfile();
+      return this.getIconInfo(jwt_decode(token).UserID);
     } else {
-      const usr: User = {
-        id: 0,
+      const icon: IconInfo = {
         userName: userName,
-        email: '',
-        photo: photo,
-        gender: {id: 0, name: ''},
-        dateOfBirth: '',
-        country: {id: 0, name: ''},
-        steam: '',
-        languages: [{id: 0, name: ''}],
-        players: [],
-        teams: []
-      };
-      return of(usr);
+        photo: photo
+      }
+      return of(icon);
     }
   }
 
@@ -147,6 +130,10 @@ export class AccountService {
     return this.http.post(this.BaseURI + '/Account/Restore', {}, {
       params: new HttpParams().set('email', email)
     });
+  }
+
+  getIconInfo(userId: string): Observable<IconInfo> {
+    return this.http.get<IconInfo>(`${this.BaseURI}/Info/UserIcon/${userId}`);
   }
 
 }
