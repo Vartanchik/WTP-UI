@@ -333,7 +333,7 @@ actionComplete(args) {
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var player = records[0] as PlayerInfo;
+      var player = args.data as PlayerInfo;
       player.gameId=this.gameObj.value as number;
       player.rankId=this.rankObj.value as number;
       player.goalId=this.goalObj.value as number;
@@ -345,9 +345,11 @@ actionComplete(args) {
       this.http.post(baseURIConfig+'/PlayerManage/item',player).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Something is wrong!");
+        this.getData();
       });
 
     this.operationSate='';
@@ -364,13 +366,15 @@ actionComplete(args) {
       this.http.put(baseURIConfig+'/PlayerManage/item',updatedPlayer).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Something is wrong!");
+        this.getData();
       }); 
     this.operationSate='';
     }
-    this.getData();
+    //this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {

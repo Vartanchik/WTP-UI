@@ -71,14 +71,16 @@ actionComplete(args) {
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var Goal = records[0] as Goal;
+      var Goal = args.data as Goal;
       console.log(records);
       this.http.post(baseURIConfig+'/Goal',Goal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+        this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Goalname is existed");
+        this.getData();
       });
       
     this.operationSate='';
@@ -90,13 +92,15 @@ actionComplete(args) {
       this.http.put(baseURIConfig+'/Goal/item/'+updatedGoal.id,updatedGoal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+        this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Goalname is existed");
+        this.getData();
       }); 
     this.operationSate='';
     }
-    this.getData();
+    //this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {

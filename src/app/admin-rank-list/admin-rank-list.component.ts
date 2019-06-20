@@ -71,14 +71,17 @@ actionComplete(args) {
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var Rank = records[0] as Rank;
+      //var Rank = records[0] as Rank;
+      var rank = args.data as Rank;
       console.log(records);
-      this.http.post(baseURIConfig+'/Rank/item',Rank).subscribe(
+      this.http.post(baseURIConfig+'/Rank/item',rank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Rankname or email are existed");
+        this.getData();
       });
       
     this.operationSate='';
@@ -90,13 +93,15 @@ actionComplete(args) {
       this.http.put(baseURIConfig+'/Rank/item/'+updatedRank.id,updatedRank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Rankname or email are existed");
+        this.getData();
       }); 
     this.operationSate='';
     }
-    this.getData();
+    //this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {

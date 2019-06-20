@@ -70,14 +70,16 @@ actionComplete(args) {
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var game = records[0] as Game;
+      var game = args.data as Game;
       console.log(records);
       this.http.post(baseURIConfig+'/Game/item',game).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+        this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("gamename is existed");
+        this.getData();
       });
       
     this.operationSate='';
@@ -89,13 +91,15 @@ actionComplete(args) {
       this.http.put(baseURIConfig+'/Game/item/'+updatedgame.id,updatedgame).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+        this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("gamename is existed");
+        this.getData();
       }); 
     this.operationSate='';
     }
-    this.getData();
+    //this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
