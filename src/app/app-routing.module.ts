@@ -20,10 +20,7 @@ import { DotaComponent } from './global-players/dota/dota.component';
 import { GtaComponent } from './global-players/gta/gta.component';
 import { CsGoComponent } from './global-players/cs-go/cs-go.component';
 import {RestoreComponent} from './account/restore/restore.component';
-import { AdminFilterListComponent } from './admin-filter-list/admin-filter-list.component';
 import { AdminPlayerListComponent } from './admin-player-list/admin-player-list.component';
-import { AdminTestListComponent } from './admin-test-list/admin-test-list.component';
-import { AdminPagingListComponent } from './admin-paging-list/admin-paging-list.component';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { AdminRankListComponent } from './admin-rank-list/admin-rank-list.component';
@@ -52,11 +49,9 @@ const routes: Routes = [
     children: [
       { path: 'users', component: UserListComponent },
       {path: 'history', component: SectionHistoryComponent},
-      //{path: 'games', component: SectionGamesComponent},
       { path: 'users/edit/:id', component: UserUpdateComponent },
       { path: 'users/block/:id', component: LockUserComponent },
       { path: 'users/create', component: UserCreateComponent },
-      //{ path: 'lib', component:AdminFilterListComponent},
       { path: 'users/list', component:AdminUserListComponent},
       { path: 'games', component:AdminGameListComponent},
       { path: 'ranks', component:AdminRankListComponent},
@@ -64,8 +59,6 @@ const routes: Routes = [
       { path: 'players', component:AdminPlayerListComponent},
       { path: 'teams', component:AdminTeamListComponent},
       { path: 'users/history', component:AdminHistoryListComponent},
-      //{ path: 'lol', component:AdminTestListComponent},
-      { path: 'paging', component:AdminPagingListComponent},
       {path: '', redirectTo: 'users',pathMatch: 'full'},//component: UserListComponent},
       { path: '**', component: NotFoundComponent }
     ]

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Query } from '@syncfusion/ej2-data';
 
 import { Grid, Filter,Page,Sort, SortEventArgs, PageSettingsModel, EditSettingsModel, ToolbarItems, FilterSettingsModel, IEditCell } from '@syncfusion/ej2-grids';
-import { data } from './data';
 import { NotifyPropertyChanges } from '@syncfusion/ej2-base';
 import { ChangeEventArgs } from '@syncfusion/ej2-inputs';
 import { HttpClient } from '@angular/common/http';
@@ -301,7 +300,6 @@ this.userObj.appendTo(this.userElem);
   this.getData();
       
       this.initialPage = { pageSize: 3};
-      this.data = data;
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
         allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog'

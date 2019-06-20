@@ -25,7 +25,6 @@ import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommunicationService } from './services/communication.service';
 import { GameSwitchButtonComponent } from './home/game-switch-button/game-switch-button.component';
-import { AdminComponentComponent } from './admin-component/admin-component.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from '../routes';
 import { SectionHistoryComponent } from './sections/section-history/section-history.component';
@@ -56,13 +55,10 @@ import { TeamProfileCreateComponent } from './team-profile-create/team-profile-c
 import { TeamProfileEditComponent } from './team-profile-edit/team-profile-edit.component';
 
 import { GridModule, PageService, ToolbarService, SortService, FilterService, GroupService, EditService } from '@syncfusion/ej2-angular-grids';
-import { AdminFilterListComponent } from './admin-filter-list/admin-filter-list.component';
 import { MatTableModule, MatTreeModule } from '@angular/material'
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { AdminPlayerListComponent } from './admin-player-list/admin-player-list.component';
-import { AdminTestListComponent } from './admin-test-list/admin-test-list.component';
-import { AdminPagingListComponent } from './admin-paging-list/admin-paging-list.component';
 
 import { NumericTextBoxComponent } from '@syncfusion/ej2-angular-inputs';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
@@ -85,7 +81,6 @@ import { AdminTeamListComponent } from './admin-team-list/admin-team-list.compon
     HeaderComponent,
     FooterComponent,
     GameSwitchButtonComponent,
-    AdminComponentComponent,
     SectionHistoryComponent,
     SectionGamesComponent,
     UserListComponent,
@@ -103,11 +98,8 @@ import { AdminTeamListComponent } from './admin-team-list/admin-team-list.compon
     TeamProfileListComponent,
     TeamProfileCreateComponent,
     TeamProfileEditComponent,
-    AdminFilterListComponent,
     DropDownListComponent,
     AdminPlayerListComponent,
-    AdminTestListComponent,
-    AdminPagingListComponent,
     NumericTextBoxComponent,
     AdminUserListComponent,
     AdminGameListComponent,
