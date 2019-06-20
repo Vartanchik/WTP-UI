@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommunicationService } from 'src/app/services/communication.service';
+import {IsUserService} from '../../services/is-user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private router: Router, 
     private toastr: ToastrService, 
     private fb: FormBuilder, 
-    private svc: CommunicationService) 
+    private svc: CommunicationService,
+    private isUserSvc: IsUserService)
   { }
 
   ngOnInit() {
@@ -41,10 +43,14 @@ export class LoginComponent implements OnInit {
       res => {
         this.service.setAuthInfo(res.accessToken);
         this.svc.setLoginValue(true);
-        if(res.accessToken.role!='Admin')
+        if(res.accessToken.role!='Admin') {
+          this.isUserSvc.setValue(false);
           this.router.navigate(['/home']);
-        else
+        }
+        else {
+          this.isUserSvc.setValue(true);
           this.router.navigate(['/admin', 'users']);
+        }
         this.toastr.success(res.message);
       },
       err => {

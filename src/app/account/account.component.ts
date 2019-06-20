@@ -6,6 +6,7 @@ import { CommunicationService } from '../services/communication.service';
 import { Subscription, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import {IsUserService} from '../services/is-user.service';
 
 @Component({
   selector: 'app-account',
@@ -23,7 +24,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private service: AccountService, 
-    private svc: CommunicationService) 
+    private svc: CommunicationService,
+    private isUserSvc: IsUserService)
   { }
   
   ngOnInit() {
@@ -55,6 +57,7 @@ export class AccountComponent implements OnInit {
   //Logout user and delete JWT from local storage
   onLogout() {
     this.isLogin = false;
+    this.isUserSvc.setValue(true);
     this.service.removeAuthInfo();
     this.toastr.success('Logged out.', 'Completed.');
   }
