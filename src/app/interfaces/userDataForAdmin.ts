@@ -1,5 +1,5 @@
 export class User {
-    constructor(
+  constructor(
     public id?: number,
     public userName?: string,
     public email?: string,
@@ -10,5 +10,6 @@ export class User {
     public steamId?: string,
     public lockoutEnabled?: boolean,
     public lockoutEnd?: Date,
-    public deletedStatus?: boolean) { }
+    public deletedStatus?: boolean) {
+  }
 }

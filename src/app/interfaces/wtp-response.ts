@@ -1,5 +1,5 @@
 export interface WtpResponse {
-    statusCode: number;
-    message: string;
-    info?: string;
+  statusCode: number;
+  message: string;
+  info?: string;
 }

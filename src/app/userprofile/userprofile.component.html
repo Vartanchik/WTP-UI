@@ -1,5 +1,5 @@
 <hr id="account-line">
-<div class="container" id="containerProfile" *ngIf="isValid == false">
+<div *ngIf="isValid == false" class="container" id="containerProfile">
   <ngb-tabset>
     <ngb-tab title="User Profile">
       <ng-template ngbTabContent>
@@ -12,15 +12,15 @@
               </div>
               <div class="card-body">
                 <div id="cardUploadAvatar">
-                  <img src="{{userProfile.photo}}" id="avatarInProfile" alt="Profile avatar">
+                  <img alt="Profile avatar" id="avatarInProfile" src="{{userProfile.photo}}">
                 </div>
 
-                <form [formGroup]="formModelUser" autocomplete="off" (submit)="onSubmit()">
+                <form (submit)="onSubmit()" [formGroup]="formModelUser" autocomplete="off">
 
                   <div class="form-group" id="upload">
                     <div class="custom-file">
-                      <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01"
-                        (change)="onFileChange($event)" />
+                      <input (change)="onFileChange($event)" aria-describedby="inputGroupFileAddon01" class="form-control custom-file-input"
+                             type="file"/>
                       <label class="custom-file-label">UPDATE AVATAR</label>
                     </div>
                   </div>
@@ -29,18 +29,18 @@
                   <div class="row justify-content-center">
                     <div class="col-md-6 form-group required">
                       <label class="labelLeft">Name*</label>
-                      <input class="form-control" formControlName="userName" [(ngModel)]="userProfile.userName" />
-                      <small id="userNameHelp" class="form-text text-muted">
+                      <input [(ngModel)]="userProfile.userName" class="form-control" formControlName="userName"/>
+                      <small class="form-text text-muted" id="userNameHelp">
                         Username must be 4-16 characters long.
                       </small>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required">
+                      <label *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.required"
+                             class="text-danger">
                         This field is mandatory.</label>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.minlength">
+                      <label *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.minlength"
+                             class="text-danger">
                         Minimum 4 characters required.</label>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength">
+                      <label *ngIf="formModelUser.get('userName').touched && formModelUser.get('userName').errors?.maxlength"
+                             class="text-danger">
                         Maximum 16 characters required.</label>
                     </div>
                   </div>
@@ -48,19 +48,19 @@
                   <div class="row justify-content-between">
                     <div class="col-md-6 form-group required">
                       <label>Gender*</label>
-                      <ng-multiselect-dropdown formControlName="gender" [placeholder]="'Choose gender'"
-                        [data]="dropdownListGenders" [(ngModel)]="selectedItemGender"
-                        [settings]="dropdownSettingsGenders">
+                      <ng-multiselect-dropdown [(ngModel)]="selectedItemGender" [data]="dropdownListGenders"
+                                               [placeholder]="'Choose gender'" [settings]="dropdownSettingsGenders"
+                                               formControlName="gender">
                       </ng-multiselect-dropdown>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required">
+                      <label *ngIf="formModelUser.get('gender').touched && formModelUser.get('gender').errors?.required"
+                             class="text-danger">
                         This field is mandatory.</label>
                     </div>
 
                     <div class="col-md-6 form-group required">
                       <label>Date of birth*</label>
-                      <my-date-picker id="piker" name="mydate" [placeholder]="model" [(ngModel)]="model"
-                        [options]="myDatePickerOptions" formControlName="dateOfBirth"></my-date-picker>
+                      <my-date-picker [(ngModel)]="model" [options]="myDatePickerOptions" [placeholder]="model" formControlName="dateOfBirth"
+                                      id="piker" name="mydate"></my-date-picker>
                     </div>
                   </div>
 
@@ -68,29 +68,30 @@
                   <div class="row justify-content-between">
                     <div class="col-md-6 form-group required">
                       <label>Country*</label>
-                      <ng-multiselect-dropdown formControlName="country" [placeholder]="'Choose country'"
-                        [data]="dropdownListCountries" [(ngModel)]="selectedItemCountry"
-                        [settings]="dropdownSettingsCountries">
+                      <ng-multiselect-dropdown [(ngModel)]="selectedItemCountry" [data]="dropdownListCountries"
+                                               [placeholder]="'Choose country'" [settings]="dropdownSettingsCountries"
+                                               formControlName="country">
                       </ng-multiselect-dropdown>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required">
+                      <label *ngIf="formModelUser.get('country').touched && formModelUser.get('country').errors?.required"
+                             class="text-danger">
                         This field is mandatory.</label>
                     </div>
 
                     <div class="col-md-6 form-group required">
                       <label>Languages*</label>
-                      <ng-multiselect-dropdown id="lingvoSelect" formControlName="languages"
-                        [placeholder]="'Choose language'" [data]="dropdownListLanguages"
-                        [(ngModel)]="selectedItemsLanguages" [settings]="dropdownSettingsLanguages">
+                      <ng-multiselect-dropdown [(ngModel)]="selectedItemsLanguages" [data]="dropdownListLanguages"
+                                               [placeholder]="'Choose language'" [settings]="dropdownSettingsLanguages"
+                                               formControlName="languages"
+                                               id="lingvoSelect">
                       </ng-multiselect-dropdown>
-                      <label class="text-danger"
-                        *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required">
+                      <label *ngIf="formModelUser.get('languages').touched && formModelUser.get('languages').errors?.required"
+                             class="text-danger">
                         This field is mandatory.</label>
                     </div>
                   </div>
                   <br>
                   <div class="form-group center-elements">
-                    <button id="create-button" type="submit" class="btn btn-primary" [disabled]="!formModelUser.valid">
+                    <button [disabled]="!formModelUser.valid" class="btn btn-primary" id="create-button" type="submit">
                       SAVE CHANGES
                     </button>
                   </div>
@@ -102,13 +103,13 @@
                   <div class="row">
 
                     <div class="col-md-6 center-elements">
-                      <button id="create-button" class="btn btn-dark" routerLink="../account/changepassword">
+                      <button class="btn btn-dark" id="create-button" routerLink="../account/changepassword">
                         CHANGE PASSWORD
                       </button>
                     </div>
 
                     <div class="col-md-6 center-elements">
-                      <button id="create-button" class="btn btn-danger" (click)="performDelete()">
+                      <button (click)="performDelete()" class="btn btn-danger" id="create-button">
                         DELETE ACCOUNT
                       </button>
                     </div>

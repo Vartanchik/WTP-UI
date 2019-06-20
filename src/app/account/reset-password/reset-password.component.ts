@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup, ValidationErrors } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from 'src/app/services/account.service';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 
 @Component({
@@ -15,6 +15,11 @@ export class ResetPasswordComponent implements OnInit {
 
   userId: string;
   code: string;
+  formModelResetPassword = this.fb.group({
+      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
+      confirmPassword: ['', Validators.required]
+    }, {validators: [this.checkPasswords]}
+  );
 
   constructor(
     public service: AccountService,
@@ -22,13 +27,8 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private fb: FormBuilder
-    ) { }
-
-  formModelResetPassword = this.fb.group({
-    newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
-    confirmPassword: ['', Validators.required]
-  }, { validators : [this.checkPasswords] }
-  );
+  ) {
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParams => {
@@ -58,6 +58,6 @@ export class ResetPasswordComponent implements OnInit {
     const newPassword = fb.get('newPassword').value;
     const confirmPassword = fb.get('confirmPassword').value;
     return newPassword === confirmPassword
-        ? null : { notSame: true };
+      ? null : {notSame: true};
   }
 }

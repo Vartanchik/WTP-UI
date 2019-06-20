@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LockUserComponent } from './lock-user.component';
+import {LockUserComponent} from './lock-user.component';
 
 describe('LockUserComponent', () => {
   let component: LockUserComponent;
@@ -8,9 +8,9 @@ describe('LockUserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LockUserComponent ]
+      declarations: [LockUserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

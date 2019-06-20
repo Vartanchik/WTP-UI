@@ -1,7 +1,6 @@
-import { History } from './history';
+import {History} from './history';
 
-export class HistoryFilterViewModel
-{
-    public histories:History[];
-    public selectedName:string;
+export class HistoryFilterViewModel {
+  public histories: History[];
+  public selectedName: string;
 }

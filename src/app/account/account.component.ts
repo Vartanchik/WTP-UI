@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AccountService } from '../services/account.service';
-import { User } from '../interfaces/user';
-import { CommunicationService } from '../services/communication.service';
-import { Subscription, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { IconInfo } from '../interfaces/icon-info';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from '../services/account.service';
+import {CommunicationService} from '../services/communication.service';
+import {of, Subscription} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
+import {IconInfo} from '../interfaces/icon-info';
 import {IsUserService} from '../services/is-user.service';
 
 @Component({
@@ -24,33 +22,34 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private service: AccountService, 
+    private service: AccountService,
     private svc: CommunicationService,
-    private isUserSvc: IsUserService)
-  { }
-  
+    private isUserSvc: IsUserService) {
+  }
+
   ngOnInit() {
     this.disposable.add(
       this.svc.getLoginValue()
-      .pipe(
-        flatMap(val => {
-          if (val){ 
-            return this.service.getPhotoAndName();}
-          else{ 
-            return of({});}
-        })
-      )
-      .subscribe(
-        obj => {
-          if (obj && obj.hasOwnProperty('photo')) {
-          this.isLogin = true;
-          this.photo = (obj as IconInfo).photo;
-          this.userName = (obj as IconInfo).userName;
-          } else {
-            this.isLogin = false;
+        .pipe(
+          flatMap(val => {
+            if (val) {
+              return this.service.getPhotoAndName();
+            } else {
+              return of({});
+            }
+          })
+        )
+        .subscribe(
+          obj => {
+            if (obj && obj.hasOwnProperty('photo')) {
+              this.isLogin = true;
+              this.photo = (obj as IconInfo).photo;
+              this.userName = (obj as IconInfo).userName;
+            } else {
+              this.isLogin = false;
+            }
           }
-        }
-      )
+        )
     );
     this.service.checkExistenceTokenAsync();
   }

@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Player } from '../../interfaces/player';
-import { PlayerService } from '../../services/player.service';
-import { PlayerCommunicationServer } from '../../services/player.communication.service';
-import { dropdownListGamesConfig } from '../../services/dataconfig';
-import { ToastrService } from 'ngx-toastr';
-import { Invitation } from '../../interfaces/invitation';
-import { TeamService } from '../../services/team.service';
+import {Component, OnInit} from '@angular/core';
+import {Player} from '../../interfaces/player';
+import {PlayerService} from '../../services/player.service';
+import {PlayerCommunicationServer} from '../../services/player.communication.service';
+import {dropdownListGamesConfig} from '../../services/dataconfig';
+import {ToastrService} from 'ngx-toastr';
+import {Invitation} from '../../interfaces/invitation';
+import {TeamService} from '../../services/team.service';
 
 @Component({
   selector: 'app-player-profile-list',
@@ -14,19 +14,17 @@ import { TeamService } from '../../services/team.service';
 })
 export class PlayerProfileListComponent implements OnInit {
 
+  public userId: number;
+  public numberOfGames: number;
+  public inviteList: Invitation[] = [];
+  private players: Player[] = [];
+
   constructor(
     private playerService: PlayerService,
     private teamService: TeamService,
     private data: PlayerCommunicationServer,
-    private toastr: ToastrService) { }
-
-  public userId: number;
-
-  public numberOfGames: number;
-
-  public inviteList: Invitation[] = [];
-
-  private players: Player[] = [];
+    private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;

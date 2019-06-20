@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {History} from '../../interfaces/history';
-import { UserService } from 'src/app/services/user.service';
-import { HttpClient } from '@angular/common/http';
-import { HistoryIndexViewModel } from 'src/app/interfaces/historyIndexViewModel';
-import { HistorySortState } from 'src/app/interfaces/historySortViewModel';
+import {UserService} from 'src/app/services/user.service';
+import {HttpClient} from '@angular/common/http';
+import {HistoryIndexViewModel} from 'src/app/interfaces/historyIndexViewModel';
+import {HistorySortState} from 'src/app/interfaces/historySortViewModel';
 
 @Component({
   selector: 'app-section-history',
@@ -27,87 +27,79 @@ export class SectionHistoryComponent implements OnInit {
 
   //Array of users at current page
   histories: History[];
-  private http: HttpClient;
-  private baseUrl: string=this.userService.baseUrl;//"http://localhost:5000/";
-
   //Current page
   public pageNumber: number = 1;
-
   //Count of pages
   public Count: number;
-
   //Count of users at one page
-  public itemOnPage:number;
-  
+  public itemOnPage: number;
+  // public filter : UserFilterViewModel;
+  public sortBySome: HistorySortState[] = [HistorySortState.EmailAsc, HistorySortState.EmailDesc,
+    HistorySortState.NameAsc, HistorySortState.NameDesc, HistorySortState.IdAsc, HistorySortState.IdDesc,
+    HistorySortState.UserIdAsc, HistorySortState.UserIdDesc, HistorySortState.AdminIdAsc,
+    HistorySortState.AdminIdDesc, HistorySortState.DateAsc, HistorySortState.DateDesc];
+  //Sorting field
+  public nameOfSort: string[] = [HistorySortState[HistorySortState.EmailAsc], HistorySortState[HistorySortState.EmailDesc],
+    HistorySortState[HistorySortState.NameAsc], HistorySortState[HistorySortState.NameDesc],
+    HistorySortState[HistorySortState.IdAsc], HistorySortState[HistorySortState.IdDesc],
+    HistorySortState[HistorySortState.UserIdAsc], HistorySortState[HistorySortState.UserIdDesc],
+    HistorySortState[HistorySortState.AdminIdAsc], HistorySortState[HistorySortState.AdminIdDesc],
+    HistorySortState[HistorySortState.DateAsc], HistorySortState[HistorySortState.DateDesc]];
+
   // public sort: UserSortViewModel;
   // public pageView : UserPageViewModel;
-  // public filter : UserFilterViewModel;
-  public sortBySome:HistorySortState[]=[HistorySortState.EmailAsc,HistorySortState.EmailDesc,
-     HistorySortState.NameAsc, HistorySortState.NameDesc,HistorySortState.IdAsc,HistorySortState.IdDesc,
-     HistorySortState.UserIdAsc,HistorySortState.UserIdDesc,HistorySortState.AdminIdAsc,
-     HistorySortState.AdminIdDesc, HistorySortState.DateAsc, HistorySortState.DateDesc];
-  //Sorting field
-  public nameOfSort:string[]=[HistorySortState[HistorySortState.EmailAsc],HistorySortState[HistorySortState.EmailDesc],
-  HistorySortState[HistorySortState.NameAsc],HistorySortState[HistorySortState.NameDesc],
-  HistorySortState[HistorySortState.IdAsc],HistorySortState[HistorySortState.IdDesc],
-  HistorySortState[HistorySortState.UserIdAsc], HistorySortState[HistorySortState.UserIdDesc],
-  HistorySortState[HistorySortState.AdminIdAsc], HistorySortState[HistorySortState.AdminIdDesc],
-  HistorySortState[HistorySortState.DateAsc], HistorySortState[HistorySortState.DateDesc]];
-
   //Selected name of sorting field
-  public selectedNumber:string=HistorySortState[HistorySortState.DateDesc];
-
+  public selectedNumber: string = HistorySortState[HistorySortState.DateDesc];
   //Model, which consists of data about paging, sorting and filters
-  public model :HistoryIndexViewModel;
-
+  public model: HistoryIndexViewModel;
   //Input name pattern for searching
-  public searchByName:string='';
+  public searchByName: string = '';
+  private http: HttpClient;
+  private baseUrl: string = this.userService.baseUrl;//"http://localhost:5000/";
 
+  constructor(private userService: UserService, http: HttpClient) {
+    this.http = http;
+  }
 
-constructor(private userService: UserService, http:HttpClient) {
-  this.http = http;
- }
-
-ngOnInit() {
-  this.load();
-}
+  ngOnInit() {
+    this.load();
+  }
 
 //Load data from first page which contains filtered and sorted user information by default params
-load() {
-  this.http.get<HistoryIndexViewModel>(this.baseUrl + 'api/Admin/history?name='+this.searchByName+'&page='+this.pageNumber+'&sortorder='+this.selectedNumber).subscribe(result => {
-      
-    if(result==null)
-      window.alert("No content!");
-    else{
-      this.model=result;      
-      this.histories = result.histories;
-      this.pageNumber = result.pageViewModel.pageNumber;
-      this.Count = result.pageViewModel.totalPages*result.histories.length;
-      this.itemOnPage= result.histories.length;
-    }
+  load() {
+    this.http.get<HistoryIndexViewModel>(this.baseUrl + 'api/Admin/history?name=' + this.searchByName + '&page=' + this.pageNumber + '&sortorder=' + this.selectedNumber).subscribe(result => {
+
+      if (result == null) {
+        window.alert('No content!');
+      } else {
+        this.model = result;
+        this.histories = result.histories;
+        this.pageNumber = result.pageViewModel.pageNumber;
+        this.Count = result.pageViewModel.totalPages * result.histories.length;
+        this.itemOnPage = result.histories.length;
+      }
     }, error => console.error(error));
-}
+  }
 
 //Load data by changing page
-onPageChange = (pageNumber) => {
-this.http.get<HistoryIndexViewModel>(this.baseUrl + 'api/Admin/history?name='+this.searchByName+'&page='+pageNumber+'&sortorder='+this.selectedNumber).subscribe(result => {
-  
-  if(result==null)
-  window.alert("No content!");
-else{
-  this.model=result;
-  this.histories = result.histories;
-  this.pageNumber = result.pageViewModel.pageNumber;
-  this.Count = result.pageViewModel.totalPages*result.histories.length;
-  this.itemOnPage= result.histories.length;
-  }
-  }, error => console.error(error));
-}
+  onPageChange = (pageNumber) => {
+    this.http.get<HistoryIndexViewModel>(this.baseUrl + 'api/Admin/history?name=' + this.searchByName + '&page=' + pageNumber + '&sortorder=' + this.selectedNumber).subscribe(result => {
+
+      if (result == null) {
+        window.alert('No content!');
+      } else {
+        this.model = result;
+        this.histories = result.histories;
+        this.pageNumber = result.pageViewModel.pageNumber;
+        this.Count = result.pageViewModel.totalPages * result.histories.length;
+        this.itemOnPage = result.histories.length;
+      }
+    }, error => console.error(error));
+  };
 
 //Apply filters
-search()
-{
+  search() {
     this.onPageChange(1);
-}
+  }
 
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from 'src/app/services/account.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +11,19 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private service: AccountService, private router: Router, private toastr: ToastrService, private fb: FormBuilder) { }
+  //Validation rules
+  formModelRegister = this.fb.group({
+    confirmCheckbox: ['', Validators.required],
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email]],
+    passwords: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
+      confirmPassword: ['', Validators.required]
+    }, {validator: this.comparePasswords})
+  });
+
+  constructor(private service: AccountService, private router: Router, private toastr: ToastrService, private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.formModelRegister.reset();
@@ -20,24 +32,15 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  //Validation rules
-  formModelRegister = this.fb.group({
-    confirmCheckbox:  ['', Validators.required],
-    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-    email: ['', [Validators.required, Validators.email]],
-    passwords: this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
-      confirmPassword: ['', Validators.required ]}, { validator: this.comparePasswords })
-  });
-
   //Compare password on forms
   comparePasswords(fb: FormGroup) {
     let confirmPswrdCtrl = fb.get('confirmPassword');
     if (confirmPswrdCtrl.errors == null || 'passwordMismatch' in confirmPswrdCtrl.errors) {
-      if (fb.get('password').value != confirmPswrdCtrl.value)
-        confirmPswrdCtrl.setErrors({ passwordMismatch: true });
-      else
+      if (fb.get('password').value != confirmPswrdCtrl.value) {
+        confirmPswrdCtrl.setErrors({passwordMismatch: true});
+      } else {
         confirmPswrdCtrl.setErrors(null);
+      }
     }
   }
 
@@ -55,5 +58,5 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
-  
+
 }

@@ -11,15 +11,15 @@ import {IsUserService} from './services/is-user.service';
 
 export class AppComponent implements OnInit {
 
+  title = 'wtp-ui';
+  isUser: boolean;
+
   constructor(
     private router: Router,
     private infoService: InfoService,
     private isUserSvc: IsUserService
   ) {
   }
-
-  title = 'wtp-ui';
-  isUser: boolean;
 
   navigateToPlayers(): void {
     const selectedGame = this.infoService.getSelectedGame();

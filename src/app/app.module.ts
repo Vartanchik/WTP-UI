@@ -30,29 +30,29 @@ import {UserListComponent} from './users/user-list/user-list.component';
 import {UserUpdateComponent} from './users/user-update/user-update.component';
 
 import {UserService} from './services/user.service';
-import { NotFoundComponent } from './users/not-found/not-found.component';
-import { UserCreateComponent } from './users/user-create/user-create.component';
+import {NotFoundComponent} from './users/not-found/not-found.component';
+import {UserCreateComponent} from './users/user-create/user-create.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
-import { LockUserComponent } from './users/lock-user/lock-user.component';
+import {LockUserComponent} from './users/lock-user/lock-user.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import { ConfirmDeleteComponent } from './userprofile/confirm-delete/confirm-delete.component';
-import { GlobalPlayersModule } from './global-players/global-players.module';
-import { GlobalTeamsModule } from './global-teams/global-teams.module';
-import { RestoreComponent } from './account/restore/restore.component';
-import { PlayerProfileCreateComponent } from './player/player-profile-create/player-profile.component';
-import { PlayerProfileListComponent } from './player/player-profile-list/player-profile-list.component';
-import { PlayerCommunicationServer } from './services/player.communication.service';
-import { PlayerService } from './services/player.service';
-import { PlayerProfileEditComponent } from './player/player-profile-edit/player-profile-edit.component';
-import { TeamProfileListComponent } from './team/team-profile-list/team-profile-list.component';
-import { TeamService } from './services/team.service';
-import { TeamCommunicationService } from './services/team.communication.service';
-import { TeamProfileCreateComponent } from './team/team-profile-create/team-profile-create.component';
-import { TeamProfileEditComponent } from './team/team-profile-edit/team-profile-edit.component';
-import { PlayerPageComponent } from './player/player-page/player-page.component';
-import { TeamPageComponent } from './team/team-page/team-page.component';
+import {ConfirmDeleteComponent} from './userprofile/confirm-delete/confirm-delete.component';
+import {GlobalPlayersModule} from './global-players/global-players.module';
+import {GlobalTeamsModule} from './global-teams/global-teams.module';
+import {RestoreComponent} from './account/restore/restore.component';
+import {PlayerProfileCreateComponent} from './player/player-profile-create/player-profile.component';
+import {PlayerProfileListComponent} from './player/player-profile-list/player-profile-list.component';
+import {PlayerCommunicationServer} from './services/player.communication.service';
+import {PlayerService} from './services/player.service';
+import {PlayerProfileEditComponent} from './player/player-profile-edit/player-profile-edit.component';
+import {TeamProfileListComponent} from './team/team-profile-list/team-profile-list.component';
+import {TeamService} from './services/team.service';
+import {TeamCommunicationService} from './services/team.communication.service';
+import {TeamProfileCreateComponent} from './team/team-profile-create/team-profile-create.component';
+import {TeamProfileEditComponent} from './team/team-profile-edit/team-profile-edit.component';
+import {PlayerPageComponent} from './player/player-page/player-page.component';
+import {TeamPageComponent} from './team/team-page/team-page.component';
 
 import {
   EditService,
@@ -119,7 +119,7 @@ import {IsUserService} from './services/is-user.service';
     AdminGoalListComponent,
     AdminHistoryListComponent,
     AdminTeamListComponent,
-    ],
+  ],
   imports: [
     NgbModule,
     BrowserModule,
@@ -167,4 +167,5 @@ import {IsUserService} from './services/is-user.service';
     ConfirmDeleteComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

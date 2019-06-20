@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { baseURIConfig } from './dataconfig';
-import { Player } from '../interfaces/player';
-import { WtpResponse } from '../interfaces/wtp-response';
-import { Invitation } from '../interfaces/invitation';
-import { PlayerForPlayerPage } from '../interfaces/player-for-player-page';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {baseURIConfig} from './dataconfig';
+import {Player} from '../interfaces/player';
+import {WtpResponse} from '../interfaces/wtp-response';
+import {PlayerForPlayerPage} from '../interfaces/player-for-player-page';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,8 @@ export class PlayerService {
 
   readonly BaseURI = baseURIConfig;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getPlayerById(playerId: number): Observable<PlayerForPlayerPage> {
     return this.http.get<PlayerForPlayerPage>(this.BaseURI + '/Player/' + playerId);

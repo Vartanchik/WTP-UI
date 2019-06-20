@@ -1,7 +1,6 @@
-import { User } from './userDataForAdmin';
+import {User} from './userDataForAdmin';
 
-export class UserFilterViewModel
-{
-    public users:User[];
-    public selectedName:string;
+export class UserFilterViewModel {
+  public users: User[];
+  public selectedName: string;
 }

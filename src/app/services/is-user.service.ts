@@ -8,11 +8,13 @@ export class IsUserService {
 
   private subject: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
-  constructor() { }
+  constructor() {
+  }
 
   setValue(value: boolean) {
     this.subject.next(value);
   }
+
   getValue(): Observable<boolean> {
     return this.subject.asObservable();
   }

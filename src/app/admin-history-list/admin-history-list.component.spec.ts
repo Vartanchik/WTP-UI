@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminHistoryListComponent } from './admin-history-list.component';
+import {AdminHistoryListComponent} from './admin-history-list.component';
 
 describe('AdminHistoryListComponent', () => {
   let component: AdminHistoryListComponent;
@@ -8,9 +8,9 @@ describe('AdminHistoryListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminHistoryListComponent ]
+      declarations: [AdminHistoryListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

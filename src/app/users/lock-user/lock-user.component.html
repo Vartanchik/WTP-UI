@@ -1,22 +1,21 @@
-
-    <form #userForm="ngForm">
-    <h2>Enter days for ban user</h2>
-    <div class="form-group">
-        <label>Ban Days(1-99)</label>
-        <input type="number" required pattern="^[1-9]{1,2}$" min="1" max="99" [(ngModel)]="user.days" class="form-control" name="days" #days="ngModel"/>
-                <div class="alert alert-danger"
-                *ngIf="days.errors?.required && days.touched">
-                This field is required!
-            </div>
-            <div class="alert alert-danger"
-          *ngIf="days.errors?.pattern && days.touched">
-          Field is invalid!
-      </div>
-      </div>
-    <div class="form-group">
-        <button type="submit" (click)="save()" [disabled]="userForm.form.invalid" class="btn btn-success">Save</button>
-        <a routerLink="/" class="btn btn-warning">Cancel</a>
+<form #userForm="ngForm">
+  <h2>Enter days for ban user</h2>
+  <div class="form-group">
+    <label>Ban Days(1-99)</label>
+    <input #days="ngModel" [(ngModel)]="user.days" class="form-control" max="99" min="1" name="days" pattern="^[1-9]{1,2}$"
+           required type="number"/>
+    <div *ngIf="days.errors?.required && days.touched"
+         class="alert alert-danger">
+      This field is required!
     </div>
-  </form>
-  
+    <div *ngIf="days.errors?.pattern && days.touched"
+         class="alert alert-danger">
+      Field is invalid!
+    </div>
+  </div>
+  <div class="form-group">
+    <button (click)="save()" [disabled]="userForm.form.invalid" class="btn btn-success" type="submit">Save</button>
+    <a class="btn btn-warning" routerLink="/">Cancel</a>
+  </div>
+</form>
   

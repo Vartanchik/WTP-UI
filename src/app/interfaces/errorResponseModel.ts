@@ -1,4 +1,3 @@
-export class ErrorResponseModel
-{
-    message: string[];
+export class ErrorResponseModel {
+  message: string[];
 }

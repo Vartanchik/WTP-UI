@@ -1,4 +1,4 @@
 export class UpdateModel {
-    public email:string;
-    public userName:string;
+  public email: string;
+  public userName: string;
 }

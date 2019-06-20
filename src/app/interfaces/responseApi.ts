@@ -1,4 +1,4 @@
 export interface ResponseApi {
-     statusCode:string;
-     message:string;
+  statusCode: string;
+  message: string;
 }

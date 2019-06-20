@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { WtpResponse } from '../interfaces/wtp-response';
-import { ClickEventArgs } from '@syncfusion/ej2-splitbuttons/src/split-button';
-import { HttpClient } from '@angular/common/http';
-import { PageSettingsModel, EditSettingsModel, ToolbarItems, FilterSettingsModel } from '@syncfusion/ej2-grids';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
-import { ChangeEventArgs } from '@syncfusion/ej2-navigations/src';
-import { baseURIConfig } from '../services/dataconfig';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {EditSettingsModel, FilterSettingsModel, PageSettingsModel, ToolbarItems} from '@syncfusion/ej2-grids';
+import {GridComponent} from '@syncfusion/ej2-angular-grids';
+import {ChangeEventArgs} from '@syncfusion/ej2-navigations/src';
+import {baseURIConfig} from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-history-list',
@@ -14,17 +12,20 @@ import { baseURIConfig } from '../services/dataconfig';
 })
 export class AdminHistoryListComponent implements OnInit {
 
-  private http: HttpClient;
   public data: object[];
   public initialPage: PageSettingsModel;
   public operationSate: string;
-  public currentHistory:History;
+  public currentHistory: History;
+  @ViewChild('grid') public Grid: GridComponent;
+  public editSettings: EditSettingsModel;
+  public toolbar: ToolbarItems[];
+  public filterOption: FilterSettingsModel = {type: 'Excel'};
+  private http: HttpClient;
 
-  constructor(http:HttpClient){
+  constructor(http: HttpClient) {
     this.http = http;
   }
 
-  @ViewChild('grid') public Grid: GridComponent;
   load() {
     const rowHeight: number = this.Grid.getRowHeight();  // height of the each row
     const gridHeight: any = this.Grid.height;  // grid height
@@ -32,39 +33,41 @@ export class AdminHistoryListComponent implements OnInit {
     const pageResize: any = (gridHeight - (pageSize * rowHeight)) / rowHeight; // new page size is obtained here
     this.Grid.pageSettings.pageSize = 3;//pageSize + Math.round(pageResize);
     //this.Grid.pageSettings.pageCount = 6;
-}
-
-  public editSettings: EditSettingsModel;
-  public toolbar: ToolbarItems[];
-  public filterOption: FilterSettingsModel = { type: 'Excel' };
+  }
 
   ngOnInit(): void {
-      //this.data = data;
-      this.getData();
-      
-      this.editSettings = {
-        showConfirmDialog: true, showDeleteConfirmDialog: true,
-        allowEditing: false, allowAdding: false, allowDeleting: false, mode: 'Dialog'
+    //this.data = data;
+    this.getData();
+
+    this.editSettings = {
+      showConfirmDialog: true, showDeleteConfirmDialog: true,
+      allowEditing: false, allowAdding: false, allowDeleting: false, mode: 'Dialog'
     };
-      this.toolbar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-      
-      this.Grid.dataSourceChanged.subscribe(generatorOrNext=>{console.log(generatorOrNext)}, 
-        error=>{console.log(error)},complete=>{console.log(complete)})
+    this.toolbar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
+
+    this.Grid.dataSourceChanged.subscribe(generatorOrNext => {
+        console.log(generatorOrNext);
+      },
+      error => {
+        console.log(error);
+      }, complete => {
+        console.log(complete);
+      });
   }
 
   change(args: ChangeEventArgs) {
-    console.log("page");
+    console.log('page');
     //this.initialPage = { currentPage: args.value };
   }
 
-  getData():void{
-    this.http.get<History[]>(baseURIConfig+'/Admin/history/list').subscribe(result => {
-        
-      if(result==null)
-        window.alert("No content!");
-      else{  
+  getData(): void {
+    this.http.get<History[]>(baseURIConfig + '/Admin/history/list').subscribe(result => {
+
+      if (result == null) {
+        window.alert('No content!');
+      } else {
         this.data = result;
       }
-      }, error => console.error(error));
+    }, error => console.error(error));
   }
 }

@@ -1,20 +1,18 @@
-import { PlayerService } from '../../services/player.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {PlayerService} from '../../services/player.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 import {
   dropdownListGoalsConfig,
-  dropdownSettingsGoalsConfig,
   dropdownListServersConfig,
-  dropdownSettingsServersConfig,
-  dropdownListLanguagesConfig,
-  dropdownSettingsLanguagesConfig
+  dropdownSettingsGoalsConfig,
+  dropdownSettingsServersConfig
 } from '../../services/dataconfig';
-import { ToastrService } from 'ngx-toastr';
-import { TeamService } from '../../services/team.service';
-import { TeamCommunicationService } from '../../services/team.communication.service';
-import { Team } from '../../interfaces/team';
-import { IdItem } from '../../interfaces/id-item';
-import { Item } from '../../player/player-profile-edit/item';
+import {ToastrService} from 'ngx-toastr';
+import {TeamService} from '../../services/team.service';
+import {TeamCommunicationService} from '../../services/team.communication.service';
+import {Team} from '../../interfaces/team';
+import {IdItem} from '../../interfaces/id-item';
+import {Item} from '../../player/player-profile-edit/item';
 
 @Component({
   selector: 'app-team-profile-edit',
@@ -23,13 +21,22 @@ import { Item } from '../../player/player-profile-edit/item';
 })
 export class TeamProfileEditComponent implements OnInit {
 
-  constructor(
-    private teamService: TeamService,
-    private playerService: PlayerService,
-    private fb: FormBuilder,
-    private toastr: ToastrService,
-    private data: TeamCommunicationService) { }
-
+  formModelTeam = this.fb.group({
+    id: 0,
+    name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+    server: ['', Validators.required],
+    goal: ['', Validators.required],
+    // language: ['', Validators.required],
+    players: []
+  });
+  // Multiselect-dropdown - Server
+  dropdownListServer = [];
+  selectedServer: IdItem[] = null;
+  dropdownSettingsServer = {};
+  // Multiselect-dropdown - Goal
+  dropdownListGoal = [];
+  selectedGoal: IdItem[] = null;
+  dropdownSettingsGoal = {};
   private team: Team = {
     id: 0,
     name: '',
@@ -44,24 +51,13 @@ export class TeamProfileEditComponent implements OnInit {
     invitations: []
   };
 
-  formModelTeam = this.fb.group({
-    id: 0,
-    name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-    server: ['', Validators.required],
-    goal: ['', Validators.required],
-    // language: ['', Validators.required],
-    players: []
-  });
-
-  // Multiselect-dropdown - Server
-  dropdownListServer = [];
-  selectedServer: IdItem[] = null;
-  dropdownSettingsServer = {};
-
-  // Multiselect-dropdown - Goal
-  dropdownListGoal = [];
-  selectedGoal: IdItem[] = null;
-  dropdownSettingsGoal = {};
+  constructor(
+    private teamService: TeamService,
+    private playerService: PlayerService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private data: TeamCommunicationService) {
+  }
 
   // Multiselect-dropdown - Languege
   // dropdownListLanguage = [];

@@ -1,10 +1,10 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Team } from '../../interfaces/team';
-import { TeamCommunicationService } from '../../services/team.communication.service';
-import { TeamService } from '../../services/team.service';
-import { dropdownListGamesConfig } from '../../services/dataconfig';
-import { Invitation } from '../../interfaces/invitation';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Team} from '../../interfaces/team';
+import {TeamCommunicationService} from '../../services/team.communication.service';
+import {TeamService} from '../../services/team.service';
+import {dropdownListGamesConfig} from '../../services/dataconfig';
+import {Invitation} from '../../interfaces/invitation';
 
 @Component({
   selector: 'app-team-profile-list',
@@ -13,18 +13,16 @@ import { Invitation } from '../../interfaces/invitation';
 })
 export class TeamProfileListComponent implements OnInit {
 
+  public userId: number;
+  public numberOfGames: number;
+  public inviteList: Invitation[] = [];
+  private teams: Team[] = [];
+
   constructor(
     private teamService: TeamService,
     private data: TeamCommunicationService,
-    private toastr: ToastrService) { }
-
-  public userId: number;
-
-  public numberOfGames: number;
-
-  public inviteList: Invitation[] = [];
-
-  private teams: Team[] = [];
+    private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;

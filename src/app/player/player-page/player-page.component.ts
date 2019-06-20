@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PlayerForPlayerPage } from 'src/app/interfaces/player-for-player-page';
-import { Subscription, of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { AccountService } from 'src/app/services/account.service';
-import { CommunicationService } from 'src/app/services/communication.service';
-import { flatMap } from 'rxjs/operators';
-import { InfoService } from 'src/app/services/info.service';
-import { TeamService } from 'src/app/services/team.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
-import { PlayerService } from 'src/app/services/player.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {PlayerForPlayerPage} from 'src/app/interfaces/player-for-player-page';
+import {of, Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {AccountService} from 'src/app/services/account.service';
+import {CommunicationService} from 'src/app/services/communication.service';
+import {flatMap} from 'rxjs/operators';
+import {InfoService} from 'src/app/services/info.service';
+import {TeamService} from 'src/app/services/team.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ActivatedRoute} from '@angular/router';
+import {PlayerService} from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-player-page',
@@ -19,31 +19,15 @@ import { PlayerService } from 'src/app/services/player.service';
 })
 export class PlayerPageComponent implements OnInit {
 
-  constructor(
-    private toastr: ToastrService,
-    private serviceAccount: AccountService,
-    private svc: CommunicationService,
-    private serviceInfo: InfoService,
-    private serviceTeam: TeamService,
-    private service: PlayerService,
-    private modalService: NgbModal,
-    private route: ActivatedRoute,
-  ) { }
-
-  // closeResult: string;
-
   disposable: Subscription = new Subscription();
 
+  // closeResult: string;
   isAvailable = true;
-
   isLogin = false;
-
   game = '';
-
   // fields of user who want to send invite
   teamId = 0;
   userId = 0;
-
   player: PlayerForPlayerPage = {
     id: 0,
     photo: '',
@@ -60,6 +44,18 @@ export class PlayerPageComponent implements OnInit {
     teamName: '',
     teamPhoto: ''
   };
+
+  constructor(
+    private toastr: ToastrService,
+    private serviceAccount: AccountService,
+    private svc: CommunicationService,
+    private serviceInfo: InfoService,
+    private serviceTeam: TeamService,
+    private service: PlayerService,
+    private modalService: NgbModal,
+    private route: ActivatedRoute,
+  ) {
+  }
 
   ngOnInit() {
 
@@ -106,7 +102,9 @@ export class PlayerPageComponent implements OnInit {
         this.player = res;
         if (this.player.teamId === 0) {
           this.isAvailable = true;
-        } else { this.isAvailable = false; }
+        } else {
+          this.isAvailable = false;
+        }
       },
       err => {
         this.toastr.error(err.error.info, err.error.message);
@@ -132,6 +130,6 @@ export class PlayerPageComponent implements OnInit {
   }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, {centered: true});
   }
 }

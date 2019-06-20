@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../../services/player.service';
-import { PlayerCommunicationServer } from '../../services/player.communication.service';
-import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Player } from '../../interfaces/player';
+import {Component, OnInit} from '@angular/core';
+import {PlayerService} from '../../services/player.service';
+import {PlayerCommunicationServer} from '../../services/player.communication.service';
+import {ToastrService} from 'ngx-toastr';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Player} from '../../interfaces/player';
 import {
-  dropdownListServersConfig,
-  dropdownSettingsServersConfig,
   dropdownListGoalsConfig,
-  dropdownSettingsGoalsConfig,
   dropdownListRanksConfig,
-  dropdownSettingsRanksConfig
+  dropdownListServersConfig,
+  dropdownSettingsGoalsConfig,
+  dropdownSettingsRanksConfig,
+  dropdownSettingsServersConfig
 } from '../../services/dataconfig';
-import { IdItem } from '../../interfaces/id-item';
-import { Item } from './item';
+import {IdItem} from '../../interfaces/id-item';
+import {Item} from './item';
 
 @Component({
   selector: 'app-player-profile-edit',
@@ -22,12 +22,6 @@ import { Item } from './item';
 })
 
 export class PlayerProfileEditComponent implements OnInit {
-
-  constructor(
-    private service: PlayerService,
-    private fb: FormBuilder,
-    private toastr: ToastrService,
-    private data: PlayerCommunicationServer) { }
 
   player: Player = {
     id: 0,
@@ -41,7 +35,6 @@ export class PlayerProfileEditComponent implements OnInit {
     decency: 0,
     invitations: []
   };
-
   formModelPlayer = this.fb.group({
     id: 0,
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
@@ -51,21 +44,25 @@ export class PlayerProfileEditComponent implements OnInit {
     rank: ['', Validators.required],
     decency: [0, [Validators.required, Validators.min(1), Validators.max(10000)]]
   });
-
   // Multiselect-dropdown - Server
   dropdownListServer = [];
   selectedServer: IdItem[] = null;
   dropdownSettingsServer = {};
-
   // Multiselect-dropdown - Goal
   dropdownListGoal = [];
   selectedGoal: IdItem[] = null;
   dropdownSettingsGoal = {};
-
   // Multiselect-dropdown - Rank
   dropdownListRank = [];
   selectedRank: IdItem[] = null;
   dropdownSettingsRank = {};
+
+  constructor(
+    private service: PlayerService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private data: PlayerCommunicationServer) {
+  }
 
   ngOnInit() {
     this.data.currentPlayerToEdit.subscribe(p => this.player = p);
