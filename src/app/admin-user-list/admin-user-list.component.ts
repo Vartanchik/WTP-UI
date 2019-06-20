@@ -68,22 +68,24 @@ actionComplete(args) {
   console.log(args.requestType);
   if(args.requestType==='save')
   {
+    console.log(args);
     var records = this.Grid.getSelectedRecords();
-
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var user = records[0] as RegisterModel;
-      user.password = '123456';
-      console.log(records);
-      this.http.post(baseURIConfig+'/Admin/users/profiles',user).subscribe(
+      //console.log(args.data);
+      var newUser =args.data as RegisterModel;
+      newUser.password='123456';
+      this.http.post(baseURIConfig+'/Admin/users/profiles',newUser).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();
+        },
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Username or email are existed");
+        this.getData();
       });
-      
     this.operationSate='';
     }
     else if(this.operationSate==='Edit')
@@ -94,13 +96,15 @@ actionComplete(args) {
       this.http.put(baseURIConfig+'/Admin/users/'+updatedUser.id,updatedUser).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Username or email are existed");
+        this.getData();
       }); 
     this.operationSate='';
     }
-    this.getData();
+      //this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
@@ -108,7 +112,8 @@ actionComplete(args) {
       this.http.delete(baseURIConfig+'/Admin/users/'+this.currentUser.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
-        window.alert(res.message)});
+        window.alert(res.message);
+      });
     this.operationSate='';
   }
 }

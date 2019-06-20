@@ -6,6 +6,7 @@ import { ChangeEventArgs } from '@syncfusion/ej2-inputs';
 import { FilterSettingsModel, ToolbarItems, EditSettingsModel, PageSettingsModel } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { HttpClient } from '@angular/common/http';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-team-list',
@@ -42,14 +43,7 @@ export class AdminTeamListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Team[]>('http://localhost:5000/api/Team/team/list').subscribe(result => {
-        
-    if(result==null)
-      window.alert("No content!");
-    else{  
-      this.data = result;
-    }
-    }, error => console.error(error));
+      this.getData();
       
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
@@ -77,14 +71,16 @@ actionComplete(args) {
     console.log("Operation name: "+ this.operationSate);
     if(this.operationSate==='Add')
     {
-      var Team = records[0] as Team;
+      var team = args.data as Team;
       console.log(records);
-      this.http.post('http://localhost:5000/api/Team/create',Team).subscribe(
+      this.http.post(baseURIConfig + '/Team/create',team).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Team is existed");
+        this.getData();
       });
       
     this.operationSate='';
@@ -93,12 +89,14 @@ actionComplete(args) {
     {
       var updatedTeam = records[0] as Team;
       console.log(records);
-      this.http.put('http://localhost:5000/api/Team/update',updatedTeam).subscribe(
+      this.http.put(baseURIConfig + '/Team/update',updatedTeam).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
-          window.alert(res.message)},
+          window.alert(res.message);
+          this.getData();},
         (err:WtpResponse)=>{console.log("Error");
         window.alert("Team is existed");
+        this.getData();
       }); 
     this.operationSate='';
     }
@@ -106,10 +104,10 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('http://localhost:5000/api/Team/delete'+this.currentTeam.id)
+      this.http.delete(baseURIConfig + '/Team/delete'+this.currentTeam.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
-        window.alert(res.message)});
+        window.alert(res.message);});
     this.operationSate='';
   }
 }
@@ -122,6 +120,17 @@ toolbarClick(args:ClickEventArgs)
    var z = this.Grid.getSelectedRecords() as Team[];
    this.currentTeam = z[0];
    console.log(this.currentTeam);
+}
+
+getData():void{
+  this.http.get<Team[]>(baseURIConfig + '/Team/team/list').subscribe(result => {
+        
+    if(result==null)
+      window.alert("No content!");
+    else{  
+      this.data = result;
+    }
+    }, error => console.error(error));
 }
 
 }
