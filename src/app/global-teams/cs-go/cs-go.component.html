@@ -5,10 +5,10 @@
     </div>
      
       <div class="teams-list">
-        <app-dota-team
+        <app-cs-team
           *ngFor="let team of teams"
           [team]="team">
-        </app-dota-team>
+        </app-cs-team>
         <div class="pagination" *ngIf="pageView.totalPages !== 0">
           <button class="page-item pagination-button"
               (click)="loadPreviousPage()"
