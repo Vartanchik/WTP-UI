@@ -26,7 +26,7 @@ export class PlayerProfileListComponent implements OnInit {
 
   public inviteList: Invitation[] = [];
 
-  private players: Player[] = [];
+  players: Player[] = [];
 
   ngOnInit() {
     this.numberOfGames = dropdownListGamesConfig.length;

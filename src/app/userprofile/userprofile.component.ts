@@ -47,7 +47,7 @@ export class UserProfileComponent implements OnInit {
     config.justify = 'center';
   }
 
-  private isValid: boolean = true;
+  isValid: boolean = true;
   public createPlayer = false;
   public listOfPlayers = true;
   public editPlayer = false;

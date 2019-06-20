@@ -16,7 +16,7 @@ import { IconInfo } from '../interfaces/icon-info';
 export class AccountComponent implements OnInit {
 
   disposable: Subscription = new Subscription();
-  private isLogin: boolean = false;
+  isLogin: boolean = false;
 
   private photo: string;
   private userName: string;

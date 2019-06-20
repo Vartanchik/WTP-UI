@@ -8,7 +8,7 @@ import { Player } from '../../models/player.model';
 })
 export class DotaPlayerComponent implements OnInit {
 
-  @Input() player: Player[];
+  @Input() player: Player;
 
   constructor() { }
 

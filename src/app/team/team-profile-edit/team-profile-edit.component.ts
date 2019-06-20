@@ -30,7 +30,7 @@ export class TeamProfileEditComponent implements OnInit {
     private toastr: ToastrService,
     private data: TeamCommunicationService) { }
 
-  private team: Team = {
+  team: Team = {
     id: 0,
     name: '',
     photo: '',
