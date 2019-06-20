@@ -90,8 +90,9 @@ export class TeamPageComponent implements OnInit {
               this.userId = +localStorage.getItem('id');
               this.servicePlayer.getPlayersByUserId(this.userId).subscribe(
                 res => {
-                  if (res.length === 0) {
-                    this.playerId = res.find(t => t.game === this.game).id;
+                  const player = res.find(t => t.game === this.game);
+                  if (player !== undefined) {
+                    this.playerId = player.id;
                   }
                 }
               );
