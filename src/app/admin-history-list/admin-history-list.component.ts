@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { PageSettingsModel, EditSettingsModel, ToolbarItems, FilterSettingsModel } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { ChangeEventArgs } from '@syncfusion/ej2-navigations/src';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-history-list',
@@ -39,14 +40,7 @@ export class AdminHistoryListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<History[]>('http://localhost:5000/api/Admin/history/list').subscribe(result => {
-        
-    if(result==null)
-      window.alert("No content!");
-    else{  
-      this.data = result;
-    }
-    }, error => console.error(error));
+      this.getData();
       
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
@@ -63,4 +57,14 @@ export class AdminHistoryListComponent implements OnInit {
     //this.initialPage = { currentPage: args.value };
   }
 
+  getData():void{
+    this.http.get<History[]>(baseURIConfig+'/Admin/history/list').subscribe(result => {
+        
+      if(result==null)
+        window.alert("No content!");
+      else{  
+        this.data = result;
+      }
+      }, error => console.error(error));
+  }
 }

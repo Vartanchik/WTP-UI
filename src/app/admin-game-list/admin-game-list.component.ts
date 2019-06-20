@@ -5,6 +5,7 @@ import { Game } from '../shared/game';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { ChangeEventArgs, ClickEventArgs } from '@syncfusion/ej2-navigations/src';
 import { WtpResponse } from '../interfaces/wtp-response';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-game-list',
@@ -41,14 +42,7 @@ export class AdminGameListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Game[]>('http://localhost:5000/api/Game/list').subscribe(result => {
-        
-    if(result==null)
-      window.alert("No content!");
-    else{  
-      this.data = result;
-    }
-    }, error => console.error(error));
+      this.getData();
       
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
@@ -78,7 +72,7 @@ actionComplete(args) {
     {
       var game = records[0] as Game;
       console.log(records);
-      this.http.post('http://localhost:5000/api/Game/item',game).subscribe(
+      this.http.post(baseURIConfig+'/Game/item',game).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -92,7 +86,7 @@ actionComplete(args) {
     {
       var updatedgame = records[0] as Game;
       console.log(updatedgame);
-      this.http.put('http://localhost:5000/api/Game/item/'+updatedgame.id,updatedgame).subscribe(
+      this.http.put(baseURIConfig+'/Game/item/'+updatedgame.id,updatedgame).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -101,11 +95,12 @@ actionComplete(args) {
       }); 
     this.operationSate='';
     }
+    this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('http://localhost:5000/api/Game/item/'+this.currentGame.id)
+      this.http.delete(baseURIConfig+'/Game/item/'+this.currentGame.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
@@ -113,6 +108,16 @@ actionComplete(args) {
   }
 }
 
+getData():void{
+  this.http.get<Game[]>(baseURIConfig+'/Game/list').subscribe(result => {
+        
+    if(result==null)
+      window.alert("No content!");
+    else{  
+      this.data = result;
+    }
+    }, error => console.error(error));
+}
 
 toolbarClick(args:ClickEventArgs)
 {

@@ -7,6 +7,7 @@ import { ChangeEventArgs } from '@syncfusion/ej2-navigations/src/sidebar';
 import { MenuEventArgs, ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { RegisterModel } from '../interfaces/registerModel';
 import { WtpResponse } from '../interfaces/wtp-response';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -75,7 +76,7 @@ actionComplete(args) {
       var user = records[0] as RegisterModel;
       user.password = '123456';
       console.log(records);
-      this.http.post('http://localhost:5000/api/Admin/users/profiles',user).subscribe(
+      this.http.post(baseURIConfig+'/Admin/users/profiles',user).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -90,7 +91,7 @@ actionComplete(args) {
       var updatedUser = records[0] as User;
       updatedUser.dateOfBirth = '';
       console.log(records);
-      this.http.put('http://localhost:5000/api/Admin/users/'+updatedUser.id,updatedUser).subscribe(
+      this.http.put(baseURIConfig+'/Admin/users/'+updatedUser.id,updatedUser).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -104,7 +105,7 @@ actionComplete(args) {
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('https://localhost:44390/api/Admin/users/'+this.currentUser.id)
+      this.http.delete(baseURIConfig+'/Admin/users/'+this.currentUser.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
@@ -123,7 +124,8 @@ toolbarClick(args:ClickEventArgs)
 }
 
 getData() {
-  this.http.get<User[]>('http://localhost:5000/api/Admin/users').subscribe(result => {
+  baseURIConfig
+  this.http.get<User[]>(baseURIConfig+'/Admin/users').subscribe(result => {
 
     if(result==null)
       window.alert("No content!");

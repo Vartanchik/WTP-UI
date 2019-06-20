@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Rank } from '../interfaces/rank';
 import { ChangeEventArgs, ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { WtpResponse } from '../interfaces/wtp-response';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-rank-list',
@@ -41,14 +42,7 @@ export class AdminRankListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Rank[]>('http://localhost:5000/api/Rank/list').subscribe(result => {
-        
-    if(result==null)
-      window.alert("No content!");
-    else{  
-      this.data = result;
-    }
-    }, error => console.error(error));
+      this.getData();
       
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
@@ -79,7 +73,7 @@ actionComplete(args) {
     {
       var Rank = records[0] as Rank;
       console.log(records);
-      this.http.post('http://localhost:5000/api/Rank/item',Rank).subscribe(
+      this.http.post(baseURIConfig+'/Rank/item',Rank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -93,7 +87,7 @@ actionComplete(args) {
     {
       var updatedRank = records[0] as Rank;
       console.log(records);
-      this.http.put('http://localhost:5000/api/Rank/item/'+updatedRank.id,updatedRank).subscribe(
+      this.http.put(baseURIConfig+'/Rank/item/'+updatedRank.id,updatedRank).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -102,11 +96,12 @@ actionComplete(args) {
       }); 
     this.operationSate='';
     }
+    this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('http://localhost:5000/api/Rank/item/'+this.currentRank.id)
+      this.http.delete(baseURIConfig+'/Rank/item/'+this.currentRank.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
@@ -122,6 +117,18 @@ toolbarClick(args:ClickEventArgs)
    var z = this.Grid.getSelectedRecords() as Rank[];
    this.currentRank = z[0];
    console.log(this.currentRank);
+}
+
+getData():void
+{
+  this.http.get<Rank[]>(baseURIConfig+'/Rank/list').subscribe(result => {
+        
+    if(result==null)
+      window.alert("No content!");
+    else{  
+      this.data = result;
+    }
+    }, error => console.error(error)); 
 }
 
 }

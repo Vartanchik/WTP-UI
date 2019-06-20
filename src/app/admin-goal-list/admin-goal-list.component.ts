@@ -6,6 +6,7 @@ import { PageSettingsModel, EditSettingsModel, ToolbarItems, FilterSettingsModel
 import { Goal } from '../interfaces/goal';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { ChangeEventArgs } from '@syncfusion/ej2-inputs/src';
+import { baseURIConfig } from '../services/dataconfig';
 
 @Component({
   selector: 'app-admin-goal-list',
@@ -42,14 +43,7 @@ export class AdminGoalListComponent implements OnInit {
 
   ngOnInit(): void {
       //this.data = data;
-      this.http.get<Goal[]>('http://localhost:5000/api/Goal/list').subscribe(result => {
-        
-    if(result==null)
-      window.alert("No content!");
-    else{  
-      this.data = result;
-    }
-    }, error => console.error(error));
+      this.getData();
       
       this.editSettings = {
         showConfirmDialog: true, showDeleteConfirmDialog: true,
@@ -79,7 +73,7 @@ actionComplete(args) {
     {
       var Goal = records[0] as Goal;
       console.log(records);
-      this.http.post('http://localhost:5000/api/Goal',Goal).subscribe(
+      this.http.post(baseURIConfig+'/Goal',Goal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -93,7 +87,7 @@ actionComplete(args) {
     {
       var updatedGoal = records[0] as Goal;
       console.log(records);
-      this.http.put('http://localhost:5000/api/Goal/item/'+updatedGoal.id,updatedGoal).subscribe(
+      this.http.put(baseURIConfig+'/Goal/item/'+updatedGoal.id,updatedGoal).subscribe(
         (res:WtpResponse)=>{
           console.log(res.message); 
           window.alert(res.message)},
@@ -102,16 +96,29 @@ actionComplete(args) {
       }); 
     this.operationSate='';
     }
+    this.getData();
   }
   else if(this.operationSate==='Delete' && args.requestType==='delete')
   {
     console.log("Operation name: "+ this.operationSate);    
-      this.http.delete('http://localhost:5000/api/Goal/item/'+this.currentGoal.id)
+      this.http.delete(baseURIConfig+'/Goal/item/'+this.currentGoal.id)
       .subscribe((res:WtpResponse)=>{
         console.log(res.message); 
         window.alert(res.message)});
     this.operationSate='';
   }
+}
+
+
+getData():void{
+  this.http.get<Goal[]>(baseURIConfig+'/Goal/list').subscribe(result => {
+        
+    if(result==null)
+      window.alert("No content!");
+    else{  
+      this.data = result;
+    }
+    }, error => console.error(error));
 }
 
 
