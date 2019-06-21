@@ -1,10 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TeamFiltersModel } from '../models/team-filters';
-import { DotaTeamsComponent } from '../dota/dota.component';
-import { GlobalTeamsService } from '../global-teams.service';
-import { Options } from 'ng5-slider';
-import { IdItem } from 'src/app/interfaces/id-item';
-import { dropdownListGoalsConfig, dropdownSettingsGoalsConfig } from 'src/app/services/dataconfig';
+import {Component, OnInit} from '@angular/core';
+import {TeamFiltersModel} from '../models/team-filters';
+import {GlobalTeamsService} from '../global-teams.service';
+import {Options} from 'ng5-slider';
+import {IdItem} from 'src/app/interfaces/id-item';
+import {dropdownListGoalsConfig} from 'src/app/services/dataconfig';
 
 
 @Component({
@@ -25,7 +24,7 @@ export class TeamsFilteringComponent implements OnInit {
     sortingType: '',
     teamsOnPage: 5,
     selectedItemGoals: []
-  }
+  };
 
   sortEnabled: boolean = true;
 
@@ -34,22 +33,6 @@ export class TeamsFilteringComponent implements OnInit {
     ceil: 5,
     step: 1,
   };
-
-
-  constructor(
-    private svc: GlobalTeamsService
-  ) { }
-
-  SortChanged(){
-    if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
-    this.sortEnabled = false;
-  }
-
-  updateSortFields(){
-    this.svc.pushUpdatedValues(this.filterFields);
-    this.svc.filter('Filter click');
-  }
-  
   dropdownListGoals = [];
   selectedItemGoals: IdItem[] = null;
   dropdownSettingsGoals = {
@@ -57,10 +40,27 @@ export class TeamsFilteringComponent implements OnInit {
     idField: 'id',
     textField: 'name',
     itemsShowLimit: 0,
-    selectAllText: "Selected All",
-    allowSearchFilter: false};
+    selectAllText: 'Selected All',
+    allowSearchFilter: false
+  };
 
-  ngOnInit() {  
-    this.dropdownListGoals = dropdownListGoalsConfig;      
+  constructor(
+    private svc: GlobalTeamsService
+  ) {
+  }
+
+  SortChanged() {
+    if (this.filterFields.sortingField != '0' && this.filterFields.sortingField != '') {
+      this.sortEnabled = false;
+    }
+  }
+
+  updateSortFields() {
+    this.svc.pushUpdatedValues(this.filterFields);
+    this.svc.filter('Filter click');
+  }
+
+  ngOnInit() {
+    this.dropdownListGoals = dropdownListGoalsConfig;
   }
 }

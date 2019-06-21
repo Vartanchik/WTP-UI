@@ -1,10 +1,10 @@
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, BehaviorSubject, pipe, throwError} from 'rxjs';
-import {tap, catchError, switchMap, finalize, filter, take} from 'rxjs/operators';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AccountService} from 'src/app/services/account.service';
-import { TokenResponse } from '../interfaces/token-response';
+import {TokenResponse} from '../interfaces/token-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ import { TokenResponse } from '../interfaces/token-response';
 //@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  private isTokenRefreshing: boolean = false;
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private isTokenRefreshing: boolean = false;
 
   constructor(private router: Router, private service: AccountService) {
   }
@@ -45,6 +45,11 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       })
     );
+  }
+
+  onLogout() {
+    this.service.removeAuthInfo();
+    this.router.navigate(['/home']);
   }
 
   // Method to handle http error response
@@ -86,11 +91,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private attachTokenToRequest(request: HttpRequest<any>) {
     const token = this.service.getItem('token');
     return request.clone({setHeaders: {Authorization: `Bearer ${token}`}});
-  }
-
-  onLogout() {
-    this.service.removeAuthInfo();
-    this.router.navigate(['/home']);
   }
 
 }

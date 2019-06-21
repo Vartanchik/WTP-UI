@@ -1,61 +1,60 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Team } from '../interfaces/team';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Team} from '../interfaces/team';
 
 @Injectable()
 export class TeamCommunicationService {
 
-    constructor() { }
+  private team: Team = {
+    id: 0,
+    name: '',
+    photo: '',
+    appUser: 0,
+    game: '',
+    server: '',
+    goal: '',
+    language: '',
+    players: [],
+    winRate: 0,
+    invitations: []
+  };
+  private userId = new BehaviorSubject<number>(0);
+  currentUserId = this.userId.asObservable();
+  private listOfTeams = new BehaviorSubject<boolean>(true);
+  currentListOfTeams = this.listOfTeams.asObservable();
+  private createTeam = new BehaviorSubject<boolean>(false);
+  currentCreateTeam = this.createTeam.asObservable();
+  private editTeam = new BehaviorSubject<boolean>(false);
+  currentEditTeam = this.editTeam.asObservable();
+  private teamToEdit = new BehaviorSubject<Team>(this.team);
+  currentTeamToEdit = this.teamToEdit.asObservable();
+  private existingGames = new BehaviorSubject<string[]>([]);
+  getExistingGames = this.existingGames.asObservable();
 
-    private team: Team = {
-        id: 0,
-        name: '',
-        photo: '',
-        appUser: 0,
-        game: '',
-        server: '',
-        goal: '',
-        language: '',
-        players: [],
-        winRate: 0,
-        invitations: []
-    };
+  constructor() {
+  }
 
-    private userId = new BehaviorSubject<number>(0);
-    private listOfTeams = new BehaviorSubject<boolean>(true);
-    private createTeam = new BehaviorSubject<boolean>(false);
-    private editTeam = new BehaviorSubject<boolean>(false);
-    private teamToEdit = new BehaviorSubject<Team>(this.team);
-    private existingGames = new BehaviorSubject<string[]>([]);
+  changeUserId(id: number) {
+    this.userId.next(id);
+  }
 
-    currentUserId = this.userId.asObservable();
-    currentListOfTeams = this.listOfTeams.asObservable();
-    currentCreateTeam = this.createTeam.asObservable();
-    currentEditTeam = this.editTeam.asObservable();
-    currentTeamToEdit = this.teamToEdit.asObservable();
-    getExistingGames = this.existingGames.asObservable();
+  changeListOfTeams(status: boolean) {
+    this.listOfTeams.next(status);
+  }
 
-    changeUserId(id: number) {
-        this.userId.next(id);
-    }
+  changeCreateTeam(status: boolean) {
+    this.createTeam.next(status);
+  }
 
-    changeListOfTeams(status: boolean) {
-        this.listOfTeams.next(status);
-    }
+  changeEditTeam(status: boolean) {
+    this.editTeam.next(status);
+  }
 
-    changeCreateTeam(status: boolean) {
-        this.createTeam.next(status);
-    }
+  changeTeamToEdit(team: Team) {
+    this.teamToEdit.next(team);
+  }
 
-    changeEditTeam(status: boolean) {
-        this.editTeam.next(status);
-    }
-
-    changeTeamToEdit(team: Team) {
-        this.teamToEdit.next(team);
-    }
-
-    setExistingGames(games: string[]) {
-        this.existingGames.next(games);
-    }
+  setExistingGames(games: string[]) {
+    this.existingGames.next(games);
+  }
 }

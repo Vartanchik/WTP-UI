@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../services/account.service';
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-restore',
@@ -17,7 +17,8 @@ export class RestoreComponent implements OnInit {
     private route: ActivatedRoute,
     private accSvc: AccountService,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParams => {

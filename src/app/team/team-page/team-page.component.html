@@ -9,7 +9,7 @@
             <div class="col-md-3">
               <div class="row justify-content-center">
                 <div class="image-cropper">
-                  <img src="{{team.photo}}" class="profile-pic" />
+                  <img class="profile-pic" src="{{team.photo}}"/>
                 </div>
               </div>
               <br>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <button id="create-button" class="btn btn-primary" (click)="makeOffer(content)">
+                  <button (click)="makeOffer(content)" class="btn btn-primary" id="create-button">
                     Make offer
                   </button>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="col-md-3">
                   <div class="row justify-content-center">
                     <div class="image-cropper-team">
-                      <a [routerLink]="['/player', item.id]"><img src="{{item.photo}}" class="profile-pic" /></a>
+                      <a [routerLink]="['/player', item.id]"><img class="profile-pic" src="{{item.photo}}"/></a>
                     </div>
                   </div>
                 </div>
@@ -144,7 +144,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Make an offer needs:</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -152,6 +152,6 @@
     <p>- be logged in;</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button (click)="modal.close('Close click')" class="btn btn-light" type="button">Close</button>
   </div>
 </ng-template>

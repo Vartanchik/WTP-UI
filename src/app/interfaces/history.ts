@@ -1,5 +1,5 @@
 export class History {
-    constructor(
+  constructor(
     public id?: number,
     public dateOfOperation?: Date,
     public description?: string,
@@ -10,5 +10,6 @@ export class History {
     public appUserId?: number,
     public adminId?: number,
     public operationId?: number
-     ) { }
+  ) {
+  }
 }

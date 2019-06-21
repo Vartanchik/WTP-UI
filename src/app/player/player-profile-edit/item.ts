@@ -1,14 +1,14 @@
-import { IdItem } from '../../interfaces/id-item';
+import {IdItem} from '../../interfaces/id-item';
 
 
 export class Item implements IdItem {
 
-    id: number;
+  id: number;
 
-    name: string;
+  name: string;
 
-    constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name;
-    }
+  constructor(id: number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
 }

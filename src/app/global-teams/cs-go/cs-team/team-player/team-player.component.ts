@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Player } from 'src/app/global-players/models/player.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Player} from 'src/app/global-players/models/player.model';
 
 
 @Component({
@@ -13,9 +13,10 @@ export class TeamPlayerComponent implements OnInit {
 
   showButton: boolean = false;
 
-  constructor(
-  ) { }
+  constructor() {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

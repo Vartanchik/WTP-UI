@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Options } from 'ng5-slider';
-import { dropdownListRanksConfig } from 'src/app/services/dataconfig';
-import { PlayerFiltersModel } from '../models/PlayerFilters';
-import { GlobalPlayersService } from '../global-players.service';
+import {Component, OnInit} from '@angular/core';
+import {Options} from 'ng5-slider';
+import {dropdownListRanksConfig} from 'src/app/services/dataconfig';
+import {PlayerFiltersModel} from '../models/PlayerFilters';
+import {GlobalPlayersService} from '../global-players.service';
 
 @Component({
   selector: 'app-players-filtering',
@@ -11,7 +11,7 @@ import { GlobalPlayersService } from '../global-players.service';
 })
 
 export class PlayersFilteringComponent implements OnInit {
-  
+
   filterFields: PlayerFiltersModel = {
     name: '',
     rankLeft: 0,
@@ -21,7 +21,7 @@ export class PlayersFilteringComponent implements OnInit {
     sortingField: '',
     sortingType: '',
     playersOnPage: 5
-  }
+  };
 
   sortEnabled: boolean = true;
 
@@ -36,39 +36,43 @@ export class PlayersFilteringComponent implements OnInit {
     ceil: 70,
     step: 10,
     translate: (value: number): string => {
-      switch(value){
+      switch (value) {
         case 0:
-          return dropdownListRanksConfig[0].name
+          return dropdownListRanksConfig[0].name;
         case 10:
-          return dropdownListRanksConfig[1].name
+          return dropdownListRanksConfig[1].name;
         case 20:
-          return dropdownListRanksConfig[2].name
+          return dropdownListRanksConfig[2].name;
         case 30:
-          return dropdownListRanksConfig[3].name
+          return dropdownListRanksConfig[3].name;
         case 40:
-          return dropdownListRanksConfig[4].name
+          return dropdownListRanksConfig[4].name;
         case 50:
-          return dropdownListRanksConfig[5].name
+          return dropdownListRanksConfig[5].name;
         case 60:
-          return dropdownListRanksConfig[6].name
+          return dropdownListRanksConfig[6].name;
         case 70:
-          return dropdownListRanksConfig[7].name
+          return dropdownListRanksConfig[7].name;
         default:
-          return 'None'
+          return 'None';
       }
 
     }
   };
 
-  constructor(private svc: GlobalPlayersService) { }
-
-  SortChanged(){
-    if(this.filterFields.sortingField != '0' && this.filterFields.sortingField != '')
-    this.sortEnabled = false;
+  constructor(private svc: GlobalPlayersService) {
   }
-  ngOnInit() {  }
 
-  updateSortFields(){
+  SortChanged() {
+    if (this.filterFields.sortingField != '0' && this.filterFields.sortingField != '') {
+      this.sortEnabled = false;
+    }
+  }
+
+  ngOnInit() {
+  }
+
+  updateSortFields() {
     this.svc.pushUpdatedValues(this.filterFields);
     this.svc.filter('Filter click');
   }

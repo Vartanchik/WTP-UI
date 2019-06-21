@@ -1,14 +1,15 @@
 export class User {
-    constructor(
+  constructor(
     public id?: number,
     public userName?: string,
     public email?: string,
     public photo?: string,
     public gender?: string,
-    public birthday?: Date,
+    public dateOfBirth?: string,
     public country?: string[],
     public steamId?: string,
     public lockoutEnabled?: boolean,
     public lockoutEnd?: Date,
-    public deletedStatus?: boolean) { }
+    public deletedStatus?: boolean) {
+  }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +12,14 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private toastr: ToastrService
-    ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(queryParam  => {
+    this.route.queryParamMap.subscribe(queryParam => {
       if (queryParam.get('confirmed') === 'true') {
         this.toastr.success('Your e-mail was confirmed!', 'Success!');
-      }
-      else if (queryParam.get('confirmed') === 'false'){
+      } else if (queryParam.get('confirmed') === 'false') {
         this.toastr.error('Something went wrong!', 'Error!');
       }
     });
