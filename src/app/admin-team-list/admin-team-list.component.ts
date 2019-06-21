@@ -179,6 +179,7 @@ export class AdminTeamListComponent implements OnInit {
         team.goalId = this.goalObj.value as number;
         team.gameId = this.gameObj.value as number;
         team.serverId=1;
+        team.id=0;
         console.log(records);
         this.http.post(baseURIConfig + '/Team/create', team).subscribe(
           (res: WtpResponse) => {
@@ -214,7 +215,7 @@ export class AdminTeamListComponent implements OnInit {
       }
     } else if (this.operationSate === 'Delete' && args.requestType === 'delete') {
       console.log('Operation name: ' + this.operationSate);
-      this.http.delete(baseURIConfig + '/Team/delete' + this.currentTeam.id)
+      this.http.delete(baseURIConfig + '/Team/' + this.currentTeam.id)
         .subscribe((res: WtpResponse) => {
           console.log(res.message);
           window.alert(res.message);

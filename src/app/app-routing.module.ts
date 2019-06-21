@@ -61,7 +61,7 @@ const routes: Routes = [
       {path: 'ranks', component: AdminRankListComponent},
       {path: 'goals', component: AdminGoalListComponent},
       {path: 'players', component: AdminPlayerListComponent},
-      {path: 'teams', component: AdminTeamListComponent},
+      //{path: 'teams', component: AdminTeamListComponent},
       {path: 'users/history', component: AdminHistoryListComponent},
       {path: '', redirectTo: 'users', pathMatch: 'full'},//component: UserListComponent},
       {path: '**', component: NotFoundComponent}
