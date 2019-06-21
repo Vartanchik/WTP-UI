@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { TeamForTeamPage } from 'src/app/interfaces/team-for-team-page';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription, of } from 'rxjs';
-import { CommunicationService } from 'src/app/services/communication.service';
-import { flatMap } from 'rxjs/operators';
-import { AccountService } from 'src/app/services/account.service';
-import { InfoService } from 'src/app/services/info.service';
-import { PlayerService } from 'src/app/services/player.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TeamService } from 'src/app/services/team.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {TeamForTeamPage} from 'src/app/interfaces/team-for-team-page';
+import {ActivatedRoute} from '@angular/router';
+import {of, Subscription} from 'rxjs';
+import {CommunicationService} from 'src/app/services/communication.service';
+import {flatMap} from 'rxjs/operators';
+import {AccountService} from 'src/app/services/account.service';
+import {InfoService} from 'src/app/services/info.service';
+import {PlayerService} from 'src/app/services/player.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TeamService} from 'src/app/services/team.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-team-page',
@@ -18,38 +18,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TeamPageComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private svc: CommunicationService,
-    private serviceAccount: AccountService,
-    private serviceInfo: InfoService,
-    private servicePlayer: PlayerService,
-    private modalService: NgbModal,
-    private service: TeamService,
-    private toastr: ToastrService
-  ) { }
-
   // closeResult: string;
   disposable: Subscription = new Subscription();
-
   isLogin = false;
-
   game = '';
-
   maxTeamSize = 5;
-
   playersAge: number[] = [];
   minAge = 0;
   maxAge = 0;
-
   playersDecency: number[] = [];
   minDecency = 0;
   maxDecency = 0;
-
   // fields of user who want to send invite
   playerId = 0;
   userId = 0;
-
   team: TeamForTeamPage = {
     id: 0,
     name: '',
@@ -61,6 +43,18 @@ export class TeamPageComponent implements OnInit {
     players: [],
     winRate: 0
   };
+
+  constructor(
+    private route: ActivatedRoute,
+    private svc: CommunicationService,
+    private serviceAccount: AccountService,
+    private serviceInfo: InfoService,
+    private servicePlayer: PlayerService,
+    private modalService: NgbModal,
+    private service: TeamService,
+    private toastr: ToastrService
+  ) {
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(
@@ -149,6 +143,6 @@ export class TeamPageComponent implements OnInit {
   }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, {centered: true});
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { PageView } from '../models/page-view.model';
-import { Team } from '../models/team.model';
-import { GlobalTeamsService } from '../global-teams.service';
-import { TeamsPagination } from '../models/team-pagination.model';
+import {Component, OnInit} from '@angular/core';
+import {PageView} from '../models/page-view.model';
+import {Team} from '../models/team.model';
+import {GlobalTeamsService} from '../global-teams.service';
+import {TeamsPagination} from '../models/team-pagination.model';
 
 @Component({
   selector: 'app-cs-go',
@@ -11,7 +11,7 @@ import { TeamsPagination } from '../models/team-pagination.model';
 })
 export class CsGoTeamsComponent implements OnInit {
 
-  
+
   teams: Team[];
   pageView: PageView = {
     pageNumber: 1,
@@ -22,11 +22,11 @@ export class CsGoTeamsComponent implements OnInit {
   paginationArray: undefined[] = [];
 
 
-  constructor(private teamService: GlobalTeamsService){
-    this.teamService.listen().subscribe((m:any) => {
-        console.log(m);
-        this.onFilterClick(m);
-    })
+  constructor(private teamService: GlobalTeamsService) {
+    this.teamService.listen().subscribe((m: any) => {
+      console.log(m);
+      this.onFilterClick(m);
+    });
   }
 
   onFilterClick(event: any) {
@@ -50,20 +50,20 @@ export class CsGoTeamsComponent implements OnInit {
     this.loadPlayersList(this.pageView.pageNumber + 1);
   }
 
-  private loadPlayersList(pageId: number): void{
-    this.teamService.getPlayers(2, pageId)
-    .subscribe(
-      (data: TeamsPagination) => {
-        this.teams = data.teams;
-        this.pageView = data.pageViewModel;
-        this.paginationArray.length = data.pageViewModel.totalPages;
-        window.scroll(0,0);
-      }
-    )
-  }
-
   loadList(): void {
     this.loadPlayersList(this.pageView.pageNumber);
+  }
+
+  private loadPlayersList(pageId: number): void {
+    this.teamService.getPlayers(2, pageId)
+      .subscribe(
+        (data: TeamsPagination) => {
+          this.teams = data.teams;
+          this.pageView = data.pageViewModel;
+          this.paginationArray.length = data.pageViewModel.totalPages;
+          window.scroll(0, 0);
+        }
+      );
   }
 
 

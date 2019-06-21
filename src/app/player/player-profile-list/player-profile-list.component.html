@@ -9,8 +9,8 @@
         <div class="center-elements">
           <p *ngIf="players.length === numberOfGames" class="text-primary">You can create only one player by one game!
           </p>
-          <button id="create-button" type="submit" class="btn btn-primary" (click)="createPlayer()"
-            [disabled]="players.length >= numberOfGames">
+          <button (click)="createPlayer()" [disabled]="players.length >= numberOfGames" class="btn btn-primary" id="create-button"
+                  type="submit">
             CREATE PLAYER
           </button>
         </div>
@@ -18,33 +18,33 @@
         <h3>Players</h3>
         <table>
           <thead>
-            <tr>
-              <th class="first-column" scope="col">#</th>
-              <th scope="col">Player</th>
-              <th scope="col">Game</th>
-              <th scope="col">Rank</th>
-              <th class="double-column" scope="col" colspan="2">Actions</th>
-            </tr>
+          <tr>
+            <th class="first-column" scope="col">#</th>
+            <th scope="col">Player</th>
+            <th scope="col">Game</th>
+            <th scope="col">Rank</th>
+            <th class="double-column" colspan="2" scope="col">Actions</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of players; index as i">
-              <ng-container *ngIf="item.id !== 0">
-                <td class="first-column" scope="row">{{ i + 1 }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.game }}</td>
-                <td>{{ item.rank }}</td>
-                <td>
-                  <button class="action-button" (click)="editPlayer(item)">
-                    Edit
-                  </button>
-                </td>
-                <td>
-                  <button class="action-button" (click)="deletePlayer(item.game)">
-                    Delete
-                  </button>
-                </td>
-              </ng-container>
-            </tr>
+          <tr *ngFor="let item of players; index as i">
+            <ng-container *ngIf="item.id !== 0">
+              <td class="first-column" scope="row">{{ i + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.game }}</td>
+              <td>{{ item.rank }}</td>
+              <td>
+                <button (click)="editPlayer(item)" class="action-button">
+                  Edit
+                </button>
+              </td>
+              <td>
+                <button (click)="deletePlayer(item.game)" class="action-button">
+                  Delete
+                </button>
+              </td>
+            </ng-container>
+          </tr>
           </tbody>
         </table>
         <p *ngIf="players === undefined || players.length === 0" class="text-primary center-elements">
@@ -56,48 +56,48 @@
           <h3>Invitations</h3>
           <table>
             <thead>
-              <tr>
-                <th class="first-column" scope="col">#</th>
-                <th scope="col">Player</th>
-                <th scope="col">Team</th>
-                <th scope="col">Sender</th>
-                <th class="double-column" scope="col" colspan="2">Actions</th>
-              </tr>
+            <tr>
+              <th class="first-column" scope="col">#</th>
+              <th scope="col">Player</th>
+              <th scope="col">Team</th>
+              <th scope="col">Sender</th>
+              <th class="double-column" colspan="2" scope="col">Actions</th>
+            </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of inviteList; index as i">
-                <ng-container *ngIf="item.id !== 0">
-                  <td class="first-column" scope="row">{{ i + 1 }}</td>
-                  <td>{{ item.playerName }}</td>
+            <tr *ngFor="let item of inviteList; index as i">
+              <ng-container *ngIf="item.id !== 0">
+                <td class="first-column" scope="row">{{ i + 1 }}</td>
+                <td>{{ item.playerName }}</td>
+                <td>{{ item.teamName }}</td>
+                <ng-container *ngIf="item.author === 'Coach'">
                   <td>{{ item.teamName }}</td>
-                  <ng-container *ngIf="item.author === 'Coach'">
-                    <td>{{ item.teamName }}</td>
-                    <td>
-                      <button class="action-button" (click)="accept(item.id)">
-                        Accept
-                      </button>
-                    </td>
-                    <td>
-                      <button class="action-button" (click)="decline(item.id)">
-                        Decline
-                      </button>
-                    </td>
-                  </ng-container>
-                  <ng-container *ngIf="item.author === 'Player'">
-                    <td>{{ item.playerName }}</td>
-                    <td>
-                      <button class="disabled-button" color='black' disabled>
-                        Sent
-                      </button>
-                    </td>
-                    <td>
-                      <button class="action-button" (click)="decline(item.id)">
-                        Cancel
-                      </button>
-                    </td>
-                  </ng-container>
+                  <td>
+                    <button (click)="accept(item.id)" class="action-button">
+                      Accept
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="decline(item.id)" class="action-button">
+                      Decline
+                    </button>
+                  </td>
                 </ng-container>
-              </tr>
+                <ng-container *ngIf="item.author === 'Player'">
+                  <td>{{ item.playerName }}</td>
+                  <td>
+                    <button class="disabled-button" color='black' disabled>
+                      Sent
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="decline(item.id)" class="action-button">
+                      Cancel
+                    </button>
+                  </td>
+                </ng-container>
+              </ng-container>
+            </tr>
             </tbody>
           </table>
           <p *ngIf="inviteList === undefined || inviteList.length === 0" class="text-primary center-elements">

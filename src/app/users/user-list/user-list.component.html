@@ -1,70 +1,71 @@
- <div>
-        <h2>Searching string(input valid name of user!)</h2>
-        <div class="text-right">
-        <p class="one"><input type="text" [(ngModel)]="searchByName" class="form-control"/></p>
-       
-        <div class="text-left">
-          <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                <td>Enable Deleted Users</td>
-                <td>Enable Lock Users</td>
-                <td>Choose sorts field</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr valign="text-right">
-                  <td><input style="width:25px;height:25px" type="checkbox" [(ngModel)]="enableDeleted"></td>
-                  <td><input style="width:25px;height:25px" type="checkbox" [(ngModel)]="enableLocked"></td>
-                  <td><select [(ngModel)]="selectedNumber">  
-                      <option *ngFor="let item of nameOfSort">{{item}} </option>  
-                    </select> </td>
-                </tr>
-                </tbody>
-                </table>
-        </div>
+<div>
+  <h2>Searching string(input valid name of user!)</h2>
+  <div class="text-right">
+    <p class="one"><input [(ngModel)]="searchByName" class="form-control" type="text"/></p>
 
-        <button  style="width:300px;height:35px" (click)="search()" class="btn btn-sm btn-info">Search</button>
-      </div>
-      <br>
-      </div>
+    <div class="text-left">
       <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-                <td>Id</td>
-                <td>UserName</td>
-                <td>Email</td>
-                <td>LockoutEnable</td>
-                <td>LockoutEnd</td>
-                <td>DeletedStatus</td>
-                <td></td>
-                <td></td>
-            </tr>
+        <thead class="thead-dark">
+        <tr>
+          <td>Enable Deleted Users</td>
+          <td>Enable Lock Users</td>
+          <td>Choose sorts field</td>
+        </tr>
         </thead>
         <tbody>
-                <tr *ngFor="let item of users | paginate: { itemsPerPage: itemOnPage, currentPage: pageNumber, totalItems:Count };let i = index">
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.userName }}</td>
-                      <td>{{ item.email }}</td>
-                      <td>{{item.lockoutEnabled}}</td>
-                    <td>{{item.lockoutEnd | date:'short'}}</td>
-                    <td>{{item.deletedStatus}}</td>
-                    <td>
-                        <div *ngIf="!item.deletedStatus">
-                            <a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary">Edit</a>
-                            <button (click)="delete(item.id)" class="btn btn-sm btn-danger">Delete</button>
-                        </div>
-                        </td>
-                        <td>
-                                <div *ngIf="!item.deletedStatus">
-                              <a [routerLink]="['block', item.id]" class="btn btn-sm btn-warning">Lock</a>
-                              <button (click)="unLock(item.id)" class="btn btn-sm btn-info">UnLock</button>
-                            </div>
-                        </td>
-            </tr>
+        <tr valign="text-right">
+          <td><input [(ngModel)]="enableDeleted" style="width:25px;height:25px" type="checkbox"></td>
+          <td><input [(ngModel)]="enableLocked" style="width:25px;height:25px" type="checkbox"></td>
+          <td><select [(ngModel)]="selectedNumber">
+            <option *ngFor="let item of nameOfSort">{{item}} </option>
+          </select></td>
+        </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-      <div class="text-right">
-            <a routerLink="create" class="nav-link" class="btn btn-success">Add new User</a>
+    </div>
+
+    <button (click)="search()" class="btn btn-sm btn-info" style="width:300px;height:35px">Search</button>
+  </div>
+  <br>
+</div>
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <td>Id</td>
+    <td>UserName</td>
+    <td>Email</td>
+    <td>LockoutEnable</td>
+    <td>LockoutEnd</td>
+    <td>DeletedStatus</td>
+    <td></td>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr
+    *ngFor="let item of users | paginate: { itemsPerPage: itemOnPage, currentPage: pageNumber, totalItems:Count };let i = index">
+    <td>{{ item.id }}</td>
+    <td>{{ item.userName }}</td>
+    <td>{{ item.email }}</td>
+    <td>{{item.lockoutEnabled}}</td>
+    <td>{{item.lockoutEnd | date:'short'}}</td>
+    <td>{{item.deletedStatus}}</td>
+    <td>
+      <div *ngIf="!item.deletedStatus">
+        <a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary">Edit</a>
+        <button (click)="delete(item.id)" class="btn btn-sm btn-danger">Delete</button>
       </div>
+    </td>
+    <td>
+      <div *ngIf="!item.deletedStatus">
+        <a [routerLink]="['block', item.id]" class="btn btn-sm btn-warning">Lock</a>
+        <button (click)="unLock(item.id)" class="btn btn-sm btn-info">UnLock</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+<div class="text-right">
+  <a class="nav-link" class="btn btn-success" routerLink="create">Add new User</a>
+</div>

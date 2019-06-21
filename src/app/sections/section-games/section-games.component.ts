@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
 
 
 class Game {
   constructor(
-    public id:number=0,
-    public name: string='',
-    public playersCount: number=0,
-    public description: string=''
-
-  ) {}
+    public id: number = 0,
+    public name: string = '',
+    public playersCount: number = 0,
+    public description: string = ''
+  ) {
+  }
 }
 
 @Component({
@@ -29,19 +28,21 @@ export class SectionGamesComponent implements OnInit {
   submitType: string = 'Save';
   // It maintains table row index based on selection.
   selectedRow: number;
+
   constructor() {
     // Add default Game data.
-    this.Games.push(new Game(1,'Cs Go',500000,'Shooter'));
-    this.Games.push(new Game(2,'Dota',1500000,'MMO'));
-    this.Games.push(new Game(3,'PUBG',1000000,'Battle Royale'));
+    this.Games.push(new Game(1, 'Cs Go', 500000, 'Shooter'));
+    this.Games.push(new Game(2, 'Dota', 1500000, 'MMO'));
+    this.Games.push(new Game(3, 'PUBG', 1000000, 'Battle Royale'));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   // This method associate to New Button.
   onNew() {
     // Initiate new Game.
-    this.gameModel = new Game(this.Games.length+1);
+    this.gameModel = new Game(this.Games.length + 1);
     // Change submitType to 'Save'.
     this.submitType = 'Save';
     // display Game entry section.

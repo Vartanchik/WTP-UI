@@ -1,0 +1,9 @@
+<ejs-grid #grid (actionComplete)='actionComplete($event)' (load)='load()' (toolbarClick)='toolbarClick($event)' [allowFiltering]='true'
+          [allowPaging]='true' [allowSorting]='true'
+          [dataSource]='data' [editSettings]='editSettings'
+          [filterSettings]='filterOption' [pageSettings]='initialPage' [toolbar]='toolbar'>
+  <e-columns>
+    <e-column [validationRules]='gameIdRules' field='id' headerText='Game ID' isPrimaryKey='true' width=120></e-column>
+    <e-column [validationRules]='gameNameRules' field='name' headerText='Game Name' width=150></e-column>
+  </e-columns>
+</ejs-grid>

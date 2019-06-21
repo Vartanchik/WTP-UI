@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlayerPageComponent } from './player-page.component';
+import {PlayerPageComponent} from './player-page.component';
 
 describe('PlayerPageComponent', () => {
   let component: PlayerPageComponent;
@@ -8,9 +8,9 @@ describe('PlayerPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerPageComponent ]
+      declarations: [PlayerPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

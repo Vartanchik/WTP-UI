@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { baseURIConfig, dropdownListGamesConfig } from './dataconfig';
-import { WtpResponse } from '../interfaces/wtp-response';
-import { Team } from '../interfaces/team';
-import { Invitation } from '../interfaces/invitation';
-import { TeamForTeamPage } from '../interfaces/team-for-team-page';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {baseURIConfig} from './dataconfig';
+import {WtpResponse} from '../interfaces/wtp-response';
+import {Team} from '../interfaces/team';
+import {TeamForTeamPage} from '../interfaces/team-for-team-page';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,8 @@ export class TeamService {
 
   readonly BaseURI = baseURIConfig;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getTeamById(teamId: number): Observable<TeamForTeamPage> {
     return this.http.get<TeamForTeamPage>(this.BaseURI + '/Team/' + teamId);
@@ -62,7 +62,7 @@ export class TeamService {
     const body = {
       invitationId,
       accept
-    }
+    };
     return this.http.post<WtpResponse>(this.BaseURI + '/Invitation/InvitationResponse', body);
   }
 
@@ -70,7 +70,7 @@ export class TeamService {
     const body = {
       playerId,
       teamId
-    }
+    };
     return this.http.post<WtpResponse>(this.BaseURI + '/Invitation', body);
   }
 }

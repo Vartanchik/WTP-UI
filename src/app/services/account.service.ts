@@ -11,19 +11,19 @@ import {WtpResponse} from '../interfaces/wtp-response';
 import {TokenResponse} from '../interfaces/token-response';
 import {User} from '../interfaces/user';
 import {CommunicationService} from './communication.service';
-import { IconInfo } from '../interfaces/icon-info';
-import * as jwt_decode from "jwt-decode";
+import {IconInfo} from '../interfaces/icon-info';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: providedInConfig
 })
 export class AccountService {
 
-  constructor(private http: HttpClient, private svc: CommunicationService) {
-  }
-
   //Data from dataconfig file
   readonly BaseURI = baseURIConfig;
+
+  constructor(private http: HttpClient, private svc: CommunicationService) {
+  }
 
   //Check existence JWT in local storage
   checkExistenceToken() {
@@ -116,7 +116,7 @@ export class AccountService {
       const icon: IconInfo = {
         userName: userName,
         photo: photo
-      }
+      };
       return of(icon);
     }
   }

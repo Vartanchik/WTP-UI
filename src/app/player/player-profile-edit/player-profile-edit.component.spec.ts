@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlayerProfileEditComponent } from './player-profile-edit.component';
+import {PlayerProfileEditComponent} from './player-profile-edit.component';
 
 describe('PlayerProfileEditComponent', () => {
   let component: PlayerProfileEditComponent;
@@ -8,9 +8,9 @@ describe('PlayerProfileEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerProfileEditComponent ]
+      declarations: [PlayerProfileEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

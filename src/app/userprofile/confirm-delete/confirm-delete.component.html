@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-title">Profile deletion</h4>
-  <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+  <button (click)="modal.dismiss('Cross click')" aria-describedby="modal-title" class="close" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -9,6 +9,6 @@
   <p><span class="text-danger">All information associated to this user profile will be deleted.</span></p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-  <button type="button" class="btn btn-danger" (click)="purge()">Ok</button>
+  <button (click)="modal.dismiss('cancel click')" class="btn btn-outline-secondary" type="button">Cancel</button>
+  <button (click)="purge()" class="btn btn-danger" type="button">Ok</button>
 </div>

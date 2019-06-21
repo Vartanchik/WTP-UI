@@ -1,4 +1,4 @@
-export interface RegisterModel {
-     statusCode:string;
-     message:string;
+export interface ResponseApi {
+  statusCode: string;
+  message: string;
 }

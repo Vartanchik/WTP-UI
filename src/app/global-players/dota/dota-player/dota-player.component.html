@@ -2,25 +2,25 @@
   <div class="player-aside"></div>
   <div class="player-info">
     <div class="card-header">
-        <div class="name">
-          <h4>{{ player.name }}</h4>
-        </div>
-        <div class="card-buttons">
-          <button [routerLink]="['/player', player.id]" class="btn btn-primary">Make offer</button>
-        </div>
+      <div class="name">
+        <h4>{{ player.name }}</h4>
+      </div>
+      <div class="card-buttons">
+        <button [routerLink]="['/player', player.id]" class="btn btn-primary">Make offer</button>
+      </div>
     </div>
     <div class="player-details">
       <div class="player-rank">
-        <h5>Rank:</h5> 
+        <h5>Rank:</h5>
         {{ player.rank }}
       </div>
       <div class="player-server">
         <h5>Server:</h5>
-         {{ player.server }}
+        {{ player.server }}
       </div>
       <div class="player-decency">
         <h5>Decency:</h5>
-         {{ player.decency }}
+        {{ player.decency }}
       </div>
     </div>
   </div>

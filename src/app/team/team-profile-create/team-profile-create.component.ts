@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 import {
-  dropdownListGoalsConfig,
-  dropdownSettingsGoalsConfig,
-  dropdownListServersConfig,
-  dropdownSettingsServersConfig,
-  dropdownSettingsGamesConfig,
   dropdownListGamesConfig,
-  dropdownListLanguagesConfig,
-  dropdownSettingsLanguagesConfig
+  dropdownListGoalsConfig,
+  dropdownListServersConfig,
+  dropdownSettingsGamesConfig,
+  dropdownSettingsGoalsConfig,
+  dropdownSettingsServersConfig
 } from '../../services/dataconfig';
-import { ToastrService } from 'ngx-toastr';
-import { TeamService } from '../../services/team.service';
-import { TeamCommunicationService } from '../../services/team.communication.service';
+import {ToastrService} from 'ngx-toastr';
+import {TeamService} from '../../services/team.service';
+import {TeamCommunicationService} from '../../services/team.communication.service';
 
 @Component({
   selector: 'app-team-profile-create',
@@ -21,14 +19,6 @@ import { TeamCommunicationService } from '../../services/team.communication.serv
 })
 export class TeamProfileCreateComponent implements OnInit {
 
-  constructor(
-    private service: TeamService,
-    private fb: FormBuilder,
-    private toastr: ToastrService,
-    private data: TeamCommunicationService) { }
-
-  private existingGames: string[];
-
   formModelTeam = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     game: ['', Validators.required],
@@ -36,18 +26,23 @@ export class TeamProfileCreateComponent implements OnInit {
     goal: ['', Validators.required]
     // language: ['', Validators.required]
   });
-
   // Multiselect-dropdown - Game
   dropdownListGame = [];
   dropdownSettingsGame = {};
-
   // Multiselect-dropdown - Server
   dropdownListServer = [];
   dropdownSettingsServer = {};
-
   // Multiselect-dropdown - Goal
   dropdownListGoal = [];
   dropdownSettingsGoal = {};
+  private existingGames: string[];
+
+  constructor(
+    private service: TeamService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private data: TeamCommunicationService) {
+  }
 
   // Multiselect-dropdown - Languege
   // dropdownListLanguage = [];

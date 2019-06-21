@@ -1,0 +1,10 @@
+<ejs-grid #grid (actionComplete)='actionComplete($event)' (load)='load()' (toolbarClick)='toolbarClick($event)' [allowFiltering]='true'
+          [allowPaging]='true' [allowSorting]='true'
+          [dataSource]='data' [editSettings]='editSettings'
+          [filterSettings]='filterOption' [pageSettings]='initialPage' [toolbar]='toolbar'>
+  <e-columns>
+    <e-column [validationRules]='rankIdRules' field='id' headerText='Rank ID' isPrimaryKey='true' width=120></e-column>
+    <e-column [validationRules]='rankNameRules' field='name' headerText='Rank Name' width=150></e-column>
+    <e-column [validationRules]='rankvalueRules' field='value' headerText='Rank Value' width=150></e-column>
+  </e-columns>
+</ejs-grid>
