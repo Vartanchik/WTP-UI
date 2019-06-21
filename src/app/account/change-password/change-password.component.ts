@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { FormBuilder, Validators, ValidationErrors, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from 'src/app/services/account.service';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-changepassword',
@@ -11,20 +11,21 @@ import { FormBuilder, Validators, ValidationErrors, FormGroup } from '@angular/f
 })
 export class ChangePasswordComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, public service: AccountService, private router: Router, private toastr: ToastrService) { }
+  //Validation rules - changePassword form
+  formModelChangePassword = this.fb.group({
+      currentPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^([0-9A-Za-z]{1,16})$')]],
+      confirmPassword: ['', [Validators.required]]
+    },
+    {validators: [this.checkPasswords]}
+  );
+
+  constructor(private fb: FormBuilder, public service: AccountService, private router: Router, private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.formModelChangePassword.reset();
   }
-
-  //Validation rules - changePassword form
-  formModelChangePassword = this.fb.group({
-    currentPassword : ['', [Validators.required]],
-    newPassword : ['', [Validators.required, Validators.minLength(6), Validators.pattern("^([0-9A-Za-z]{1,16})$")]],
-    confirmPassword : ['', [Validators.required]]
-    }, 
-    { validators : [this.checkPasswords] }
-  );
 
   //Send data from changePassword form to API and process response
   onSubmit() {
@@ -45,9 +46,9 @@ export class ChangePasswordComponent implements OnInit {
     let currentPassword = fb.get('currentPassword').value;
     let newPassword = fb.get('newPassword').value;
     let confirmPassword = fb.get('confirmPassword').value;
-    
+
     return currentPassword !== newPassword && newPassword === confirmPassword
-        ? null : { "notSame": true };
+      ? null : {'notSame': true};
   }
-  
+
 }

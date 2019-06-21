@@ -1,15 +1,19 @@
 <div *ngIf="isLogin == false">
-  <button routerLink='/account/login' routerLinkActive='active' type="button" class="btn btn-outline-dark"
-  id="btn-login">LOG IN</button>
-  <button routerLink='/account/registration' routerLinkActive='active' type="button"
-  class="btn btn-primary" id="btn-register">REGISTER</button>
+  <button class="btn btn-outline-dark" id="btn-login" routerLink='/account/login' routerLinkActive='active'
+          type="button">LOG IN
+  </button>
+  <button class="btn btn-primary" id="btn-register" routerLink='/account/registration'
+          routerLinkActive='active' type="button">REGISTER
+  </button>
 </div>
 
-<div ngbDropdown class="dropdown" *ngIf="isLogin == true">
-      <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" ngbDropdownToggle aria-haspopup="true" aria-expanded="false"> <img src="{{ this.service.getItem('photo') }}" id="avatar"><span id="avatarUserName">
+<div *ngIf="isLogin == true" class="dropdown" ngbDropdown>
+  <button aria-expanded="false" aria-haspopup="true" class="btn btn-link dropdown-toggle" id="dropdownMenuButton"
+          ngbDropdownToggle type="button"><img id="avatar" src="{{ this.service.getItem('photo') }}"><span
+    id="avatarUserName">
         {{this.service.getItem("userName")}}</span></button>
-      <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-        <a routerLink='/userprofile' routerLinkActive='active' class="dropdown-item">Manage Profile</a>
-        <a class="dropdown-item" id="logout" routerLink="/home" (click)="onLogout()">Log Out</a>
-      </div>
+  <div aria-labelledby="dropdownMenuButton" ngbDropdownMenu>
+    <a class="dropdown-item" routerLink='/userprofile' routerLinkActive='active'>Manage Profile</a>
+    <a (click)="onLogout()" class="dropdown-item" id="logout" routerLink="/home">Log Out</a>
+  </div>
 </div>

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { TeamFiltersModel } from './models/team-filters';
-import { baseURIConfig } from '../services/dataconfig';
-import { HttpClient } from '@angular/common/http';
-import { TeamsPagination } from './models/team-pagination.model';
-import { Observable, Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {TeamFiltersModel} from './models/team-filters';
+import {baseURIConfig} from '../services/dataconfig';
+import {HttpClient} from '@angular/common/http';
+import {TeamsPagination} from './models/team-pagination.model';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +20,18 @@ export class GlobalTeamsService {
     sortingType: '',
     teamsOnPage: 5,
     selectedItemGoals: []
-  }
+  };
 
   private readonly BaseURI = baseURIConfig;
   private readonly playersUrl = '/Team/teams/pagination';
+  private _listners = new Subject<any>();
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  getPlayers(gameId: number, pageId: number): Observable<TeamsPagination> 
-  {
+  getPlayers(gameId: number, pageId: number): Observable<TeamsPagination> {
     return this.http.get<TeamsPagination>(
       `${this.BaseURI}${this.playersUrl}`, {
         params: {
@@ -49,20 +50,18 @@ export class GlobalTeamsService {
       });
   }
 
-  pushUpdatedValues(value: TeamFiltersModel){
+  //communication between game components and filter component 
+
+  pushUpdatedValues(value: TeamFiltersModel) {
     this.currentFields = value;
   }
 
-  //communication between game components and filter component 
+  listen(): Observable<any> {
+    return this._listners.asObservable();
+  }
 
-  private _listners = new Subject<any>();
-
-    listen(): Observable<any> {
-       return this._listners.asObservable();
-    }
-
-    filter(filterBy: string) {
-       this._listners.next(filterBy);
-    }
+  filter(filterBy: string) {
+    this._listners.next(filterBy);
+  }
 
 }

@@ -1,45 +1,48 @@
 <div>
   <h2>Adding new user</h2>
   <form #userForm="ngForm">
-  <div class="form-group">
+    <div class="form-group">
       <label>Email</label>
-      <input type="text" [(ngModel)]="user.email" class="form-control"  required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="userEmail" #userEmail="ngModel"/>
-              <div class="alert alert-danger"
-              *ngIf="userEmail.errors?.required && userEmail.touched">
-              Email is required!
-          </div>
-          <div class="alert alert-danger"
-              *ngIf="userEmail.errors?.pattern && userEmail.touched">
-              Email is invalid!
-          </div>
+      <input #userEmail="ngModel" [(ngModel)]="user.email" class="form-control" name="userEmail"
+             pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required type="text"/>
+      <div *ngIf="userEmail.errors?.required && userEmail.touched"
+           class="alert alert-danger">
+        Email is required!
+      </div>
+      <div *ngIf="userEmail.errors?.pattern && userEmail.touched"
+           class="alert alert-danger">
+        Email is invalid!
+      </div>
     </div>
     <div class="form-group">
       <label>UserName(6-15 chars (only letters and numbers))</label>
-      <input type="text" [(ngModel)]="user.userName" class="form-control" required pattern="^[a-zA-Z0-9]{6,15}$" name="nameOfUser" #nameOfUser="ngModel" />
-      <div class="alert alert-danger"
-              *ngIf="nameOfUser.errors?.required && nameOfUser.touched">
-              NameOfUser is required!
-          </div>
-          <div class="alert alert-danger"
-              *ngIf="nameOfUser.errors?.pattern && nameOfUser.touched">
-              NameOfUser is invalid!
-          </div>
+      <input #nameOfUser="ngModel" [(ngModel)]="user.userName" class="form-control" name="nameOfUser" pattern="^[a-zA-Z0-9]{6,15}$"
+             required type="text"/>
+      <div *ngIf="nameOfUser.errors?.required && nameOfUser.touched"
+           class="alert alert-danger">
+        NameOfUser is required!
+      </div>
+      <div *ngIf="nameOfUser.errors?.pattern && nameOfUser.touched"
+           class="alert alert-danger">
+        NameOfUser is invalid!
+      </div>
     </div>
     <div class="form-group">
       <label>Password(6-15 chars(allows only letters and numbers and ._%+-)</label>
-      <input required pattern="^[a-z0-9A-Z._%+-]{6,15}$" [(ngModel)]="user.password" class="form-control"  type="password" name="password" #userPassword="ngModel" />
-      <div class="alert alert-danger"
-              *ngIf="userPassword.errors?.required && userPassword.touched">
-              Password is required!
-          </div>
-          <div class="alert alert-danger"
-              *ngIf="userPassword.errors?.pattern && userPassword.touched">
-              Password is invalid!
-          </div>
+      <input #userPassword="ngModel" [(ngModel)]="user.password" class="form-control" name="password"
+             pattern="^[a-z0-9A-Z._%+-]{6,15}$" required type="password"/>
+      <div *ngIf="userPassword.errors?.required && userPassword.touched"
+           class="alert alert-danger">
+        Password is required!
+      </div>
+      <div *ngIf="userPassword.errors?.pattern && userPassword.touched"
+           class="alert alert-danger">
+        Password is invalid!
+      </div>
     </div>
-  <div class="form-group">
-      <button type="submit" (click)="save()" [disabled]="userForm.form.invalid" class="btn btn-success">Save</button>
-      <a routerLink="/" class="btn btn-warning">Cancel</a>
-  </div>
-</form>
+    <div class="form-group">
+      <button (click)="save()" [disabled]="userForm.form.invalid" class="btn btn-success" type="submit">Save</button>
+      <a class="btn btn-warning" routerLink="/">Cancel</a>
+    </div>
+  </form>
 </div>

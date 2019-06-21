@@ -1,28 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { UserprofileService } from '../services/userprofile.service';
-import { IMyDpOptions } from 'mydatepicker';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {UserprofileService} from '../services/userprofile.service';
+import {IMyDpOptions} from 'mydatepicker';
 import {
-  dropdownListLanguagesConfig,
-  dropdownSettingsLanguagesConfig,
-  dropdownListGendersConfig,
-  dropdownSettingsGendersConfig,
+  dateFormatConfig,
   dropdownListCountriesConfig,
+  dropdownListGendersConfig,
+  dropdownListLanguagesConfig,
   dropdownSettingsCountriesConfig,
-  dateFormatConfig
+  dropdownSettingsGendersConfig,
+  dropdownSettingsLanguagesConfig
 } from '../services/dataconfig';
-import { User } from '../interfaces/user';
-import { IdItem } from '../interfaces/id-item';
-import { CommunicationService } from '../services/communication.service';
-import { flatMap } from 'rxjs/operators';
-import { AccountService } from '../services/account.service';
-import { PlayerService } from '../services/player.service';
-import { NgbModal, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
-import { PlayerCommunicationServer } from '../services/player.communication.service';
-import { TeamCommunicationService } from '../services/team.communication.service';
+import {User} from '../interfaces/user';
+import {IdItem} from '../interfaces/id-item';
+import {CommunicationService} from '../services/communication.service';
+import {flatMap} from 'rxjs/operators';
+import {AccountService} from '../services/account.service';
+import {PlayerService} from '../services/player.service';
+import {NgbModal, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmDeleteComponent} from './confirm-delete/confirm-delete.component';
+import {PlayerCommunicationServer} from '../services/player.communication.service';
+import {TeamCommunicationService} from '../services/team.communication.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -31,6 +31,53 @@ import { TeamCommunicationService } from '../services/team.communication.service
   providers: [NgbTabsetConfig],
 })
 export class UserProfileComponent implements OnInit {
+
+  public createPlayer = false;
+  public listOfPlayers = true;
+  public editPlayer = false;
+  public createTeam = false;
+  public listOfTeams = true;
+  public editTeam = false;
+  public model: any = 'Choose date of birth';
+  //Initialized to specific date.
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: dateFormatConfig
+  };
+  //Multiselect-dropdown - Country
+  dropdownListLanguages = [];
+  selectedItemsLanguages: IdItem[] = null;
+  dropdownSettingsLanguages = {};
+  //Multiselect-dropdown - Gender
+  dropdownListGenders = [];
+  selectedItemGender: IdItem[] = null;
+  dropdownSettingsGenders = {};
+  //Multiselect-dropdown - Language
+  dropdownListCountries = [];
+  selectedItemCountry: IdItem[] = null;
+  dropdownSettingsCountries = {};
+  //Validation rules - userProfile form
+  formModelUser = this.fb.group({
+    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+    gender: ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    languages: ['', Validators.required],
+    country: ['', Validators.required],
+    steam: ['']
+  });
+  private isValid: boolean = true;
+  private userProfile: User = {
+    id: 0,
+    userName: '',
+    email: '',
+    photo: '',
+    gender: {id: 0, name: ''},
+    dateOfBirth: '',
+    country: {id: 0, name: ''},
+    steam: '',
+    languages: [{id: 0, name: ''}],
+    players: [],
+    teams: []
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -46,50 +93,6 @@ export class UserProfileComponent implements OnInit {
     private _modalService: NgbModal) {
     config.justify = 'center';
   }
-
-  private isValid: boolean = true;
-  public createPlayer = false;
-  public listOfPlayers = true;
-  public editPlayer = false;
-  public createTeam = false;
-  public listOfTeams = true;
-  public editTeam = false;
-
-  private userProfile: User = {
-    id: 0,
-    userName: '',
-    email: '',
-    photo: '',
-    gender: { id: 0, name: '' },
-    dateOfBirth: '',
-    country: { id: 0, name: '' },
-    steam: '',
-    languages: [{ id: 0, name: '' }],
-    players: [],
-    teams: []
-  };
-
-  public model: any = 'Choose date of birth';
-
-  //Initialized to specific date.
-  myDatePickerOptions: IMyDpOptions = {
-    dateFormat: dateFormatConfig
-  };
-
-  //Multiselect-dropdown - Country
-  dropdownListLanguages = [];
-  selectedItemsLanguages: IdItem[] = null;
-  dropdownSettingsLanguages = {};
-
-  //Multiselect-dropdown - Gender
-  dropdownListGenders = [];
-  selectedItemGender: IdItem[] = null;
-  dropdownSettingsGenders = {};
-
-  //Multiselect-dropdown - Language 
-  dropdownListCountries = [];
-  selectedItemCountry: IdItem[] = null;
-  dropdownSettingsCountries = {};
 
   ngOnInit() {
     if (!this.service.checkExistenceToken()) {
@@ -117,16 +120,6 @@ export class UserProfileComponent implements OnInit {
     this.teamData.currentEditTeam.subscribe(status => this.editTeam = status);
     this.initializeDefaultConfig();
   }
-
-  //Validation rules - userProfile form
-  formModelUser = this.fb.group({
-    userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-    gender: ['', Validators.required],
-    dateOfBirth: ['', Validators.required],
-    languages: ['', Validators.required],
-    country: ['', Validators.required],
-    steam: ['']
-  });
 
   //Send data from userProfile-form to API and process response
   onSubmit() {
@@ -168,6 +161,10 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  performDelete() {
+    this._modalService.open(ConfirmDeleteComponent);
+  }
+
   private initializeDefaultConfig() {
     this.dropdownListLanguages = dropdownListLanguagesConfig;
     this.dropdownSettingsLanguages = dropdownSettingsLanguagesConfig;
@@ -177,10 +174,6 @@ export class UserProfileComponent implements OnInit {
 
     this.dropdownListCountries = dropdownListCountriesConfig;
     this.dropdownSettingsCountries = dropdownSettingsCountriesConfig;
-  }
-
-  performDelete() {
-    this._modalService.open(ConfirmDeleteComponent);
   }
 
   private setCurrentUserInfo() {

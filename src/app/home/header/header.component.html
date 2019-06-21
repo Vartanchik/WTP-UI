@@ -9,11 +9,13 @@
         </div>
         <div class="col-md">
           <p class="description-text" style="word-wrap:break-word">
-            Description Description DescriptionDescription Description Description Description Description Description Description Description DescriptionDescriptionDescriptionDescriptionDescription Description DescriptionDescription
+            Description Description DescriptionDescription Description Description Description Description Description
+            Description Description DescriptionDescriptionDescriptionDescriptionDescription Description
+            DescriptionDescription
           </p>
         </div>
         <div class="col-md">
-          <a class="btn btn-primary" [routerLink]="['']" fragment="games" (click)="onAnchorCLick()">View Games</a>
+          <a (click)="onAnchorCLick()" [routerLink]="['']" class="btn btn-primary" fragment="games">View Games</a>
         </div>
       </div>
 

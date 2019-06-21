@@ -1,0 +1,10 @@
+<ejs-grid #grid (actionComplete)='actionComplete($event)' (load)='load()' (toolbarClick)='toolbarClick($event)' [allowFiltering]='true'
+          [allowPaging]='true' [allowSorting]='true'
+          [dataSource]='data' [editSettings]='editSettings'
+          [filterSettings]='filterOption' [pageSettings]='initialPage' [toolbar]='toolbar'>
+  <e-columns>
+    <e-column [validationRules]='userIDRules' field='id' headerText='User ID' isPrimaryKey='true' width=120></e-column>
+    <e-column [validationRules]='userNameRules' field='userName' headerText='User Name' width=150></e-column>
+    <e-column [validationRules]='userEmailRules' field='email' headerText='User Email' width=150></e-column>
+  </e-columns>
+</ejs-grid>

@@ -1,41 +1,41 @@
-#btn-register{
-    margin-left: 10px;
-    font-size: 16px;
-    font-weight: bold;
+#btn-register {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-#btn-login{
-    font-size: 16px;
-    font-weight: bold;
-    color: rgb(0, 132, 255);
-    box-shadow: none;
-    border: none;
-    background: rgb(239, 250, 255);
+#btn-login {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(0, 132, 255);
+  box-shadow: none;
+  border: none;
+  background: rgb(239, 250, 255);
 }
 
-#btn-login:hover{
-    font-size: 16px;
-    background: rgb(211, 241, 250);
-    border-color: rgb(227, 255, 255);
-    color: blue;
-    box-shadow: none;
+#btn-login:hover {
+  font-size: 16px;
+  background: rgb(211, 241, 250);
+  border-color: rgb(227, 255, 255);
+  color: blue;
+  box-shadow: none;
 }
 
-#avatar{
-    width: 35px;
-    height: 35px;
-    margin-right: 15px;    
+#avatar {
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
 }
 
-#avatarUserName{
-    font-size: 13px;
-    font-weight: bold;
-    color: rgb(58, 54, 54);
-    position: relative;
-    margin-top: 15px;
-    text-decoration: none;
+#avatarUserName {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(58, 54, 54);
+  position: relative;
+  margin-top: 15px;
+  text-decoration: none;
 }
 
-#logout{
-    opacity: .8;
+#logout {
+  opacity: .8;
 }

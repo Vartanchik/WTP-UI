@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from 'src/app/services/account.service';
+import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,17 +12,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 export class ForgotPasswordComponent implements OnInit {
 
+  formModelForgotPassword = this.fb.group({
+    email: ['', [Validators.required, Validators.email]]
+  });
+
   constructor(
     private service: AccountService,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private fb: FormBuilder
-    ) { }
-
-  formModelForgotPassword = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
-  });
+  ) {
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParam => {

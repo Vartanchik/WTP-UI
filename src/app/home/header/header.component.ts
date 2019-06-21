@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private fragment: string;
   private subscription: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     this.subscription.add(
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           if (tree.fragment) {
             const element = document.querySelector('#' + tree.fragment);
             if (element) {
-              element.scrollIntoView({behavior: "smooth"});
+              element.scrollIntoView({behavior: 'smooth'});
             }
           }
         }
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.route.fragment.subscribe(f => {
         const element = document.querySelector('#' + this.fragment);
         if (element) {
-          element.scrollIntoView({behavior: "smooth"});
+          element.scrollIntoView({behavior: 'smooth'});
         }
       }));
   }

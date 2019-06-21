@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AccountService} from '../../services/account.service';
 import {ToastrService} from 'ngx-toastr';
@@ -16,7 +16,8 @@ export class ConfirmDeleteComponent implements OnInit {
               private svc: AccountService,
               private toastr: ToastrService,
               private router: Router,
-              private comm: CommunicationService) { }
+              private comm: CommunicationService) {
+  }
 
   ngOnInit() {
   }
@@ -30,7 +31,7 @@ export class ConfirmDeleteComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       err => {
-        this.toastr.error("Something went wrong, try again!");
+        this.toastr.error('Something went wrong, try again!');
       }
     );
   }

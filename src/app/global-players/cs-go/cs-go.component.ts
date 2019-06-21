@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { GlobalPlayersService } from '../global-players.service';
-import { Player } from '../models/player.model';
-import { PageView } from '../models/page-view.model';
-import { PlayersPagination } from '../models/players-pagination.model';
+import {Component, OnInit} from '@angular/core';
+import {GlobalPlayersService} from '../global-players.service';
+import {Player} from '../models/player.model';
+import {PageView} from '../models/page-view.model';
+import {PlayersPagination} from '../models/players-pagination.model';
 
 @Component({
   selector: 'app-cs-go',
@@ -20,11 +20,11 @@ export class CsGoComponent implements OnInit {
   };
   paginationArray: undefined[] = [];
 
-  constructor(private globalPlayersService: GlobalPlayersService){
-    this.globalPlayersService.listen().subscribe((m:any) => {
-        console.log(m);
-        this.onFilterClick(m);
-    })
+  constructor(private globalPlayersService: GlobalPlayersService) {
+    this.globalPlayersService.listen().subscribe((m: any) => {
+      console.log(m);
+      this.onFilterClick(m);
+    });
   }
 
   onFilterClick(event: any) {
@@ -49,20 +49,20 @@ export class CsGoComponent implements OnInit {
     this.loadPlayersList(this.pageView.pageNumber + 1);
   }
 
-  private loadPlayersList(pageId: number): void{
-    this.globalPlayersService.getPlayers(2, pageId)
-    .subscribe(
-      (data: PlayersPagination) => {
-        this.players = data.players;
-        this.pageView = data.pageViewModel;
-        this.paginationArray.length = data.pageViewModel.totalPages;
-        window.scroll(0,0);
-      }
-    )
-  }
-
   loadList(): void {
     this.loadPlayersList(this.pageView.pageNumber);
+  }
+
+  private loadPlayersList(pageId: number): void {
+    this.globalPlayersService.getPlayers(2, pageId)
+      .subscribe(
+        (data: PlayersPagination) => {
+          this.players = data.players;
+          this.pageView = data.pageViewModel;
+          this.paginationArray.length = data.pageViewModel.totalPages;
+          window.scroll(0, 0);
+        }
+      );
   }
 
 }

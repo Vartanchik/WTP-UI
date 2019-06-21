@@ -6,15 +6,15 @@
       </div>
       <div class="card-body">
         <div id="cardUploadAvatar">
-          <img src="{{team.photo}}" id="avatarInProfile" alt="Profile avatar">
+          <img alt="Profile avatar" id="avatarInProfile" src="{{team.photo}}">
         </div>
 
         <form [formGroup]="formModelTeam" autocomplete="off">
 
           <div class="form-group" id="upload">
             <div class="custom-file">
-              <input type="file" class="form-control custom-file-input" aria-describedby="inputGroupFileAddon01"
-                (change)="onFileChange($event)" />
+              <input (change)="onFileChange($event)" aria-describedby="inputGroupFileAddon01" class="form-control custom-file-input"
+                     type="file"/>
               <label class="custom-file-label">UPDATE LOGO</label>
             </div>
           </div>
@@ -23,16 +23,16 @@
           <div class="row justify-content-center">
             <div class="col-md-6 form-group required">
               <label class="labelLeft">Name*</label>
-              <input class="form-control" formControlName="name" [(ngModel)]="team.name" />
-              <small id="teamNameHelp" class="form-text text-muted">Teamrname must be 4-16 characters long.</small>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.required">
+              <input [(ngModel)]="team.name" class="form-control" formControlName="name"/>
+              <small class="form-text text-muted" id="teamNameHelp">Teamrname must be 4-16 characters long.</small>
+              <label *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.required"
+                     class="text-danger">
                 This field is mandatory.</label>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.minlength">
+              <label *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.minlength"
+                     class="text-danger">
                 Minimum 4 characters required.</label>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.maxlength">
+              <label *ngIf="formModelTeam.get('name').touched && formModelTeam.get('name').errors?.maxlength"
+                     class="text-danger">
                 Maximum 16 characters required.</label>
             </div>
           </div>
@@ -40,21 +40,22 @@
           <div class="row justify-content-between">
             <div class="col-md-6 form-group required">
               <label>Server*</label>
-              <ng-multiselect-dropdown formControlName="server" [placeholder]="'Choose server'"
-                [data]="dropdownListServer" [(ngModel)]="selectedServer" [settings]="dropdownSettingsServer">
+              <ng-multiselect-dropdown [(ngModel)]="selectedServer" [data]="dropdownListServer"
+                                       [placeholder]="'Choose server'" [settings]="dropdownSettingsServer"
+                                       formControlName="server">
               </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('server').touched && formModelTeam.get('server').errors?.required">
+              <label *ngIf="formModelTeam.get('server').touched && formModelTeam.get('server').errors?.required"
+                     class="text-danger">
                 This field is mandatory.</label>
             </div>
 
             <div class="col-md-6 form-group required">
               <label>Goal*</label>
-              <ng-multiselect-dropdown formControlName="goal" [placeholder]="'Choose goal'" [data]="dropdownListGoal"
-                [(ngModel)]="selectedGoal" [settings]="dropdownSettingsGoal">
+              <ng-multiselect-dropdown [(ngModel)]="selectedGoal" [data]="dropdownListGoal" [placeholder]="'Choose goal'"
+                                       [settings]="dropdownSettingsGoal" formControlName="goal">
               </ng-multiselect-dropdown>
-              <label class="text-danger"
-                *ngIf="formModelTeam.get('goal').touched && formModelTeam.get('goal').errors?.required">
+              <label *ngIf="formModelTeam.get('goal').touched && formModelTeam.get('goal').errors?.required"
+                     class="text-danger">
                 This field is mandatory.</label>
             </div>
           </div>
@@ -77,17 +78,17 @@
               <ng-container *ngIf="team.players !== undefined && team.players.length > 0">
                 <table class="table-condensed">
                   <tbody>
-                    <tr *ngFor="let item of team.players; index as i">
-                      <td>{{ i + 1 }}</td>
-                      <td><img src="{{item.photo}}" id="avatar">
-                      </td>
-                      <td>{{ item.name }}</td>
-                      <td>
-                        <button class="action-button" (click)="removePlayer(item.id)">
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
+                  <tr *ngFor="let item of team.players; index as i">
+                    <td>{{ i + 1 }}</td>
+                    <td><img id="avatar" src="{{item.photo}}">
+                    </td>
+                    <td>{{ item.name }}</td>
+                    <td>
+                      <button (click)="removePlayer(item.id)" class="action-button">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
               </ng-container>
@@ -95,8 +96,8 @@
           </div>
 
           <div class="form-group center-elements">
-            <button id="create-button" type="submit" class="btn btn-primary" (click)="onSubmit()"
-              [disabled]="!formModelTeam.valid">
+            <button (click)="onSubmit()" [disabled]="!formModelTeam.valid" class="btn btn-primary" id="create-button"
+                    type="submit">
               UPDATE TEAM
             </button>
           </div>
@@ -104,7 +105,7 @@
 
         <hr>
         <div class="center-elements">
-          <button id="create-button" class="btn btn-info" (click)="cancel()">
+          <button (click)="cancel()" class="btn btn-info" id="create-button">
             CANCEL
           </button>
         </div>

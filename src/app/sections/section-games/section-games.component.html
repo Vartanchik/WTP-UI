@@ -1,69 +1,71 @@
 <div class="section-container">
-    <h2>Games</h2>
+  <h2>Games</h2>
   <div class="reglist">
     <table class="table table-striped">
       <thead class="thead-dark">
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Count of Players</th>
-          <th>Description</th>
-          <th></th>
-          <th></th>
-        </tr>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Count of Players</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let game of Games; let i = index">
-          <th scope="row">{{ game.id }}</th>
-          <td>{{ game.name }}</td>
-          <td>{{ game.playersCount }}</td>
-          <td>{{ game.description}}</td>
-          <td>
-            <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
-          </td>
-          <td>
-            <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
-          </td>
-        </tr>
+      <tr *ngFor="let game of Games; let i = index">
+        <th scope="row">{{ game.id }}</th>
+        <td>{{ game.name }}</td>
+        <td>{{ game.playersCount }}</td>
+        <td>{{ game.description}}</td>
+        <td>
+          <button (click)="onEdit(i)" class="btn btn-info" type="button">Edit</button>
+        </td>
+        <td>
+          <button (click)="onDelete(i)" class="btn btn-danger" type="button">Delete</button>
+        </td>
+      </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
+      <button (click)="onNew()" class="btn btn-primary" type="submit">New</button>
     </div>
   </div>
   <br>
-  <div class="regentry" *ngIf="showNew">
-    <form (ngSubmit)="onSave()" #gameForm="ngForm">
+  <div *ngIf="showNew" class="regentry">
+    <form #gameForm="ngForm" (ngSubmit)="onSave()">
       <div class="form-group row">
-        <label for="name-input" class="col-2 col-form-label">Name</label>
+        <label class="col-2 col-form-label" for="name-input">Name</label>
         <div class="col-10">
-          <input required pattern="^[a-zA-Z 0-9]+$" class="form-control" type="text" [(ngModel)]="gameModel.name" name="nameOfGame" #nameOfGame="ngModel">
-          <div class="alert alert-danger"
-          *ngIf="nameOfGame.errors?.required && nameOfGame.touched">
-          Name is required!
-      </div>
-      <div class="alert alert-danger"
-          *ngIf="nameOfGame.errors?.pattern && nameOfGame.touched">
-          Name is invalid!
-      </div>
+          <input #nameOfGame="ngModel" [(ngModel)]="gameModel.name" class="form-control" name="nameOfGame" pattern="^[a-zA-Z 0-9]+$"
+                 required type="text">
+          <div *ngIf="nameOfGame.errors?.required && nameOfGame.touched"
+               class="alert alert-danger">
+            Name is required!
+          </div>
+          <div *ngIf="nameOfGame.errors?.pattern && nameOfGame.touched"
+               class="alert alert-danger">
+            Name is invalid!
+          </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="description-input" class="col-2 col-form-label">Description</label>
+        <label class="col-2 col-form-label" for="description-input">Description</label>
         <div class="col-10">
-          <input required pattern="^[a-zA-Z 0-9.,!():?;]+$" class="form-control" type="text" [(ngModel)]="gameModel.description" name="description" #description="ngModel">
-          <div class="alert alert-danger"
-          *ngIf="description.errors?.required && description.touched">
-          Description is required!
-      </div>
-      <div class="alert alert-danger"
-          *ngIf="description.errors?.pattern && description.touched">
-          Description is invalid!
-      </div>
+          <input #description="ngModel" [(ngModel)]="gameModel.description" class="form-control" name="description"
+                 pattern="^[a-zA-Z 0-9.,!():?;]+$" required type="text">
+          <div *ngIf="description.errors?.required && description.touched"
+               class="alert alert-danger">
+            Description is required!
+          </div>
+          <div *ngIf="description.errors?.pattern && description.touched"
+               class="alert alert-danger">
+            Description is invalid!
+          </div>
         </div>
       </div>
-      <button type="submit"  [disabled]="gameForm.form.invalid" class="btn btn-success">{{submitType}}</button>
-      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+      <button [disabled]="gameForm.form.invalid" class="btn btn-success" type="submit">{{submitType}}</button>
+      <button (click)="onCancel()" class="btn btn-primary" type="submit">Cancel</button>
     </form>
   </div>
 </div>

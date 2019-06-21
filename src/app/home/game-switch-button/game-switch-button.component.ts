@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IdItem } from 'src/app/interfaces/id-item';
-import { InfoService } from 'src/app/services/info.service';
+import {Component, OnInit} from '@angular/core';
+import {IdItem} from 'src/app/interfaces/id-item';
+import {InfoService} from 'src/app/services/info.service';
 
 @Component({
   selector: 'app-game-switch-button',
@@ -10,13 +10,14 @@ import { InfoService } from 'src/app/services/info.service';
 
 export class GameSwitchButtonComponent implements OnInit {
 
-  games: IdItem[] = [{ name: 'Game', id: -1 }];
+  games: IdItem[] = [{name: 'Game', id: -1}];
 
-  selectedGame: IdItem = { name: 'Games', id: -1 };
+  selectedGame: IdItem = {name: 'Games', id: -1};
 
   gameByDefault = 'Dota 2';
 
-  constructor(private service: InfoService) { }
+  constructor(private service: InfoService) {
+  }
 
   ngOnInit() {
     this.service.getAllGames().subscribe(

@@ -11,7 +11,8 @@
   padding: 0;
   font-weight: normal;
 }
-.footer nav > ul > li{
+
+.footer nav > ul > li {
   display: inline-block;
   padding: 10px 15px;
   margin: 15px 3px;
@@ -30,11 +31,13 @@
   font-weight: 600;
   text-decoration: none;
 }
+
 .footer nav > ul a:not(.btn):hover,
 .footer nav > ul a:not(.btn):focus {
   color: #777777;
   opacity: 1;
 }
+
 .footer .copyright {
   color: #777777;
   padding: 10px 0;
@@ -43,89 +46,109 @@
   line-height: 20px;
   text-align: center;
 }
+
 .footer .heart {
   color: #dc3545;
   animation: heathing 1s ease infinite,;
 }
 
 @keyframes heathing {
-  0% { transform: scale( .75 ); }
-  20% { transform: scale( 1 ); }
-  40% { transform: scale( .75 ); }
-  60% { transform: scale( 1 ); }
-  80% { transform: scale( .75 ); }
-  100% { transform: scale( .75 ); }
+  0% {
+    transform: scale(.75);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(.75);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(.75);
+  }
+  100% {
+    transform: scale(.75);
+  }
 }
 
-.footer{
+.footer {
   background-color: #FFFFFE;
   line-height: 36px;
 
-  &.footer-black{
-    h4{
+  &.footer-black {
+    h4 {
       color: #FFFFFE;
     }
   }
 
-  .links{
+  .links {
     display: inline-block;
 
-    ul{
+    ul {
       list-style: none;
       margin: 0;
       padding: 0;
       font-weight: 600;
 
-      > li{
+      > li {
         display: inline-block;
         padding-right: 20px;
       }
-      > li:last-child{
+
+      > li:last-child {
         padding-right: 0;
       }
 
-      a:not(.btn){
+      a:not(.btn) {
         color: #000000;
         display: block;
         font-size: 0.9em;
         margin-bottom: 3px;
+
         &:hover,
-        &:focus{
+        &:focus {
           color: #403D39;
         }
       }
 
-      &.uppercase-links{
+      &.uppercase-links {
         text-transform: uppercase;
       }
-      &.stacked-links{
+
+      &.stacked-links {
         margin-top: 10px;
 
-        > li{
+        > li {
           display: block;
           line-height: 26px;
         }
-        h4{
+
+        h4 {
           margin-top: 0;
         }
       }
     }
   }
 
-  hr{
+  hr {
     border-color: #DDDDDD;
     border-width: 1px 0 0;
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  .copyright{
+
+  .copyright {
     color: #A49E9E;
     font-size: 0.9em;
-    ul > li{
+
+    ul > li {
       padding-right: 0;
     }
   }
-  .title{
+
+  .title {
     color: #403D39;
   }
 }

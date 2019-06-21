@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlayerProfileCreateComponent } from './player-profile.component';
+import {PlayerProfileCreateComponent} from './player-profile.component';
 
 describe('PlayerProfileComponent', () => {
   let component: PlayerProfileCreateComponent;
@@ -8,9 +8,9 @@ describe('PlayerProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerProfileCreateComponent ]
+      declarations: [PlayerProfileCreateComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

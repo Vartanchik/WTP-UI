@@ -30,30 +30,30 @@
 }
 
 #gameButton:hover {
-    background: rgb(230, 245, 252);
-  }
+  background: rgb(230, 245, 252);
+}
 
-  #smallStar{
-    width: 22px;
-    height: 22px;
-    margin-right: 10px;
-  }
+#smallStar {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+}
 
 //For admin
-#sideBar{
-    height: 100vh;
-    padding-top: 80px;
-    position: fixed;
-    background-color: #191F26;
+#sideBar {
+  height: 100vh;
+  padding-top: 80px;
+  position: fixed;
+  background-color: #191F26;
 }
 
-#dashboard{
-    margin-top: 60px;
+#dashboard {
+  margin-top: 60px;
 }
 
-#navbar{
-    background-color: #161A1E!important;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.25);
+#navbar {
+  background-color: #161A1E !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 .nav-link {

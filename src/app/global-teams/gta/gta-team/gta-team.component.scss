@@ -1,115 +1,115 @@
 .team-card {
-    display: flex;
-    background-color: #ffffff;
-    border: 2px solid rgba(40, 91, 231, 0.404);
-    border-radius: 10px;
-    overflow: hidden;
-    width: 650px;
-    margin-bottom: 30px;
-    height: 300px;
+  display: flex;
+  background-color: #ffffff;
+  border: 2px solid rgba(40, 91, 231, 0.404);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 650px;
+  margin-bottom: 30px;
+  height: 300px;
 }
 
 .team-aside {
-    background-image: url(../../../../assets/gta-team.png);
-    width: 151px;
-    height: 300px;
-    background-size: 151px 300px;
+  background-image: url(../../../../assets/gta-team.png);
+  width: 151px;
+  height: 300px;
+  background-size: 151px 300px;
 }
 
 .card-header {
-    width: 515px;
-    background-color: #f2f6f9;
-    border: none;
-    display: flex;
-    justify-content: space-between;
+  width: 515px;
+  background-color: #f2f6f9;
+  border: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-buttons {
-    display: flex;
+  display: flex;
 }
 
 .btn-primary {
-    font-size: 12px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font: bold;
-    padding: 4px;
-    border-color:  #ffffff;
-    border-radius: 7px;
-    cursor: pointer;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font: bold;
+  padding: 4px;
+  border-color: #ffffff;
+  border-radius: 7px;
+  cursor: pointer;
 }
 
 .team-details {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    padding: 10px;
-    height: 20%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 10px;
+  height: 20%;
 }
 
 .team-winRate {
-    width: 38%;
+  width: 38%;
 }
 
 .team-server {
-    width: 24%;
+  width: 24%;
 }
 
-.team-goal{
-    width: 38%;
+.team-goal {
+  width: 38%;
 }
 
-.team-avatar{
-    background-color: #ffffff;
-    display: inline-flex;
-    border-radius: 50%;
-    margin-top: 10px;
-    margin-left: 25px;
-    border: 2px solid rgba(255, 255, 255, 0.404);
+.team-avatar {
+  background-color: #ffffff;
+  display: inline-flex;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.404);
 }
 
-.team-players{
-    overflow: hidden;
-    width: 100%;
-    white-space: nowrap;
+.team-players {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }
 
-.available-slot{
-    background-color: #ffffff;
-    border: 2px solid rgba(163, 163, 163, 0.404);
-    border-radius: 10px;
-    border-bottom-style: dashed;
-    width: 80px;
-    margin-left: 10px;
-    height: 100px;
-    overflow-x:hidden;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
+.available-slot {
+  background-color: #ffffff;
+  border: 2px solid rgba(163, 163, 163, 0.404);
+  border-radius: 10px;
+  border-bottom-style: dashed;
+  width: 80px;
+  margin-left: 10px;
+  height: 100px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
-.players{
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    width: 100%;
-    white-space: nowrap;
+.players {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }
 
-.available-text{
-    text-align: center;
-    margin-top: 20px;
+.available-text {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.available-slot-text{
-    text-align: center;
+.available-slot-text {
+  text-align: center;
 }
 
-#applyBtn{
-    margin-top: 30px;
+#applyBtn {
+  margin-top: 30px;
 }
 
-#count-text{
-    color: #ffffff;
-    font-weight: 700;
-    text-align: center;
+#count-text {
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
 }
