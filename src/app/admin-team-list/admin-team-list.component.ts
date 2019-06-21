@@ -3,10 +3,14 @@ import {Team} from '../interfaces/team';
 import {ClickEventArgs} from '@syncfusion/ej2-navigations/src/toolbar';
 import {WtpResponse} from '../interfaces/wtp-response';
 import {ChangeEventArgs} from '@syncfusion/ej2-inputs';
-import {EditSettingsModel, FilterSettingsModel, PageSettingsModel, ToolbarItems} from '@syncfusion/ej2-grids';
+import {EditSettingsModel, FilterSettingsModel, PageSettingsModel, ToolbarItems, IEditCell} from '@syncfusion/ej2-grids';
 import {GridComponent} from '@syncfusion/ej2-angular-grids';
 import {HttpClient} from '@angular/common/http';
 import {baseURIConfig} from '../services/dataconfig';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
+import { Game } from '../shared/game';
+import { Goal } from '../interfaces/goal';
+import { ShortTeam } from '../interfaces/teamShortDto';
 
 @Component({
   selector: 'app-admin-team-list',
@@ -31,6 +35,101 @@ export class AdminTeamListComponent implements OnInit {
     this.http = http;
   }
 
+  public gameParams: IEditCell;
+  public gameElem: HTMLElement;
+  public gameObj: DropDownList;
+  public gameNameRules: object;
+  public game = [];
+
+
+  public goalParams: IEditCell;
+  public goalElem: HTMLElement;
+  public goalObj: DropDownList;
+  public goal = [];
+
+  loadGame(): void {
+
+    this.http.get<Game[]>(baseURIConfig + '/Game/list').subscribe((result: Game[]) => {
+      console.log(result);
+      if (result == null) {
+        window.alert('No content!');
+      } else {
+        result.forEach(element => {
+          this.game.push({key: element.id, value: element.name});
+        });
+        console.log(this.game);
+      }
+    }, error => console.error(error));
+
+    this.gameParams = {
+      create: () => {
+        this.gameElem = document.createElement('input');
+        return this.gameElem;
+      },
+      read: () => {
+        return this.gameObj.text;
+      },
+      destroy: () => {
+        this.gameObj.destroy();
+      },
+      write: () => {
+        this.gameObj = new DropDownList({
+          dataSource: this.game,
+          fields: {value: 'key', text: 'value'},
+          //     change: () => {
+          //     this.rankObj.enabled = true;
+          //     let tempQuery: Query = new Query().where('gameId', 'equal', this.gameObj.value);
+          //     this.rankObj.query = tempQuery;
+          //     this.rankObj.text = null;
+          //     this.rankObj.dataBind();
+          // },
+          placeholder: 'Select a game',
+          floatLabelType: 'Never'
+        });
+        this.gameObj.appendTo(this.gameElem);
+      }
+    };
+  }
+
+
+  loadGoal(): void {
+    this.http.get<Goal[]>(baseURIConfig + '/Goal/list').subscribe((result: Goal[]) => {
+      console.log(result);
+      if (result == null) {
+        window.alert('No content!');
+      } else {
+        result.forEach(element => {
+          this.goal.push({key: element.id, value: element.name});
+        });
+        console.log(this.goal);
+      }
+    }, error => console.error(error));
+
+    this.goalParams = {
+      create: () => {
+        this.goalElem = document.createElement('input');
+        return this.goalElem;
+      },
+      read: () => {
+        return this.goalObj.text;
+      },
+      destroy: () => {
+        this.goalObj.destroy();
+      },
+      write: () => {
+        this.goalObj = new DropDownList({
+          dataSource: this.goal,
+          fields: {value: 'key', text: 'value'},
+          placeholder: 'Select a goal',
+          floatLabelType: 'Never'
+        });
+        this.goalObj.appendTo(this.goalElem);
+      }
+    };
+  }
+
+
+
   load() {
     const rowHeight: number = this.Grid.getRowHeight();  // height of the each row
     const gridHeight: any = this.Grid.height;  // grid height
@@ -42,6 +141,8 @@ export class AdminTeamListComponent implements OnInit {
 
   ngOnInit(): void {
     //this.data = data;
+    this.loadGame();
+    this.loadGoal();
     this.getData();
 
     this.editSettings = {
@@ -74,7 +175,11 @@ export class AdminTeamListComponent implements OnInit {
 
       console.log('Operation name: ' + this.operationSate);
       if (this.operationSate === 'Add') {
-        var team = args.data as Team;
+        var team = args.data as ShortTeam;
+        team.goalId = this.goalObj.value as number;
+        team.gameId = this.gameObj.value as number;
+        team.serverId=1;
+        team.id=0;
         console.log(records);
         this.http.post(baseURIConfig + '/Team/create', team).subscribe(
           (res: WtpResponse) => {
@@ -90,7 +195,10 @@ export class AdminTeamListComponent implements OnInit {
 
         this.operationSate = '';
       } else if (this.operationSate === 'Edit') {
-        var updatedTeam = records[0] as Team;
+        var updatedTeam = records[0] as ShortTeam;
+        updatedTeam.goalId = this.goalObj.value as number;
+        updatedTeam.gameId = this.gameObj.value as number;
+        updatedTeam.serverId=1;
         console.log(records);
         this.http.put(baseURIConfig + '/Team/update', updatedTeam).subscribe(
           (res: WtpResponse) => {
@@ -107,7 +215,7 @@ export class AdminTeamListComponent implements OnInit {
       }
     } else if (this.operationSate === 'Delete' && args.requestType === 'delete') {
       console.log('Operation name: ' + this.operationSate);
-      this.http.delete(baseURIConfig + '/Team/delete' + this.currentTeam.id)
+      this.http.delete(baseURIConfig + '/Team/' + this.currentTeam.id)
         .subscribe((res: WtpResponse) => {
           console.log(res.message);
           window.alert(res.message);
