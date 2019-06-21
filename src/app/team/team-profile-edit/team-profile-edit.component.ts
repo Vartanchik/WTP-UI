@@ -37,7 +37,7 @@ export class TeamProfileEditComponent implements OnInit {
   dropdownListGoal = [];
   selectedGoal: IdItem[] = null;
   dropdownSettingsGoal = {};
-  private team: Team = {
+  team: Team = {
     id: 0,
     name: '',
     photo: '',

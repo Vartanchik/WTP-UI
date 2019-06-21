@@ -9,12 +9,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DotaTeamComponent} from './dota/dota-team/dota-team.component';
 import {AvatarModule} from 'ngx-avatar';
-import {TeamPlayerComponent} from './dota/dota-team/team-player/team-player.component';
 import {MatRadioModule} from '@angular/material';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {CsTeamComponent} from './cs-go/cs-team/cs-team.component';
 import {GtaTeamComponent} from './gta/gta-team/gta-team.component';
 import {AppRoutingModule} from '../app-routing.module';
+import {TeamPlayerComponent} from './team-player/team-player.component';
 
 
 @NgModule({

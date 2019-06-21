@@ -64,7 +64,7 @@ export class UserProfileComponent implements OnInit {
     country: ['', Validators.required],
     steam: ['']
   });
-  private isValid: boolean = true;
+  isValid: boolean = true;
   private userProfile: User = {
     id: 0,
     userName: '',

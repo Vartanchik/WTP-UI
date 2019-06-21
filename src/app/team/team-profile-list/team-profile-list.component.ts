@@ -16,7 +16,7 @@ export class TeamProfileListComponent implements OnInit {
   public userId: number;
   public numberOfGames: number;
   public inviteList: Invitation[] = [];
-  private teams: Team[] = [];
+  teams: Team[] = [];
 
   constructor(
     private teamService: TeamService,

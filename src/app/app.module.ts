@@ -65,10 +65,9 @@ import {
 } from '@syncfusion/ej2-angular-grids';
 import {MatTableModule, MatTreeModule} from '@angular/material';
 import {CdkTreeModule} from '@angular/cdk/tree';
-import {DropDownListComponent} from '@syncfusion/ej2-angular-dropdowns';
 import {AdminPlayerListComponent} from './admin-player-list/admin-player-list.component';
 
-import {NumericTextBoxComponent} from '@syncfusion/ej2-angular-inputs';
+import {NumericTextBoxModule} from '@syncfusion/ej2-angular-inputs';
 import {AdminUserListComponent} from './admin-user-list/admin-user-list.component';
 import {AdminGameListComponent} from './admin-game-list/admin-game-list.component';
 import {AdminRankListComponent} from './admin-rank-list/admin-rank-list.component';
@@ -76,6 +75,7 @@ import {AdminGoalListComponent} from './admin-goal-list/admin-goal-list.componen
 import {AdminHistoryListComponent} from './admin-history-list/admin-history-list.component';
 import {AdminTeamListComponent} from './admin-team-list/admin-team-list.component';
 import {IsUserService} from './services/is-user.service';
+import {DropDownListModule} from '@syncfusion/ej2-angular-dropdowns';
 
 @NgModule({
   declarations: [
@@ -110,9 +110,7 @@ import {IsUserService} from './services/is-user.service';
     TeamProfileEditComponent,
     PlayerPageComponent,
     TeamPageComponent,
-    DropDownListComponent,
     AdminPlayerListComponent,
-    NumericTextBoxComponent,
     AdminUserListComponent,
     AdminGameListComponent,
     AdminRankListComponent,
@@ -139,7 +137,9 @@ import {IsUserService} from './services/is-user.service';
     MyDatePickerModule,
     GlobalPlayersModule,
     GlobalTeamsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    DropDownListModule,
+    NumericTextBoxModule
   ],
   providers: [
     AccountService,
